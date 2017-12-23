@@ -1,0 +1,115 @@
+# AWS X\-Ray Use Cases and Requirements<a name="xray-usage"></a>
+
+You can use the X\-Ray SDK and AWS service integration to instrument requests to your applications that are running locally or on AWS compute services such as Amazon EC2, Elastic Beanstalk, Amazon ECS and AWS Lambda\.
+
+To instrument your application code, you use the **X\-Ray SDK**\. The SDK records data about incoming and outgoing requests and sends it to the X\-Ray daemon, which relays the data in batches to X\-Ray\. For example, when your application calls DynamoDB to retrieve user information from a DynamoDB table, the X\-Ray SDK records data from both the client request and the downstream call to DynamoDB\.
+
+![\[X-Ray SDK records data from both the client request and downstream call to DynamoDB
+      \]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-ddb-edge.png)
+
+Other AWS services make it easier to instrument your application's components by integrating with X\-Ray\. **Service integration** can include adding tracing headers to incoming requests, sending trace data to X\-Ray, or running the X\-Ray daemon\. For example, AWS Lambda can send trace data about requests to your Lambda functions, and run the X\-Ray daemon on workers to make it easier to use the X\-Ray SDK\.
+
+![\[Lambda integration with the X-Ray SDK\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
+
+Many instrumentation scenarios require only configuration changes\. For example, you can instrument all incoming HTTP requests and downstream calls to AWS services that your Java application makes\. To do this, you add the X\-Ray SDK for Java's filter to your servlet configuration, and take the AWS SDK for Java Instrumentor submodule as a build dependency\. For advanced instrumentation, you can modify your application code to customize and annotate the data that the SDK sends to X\-Ray\.
+
+
++ [Supported Languages and Frameworks](#xray-usage-languages)
++ [Supported AWS Services](#xray-usage-services)
++ [Code and Configuration Changes](#xray-usage-codechanges)
+
+## Supported Languages and Frameworks<a name="xray-usage-languages"></a>
+
+AWS X\-Ray provides tools and integration to support a variety of languages, frameworks, and platforms\.
+
+**Java**
+
+In any Java application, you can use the X\-Ray SDK for Java classes to instrument incoming requests, AWS SDK clients, and outgoing HTTP calls\. Automatic request instrumentation is available for AWS Lambda and frameworks that support Java servlets\. Automatic SDK instrumentation is available through the Instrumentor submodule\.
+
+See  for more information\.
+
++ **Tomcat** – Add a servlet filter to your deployment descriptor \(`web.xml`\) to instrument incoming requests\.
+
++ **Spring Boot** – Add a servlet filter to your `WebConfig` class to instrument incoming requests\.
+
++ **Java on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
+
++ **Other frameworks** – Add a servlet filter if your framework supports servlets, or manually create segments and make sampling decisions on incoming requests if it doesn't support servlets\.
+
+**Node\.js**
+
+In any Node\.js application, you can use the X\-Ray SDK for Node\.js classes to instrument incoming requests, AWS SDK clients, and outgoing HTTP calls\. Automatic request instrumentation is available for applications that use the Express framework\.
+
+See  for more information\.
+
++ **Express** – Use the X\-Ray SDK for Node\.js Express middleware to instrument incoming requests\.
+
++ **Node\.js on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
+
++ **Other frameworks** – Manually create segments and make sampling decisions on incoming requests\.
+
+**C\#**
+
+On Windows Server editions other than Windows Server Core, you can use the X\-Ray SDK for \.NET to instrument incoming requests, AWS SDK clients, and outgoing HTTP calls\. On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\.
+
+See  for more information\.
+
++ **\.NET on Windows Server** – Add a message handler to your HTTP configuration to instrument incoming requests\.
+
++ **C\# \.NET Core on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
+
+**Python**
+
+On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\.
+
++ **Python on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
+
+If the X\-Ray SDK isn't available for your language or platform, you can generate trace data manually and send it to the X\-Ray daemon, or directly to the X\-Ray API\. 
+
+## Supported AWS Services<a name="xray-usage-services"></a>
+
+Several AWS services provide **X\-Ray integration**\. Integrated services offer varying levels of integration that can include sampling and adding headers to incoming requests, running the X\-Ray daemon, and automatically sending trace data to X\-Ray\.
+
++ **Active instrumentation** – Samples and instruments incoming requests\.
+
++ **Passive instrumentation** – Instruments requests that have been sampled by another service\.
+
++ **Request tracing** – Adds a tracing header to all incoming requests and propagates it downstream\.
+
++ **Tooling** – Runs the AWS X\-Ray daemon to receive segments from the X\-Ray SDK\. 
+
+Services with X\-Ray integration include:
+
++ **AWS Lambda** – Active and passive instrumentation of incoming requests on all runtimes\. When you enable instrumentation, AWS Lambda also runs the X\-Ray daemon on Java and Node\.js runtimes for use with the X\-Ray SDK\. Learn more\.
+
++ **Amazon API Gateway** – Request tracing\. API Gateway passes the trace ID to AWS Lambda and adds it to the request header for other downstream services\. Learn more\.
+
++ **Elastic Load Balancing** – Request tracing on application load balancers\. The application load balancer adds the trace ID to the request header before sending it to a target group\. Learn more\.
+
++ **AWS Elastic Beanstalk** – Tooling\. Elastic Beanstalk includes the X\-Ray daemon on the following platforms:
+
+  + **Java SE** – 2\.3\.0 and newer configurations
+
+  + **Tomcat** – 2\.4\.0 and newer configurations
+
+  + **Node\.js** – 3\.2\.0 and newer configurations
+
+  + **Windows Server** – All configurations other than Windows Server Core released since December 9th, 2016\.
+
+  You can tell Elastic Beanstalk to run the daemon on these platforms in the Elastic Beanstalk console, or by using the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. Learn more\.
+
+## Code and Configuration Changes<a name="xray-usage-codechanges"></a>
+
+A large amount of tracing data can be generated without any functional changes to your code\. Detailed tracing of front\-end and downstream calls requires only minimal changes to build and deploy\-time configuration\.
+
+**Examples of Code and Configuration Changes**
+
++ **AWS resource configuration** – Change AWS resource settings to instrument requests to a Lambda function\. Run the X\-Ray daemon on the instances in your Elastic Beanstalk environment by changing an option setting\.
+
++ **Build configuration** – Take X\-Ray SDK for Java submodules as a compile\-time dependency to instrument all downstream requests to AWS services, and to resources such as Amazon DynamoDB tables, Amazon SQS queues, and Amazon S3 buckets\.
+
++ **Application configuration** – To instrument incoming HTTP requests, add a servlet filter to your Java application, or use the X\-Ray SDK for Node\.js as middleware on your Express application\. Change sampling rules and enable plugins to instrument the Amazon EC2, Amazon ECS, and AWS Elastic Beanstalk resources that run your application\.
+
++ **Class or object configuration** – To instrument outgoing HTTP calls in Java, import the X\-Ray SDK for Java version of `HttpClientBuilder` instead of the Apache\.org version\.
+
++ **Functional changes** – Add a request handler to an AWS SDK client to instrument calls that it makes to AWS services\. Create subsegments to group downstream calls, and add debug information to segments with annotations and metadata\.

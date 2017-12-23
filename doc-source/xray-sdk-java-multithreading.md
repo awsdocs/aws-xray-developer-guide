@@ -1,0 +1,13 @@
+# Passing Segment Context between Threads in a Multithreaded Application<a name="xray-sdk-java-multithreading"></a>
+
+When you create a new thread in your application, the `AWSXRayRecorder` doesn't maintain a reference to the current segment or subsegment [Entity](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Entity.html)\. If you use an instrumented client in the new thread, the SDK tries to write to a segment that doesn't exist, causing a [SegmentNotFoundException](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/exceptions/SegmentNotFoundException.html)\.
+
+To avoid throwing exceptions during development, you can configure the recorder with a [ContextMissingStrategy](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/strategy/ContextMissingStrategy.html) that tells it to log an error instead\. You can configure the strategy in code with [SetContextMissingStrategy](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#setContextMissingStrategy-com.amazonaws.xray.strategy.ContextMissingStrategy-), or configure equivalent options with an environment variable or system property\.
+
+One way to address the error is to use a new segment by calling [beginSegment](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#beginSegment-java.lang.String-) when you start the thread and [endSegment](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#endSegment--) when you close it\. This works if you are instrumenting code that doesn't run in response to an HTTP request, like code that runs when your application starts\.
+
+If you use multiple threads to handle incoming requests, you can pass the current segment or subsegment to the new thread and provide it to the global recorder\. This ensures that the information recorded within the new thread is associated with the same segment as the rest of the information recorded about that request\.
+
+To pass trace context between threads, call [GetTraceEntity](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#getTraceEntity--) on the global recorder to get a reference to the current entity \(segment or subsegment\)\. Pass the entity to the new thread, and then call [SetTraceEntity](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#setTraceEntity-com.amazonaws.xray.entities.Entity-) to configure the global recorder to use it to record trace data within the thread\.
+
+See  for an example\.
