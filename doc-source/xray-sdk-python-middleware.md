@@ -1,11 +1,10 @@
 # Tracing Incoming Requests with the X\-Ray SDK for Python Middleware<a name="xray-sdk-python-middleware"></a>
 
-You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
+If you use Django or Flask, use the Django middleware or Flask middleware to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment that provides information about the HTTP request and response\. This information includes timing, method, and disposition of the request\.
 
-**Note**  
-If your application runs on AWS Lambda, you can use the Lambda X\-Ray integration to trace incoming requests automatically\.
+If your application runs on AWS Lambda, you can use the Lambda X\-Ray integration to trace incoming requests automatically\. See  for a example Python function instrumented in Lambda\.
 
-Use the Django middleware or Flask middleware to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment that provides information about the HTTP request and response\. This information includes timing, method, and disposition of the request\.
+For scripts or Python applications on other frameworks, you can create segments manually\.
 
 Each segment has a name that identifies your application in the service map\. The segment can be named statically, or you can configure the SDK to name it dynamically based on the host header in the incoming request\. Dynamic naming lets you group traces based on the domain name in the request, and apply a default name if the name doesn't match an expected pattern \(for example, if the host header is forged\)\.
 
@@ -31,6 +30,7 @@ The mmiddleware creates a segment for each incoming request with an `http` block
 
 + [Adding the Middleware to Your Application \(Django\)](#xray-sdk-python-adding-middleware-django)
 + [Adding the Middleware to Your Application \(Flask\)](#xray-sdk-python-adding-middleware-flask)
++ [Instrumenting Python Code Manually](#xray-sdk-python-middleware-manual)
 + [Configuring a Segment Naming Strategy](#xray-sdk-python-middleware-naming)
 
 ## Adding the Middleware to Your Application \(Django\)<a name="xray-sdk-python-adding-middleware-django"></a>
@@ -82,6 +82,29 @@ XRayMiddleware(app, xray_recorder)
 ```
 
 This tells the X\-Ray recorder to trace requests served by your Flask application with the default sampling rate\. You can configure the recorder in code to apply custom sampling rules or change other settings\.
+
+## Instrumenting Python Code Manually<a name="xray-sdk-python-middleware-manual"></a>
+
+If you don't use Django or Flask, you can create segments manually\. You can create a segment for each incoming request, or create segments around patched HTTP or AWS SDK clients to provide context for the recorder to add subsegments\.
+
+**Example main\.rb – manual instrumentation**  
+
+```
+from aws_xray_sdk.core import xray_recorder
+
+# Start a segment
+segment = xray_recorder.begin_segment('segment_name')
+# Start a subsegment
+subsegment = xray_recorder.begin_subsegment('subsegment_name')
+
+# Add metadata and annotations
+segment.put_metadata('key', dict, 'namespace')
+subsegment.put_annotation('key', 'value')
+
+# Close the subsegment and segment
+xray_recorder.end_subsegment()
+xray_recorder.end_segment()
+```
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-python-middleware-naming"></a>
 

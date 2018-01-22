@@ -1,7 +1,7 @@
 # AWS X-Ray Developer Guide
 
 -----
-*****Copyright &copy; 2017 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -55,6 +55,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Generating Custom Subsegments with the X-Ray SDK for Java](xray-sdk-java-subsegments.md)
    + [Add Annotations and Metadata to Segments with the X-Ray SDK for Java](xray-sdk-java-segment.md)
    + [Passing Segment Context between Threads in a Multithreaded Application](xray-sdk-java-multithreading.md)
+   + [AOP with Spring and the X-Ray SDK for Java](xray-sdk-java-aop-spring.md)
 + [AWS X-Ray SDK for Go](xray-sdk-go.md)
    + [Configuring the X-Ray SDK for Go](xray-sdk-go-configuration.md)
    + [Instrumenting Incoming HTTP Requests with the X-Ray SDK for Go](xray-sdk-go-handler.md)

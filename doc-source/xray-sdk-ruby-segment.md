@@ -43,11 +43,11 @@ Use annotations to record information on segments or subsegments that you want i
    document = XRay.recorder.current_subsegment
    ```
 
-1. Call `add_annotations` with a hash value\.
+1. Call `update` with a hash value\.
 
    ```
    my_annotations = { id: 12345 }
-   document.add_annotations annotations: my_annotations
+   document.annotations.update my_annotations
    ```
 
 The SDK records annotations as key\-value pairs in an `annotations` object in the segment document\. Calling `add_annotations` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
@@ -76,7 +76,7 @@ Use metadata to record information on segments or subsegments that you don't nee
    document = XRay.recorder.current_subsegment
    ```
 
-1. Call `put_metadata` with a String key; a Boolean, Number, String, or Object value; and a String namespace\.
+1. Call `metadata` with a String key; a Boolean, Number, String, or Object value; and a String namespace\.
 
    ```
    my_metadata = {
@@ -84,10 +84,10 @@ Use metadata to record information on segments or subsegments that you don't nee
        key: 'value'
      }
    }
-   subsegment.add_metadata metadata: my_metadata
+   subsegment.metadata my_metadata
    ```
 
-Calling `add_metadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
+Calling `metadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 
 ## Recording User IDs with the X\-Ray SDK for Ruby<a name="xray-sdk-ruby-segment-userid"></a>
 

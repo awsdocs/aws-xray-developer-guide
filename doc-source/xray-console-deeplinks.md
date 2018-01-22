@@ -63,13 +63,13 @@ https://console.aws.amazon.com/xray/home#/service-map?timeRange=PT1H
 **Example Time range accurate to seconds**  
 
 ```
-https://console.aws.amazon.com/xray/home#/traces?timeRange=2017-12-01T16:00:00~2017-12-01T22:00:00
+https://console.aws.amazon.com/xray/home#/traces?timeRange=2018-1-01T16:00:00~2018-1-01T22:00:00
 ```
 
 **Example Time range accurate to minutes**  
 
 ```
-https://console.aws.amazon.com/xray/home#/traces?timeRange=2017-12-01T16:00~2017-12-01T22:00
+https://console.aws.amazon.com/xray/home#/traces?timeRange=2018-1-01T16:00~2018-1-01T22:00
 ```
 
 ## Region<a name="xray-console-deeplinks-region"></a>

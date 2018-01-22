@@ -1,6 +1,6 @@
 # AWS X\-Ray SDK for Python<a name="xray-sdk-python"></a>
 
-The X\-Ray SDK for Python is a library for Django and Flask web applications that provides classes and methods for generating and sending trace data to the X\-Ray daemon\. Trace data includes information about incoming HTTP requests served by the application, and calls that the application makes to downstream services using the AWS SDK, HTTP clients, or an SQL database connector\. You can also create segments manually and add debug information in annotations and metadata\.
+The X\-Ray SDK for Python is a library for Python web applications that provides classes and methods for generating and sending trace data to the X\-Ray daemon\. Trace data includes information about incoming HTTP requests served by the application, and calls that the application makes to downstream services using the AWS SDK, HTTP clients, or an SQL database connector\. You can also create segments manually and add debug information in annotations and metadata\.
 
 You can download the SDK with `pip`\.
 
@@ -11,7 +11,9 @@ $ pip install aws-xray-sdk
 **Note**  
 The X\-Ray SDK for Python is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-sdk\-python](https://github.com/aws/aws-xray-sdk-python)
 
-Start by adding the SDK middleware to your application to trace incoming requests\. The middleware creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
+If you use Django or Flask, start by adding the SDK middleware to your application to trace incoming requests\. The middleware creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\. For other applications, you can create segments manually\.
+
+For Python Lambda functions, enable active tracing to have Lambda sample and record traces for incoming requests\. If your Lambda function is downstream of an instrumented application, you don't need to enable active tracing\. Lambda will read the tracing header from the instrumented AWS SDK client that you used to invoke the function\. See  for a example Python function instrumented in Lambda\.
 
 Next, use the X\-Ray SDK for Python to instrument downstream calls by patching your application's libraries\. The SDK supports the following libraries\.
 
@@ -38,7 +40,7 @@ Annotations and metadata are arbitrary text that you add to segments with the X\
 
 When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in custom subsegments\. You can create a custom subsegment for an entire function or any section of code\. You can then you can record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
-See the [AWS X\-Ray SDK for Python API Reference](http://docs.aws.amazon.com/xray-sdk-for-python/latest/reference) for information about the SDK's classes and methods\.
+For reference documentation for the SDK's classes and methods, see the [AWS X\-Ray SDK for Python API Reference](http://docs.aws.amazon.com/xray-sdk-for-python/latest/reference)\.
 
 ## Requirements<a name="xray-sdk-python-requirements"></a>
 

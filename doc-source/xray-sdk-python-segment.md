@@ -111,6 +111,6 @@ Record user IDs on request segments to identify the user who sent the request\.
    document.set_user("U12345");
    ```
 
-You can call `set_user` in your controllers to record the user ID as soon as your application starts processing a request\. If you will only use the segment to set the user ID, you can chain the calls in a single line\.
+You can call `set_user` in your controllers to record the user ID as soon as your application starts processing a request\.
 
 To find traces for a user ID, use the `user` keyword in a filter expression\.

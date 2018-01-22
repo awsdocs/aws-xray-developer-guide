@@ -50,23 +50,23 @@ Rails.application.config.xray = {
 If you don't use Rails, create segments manually\. You can create a segment for each incoming request, or create segments around patched HTTP or AWS SDK clients to provide context for the recorder to add subsegments\.
 
 ```
-require 'aws-xray-sdk'
-
 # Start a segment
-segment = XRay.recorder.begin_segment name: 'my_service'
+segment = XRay.recorder.begin_segment 'my_service'
 # Start a subsegment
-subsegment = XRay.recorder.begin_subsegment name: 'outbound_call', namespace: 'remote'
+subsegment = XRay.recorder.begin_subsegment 'outbound_call', namespace: 'remote'
 
-# Add metadata or annotations here
-my_annotations = { id: 12345 }
-segment.add_annotations annotations: my_annotations
-
-my_metadata = {
-  my_namespace: {
-    key: 'value'
-  }
+# Add metadata or annotation here if necessary
+my_annotations = {
+  k1: 'v1',
+  k2: 1024
 }
-subsegment.add_metadata metadata: my_metadata
+segment.annotations.update my_annotations
+
+# Add metadata to default namespace
+subsegment.metadata[:k1] = 'v1'
+
+# Set user for the segment (subsegment is not supported)
+segment.user = 'my_name'
 
 # End segment/subsegment
 XRay.recorder.end_subsegment

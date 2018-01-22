@@ -19,6 +19,8 @@ On runtimes with a corresponding X\-Ray SDK, Lambda also runs the X\-Ray daemon\
 
 **X\-Ray SDKs on Lambda**
 
++ **X\-Ray SDK for Go** Go 1\.7 and newer runtime
+
 + **X\-Ray SDK for Java** Java 8 runtime
 
 + **X\-Ray SDK for Node\.js** Node\.js 4\.3 and newer runtimes

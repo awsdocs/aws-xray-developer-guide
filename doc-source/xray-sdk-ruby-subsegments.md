@@ -9,16 +9,18 @@ You can create subsegments manually to organize downstream calls into groups, or
 ```
 subsegment = XRay.recorder.begin_subsegment name: 'annotations', namespace: 'remote'
 my_annotations = { id: 12345 }
-subsegment.add_annotations annotations: my_annotations
+subsegment.annotations.update my_annotations
 XRay.recorder.end_subsegment
 ```
 
 To create a subsegment for a function, wrap it in a call to `XRay.recorder.capture`\.
 
 ```
-XRay.recorder.capture(name: 'a_name') do |subsegment|
-  # your function here
-  end
+XRay.recorder.capture('name_for_subsegment') do |subsegment|
+  resp = myfunc() # myfunc is your function
+  subsegment.annotations.update k1: 'v1'
+  resp
+end
 ```
 
 When you create a subsegment within a segment or another subsegment, the X\-Ray SDK generates an ID for it and records the start time and end time\.
