@@ -39,7 +39,7 @@ In the center of each node, the console shows the average response time and numb
 
 If your service map is large, the console defaults to a zoomed out view\. Use the on\-screen controls or mouse to zoom in and out and move the image around\.
 
-![\[Zooming and moving the service map\]](http://docs.aws.amazon.com/xray/latest/devguide/)
+![\[Zooming and moving the service map\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-zoompan.gif)
 
 **Controls**
 
