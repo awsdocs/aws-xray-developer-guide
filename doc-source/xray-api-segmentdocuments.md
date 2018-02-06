@@ -309,7 +309,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
       "instance_id": "i-0b5a4678fc325bg98"
     },
     "xray": {
-        "sdk_version": "1.2.1 for Java"
+        "sdk_version": "1.3.1 for Java"
     },
   },
   "http": {
@@ -392,7 +392,7 @@ Segments and subsegments can include an `annotations` object containing one or m
       "instance_id": "i-0b5a4678fc325bg98"
     },
     "xray": {
-        "sdk_version": "1.2.1 for Java"
+        "sdk_version": "1.3.1 for Java"
     },
   },
   "annotations": {
@@ -493,7 +493,7 @@ All fields are optional\.
       "instance_id": "i-075ad396f12bc325a"
     },
     "xray": {
-      "sdk": "1.2.1 for Java"
+      "sdk": "1.3.1 for Java"
     }
   }
   ```

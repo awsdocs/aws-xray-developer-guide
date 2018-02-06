@@ -1,10 +1,16 @@
 # AWS X\-Ray SDK for \.NET<a name="xray-sdk-dotnet"></a>
 
-The X\-Ray SDK for \.NET is a library for C\# \.NET web applications that provides classes and methods for generating and sending trace data to the X\-Ray daemon\. Trace data includes information about incoming HTTP requests served by the application, and calls that the application makes to downstream AWS services, HTTP web APIs, and SQL databases\. You can also create segments manually and add debug information in annotations and metadata\.
+The X\-Ray SDK for \.NET is a library for instrumenting C\# \.NET web applications, \.NET Core web applications, and \.NET Core functions on AWS Lambda\. It provides classes and methods for generating and sending trace data to the X\-Ray daemon\. This includes information about incoming requests served by the application, and calls that the application makes to downstream AWS services, HTTP web APIs, and SQL databases\.
 
-Download the X\-Ray SDK for \.NET from NuGet: [nuget\.org/packages/AWSXRayRecorder/](https://www.nuget.org/packages/AWSXRayRecorder/)
+**Note**  
+The X\-Ray SDK for \.NET is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-sdk\-dotnet](https://github.com/aws/aws-xray-sdk-dotnet)
 
-Start by adding a `TracingMessageHandler` to your web configuration to trace incoming requests\. The message handler creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
+For web applications, start by adding a message handler to your web configuration to trace incoming requests\. The message handler creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
+
+For Lambda functions called by an instrumented application or service, Lambda reads the tracing header and traces sampled requests automatically\. For other functions, you can configure Lambda to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
+
+**Note**  
+On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See  for more information\.
 
 Next, use the X\-Ray SDK for \.NET to instrument your AWS SDK for \.NET clients\. Whenever you make a call to a downstream AWS service or resource with an instrumented client, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
@@ -17,13 +23,21 @@ Record additional information about requests and the work that your application 
 **Annotations and Metadata**  
 Annotations and metadata are arbitrary text that you add to segments with the X\-Ray SDK\. Annotations are indexed for use with filter expressions\. Metadata are not indexed, but can be viewed in the raw segment with the X\-Ray console or API\. Anyone that you grant read access to X\-Ray can view this data\.
 
-When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in custom subsegments\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
+When you have many instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in custom subsegments\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
-For reference documentation about the SDK's classes and methods, see the [AWS X\-Ray SDK for \.NET API Reference](http://docs.aws.amazon.com//xray-sdk-for-dotnet/latest/reference)\.
+For reference documentation about the SDK's classes and methods, see the following:
+
++ [AWS X\-Ray SDK for \.NET API Reference](http://docs.aws.amazon.com//xray-sdk-for-dotnet/latest/reference)
+
++ [AWS X\-Ray SDK for \.NET Core API Reference](http://docs.aws.amazon.com//xray-sdk-for-dotnetcore/latest/reference)
+
+The same package supports both \.NET and \.NET Core, but the classes that are used vary\. Examples in this chapter link to the \.NET API reference unless the class is specific to \.NET Core\.
 
 ## Requirements<a name="xray-sdk-requirements"></a>
 
 The X\-Ray SDK for \.NET requires the \.NET framework and AWS SDK for \.NET\.
+
+For \.NET Core applications and functions, the SDK requires \.NET Core 2\.0 or later\.
 
 ## Adding the X\-Ray SDK for \.NET to Your Application<a name="xray-sdk-dotnet-dependencies"></a>
 
@@ -31,8 +45,8 @@ Use NuGet to add the X\-Ray SDK for \.NET to your application\.
 
 **To install the X\-Ray SDK for \.NET with NuGet Package Manager in Visual Studio**
 
-1. Choose **Tools**, choose **NuGet Package Manager**, and then choose **Manage NuGet Packages for Solution**\.
+1. Choose **Tools**, **NuGet Package Manager**, **Manage NuGet Packages for Solution**\.
 
 1. Search for **AWSXRayRecorder**\.
 
-1. Choose the package and then choose **Install**\.
+1. Choose the package, and then choose **Install**\.

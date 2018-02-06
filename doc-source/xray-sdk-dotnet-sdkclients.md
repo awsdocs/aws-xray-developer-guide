@@ -1,9 +1,8 @@
 # Instrumenting Downstream Calls to AWS Services<a name="xray-sdk-dotnet-sdkclients"></a>
 
-You can instrument your AWS SDK for \.NET clients by adding an event handler with `AWSSdkTracingHandler.AddEventHandler`\.
+You can instrument all of your AWS SDK for \.NET clients by calling `RegisterXRayForAllServices` before you create them\.
 
 **Example SampleController\.cs \- DynamoDB Client Instrumentation**  
-Initialize a DynamoDB client with the AWS SDK for \.NET, and create an `AWSSdkTracingHandler`, passing `AWSXRayRecorder.Instance` to the constructor\. Then call `AddEventHandler` on the SDK tracing handler\.  
 
 ```
 using Amazon;
@@ -17,12 +16,18 @@ namespace SampleEBWebApplication.Controllers
 {
   public class SampleController : ApiController
   {
+    AWSSDKHandler.RegisterXRayForAllServices();
     private static readonly Lazy<AmazonDynamoDBClient> LazyDdbClient = new Lazy<AmazonDynamoDBClient>(() =>
     {
       var client = new AmazonDynamoDBClient(EC2InstanceMetadata.Region ?? RegionEndpoint.USEast1);
-      new AWSSdkTracingHandler(AWSXRayRecorder.Instance).AddEventHandler(client);
       return client;
     });
+```
+
+To instrument clients for some services and not others, call `RegisterXRay` instead of `RegisterXRayForAllServices`\. Replace the highlighted text with the name of the service's client interface\.
+
+```
+AWSSDKHandler.RegisterXRay<IAmazonDynamoDB>()
 ```
 
 For all services, you can see the name of the API called in the X\-Ray console\. For a subset of services, the X\-Ray SDK adds information to the segment to provide more granularity in the service map\.
@@ -54,8 +59,8 @@ For example, when you make a call with an instrumented DynamoDB client, the SDK 
 
 When you access named resources, calls to the following services create additional nodes in the service map\. Calls that don't target specific resources create a generic node for the service\.
 
-+ **Amazon DynamoDB** – table name
++ **Amazon DynamoDB** – Table name
 
-+ **Amazon Simple Storage Service** – bucket and key name
++ **Amazon Simple Storage Service** – Bucket and key name
 
-+ **Amazon Simple Queue Service** – queue name
++ **Amazon Simple Queue Service** – Queue name

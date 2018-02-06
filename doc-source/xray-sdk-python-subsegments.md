@@ -1,10 +1,8 @@
 # Generating Custom Subsegments with the X\-Ray SDK for Python<a name="xray-sdk-python-subsegments"></a>
 
-A segment is a JSON document that records the work that your application does to serve a single request\. The SDK for Python middleware creates segments for HTTP requests and adds details about the request and response\. On AWS Lambda, Lambda creates the segment\. Details include information from headers in the request, the time that the request was received, and the time that the response was sent\.
+Subsegments extend a trace's segment with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
-Further instrumentation generates *subsegments*\. Instrumented AWS SDK clients, HTTP clients, and SQL clients add subsegments to the segment document with details of downstream calls made by the servlet or any functions that the servlet calls\.
-
-You can create subsegments manually to organize downstream calls into groups, or to record annotations and metadata in a separate subsegment\.
+To manage subsegments, use the `begin_subsegment` and `end_subsegment` methods\.
 
 **Example main\.py – custom subsegment**  
 

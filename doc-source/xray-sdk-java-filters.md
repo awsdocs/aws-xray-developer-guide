@@ -2,10 +2,10 @@
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
-**Note**  
-If your application runs on AWS Lambda, you can use the Lambda X\-Ray integration to trace incoming requests automatically\.
+Use a `Filter` to instrument incoming HTTP requests\. When you add the X\-Ray servlet filter to your application, the X\-Ray SDK for Java creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
-Use a `Filter` to instrument incoming HTTP requests\. When you add the X\-Ray servlet filter to your application, the X\-Ray SDK for Java creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment that provides information about the HTTP request and response, including timing, method, and disposition of the request\.
+**Note**  
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
 
 Each segment has a name that identifies your application in the service map\. The segment can be named statically, or you can configure the SDK to name it dynamically based on the host header in the incoming request\. Dynamic naming lets you group traces based on the domain name in the request, and apply a default name if the name doesn't match an expected pattern \(for example, if the host header is forged\)\.
 

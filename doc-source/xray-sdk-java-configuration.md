@@ -84,6 +84,8 @@ This example defines one custom rule and a default rule\. The custom rule applie
 
 The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
 
+On Lambda, you cannot modify the sampling rate\. If your function is called by an instrumented service, calls generated requests that were sampled by that service will be recorded by Lambda\. If active tracing is enabled and no tracing header is present, Lambda makes the sampling decision\.
+
 For Spring, configure the global recorder in a configuration class\.
 
 **Example src/main/java/myapp/WebConfig\.java \- Recorder Configuration**  

@@ -2,30 +2,85 @@
 
 You can configure the X\-Ray SDK for \.NET with plugins to include information about the service that your application runs on, modify the default sampling behavior, or add sampling rules that apply to requests to specific paths\.
 
+For \.NET web applications, add keys to the `appSettings` section of your `Web.config` file\.
 
-+ [Plugins](#xray-sdk-dotnet-configuration-plugins)
-+ [Sampling Rules](#xray-sdk-dotnet-configuration-sampling)
-+ [Logging](#xray-sdk-dotnet-configuration-logging)
-+ [Environment Variables](#xray-sdk-dotnet-configuration-envvars)
-
-## Plugins<a name="xray-sdk-dotnet-configuration-plugins"></a>
-
-Use plugins to add data about the service hosting your application\.
-
-**Plugins**
-
-+ Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
-
-To use a plugin, configure the X\-Ray SDK for \.NET client by adding the `AWSXRayPlugins` setting\.
-
-**Example Web\.config \- plugins**  
+**Example Web\.config**  
 
 ```
 <configuration>
   <appSettings>
     <add key="AWSXRayPlugins" value="EC2Plugin"/>
+    <add key="SamplingRuleManifest" value="sampling-rules.json"/>
   </appSettings>
 </configuration>
+```
+
+For \.NET Core, create a file named `appsettings.json` with a top\-level key named `XRay`\.
+
+**Example appsettings\.json**  
+
+```
+{
+  "XRay": {
+    "AWSXRayPlugins": "EC2Plugin",
+    "SamplingRuleManifest": "sampling-rules.json"
+  }
+}
+```
+
+Then, in your application code, build a configuration object and use it to initialize the X\-Ray recorder\. Do this before you initialize the recorder\.
+
+**Example Program\.cs – \.NET Core Configuration**  
+
+```
+using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+...
+AWSXRayRecorder.InitializeInstance(configuration);
+```
+
+If you are instrumenting a \.NET Core web application, you can also pass the configuration object to the `UseXRay` method when you configure the message handler\. For Lambda functions, use the `InitializeInstance` method as shown above\.
+
+For more information on the \.NET Core configuration API, see [Configure an ASP\.NET Core App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration) on docs\.microsoft\.com\.
+
+
++ [Plugins](#xray-sdk-dotnet-configuration-plugins)
++ [Sampling Rules](#xray-sdk-dotnet-configuration-sampling)
++ [Logging \(\.NET\)](#xray-sdk-dotnet-configuration-logging)
++ [Logging \(\.NET Core\)](#xray-sdk-dotnet-configuration-corelogging)
++ [Environment Variables](#xray-sdk-dotnet-configuration-envvars)
+
+## Plugins<a name="xray-sdk-dotnet-configuration-plugins"></a>
+
+Use plugins to add data about the service that is hosting your application\.
+
+**Plugins**
+
++ Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
+
++ Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
+
++ Amazon ECS – `ECSPlugin` adds the container ID\.
+
+To use a plugin, configure the X\-Ray SDK for \.NET client by adding the `AWSXRayPlugins` setting\. If multiple plugins apply to your application, specify all of them in the same setting, separated by commas\.
+
+**Example Web\.config \- Plugins**  
+
+```
+<configuration>
+  <appSettings>
+    <add key="AWSXRayPlugins" value="EC2Plugin,ElasticBeanstalkPlugin"/>
+  </appSettings>
+</configuration>
+```
+
+**Example appsettings\.json – Plugins**  
+
+```
+{
+  "XRay": {
+    "AWSXRayPlugins": "EC2Plugin,ElasticBeanstalkPlugin"
+  }
+}
 ```
 
 ## Sampling Rules<a name="xray-sdk-dotnet-configuration-sampling"></a>
@@ -58,6 +113,8 @@ This example defines one custom rule and a default rule\. The custom rule applie
 
 The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
 
+On Lambda, you cannot modify the sampling rate\. If your function is called by an instrumented service, calls generated requests that were sampled by that service will be recorded by Lambda\. If active tracing is enabled and no tracing header is present, Lambda makes the sampling decision\.
+
 Tell the X\-Ray SDK for \.NET to load sampling rules from a file with the `SamplingRuleManifest` setting\.
 
 **Example Web\.config \- Sampling Rules**  
@@ -70,7 +127,17 @@ Tell the X\-Ray SDK for \.NET to load sampling rules from a file with the `Sampl
 </configuration>
 ```
 
-## Logging<a name="xray-sdk-dotnet-configuration-logging"></a>
+**Example appsettings\.json – Sampling Rules**  
+
+```
+{
+  "XRay": {
+    "SamplingRuleManifest": "sampling-rules.json"
+  }
+}
+```
+
+## Logging \(\.NET\)<a name="xray-sdk-dotnet-configuration-logging"></a>
 
 The X\-Ray SDK for \.NET uses the same logging mechanism as the AWS SDK for \.NET\. If you already configured your application to log AWS SDK for \.NET output, the same configuration applies to output from the X\-Ray SDK for \.NET\.
 
@@ -91,6 +158,61 @@ To configure logging, add a configuration section named `aws` to your `App.confi
 ```
 
 For more information, see [Configuring Your AWS SDK for \.NET Application](http://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-config.html) in the *AWS SDK for \.NET Developer Guide*\.
+
+## Logging \(\.NET Core\)<a name="xray-sdk-dotnet-configuration-corelogging"></a>
+
+For \.NET Core applications, the X\-Ray SDK supports the logging options in the AWS SDK for \.NET [LoggingOptions enum](http://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TLoggingOptions.html)\. To configure logging, pass one of these options to the `RegisterLogger` method\.
+
+```
+AWSXRayRecorder.RegisterLogger(LoggingOptions.Console);
+```
+
+For example, to use log4net, create a configuration file that defines the logger, the output format, and the file location\.
+
+**Example log4net\.config**  
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<log4net>
+  <appender name="FileAppender" type="log4net.Appender.FileAppender,log4net">
+    <file value="c:\logs\sdk-log.txt" />
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%date [%thread] %level %logger - %message%newline" />
+    </layout>
+  </appender>
+  <logger name="Amazon">
+    <level value="DEBUG" />
+    <appender-ref ref="FileAppender" />
+  </logger>
+</log4net>
+```
+
+Then, create the logger and apply the configuration in your program code\.
+
+**Example Program\.cs – Logging**  
+
+```
+using log4net;
+using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+
+class Program
+{
+  private static ILog log;
+  static Program()
+  {
+    var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+    XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+    log = LogManager.GetLogger(typeof(Program));
+    AWSXRayRecorder.RegisterLogger(LoggingOptions.Log4Net);
+  }
+  static void Main(string[] args)
+  {
+  ...
+  }
+}
+```
+
+For more information on configuring log4net, see [Configuration](https://logging.apache.org/log4net/release/manual/configuration.html) on logging\.apache\.org\.
 
 ## Environment Variables<a name="xray-sdk-dotnet-configuration-envvars"></a>
 

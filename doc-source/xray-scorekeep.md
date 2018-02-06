@@ -2,8 +2,7 @@
 
 The AWS X\-Ray [eb\-java\-scorekeep](https://github.com/awslabs/eb-java-scorekeep/tree/xray) sample app, available on GitHub, shows the use of the AWS X\-Ray SDK to instrument incoming HTTP calls, DynamoDB SDK clients, and HTTP clients\. The sample app uses AWS Elastic Beanstalk features to create DynamoDB tables, compile Java code on instance, and run the X\-Ray daemon without any additional configuration\.
 
-![\[Scorekeep uses the AWS X-Ray SDK to instrument incoming HTTP calls, DynamoDB SDK
-        clients, and HTTP clients\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-flow.png)
+![\[Scorekeep uses the AWS X-Ray SDK to instrument incoming HTTP calls, DynamoDB SDK clients, and HTTP clients\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-flow.png)
 
 The sample is an instrumented version of the [Scorekeep](https://github.com/awslabs/eb-java-scorekeep) project on AWSLabs\. It includes a front\-end web app, the API that it calls, and the DynamoDB tables that it uses to store data\. All the components are hosted in an Elastic Beanstalk environment for portability and ease of deployment\.
 

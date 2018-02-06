@@ -22,7 +22,7 @@ You can use the AWS SDK to develop programs that use the X\-Ray API\. The X\-Ray
 
 The AWS Command Line Interface is a command line tool that uses the SDK for Python to call AWS APIs\. When you are first learning an AWS API, the AWS CLI provides an easy way to explore the available parameters and view the service output in JSON or text form\.
 
-See [the AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference//xray) for details on `aws xray` subcommands\.
+See [the AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference/xray) for details on `aws xray` subcommands\.
 
 
 + [Using the AWS X\-Ray API with the AWS CLI](xray-api-tutorial.md)

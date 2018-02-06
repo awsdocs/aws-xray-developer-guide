@@ -4,8 +4,7 @@ You can use the X\-Ray SDK and AWS service integration to instrument requests to
 
 To instrument your application code, you use the **X\-Ray SDK**\. The SDK records data about incoming and outgoing requests and sends it to the X\-Ray daemon, which relays the data in batches to X\-Ray\. For example, when your application calls DynamoDB to retrieve user information from a DynamoDB table, the X\-Ray SDK records data from both the client request and the downstream call to DynamoDB\.
 
-![\[X-Ray SDK records data from both the client request and downstream call to DynamoDB
-      \]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-ddb-edge.png)
+![\[X-Ray SDK records data from both the client request and downstream call to DynamoDB\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-ddb-edge.png)
 
 Other AWS services make it easier to instrument your application's components by integrating with X\-Ray\. **Service integration** can include adding tracing headers to incoming requests, sending trace data to X\-Ray, or running the X\-Ray daemon\. For example, AWS Lambda can send trace data about requests to your Lambda functions, and run the X\-Ray daemon on workers to make it easier to use the X\-Ray SDK\.
 
@@ -22,9 +21,33 @@ Many instrumentation scenarios require only configuration changes\. For example,
 
 AWS X\-Ray provides tools and integration to support a variety of languages, frameworks, and platforms\.
 
+**C\#**
+
+On Windows Server, you can use the X\-Ray SDK for \.NET to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\.
+
+See  for more information\.
+
++ **\.NET on Windows Server** – Add a message handler to your HTTP configuration to instrument incoming requests\.
+
++ **C\# \.NET Core on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\.
+
+**Go**
+
+In any Go application, you can use the X\-Ray SDK for Go classes to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. Automatic request instrumentation is available for applications that use HTTP handlers\.
+
+On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Go to your function for full instrumentation\.
+
+See  for more information\.
+
++ **Go web applications** – Use the X\-Ray SDK for Go HTTP handler to process incoming requests on your routes\.
+
++ **Go on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\. Add the X\-Ray SDK for Go to instrument AWS SDK, HTTP, and SQL clients\.
+
 **Java**
 
-In any Java application, you can use the X\-Ray SDK for Java classes to instrument incoming requests, AWS SDK clients, and outgoing HTTP calls\. Automatic request instrumentation is available for AWS Lambda and frameworks that support Java servlets\. Automatic SDK instrumentation is available through the Instrumentor submodule\.
+In any Java application, you can use the X\-Ray SDK for Java classes to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. Automatic request instrumentation is available for frameworks that support Java servlets\. Automatic SDK instrumentation is available through the Instrumentor submodule\.
+
+On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Java to your function for full instrumentation\.
 
 See  for more information\.
 
@@ -32,39 +55,47 @@ See  for more information\.
 
 + **Spring Boot** – Add a servlet filter to your `WebConfig` class to instrument incoming requests\.
 
-+ **Java on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
++ **Java on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\. Add the X\-Ray SDK for Java to instrument AWS SDK, HTTP, and SQL clients\.
 
-+ **Other frameworks** – Add a servlet filter if your framework supports servlets, or manually create segments and make sampling decisions on incoming requests if it doesn't support servlets\.
++ **Other frameworks** – Add a servlet filter if your framework supports servlets, or manually create a segment for each incoming request\.
 
 **Node\.js**
 
-In any Node\.js application, you can use the X\-Ray SDK for Node\.js classes to instrument incoming requests, AWS SDK clients, and outgoing HTTP calls\. Automatic request instrumentation is available for applications that use the Express framework\.
+In any Node\.js application, you can use the X\-Ray SDK for Node\.js classes to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. Automatic request instrumentation is available for applications that use the Express and Restify frameworks\.
+
+On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Node\.js to your function for full instrumentation\.
 
 See  for more information\.
 
-+ **Express** – Use the X\-Ray SDK for Node\.js Express middleware to instrument incoming requests\.
++ **Express or Restify** – Use the X\-Ray SDK for Node\.js middleware to instrument incoming requests\.
 
-+ **Node\.js on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
++ **Node\.js on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\. Add the X\-Ray SDK for Node\.js to instrument AWS SDK, HTTP, and SQL clients
 
-+ **Other frameworks** – Manually create segments and make sampling decisions on incoming requests\.
-
-**C\#**
-
-On Windows Server editions other than Windows Server Core, you can use the X\-Ray SDK for \.NET to instrument incoming requests, AWS SDK clients, and outgoing HTTP calls\. On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\.
-
-See  for more information\.
-
-+ **\.NET on Windows Server** – Add a message handler to your HTTP configuration to instrument incoming requests\.
-
-+ **C\# \.NET Core on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
++ **Other frameworks** – Manually create a segment for each incoming request\.
 
 **Python**
 
-On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\.
+In any Python application, you can use the X\-Ray SDK for Python classes to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. Automatic request instrumentation is available for applications that use the Django and Flask frameworks\.
 
-+ **Python on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\.
+On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Python to your function for full instrumentation\.
 
-If the X\-Ray SDK isn't available for your language or platform, you can generate trace data manually and send it to the X\-Ray daemon, or directly to the X\-Ray API\. 
+See  for more information\.
+
++ **Django or Flask** – Use the X\-Ray SDK for Node\.js middleware to instrument incoming requests\.
+
++ **Python on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\. Add the X\-Ray SDK for Python to instrument AWS SDK, HTTP, and SQL clients\.
+
++ **Other frameworks** – Manually create a segment for each incoming request\.
+
+**Ruby**
+
+In any Ruby application, you can use the X\-Ray SDK for Ruby classes to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. Automatic request instrumentation is available for applications that use the Rails framework\.
+
++ **Rails** – Add the X\-Ray SDK for Ruby gem and railtie to your gemfile, and configure the recorder in an initializer to instrument incoming requests\.
+
++ **Other frameworks** – Manually create a segment for each incoming request\.
+
+If the X\-Ray SDK isn't available for your language or platform, you can generate trace data manually and send it to the X\-Ray daemon, or directly to the X\-Ray API\.
 
 ## Supported AWS Services<a name="xray-usage-services"></a>
 

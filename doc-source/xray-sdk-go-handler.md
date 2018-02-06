@@ -2,9 +2,12 @@
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
-Use `xray.handler` to instrument incoming HTTP requests\. The X\-Ray SDK for Go implements the standard Go library `http.handler` interface in the `xay.Handler` class to intercept web requests\. The `xay.Handler` class wraps the provided `http.handler` with `xray.Capture` using the request's context, parsing the incoming headers, adding response headers if needed, and sets HTTP\-specific trace fields\.
+Use `xray.Handler` to instrument incoming HTTP requests\. The X\-Ray SDK for Go implements the standard Go library `http.Handler` interface in the `xay.Handler` class to intercept web requests\. The `xay.Handler` class wraps the provided `http.Handler` with `xray.Capture` using the request's context, parsing the incoming headers, adding response headers if needed, and sets HTTP\-specific trace fields\.
 
-When you use this class to handle HTTP requests and responses, the X\-Ray SDK for Go creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment that provides information about the HTTP request and response, including timing, method, and disposition of the request\.
+When you use this class to handle HTTP requests and responses, the X\-Ray SDK for Go creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
+
+**Note**  
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
 
 The following example intercepts requests on port 8000 and returns "Hello\!" as a response\. It creates the segment `myApp` and instruments calls through any application\.
 

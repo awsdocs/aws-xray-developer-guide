@@ -13,7 +13,12 @@ The X\-Ray SDK for Python is an open source project\. You can follow the project
 
 If you use Django or Flask, start by adding the SDK middleware to your application to trace incoming requests\. The middleware creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\. For other applications, you can create segments manually\.
 
-For Python Lambda functions, enable active tracing to have Lambda sample and record traces for incoming requests\. If your Lambda function is downstream of an instrumented application, you don't need to enable active tracing\. Lambda will read the tracing header from the instrumented AWS SDK client that you used to invoke the function\. See  for a example Python function instrumented in Lambda\.
+For Lambda functions called by an instrumented application or service, Lambda reads the tracing header and traces sampled requests automatically\. For other functions, you can configure Lambda to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
+
+**Note**  
+On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See  for more information\.
+
+See  for a example Python function instrumented in Lambda\.
 
 Next, use the X\-Ray SDK for Python to instrument downstream calls by patching your application's libraries\. The SDK supports the following libraries\.
 

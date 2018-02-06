@@ -7,6 +7,11 @@ The X\-Ray SDK for Node\.js is an open source project\. You can follow the proje
 
 If you use Express, start by adding the SDK as middleware on your application server to trace incoming requests\. The middleware creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
 
+For Lambda functions called by an instrumented application or service, Lambda reads the tracing header and traces sampled requests automatically\. For other functions, you can configure Lambda to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
+
+**Note**  
+On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See  for more information\.
+
 Next, use the X\-Ray SDK for Node\.js to instrument your AWS SDK for JavaScript in Node\.js clients\. Whenever you make a call to a downstream AWS service or resource with an instrumented client, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
 The X\-Ray SDK for Node\.js also provides instrumentation for downstream calls to HTTP web APIs and SQL queries\. Wrap your HTTP client in the SDK's capture method to record information about outgoing HTTP calls\. For SQL clients, use the capture method for your database type\.

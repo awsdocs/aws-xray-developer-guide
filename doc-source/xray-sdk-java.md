@@ -68,7 +68,7 @@ The X\-Ray SDK for Java is available from Maven:
 
 + **Bill of Materials** – `aws-xray-recorder-sdk-bom`
 
-+ **Version** – `1.2.1`
++ **Version** – `1.3.1`
 
 If you use Maven to build your application, add the SDK as a dependency in your `pom.xml` file\.
 
@@ -80,7 +80,7 @@ If you use Maven to build your application, add the SDK as a dependency in your 
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-xray-recorder-sdk-bom</artifactId>
-      <version>1.2.1</version>
+      <version>1.3.1</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -134,7 +134,7 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom('com.amazonaws:aws-java-sdk-bom:1.11.39')
-        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:1.2.1')
+        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:1.3.1')
     }
 }
 ```

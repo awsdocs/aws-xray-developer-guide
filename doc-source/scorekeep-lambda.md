@@ -21,8 +21,7 @@ For each sampled request, Lambda runs the X\-Ray daemon and writes two segments\
 
 Lambda passes the function segment to the X\-Ray SDK through the function context\. When you instrument a Lambda function, you don't use the SDK to create a segment for incoming requests\. Lambda provides the segment, and you use the SDK to instrument clients and write subsegments\.
 
-![\[Service map showing how Scorekeep calls a Lambda function to get random names for new
-          users\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
+![\[Service map showing how Scorekeep calls a Lambda function to get random names for new users\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
 
 The `random-name` function is implemented in Node\.js\. It uses the SDK for JavaScript in Node\.js to send notifications with Amazon SNS, and the X\-Ray SDK for Node\.js to instrument the AWS SDK client\. To write annotations, the function creates a custom subsegment with `AWSXRay.captureFunc`, and writes annotations in the instrumented function\. In Lambda, you can't write annotations directly to the function segment, only to a subsegment that you create\.
 
@@ -79,8 +78,7 @@ The worker pulls the game record and documents from other tables that the game r
 
 Sessions, and states are stored as references as well\. This keeps the entries in the game table from being too large, but requires additional calls to get all of the information about the game\. The worker dereferences all of these entries and constructs a complete record of the game as a single document in Amazon S3\. When you want to do analytics on the data, you can run queries on it directly in Amazon S3 with Amazon Athena without running read\-heavy data migrations to get your data out of DynamoDB\.
 
-![\[Service map showing how the Scorekeep worker function uses Amazon SQS, Amazon S3, and the
-          Scorekeep API.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambdaworker-node.png)
+![\[Service map showing how the Scorekeep worker function uses Amazon SQS, Amazon S3, and the Scorekeep API.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambdaworker-node.png)
 
 The worker function has active tracing enabled in its configuration in AWS Lambda\. Unlike the random name function, the worker does not receive a request from an instrumented application, so AWS Lambda doesn't receive a tracing header\. With active tracing, Lambda creates the trace ID and makes sampling decisions\.
 

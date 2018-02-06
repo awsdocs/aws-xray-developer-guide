@@ -2,10 +2,10 @@
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
-**Note**  
-If your application runs on AWS Lambda, you can use the Lambda X\-Ray integration to trace incoming requests automatically\.
+Use a message handler to instrument incoming HTTP requests\. When you add the X\-Ray message handler to your application, the X\-Ray SDK for \.NET creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
-Use a `TracingMessageHandler` to instrument incoming HTTP requests\. When you add the X\-Ray message handler to your application, the X\-Ray SDK for \.NET creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment that provides information about the HTTP request and response, including timing, method, and disposition of the request\.
+**Note**  
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
 
 Each segment has a name that identifies your application in the service map\. The segment can be named statically, or you can configure the SDK to name it dynamically based on the host header in the incoming request\. Dynamic naming lets you group traces based on the domain name in the request, and apply a default name if the name doesn't match an expected pattern \(for example, if the host header is forged\)\.
 
@@ -27,62 +27,57 @@ The message handler creates a segment for each incoming request with an `http` b
 + **Content length** — The `content-length` from the response\.
 
 
-+ [Adding a Tracing Message Handler to your Application's HTTP Configuration](#xray-sdk-dotnet-messagehandler-webapiconfig)
-+ [Adding a Tracing Message Handler to your Application Global Configuration](#xray-sdk-dotnet-messagehandler-globalasax)
++ [Instrumenting Incoming Requests \(\.NET\)](#xray-sdk-dotnet-messagehandler-globalasax)
++ [Instrumenting Incoming Requests \(\.NET Core\)](#xray-sdk-dotnet-messagehandler-startupcs)
 + [Configuring a Segment Naming Strategy](#xray-sdk-dotnet-messagehandler-naming)
 
-## Adding a Tracing Message Handler to your Application's HTTP Configuration<a name="xray-sdk-dotnet-messagehandler-webapiconfig"></a>
+## Instrumenting Incoming Requests \(\.NET\)<a name="xray-sdk-dotnet-messagehandler-globalasax"></a>
 
-To instrument requests served by your application, add a `TracingMessageHandler` to the `HttpConfiguration.MessageHandlers` collection in your web configuration\.
+To instrument requests served by your application, call `RegisterXRay` in the `Init` method of your `global.asax` file\.
 
-**Example WebApiConfig \- Message handler**  
+**Example global\.asax \- Message Handler**  
 
 ```
 using System.Web.Http;
-using [Amazon\.XRay\.Recorder\.Handlers\.AspNet\.WebApi](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AspNet_WebApi.htm);
-using SampleEBWebApplication.Controllers;
+using [Amazon\.XRay\.Recorder\.Handlers\.AspNet](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AspNet.htm);
 
 namespace SampleEBWebApplication
 {
-  public static class WebApiConfig
+  public class MvcApplication : System.Web.HttpApplication
   {
-    public static void Register(HttpConfiguration config)
+    public override void Init()
     {
-      // Add the message handler to HttpConfiguration
-      config.MessageHandlers.Add(new TracingMessageHandler("MyApp"));
-      // Web API routes
-      config.MapHttpAttributeRoutes();
-      config.Routes.MapHttpRoute(
-        name: "DefaultApi",
-        routeTemplate: "api/{controller}/{id}",
-        defaults: new { id = RouteParameter.Optional }
-      );
+      base.Init();
+      AWSXRayASPNET.RegisterXRay(this, "MyApp");
     }
   }
 }
 ```
 
-## Adding a Tracing Message Handler to your Application Global Configuration<a name="xray-sdk-dotnet-messagehandler-globalasax"></a>
+## Instrumenting Incoming Requests \(\.NET Core\)<a name="xray-sdk-dotnet-messagehandler-startupcs"></a>
 
-Alternatively, you can also add the tracing handler to a `global.asax` file\.
+To instrument requests served by your application, call the `UseExceptionHandler`, `UseXRay`, and `UseStaticFiles` methods in the `Configure` method of your `Startup` class\.
 
-**Example global\.asax \- Message handler**  
+**Example Startup\.cs**  
 
 ```
-using System.Web.Http;
-using [Amazon\.XRay\.Recorder\.Handlers\.AspNet\.WebApi](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AspNet_WebApi.htm);
+using Microsoft.AspNetCore.Builder;
 
-namespace SampleEBWebApplication
-{
-  public class WebApiApplication : System.Web.HttpApplication
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   {
-    protected void Application_Start()
-    {
-      GlobalConfiguration.Configure(WebApiConfig.Register);
-      GlobalConfiguration.Configuration.MessageHandlers.Add(new TracingMessageHandler("MyApp"));
-    }
+    app.UseExceptionHandler("/Error");
+    app.UseXRay("MyApp");
+    app.UseStaticFiles();
+    app.UseMVC();
   }
-}
+```
+
+Always call `UseXRay` after `UseExceptionHandler` to record exceptions\. If you use other middleware, enable it after you call `UseXRay`\.
+
+The `UseXRay` method can also take a configuration object as a second argument\.
+
+```
+app.UseXRay("MyApp", configuration);
 ```
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-dotnet-messagehandler-naming"></a>
@@ -95,17 +90,17 @@ If your application serves requests for multiple domains, you can configure the 
 
 For example, you might have a single application serving requests to three subdomains– `www.example.com`, `api.example.com`, and `static.example.com`\. You can use a dynamic naming strategy with the pattern `*.example.com` to identify segments for each subdomain with a different name, resulting in three service nodes on the service map\. If your application receives requests with a hostname that doesn't match the pattern, you will see a fourth node on the service map with a fallback name that you specify\.
 
-To use the same name for all request segments, specify the name of your application when you initialize the servlet filter, as shown in the previous section\. This has the same effect as creating a [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm) and passing it to the [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/M_Amazon_XRay_Recorder_Handlers_AspNet_WebApi_TracingMessageHandler__ctor.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/M_Amazon_XRay_Recorder_Handlers_AspNet_WebApi_TracingMessageHandler__ctor.htm) constructor\.
+To use the same name for all request segments, specify the name of your application when you initialize the message handler, as shown in the previous section\. This has the same effect as creating a [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm) and passing it to the `RegisterXRay` method\.
 
 ```
-config.MessageHandlers.Add(new TracingMessageHandler(new FixedSegmentNamingStrategy("MyApp"));
+AWSXRayASPNET.RegisterXRay(this, new FixedSegmentNamingStrategy("MyApp"));
 ```
 
 **Note**  
 You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` environment variable\.
 
-A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically, create a [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm) and pass it to the `TracingMessageHandler` constructor\.
+A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically, create a [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm) and pass it to the `RegisterXRay` method\.
 
 ```
-config.MessageHandlers.Add(new TracingMessageHandler(new DynamicSegmentNamingStrategy("MyApp", "*.example.com"));
+AWSXRayASPNET.RegisterXRay(this, new DynamicSegmentNamingStrategy("MyApp", "*.example.com"));
 ```

@@ -1,12 +1,8 @@
 # Generating Custom Subsegments with the X\-Ray SDK for Go<a name="xray-sdk-go-subsegments"></a>
 
-A segment is a JSON document that records the work that your application does to serve a single request\. The handler method creates segments for HTTP requests and adds details about the request and response, including information from headers in the request, the time that the request was received, and the time that the response was sent\.
+Subsegments extend a trace's segment with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
-Further instrumentation generates *subsegments*\. Instrumented AWS SDK clients and HTTP clients add subsegments to the segment document with details of downstream calls made by your application while the request segment is open\.
-
-You can create subsegments manually to organize downstream calls into groups\. For example, you can create a custom subsegment for a function that makes several calls to DynamoDB\.
-
-In the following example, the code creates a subsegment for the `GameModel.saveGame` function in a Go application\.
+Use the `Capture` method to create a subsegment around a function\.
 
 **Example main\.go – custom subsegment**  
 

@@ -1,8 +1,11 @@
 # Tracing Incoming Requests with the X\-Ray SDK for Python Middleware<a name="xray-sdk-python-middleware"></a>
 
-If you use Django or Flask, use the Django middleware or Flask middleware to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment that provides information about the HTTP request and response\. This information includes timing, method, and disposition of the request\.
+If you use Django or Flask, use the Django middleware or Flask middleware to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
-If your application runs on AWS Lambda, you can use the Lambda X\-Ray integration to trace incoming requests automatically\. See  for a example Python function instrumented in Lambda\.
+**Note**  
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
+
+See  for a example Python function instrumented in Lambda\.
 
 For scripts or Python applications on other frameworks, you can create segments manually\.
 

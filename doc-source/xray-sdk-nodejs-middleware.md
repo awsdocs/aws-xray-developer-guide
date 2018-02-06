@@ -2,10 +2,10 @@
 
 You can use the X\-Ray SDK for Node\.js to trace incoming HTTP requests that your Express and Restify applications serve on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
-**Note**  
-If your application runs on AWS Lambda, you can use the Lambda X\-Ray integration to trace incoming requests automatically\.
+The X\-Ray SDK for Node\.js provides middleware for applications that use the Express and Restify frameworks\. When you add the X\-Ray middleware to your application, the X\-Ray SDK for Node\.js creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
-The X\-Ray SDK for Node\.js provides middleware for applications that use the Express and Restify frameworks\. When you add the X\-Ray middleware to your application, the X\-Ray SDK for Node\.js creates a segment for each sampled request\. Any segments created by additional instrumentation become subsegments of the request\-level segment\. The request\-level segment provides information about the HTTP request and response including timing, method, and disposition of the request\.
+**Note**  
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
 
 Each segment has a name that identifies your application in the service map\. The segment can be named statically, or you can configure the SDK to name it dynamically based on the host header in the incoming request\. Dynamic naming lets you group traces based on the domain name in the request, and apply a default name if the name doesn't match an expected pattern \(for example, if the host header is forged\)\.
 
@@ -72,8 +72,6 @@ server.get('/', function (req, res) {
   res.render('index');
 });
 ```
-
-After you define your routes, use the output of `express.closeSegment`, as shown, to handle any errors returned by the X\-Ray SDK for Node\.js\.
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-nodejs-middleware-naming"></a>
 
