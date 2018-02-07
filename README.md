@@ -1,6 +1,6 @@
-## AWS Xray Developer Guide
+## AWS X-Ray Developer Guide
 
-The open source version of the AWS CLI User Guide
+The open source version of the AWS X-Ray Developer Guide
 
 ## License Summary
 
