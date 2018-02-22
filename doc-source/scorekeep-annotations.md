@@ -1,6 +1,6 @@
 # Recording Annotations, Metadata, and User IDs<a name="scorekeep-annotations"></a>
 
-In the game model class, the application records `Game` objects in a metadata block each time it saves a game in DynamoDB\. Separately, the application records game IDs in annotations for use with filter expressions\.
+In the game model class, the application records `Game` objects in a [metadata](xray-sdk-java-segment.md#xray-sdk-java-segment-metadata) block each time it saves a game in DynamoDB\. Separately, the application records game IDs in [annotations](xray-sdk-java-segment.md#xray-sdk-java-segment-annotations) for use with [filter expressions](xray-console-filters.md)\.
 
 **Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and Metadata**  
 
@@ -31,7 +31,7 @@ import [com\.amazonaws\.xray\.entities\.Subsegment](http://docs.aws.amazon.com/x
   }
 ```
 
-In the move controller, the application records user IDs with `setUser`\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
+In the move controller, the application records [user IDs](xray-sdk-java-segment.md#xray-sdk-java-segment-userid) with `setUser`\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
 
 **Example [src/main/java/scorekeep/MoveController\.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/MoveController.java) – User ID**  
 

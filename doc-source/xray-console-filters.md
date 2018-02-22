@@ -4,7 +4,7 @@ When you choose a time period of traces to view in the X\-Ray console, you might
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-tracescan-max.png)
 
-When you choose a node in the service map, the console constructs a filter expression based on the service name of the node, and the types of error present based on your selection\. To find traces that show performance issues or that relate to specific requests, you can adjust the expression provided by the console, or create your own\. If you add annotations with the X\-Ray SDK, you can also filter based on the presence of an annotation key or the value of a key\.
+When you [choose a node in the service map](xray-console.md#xray-console-servicemap), the console constructs a filter expression based on the service name of the node, and the types of error present based on your selection\. To find traces that show performance issues or that relate to specific requests, you can adjust the expression provided by the console, or create your own\. If you add annotations with the X\-Ray SDK, you can also filter based on the presence of an annotation key or the value of a key\.
 
 **Note**  
 If you choose a relative time range in the service map, the console converts it to an absolute start and end time when you choose a node\. To ensure that the traces for the node appear in the search results, and avoid scanning times when the node was not active, the time range only includes times when the node sent traces\. If you want to search relative to the current time, you can switch back to a relative time range in the traces page and re\-scan\.
@@ -49,7 +49,7 @@ duration >= 5 AND duration <= 8
 
 Simple keywords and operators only find issues at the trace level\. If an error occurs downstream, but is handled by your application and not returned to the user, a search for `error` will not find it\.
 
-To find traces with downstream issues, you can use the complex keywords `service()` and `edge()`\. These keywords let you apply a filter expression to all downstream nodes, a single downstream node, or an edge between two nodes\. For even more granularity, you can filter services and edges by type with the id\(\) function\.
+To find traces with downstream issues, you can use the [complex keywords](#console-filters-complex) `service()` and `edge()`\. These keywords let you apply a filter expression to all downstream nodes, a single downstream node, or an edge between two nodes\. For even more granularity, you can filter services and edges by type with [the id\(\) function](#console-filters-functions)\.
 
 ## Boolean Keywords<a name="console-filters-boolean"></a>
 
@@ -256,7 +256,7 @@ service(id(name: "service-name", type:"service::type")) { filter }
 edge(id(name: "service-one", type:"service::type"), id(name: "service-two", type:"service::type")) { filter }
 ```
 
-For example, the Scorekeep sample application includes an AWS Lambda function named `random-name`\. This creates two nodes in the service map, one for the function invocation, and one for the Lambda service\.
+For example, the [Scorekeep sample application](xray-scorekeep.md) includes an AWS Lambda function named `random-name`\. This creates two nodes in the service map, one for the function invocation, and one for the Lambda service\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
 

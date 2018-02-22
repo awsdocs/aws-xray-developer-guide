@@ -59,7 +59,7 @@ Most of the work is done in a service class named `xray`\. This service class pr
   }
 ```
 
-These methods are called in header and `transformResponse` functions in the resource services that the web app uses to call the Scorekeep API\. To include the client segment in the same trace as the segment that the API generates, the web app must include the trace ID and segment ID in a tracing header \(`X-Amzn-Trace-Id`\) that the X\-Ray SDK can read\. When the instrumented Java application receives a request with this header, the X\-Ray SDK for Java uses the same trace ID and makes the segment from the web app client the parent of its segment\. 
+These methods are called in header and `transformResponse` functions in the resource services that the web app uses to call the Scorekeep API\. To include the client segment in the same trace as the segment that the API generates, the web app must include the trace ID and segment ID in a [tracing header](xray-concepts.md#xray-concepts-tracingheader) \(`X-Amzn-Trace-Id`\) that the X\-Ray SDK can read\. When the instrumented Java application receives a request with this header, the X\-Ray SDK for Java uses the same trace ID and makes the segment from the web app client the parent of its segment\. 
 
 **Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/public/app/services.js](https://github.com/awslabs/eb-java-scorekeep/tree/xray/public/app/services.js) – Recording segments for Angular resource calls and writing tracing headers**  
 

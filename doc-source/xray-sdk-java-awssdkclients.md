@@ -1,8 +1,8 @@
 # Tracing AWS SDK Calls with the X\-Ray SDK for Java<a name="xray-sdk-java-awssdkclients"></a>
 
-When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Java tracks the calls downstream in subsegments\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
+When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Java tracks the calls downstream in [subsegments](xray-sdk-java-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
-The X\-Ray SDK for Java automatically instruments all AWS SDK clients when you include the `aws-sdk` and `aws-sdk-instrumentor` submodules in your build\. If you don't include the Instrumentor submodule, you can choose to instrument some clients while excluding others\.
+The X\-Ray SDK for Java automatically instruments all AWS SDK clients when you include the `aws-sdk` and `aws-sdk-instrumentor` [submodules](xray-sdk-java.md#xray-sdk-java-dependencies) in your build\. If you don't include the Instrumentor submodule, you can choose to instrument some clients while excluding others\.
 
 To instrument individual clients, remove the `aws-sdk-instrumentor` submodule from your build and add an `XRayClient` as a `TracingHandler` on your AWS SDK client using the service's client builder\.
 

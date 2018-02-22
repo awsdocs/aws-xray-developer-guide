@@ -2,9 +2,9 @@
 
 You can run the daemon locally for development and testing\.
 
-When running locally, the daemon can read credentials from an AWS SDK credentials file \(`.aws/credentials` in your user directory\) or from environment variables\. For more information, see \.
+When running locally, the daemon can read credentials from an AWS SDK credentials file \(`.aws/credentials` in your user directory\) or from environment variables\. For more information, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
-The daemon listens for UDP data on port 2000\. You can change the port and other options by using a configuration file and command line options\. For more information, see \.
+The daemon listens for UDP data on port 2000\. You can change the port and other options by using a configuration file and command line options\. For more information, see [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md)\.
 
 ## Running the X\-Ray Daemon on Linux<a name="xray-daemon-local-linux"></a>
 
@@ -53,7 +53,7 @@ $zipPath = "$currentLocation\$zipFileName"
 $destPath = "$currentLocation\aws-xray-daemon"
 $daemonPath = "$destPath\xray.exe"
 $daemonLogPath = "C:\inetpub\wwwroot\xray-daemon.log"
-$url = "https://s3.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip"
+$url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip"
 
 Invoke-WebRequest -Uri $url -OutFile $zipPath
 Add-Type -Assembly "System.IO.Compression.Filesystem"

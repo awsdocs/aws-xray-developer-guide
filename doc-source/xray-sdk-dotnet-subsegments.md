@@ -1,6 +1,6 @@
 # Creating Additional Subsegments<a name="xray-sdk-dotnet-subsegments"></a>
 
-Subsegments extend a trace's segment with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
+Subsegments extend a trace's [segment](xray-concepts.md#xray-concepts-segments) with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
 To manage subsegments, use the `BeginSubsegment` and `EndSubsegment` methods\. Perform any work in the subsegment in a `try` block and use `AddException` to trace exceptions\. Call `EndSubsegment` in a `finally` block to ensure that the subsegment is closed\.
 

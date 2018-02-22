@@ -5,7 +5,7 @@ You can run the X\-Ray daemon on your Elastic Beanstalk environment's EC2 instan
 **Note**  
 For a list of supported platforms, see [Configuring AWS X\-Ray Debugging](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-debugging.html) in the AWS Elastic Beanstalk Developer Guide\.
 
-The daemon uses your environment's instance profile for permissions\. For instructions about adding permissions to the Elastic Beanstalk instance profile, see \.
+The daemon uses your environment's instance profile for permissions\. For instructions about adding permissions to the Elastic Beanstalk instance profile, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
 AWS Elastic Beanstalk platforms provide a configuration option that you can set to run the daemon automatically\. You can enable the daemon in a configuration file in your source code or by checking an option in the Elastic Beanstalk console\.
 

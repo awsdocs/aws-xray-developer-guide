@@ -1,6 +1,6 @@
 # Tracing AWS SDK Calls with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-awssdkclients"></a>
 
-When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Node\.js tracks the calls downstream in subsegments\. Traced AWS services, and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
+When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Node\.js tracks the calls downstream in [subsegments](xray-sdk-nodejs-subsegments.md)\. Traced AWS services, and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
 You can instrument all AWS SDK clients by wrapping your `aws-sdk` require statement in a call to `AWSXRay.captureAWS`\.
 

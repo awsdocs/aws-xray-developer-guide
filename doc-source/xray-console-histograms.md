@@ -1,6 +1,6 @@
 # Using Latency Histograms in the AWS X\-Ray Console<a name="xray-console-histograms"></a>
 
-When you select a node or edge on an AWS X\-Ray service map, the X\-Ray console shows a latency distribution histogram\. Latency is the amount of time between when a request starts and when it completes\. A histogram shows a distribution of latencies\. It shows duration on the x\-axis, and the percentage of requests that match each duration on the y\-axis\.
+When you select a node or edge on an AWS X\-Ray [service map](xray-console.md#xray-console-servicemap), the X\-Ray console shows a latency distribution histogram\. Latency is the amount of time between when a request starts and when it completes\. A histogram shows a distribution of latencies\. It shows duration on the x\-axis, and the percentage of requests that match each duration on the y\-axis\.
 
 ![\[Latency histogram with duration on the x-axis and percentage of requests for each duration on the y-axis\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-histogram.png)
 

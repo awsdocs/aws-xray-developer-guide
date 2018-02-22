@@ -5,24 +5,24 @@ The X\-Ray SDK for Java is a set of libraries for Java web applications that pro
 **Note**  
 The X\-Ray SDK for Java is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-sdk\-java](https://github.com/aws/aws-xray-sdk-java)
 
-Starting in release 1\.3, you can now instrument your application using aspect\-oriented programming \(AOP\) in Spring\. What this means is that you can instrument your application, while it is running on AWS, without adding any code to your application's runtime\.
+Starting in release 1\.3, you can now instrument your application using [aspect\-oriented programming \(AOP\) in Spring](xray-sdk-java-aop-spring.md)\. What this means is that you can instrument your application, while it is running on AWS, without adding any code to your application's runtime\.
 
-Start by adding `AWSXRayServletFilter` as a servlet filter to trace incoming requests\. A servlet filter creates a segment While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
+Start by [adding `AWSXRayServletFilter` as a servlet filter](xray-sdk-java-filters.md) to trace incoming requests\. A servlet filter creates a [segment](xray-concepts.md#xray-concepts-segments) While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
 
-Next, use the X\-Ray SDK for Java to instrument your AWS SDK for Java clients by including the SDK Instrumentor submodule in your build configuration\. Whenever you make a call to a downstream AWS service or resource with an instrumented client, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
+Next, use the X\-Ray SDK for Java to instrument your AWS SDK for Java clients by [including the SDK Instrumentor submodule](#xray-sdk-java-dependencies) in your build configuration\. Whenever you make a call to a downstream AWS service or resource with an instrumented client, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
-If you don't want to instrument all downstream calls to AWS services, you can leave out the Instrumentor submodule and choose which clients to instrument\. Instrument individual clients by adding a `TracingHandler` to an AWS SDK service client\.
+If you don't want to instrument all downstream calls to AWS services, you can leave out the Instrumentor submodule and choose which clients to instrument\. Instrument individual clients by [adding a `TracingHandler`](xray-sdk-java-awssdkclients.md) to an AWS SDK service client\.
 
-Other X\-Ray SDK for Java submodules provide instrumentation for downstream calls to HTTP web APIs and SQL databases\. You can use the X\-Ray SDK for Java's versions of `HTTPClient` and `HTTPClientBuilder` in the Apache HTTP submodule to instrument Apache HTTP clients\. To instrument SQL queries, add the SDK's interceptor to your data source\.
+Other X\-Ray SDK for Java submodules provide instrumentation for downstream calls to HTTP web APIs and SQL databases\. You can [use the X\-Ray SDK for Java's versions of `HTTPClient` and `HTTPClientBuilder`](xray-sdk-java-httpclients.md) in the Apache HTTP submodule to instrument Apache HTTP clients\. To instrument SQL queries, [add the SDK's interceptor to your data source](xray-sdk-java-sqlclients.md)\.
 
-Once you get going with the SDK, customize its behavior by configuring the recorder and servlet filter\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
+Once you get going with the SDK, customize its behavior by [configuring the recorder and servlet filter](xray-sdk-java-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
 
-Record additional information about requests and the work that your application does in annotations and metadata\. Annotations are simple key\-value pairs that are indexed for use with filter expressions, so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
+Record additional information about requests and the work that your application does in [annotations and metadata](xray-sdk-java-segment.md)\. Annotations are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md), so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
 
 **Annotations and Metadata**  
 Annotations and metadata are arbitrary text that you add to segments with the X\-Ray SDK\. Annotations are indexed for use with filter expressions\. Metadata are not indexed, but can be viewed in the raw segment with the X\-Ray console or API\. Anyone that you grant read access to X\-Ray can view this data\.
 
-When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in custom subsegments\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
+When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in [custom subsegments](xray-sdk-java-subsegments.md)\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
 You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is split into submodules by use case, with a bill of materials for version management:
 
@@ -42,7 +42,7 @@ You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is
 
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom) – Provides a bill of materials that you can use to specify the version to use for all submodules\.
 
-If you use Maven or Gradle to build your application, add the X\-Ray SDK for Java to your build configuration\.
+If you use Maven or Gradle to build your application, [add the X\-Ray SDK for Java to your build configuration](#xray-sdk-java-dependencies)\.
 
 For reference documentation for of the SDK's classes and methods, see [AWS X\-Ray SDK for Java API Reference](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc)\.
 
@@ -139,4 +139,4 @@ dependencyManagement {
 }
 ```
 
-If you use Elastic Beanstalk to deploy your application, you can use Maven or Gradle to build on\-instance each time you deploy, instead of building and uploading a large archive that includes all of your dependencies\. See the sample application for an example that uses Gradle\.
+If you use Elastic Beanstalk to deploy your application, you can use Maven or Gradle to build on\-instance each time you deploy, instead of building and uploading a large archive that includes all of your dependencies\. See the [sample application](xray-scorekeep.md) for an example that uses Gradle\.

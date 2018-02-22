@@ -1,6 +1,6 @@
 # Tracing AWS SDK Calls with the X\-Ray SDK for Go<a name="xray-sdk-go-awssdkclients"></a>
 
-When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Go tracks the calls downstream in subsegments\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
+When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Go tracks the calls downstream in [subsegments](xray-sdk-go-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
 To trace AWS SDK clients, wrap the client object with the `xray.AWS()` call as shown in the following example\.
 
@@ -14,7 +14,7 @@ func main() {
 }
 ```
 
-Then, when you use the AWS SDK client, use the `withContext` version of the call method, and pass it the `context` from the `http.Request` object passed to the handler\.
+Then, when you use the AWS SDK client, use the `withContext` version of the call method, and pass it the `context` from the `http.Request` object passed to the [handler](xray-sdk-go-handler.md)\.
 
 **Example main\.go – AWS SDK call**  
 

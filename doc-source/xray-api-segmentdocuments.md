@@ -8,9 +8,9 @@ X\-Ray compiles and processes segment documents to generate queryable **trace su
 
 X\-Ray provides a **JSON schema** for segment documents\. You can download the schema here: [xray\-segmentdocument\-schema\-v1\.0\.0](samples/xray-segmentdocument-schema-v1.0.0.zip)\. The fields and objects listed in the schema are described in more detail in the following sections\.
 
-A subset of segment fields are indexed by X\-Ray for use with filter expressions\. For example, if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users in the X\-Ray console or by using the `GetTraceSummaries` API\. For more information, see \.
+A subset of segment fields are indexed by X\-Ray for use with filter expressions\. For example, if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users in the X\-Ray console or by using the `GetTraceSummaries` API\. For more information, see [Searching for Traces in the AWS X\-Ray Console with Filter Expressions](xray-console-filters.md)\.
 
-When you instrument your application with the X\-Ray SDK, the SDK generates segment documents for you\. Instead of sending segment documents directly to X\-Ray, the SDK transmits them over a local UDP port to the X\-Ray daemon\. For more information, see \.
+When you instrument your application with the X\-Ray SDK, the SDK generates segment documents for you\. Instead of sending segment documents directly to X\-Ray, the SDK transmits them over a local UDP port to the [X\-Ray daemon](xray-daemon.md)\. For more information, see [Sending Segment Documents to the X\-Ray Daemon](xray-api-sendingdata.md#xray-api-daemon)\.
 
 
 + [Segment Fields](#api-segmentdocuments-fields)
@@ -63,7 +63,7 @@ Values must be strings \(up to 250 characters\) unless noted otherwise\.
 
   + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 **Trace ID Security**  
-Trace IDs are visible in response headers\. Generate trace IDs with a secure random algorithm to ensure that attackers cannot calculate future trace IDs and send requests with those IDs to your application\.
+Trace IDs are visible in [response headers](xray-concepts.md#xray-concepts-tracingheader)\. Generate trace IDs with a secure random algorithm to ensure that attackers cannot calculate future trace IDs and send requests with those IDs to your application\.
 
 + `start_time` – **number** that is the time the segment was created, in floating point seconds in epoch time\. For example, `1480615200.010` or `1.480615200010E9`\. Use as many decimal places as you need\. Microsecond resolution is recommended when available\.
 
@@ -96,19 +96,19 @@ The following fields are optional for segments\.
 
   When multiple values are applicable to your application, use the one that is most specific\. For example, a Multicontainer Docker Elastic Beanstalk environment runs your application on an Amazon ECS container, which in turn runs on an Amazon EC2 instance\. In this case you would set the origin to `AWS::ElasticBeanstalk::Environment` as the environment is the parent of the other two resources\.
 
-+ `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the tracing header for downstream HTTP calls\.
++ `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the [tracing header](xray-concepts.md#xray-concepts-tracingheader) for downstream HTTP calls\.
 
-+ `http` – `http` objects with information about the original HTTP request\.
++ `http` – [`http`](#api-segmentdocuments-http) objects with information about the original HTTP request\.
 
-+ `aws` – `aws` object with information about the AWS resource on which your application served the request\.
++ `aws` – [`aws`](#api-segmentdocuments-aws) object with information about the AWS resource on which your application served the request\.
 
-+ `error`, `throttle`, `fault`, and `cause` – error fields that indicate an error occurred and that include information about the exception that caused the error\.
++ `error`, `throttle`, `fault`, and `cause` – [error](#api-segmentdocuments-errors) fields that indicate an error occurred and that include information about the exception that caused the error\.
 
-+ `annotations` – `annotations` object with key\-value pairs that you want X\-Ray to index for search\.
++ `annotations` – [`annotations`](#api-segmentdocuments-annotations) object with key\-value pairs that you want X\-Ray to index for search\.
 
-+ `metadata` – `metadata` object with any additional data that you want to store in the segment\.
++ `metadata` – [`metadata`](#api-segmentdocuments-metadata) object with any additional data that you want to store in the segment\.
 
-+ `subsegments` – **array** of `subsegment` objects\.
++ `subsegments` – **array** of [`subsegment`](#api-segmentdocuments-subsegments) objects\.
 
 ## Subsegments<a name="api-segmentdocuments-subsegments"></a>
 
@@ -249,17 +249,17 @@ The following fields are optional for subsegments\.
 
 + `namespace` – `aws` for AWS SDK calls; `remote` for other downstream calls\.
 
-+ `http` – `http` object with information about an outgoing HTTP call\.
++ `http` – [`http`](#api-segmentdocuments-http) object with information about an outgoing HTTP call\.
 
-+ `aws` – `aws` object with information about the downstream AWS resource that your application called\.
++ `aws` – [`aws`](#api-segmentdocuments-aws) object with information about the downstream AWS resource that your application called\.
 
-+ `error`, `throttle`, `fault`, and `cause` – error fields that indicate an error occurred and that include information about the exception that caused the error\.
++ `error`, `throttle`, `fault`, and `cause` – [error](#api-segmentdocuments-errors) fields that indicate an error occurred and that include information about the exception that caused the error\.
 
-+ `annotations` – `annotations` object with key\-value pairs that you want X\-Ray to index for search\.
++ `annotations` – [`annotations`](#api-segmentdocuments-annotations) object with key\-value pairs that you want X\-Ray to index for search\.
 
-+ `metadata` – `metadata` object with any additional data that you want to store in the segment\.
++ `metadata` – [`metadata`](#api-segmentdocuments-metadata) object with any additional data that you want to store in the segment\.
 
-+ `subsegments` – **array** of `subsegment` objects\.
++ `subsegments` – **array** of [`subsegment`](#api-segmentdocuments-subsegments) objects\.
 
 + `precursor_ids` – **array** of subsegment IDs that identifies subsegments with the same parent that completed prior to this subsegment\.
 

@@ -16,10 +16,10 @@ The SDK also supports instrumenting calls to SQL databases, automatic AWS SDK cl
 
 ![\[How the X-Ray SDK works\]](http://docs.aws.amazon.com/xray/latest/devguide/images/architecture-dataflow.png)
 
-Instead of sending trace data directly to X\-Ray, the SDK sends JSON segment documents to a daemon process listening for UDP traffic\. The **X\-Ray daemon** buffers segments in a queue and uploads them to X\-Ray in batches\. The daemon is available for Linux, Windows, and macOS, and is included on AWS Elastic Beanstalk and AWS Lambda platforms\.
+Instead of sending trace data directly to X\-Ray, the SDK sends JSON segment documents to a daemon process listening for UDP traffic\. The **[X\-Ray daemon](xray-daemon.md)** buffers segments in a queue and uploads them to X\-Ray in batches\. The daemon is available for Linux, Windows, and macOS, and is included on AWS Elastic Beanstalk and AWS Lambda platforms\.
 
 X\-Ray uses trace data from the AWS resources that power your cloud applications to generate a detailed **service graph**\. The service graph shows the client, your front\-end service, and backend services that your front\-end service calls to process requests and persist data\. Use the service graph to identify bottlenecks, latency spikes, and other issues to solve to improve the performance of your applications\.
 
 ![\[Service graph shows the client, front-end service, and backend services that your front-end service calls to process requests and persist data\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-after-github.png)
 
-See the getting started tutorial to start using X\-Ray in just a few minutes with an instrumented sample application\. Or keep reading to learn about the languages, frameworks, and services that work with X\-Ray\.
+See the [getting started tutorial](xray-gettingstarted.md) to start using X\-Ray in just a few minutes with an instrumented sample application\. Or [keep reading](xray-usage.md) to learn about the languages, frameworks, and services that work with X\-Ray\.

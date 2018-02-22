@@ -7,7 +7,7 @@ Use `xray.Handler` to instrument incoming HTTP requests\. The X\-Ray SDK for Go 
 When you use this class to handle HTTP requests and responses, the X\-Ray SDK for Go creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
 **Note**  
-For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
 The following example intercepts requests on port 8000 and returns "Hello\!" as a response\. It creates the segment `myApp` and instruments calls through any application\.
 
@@ -46,7 +46,7 @@ The handler creates a segment for each incoming request with an `http` block tha
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-go-segments-naming"></a>
 
-AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's name field\.
+AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
 The X\-Ray SDK can name segments after the hostname in the HTTP request header\. However, this header can be forged, which could result in unexpected nodes in your service map\. To prevent the SDK from naming segments incorrectly due to requests with forged host headers, you must specify a default name for incoming requests\.
 
@@ -57,7 +57,7 @@ For example, you might have a single application serving requests to three subdo
 To use the same name for all request segments, specify the name of your application when you create the handler, as shown in the previous section\.
 
 **Note**  
-You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` environment variable\.
+You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` [environment variable](xray-sdk-go-configuration.md#xray-sdk-go-configuration-envvars)\.
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request doesn't match the pattern\. To name segments dynamically, use `NewDynamicSegmentNamer` to configure the default name and pattern to match\.
 

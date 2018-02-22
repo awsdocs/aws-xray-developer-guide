@@ -8,7 +8,7 @@ The X\-Ray SDK for Java includes `DefaultHttpClient` and `HttpClientBuilder` cla
 
 + `com.amazonaws.xray.proxies.apache.http.HttpClientBuilder` \- `org.apache.http.impl.client.HttpClientBuilder`
 
-These libraries are in the `aws-xray-recorder-sdk-apache-http` submodule\.
+These libraries are in the [`aws-xray-recorder-sdk-apache-http`](xray-sdk-java.md) submodule\.
 
 You can replace your existing import statements with the X\-Ray equivalent to instrument all clients, or use the fully qualified name when you initialize a client to instrument specific clients\.
 

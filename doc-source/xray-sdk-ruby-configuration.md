@@ -39,7 +39,7 @@ config = {
 XRay.recorder.configure(config)
 ```
 
-You can also use environment variables, which take precedence over values set in code, to configure the recorder\.
+You can also use [environment variables](#xray-sdk-ruby-configuration-envvars), which take precedence over values set in code, to configure the recorder\.
 
 The SDK also uses plugin settings to set the `origin` field on the segment\. This indicates the type of AWS resource that runs your application\. The resource type appears under your application's name in the service map\. For example, `AWS::ElasticBeanstalk::Environment`\.
 
@@ -152,7 +152,7 @@ config = {
 XRay.recorder.configure(config)
 ```
 
-Use debug logs to identify issues, such as unclosed subsegments, when you generate subsegments manually\.
+Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-ruby-subsegments.md)\.
 
 ## Recorder Configuration in Code<a name="xray-sdk-ruby-configuration-code"></a>
 
@@ -164,13 +164,13 @@ Additional settings are available from the `configure` method on `XRay.recorder`
 
 + `name` – Set a service name that the SDK uses for segments\.
 
-+ `naming_pattern` – Set a domain name pattern to use dynamic naming\.
++ `naming_pattern` – Set a domain name pattern to use [dynamic naming](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-naming)\.
 
-+ `plugins` – Record information about your application's AWS resources with plugins\.
++ `plugins` – Record information about your application's AWS resources with [plugins](#xray-sdk-ruby-configuration-plugins)\.
 
 + `sampling` – Set to `false` to disable sampling\.
 
-+ `sampling_rules` – Set the hash containing your sampling rules\.
++ `sampling_rules` – Set the hash containing your [sampling rules](#xray-sdk-ruby-configuration-sampling)\.
 
 **Example main\.py – disable context missing exceptions**  
 
@@ -205,9 +205,9 @@ Rails.application.config.xray = {
 
 You can use environment variables to configure the X\-Ray SDK for Ruby\. The SDK supports the following variables: 
 
-+ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's segment naming strategy\.
++ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-naming)\.
 
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to listen on a different port or if it is running on a different host\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 

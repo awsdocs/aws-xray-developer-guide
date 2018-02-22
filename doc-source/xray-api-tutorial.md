@@ -4,7 +4,7 @@ The AWS CLI lets your access the X\-Ray service directly and use the same APIs t
 
 ## Prerequisites<a name="xray-api-tutorial-prerequisites"></a>
 
-This tutorial uses the Scorekeep sample application and included scripts to generate tracing data and a service map\. Follow the instructions in the getting started tutorial to launch the application\.
+This tutorial uses the Scorekeep sample application and included scripts to generate tracing data and a service map\. Follow the instructions in the [getting started tutorial](xray-gettingstarted.md) to launch the application\.
 
 This tutorial uses the AWS CLI to show basic use of the X\-Ray API\. The AWS CLI, [available for Windows, Linux, and OS\-X](http://docs.aws.amazon.com/cli/latest/userguide/installing.html), provides command line access to the public APIs for all AWS services\.
 

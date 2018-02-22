@@ -2,7 +2,7 @@
 
 On Amazon ECS, create a Docker image that runs the daemon, upload it to a Docker image repository, and then deploy it to your Amazon ECS cluster\.
 
-Use an instance profile to grant the daemon permission to upload trace data to X\-Ray\. For more information, see \.
+Use an instance profile to grant the daemon permission to upload trace data to X\-Ray\. For more information, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
 **Example Dockerfile**  
 Add the following lines to your Dockerfile file to copy and run the daemon\.  
@@ -13,7 +13,7 @@ COPY xray /usr/bin/xray
 ENTRYPOINT ["/usr/bin/xray", "log-file /var/log/xray-daemon.log"]
 ```
 
-Download the X\-Ray daemon Linux executable into the same folder as your Dockerfile and build it to create an image\.
+[Download the X\-Ray daemon](xray-daemon.md) Linux executable into the same folder as your Dockerfile and build it to create an image\.
 
 ```
 $ wget https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-2.x.zip

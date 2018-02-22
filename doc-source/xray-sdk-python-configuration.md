@@ -36,9 +36,9 @@ xray_recorder.configure(plugins=plugins)
 patch_all()
 ```
 
-You can also use environment variables, which take precedence over values set in code, to configure the recorder\.
+You can also use [environment variables](#xray-sdk-python-configuration-envvars), which take precedence over values set in code, to configure the recorder\.
 
-Configure plugins before patching libraries to record downstream calls\.
+Configure plugins before [patching libraries](#xray-sdk-python-configuration) to record downstream calls\.
 
 The SDK also uses plugin settings to set the `origin` field on the segment\. This indicates the type of AWS resource that runs your application\. The resource type appears under your application's name in the service map\. For example, `AWS::ElasticBeanstalk::Environment`\.
 
@@ -103,7 +103,7 @@ logging.basicConfig(level='WARNING')
 logging.getLogger('aws_xray_sdk').setLevel(logging.DEBUG)
 ```
 
-Use debug logs to identify issues, such as unclosed subsegments, when you generate subsegments manually\.
+Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-python-subsegments.md)\.
 
 ## Recorder Configuration in Code<a name="xray-sdk-python-middleware-configuration-code"></a>
 
@@ -119,7 +119,7 @@ Additional settings are available from the `configure` method on `xray_recorder`
 
 + `sampling` – Set to `False` to disable sampling\.
 
-+ `sampling_rules` – Set the path of the JSON file containing your sampling rules\.
++ `sampling_rules` – Set the path of the JSON file containing your [sampling rules](#xray-sdk-python-configuration-sampling)\.
 
 **Example main\.py – disable context missing exceptions**  
 
@@ -145,7 +145,7 @@ If you use the Django framework, you can use the Django `settings.py` file to co
 
 + `SAMPLING` – Set to `False` to disable sampling\.
 
-+ `SAMPLING_RULES` – Set the path of the JSON file containing your sampling rules\.
++ `SAMPLING_RULES` – Set the path of the JSON file containing your [sampling rules](#xray-sdk-python-configuration-sampling)\.
 
 To enable recorder configuration in `settings.py`, add the Django middleware to the list of installed apps\.
 
@@ -178,9 +178,9 @@ XRAY_RECORDER = {
 
 You can use environment variables to configure the X\-Ray SDK for Python\. The SDK supports the following variables: 
 
-+ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's segment naming strategy\.
++ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-python-middleware.md#xray-sdk-python-middleware-naming)\.
 
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to listen on a different port or if it is running on a different host\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 

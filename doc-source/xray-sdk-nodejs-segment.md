@@ -2,7 +2,7 @@
 
 You can record additional information about requests, the environment, or your application with annotations and metadata\. You can add annotations and metadata to the segments that the X\-Ray SDK creates, or to custom subsegments that you create\.
 
-**Annotations** are key\-value pairs with string, number, or Boolean values\. Annotations are indexed for use with filter expressions\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
+**Annotations** are key\-value pairs with string, number, or Boolean values\. Annotations are indexed for use with [filter expressions](xray-console-filters.md)\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
 
 **Metadata** are key\-value pairs that can have values of any type, including objects and lists, but are not indexed for use with filter expressions\. Use metadata to record additional data that you want stored in the trace but don't need to use with search\.
 
@@ -40,7 +40,7 @@ Use annotations to record information on segments or subsegments that you want i
 
 The SDK records annotations as key\-value pairs in an `annotations` object in the segment document\. Calling `addAnnotation` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 
-To find traces that have annotations with specific values, use the `annotations.key` keyword in a filter expression\.
+To find traces that have annotations with specific values, use the `annotations.key` keyword in a [filter expression](xray-console-filters.md)\.
 
 **Example app\.js \- Annotations**  
 

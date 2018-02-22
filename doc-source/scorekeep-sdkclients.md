@@ -1,6 +1,6 @@
 # Manually Instrumenting AWS SDK Clients<a name="scorekeep-sdkclients"></a>
 
-The X\-Ray SDK for Java automatically instruments all AWS SDK clients when you include the AWS SDK Instrumentor submodule in your build dependencies\.
+The X\-Ray SDK for Java automatically instruments all AWS SDK clients when you [include the AWS SDK Instrumentor submodule in your build dependencies](xray-sdk-java.md#xray-sdk-java-dependencies)\.
 
 You can disable automatic client instrumentation by removing the Instrumentor submodule\. This enables you to instrument some clients manually while ignoring others, or use different tracing handlers on different clients\.
 

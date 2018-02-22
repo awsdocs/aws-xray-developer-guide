@@ -25,9 +25,9 @@ AWS X\-Ray provides tools and integration to support a variety of languages, fra
 
 On Windows Server, you can use the X\-Ray SDK for \.NET to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\.
 
-See  for more information\.
+See [AWS X\-Ray SDK for \.NET](xray-sdk-dotnet.md) for more information\.
 
-+ **\.NET on Windows Server** – Add a message handler to your HTTP configuration to instrument incoming requests\.
++ **\.NET on Windows Server** – [Add a message handler](xray-sdk-dotnet-messagehandler.md#xray-sdk-dotnet-messagehandler-globalasax) to your HTTP configuration to instrument incoming requests\.
 
 + **C\# \.NET Core on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\.
 
@@ -37,9 +37,9 @@ In any Go application, you can use the X\-Ray SDK for Go classes to instrument i
 
 On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Go to your function for full instrumentation\.
 
-See  for more information\.
+See [AWS X\-Ray SDK for Go](xray-sdk-go.md) for more information\.
 
-+ **Go web applications** – Use the X\-Ray SDK for Go HTTP handler to process incoming requests on your routes\.
++ **Go web applications** – Use the [X\-Ray SDK for Go HTTP handler](xray-sdk-go-handler.md) to process incoming requests on your routes\.
 
 + **Go on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\. Add the X\-Ray SDK for Go to instrument AWS SDK, HTTP, and SQL clients\.
 
@@ -49,11 +49,11 @@ In any Java application, you can use the X\-Ray SDK for Java classes to instrume
 
 On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Java to your function for full instrumentation\.
 
-See  for more information\.
+See [AWS X\-Ray SDK for Java](xray-sdk-java.md) for more information\.
 
-+ **Tomcat** – Add a servlet filter to your deployment descriptor \(`web.xml`\) to instrument incoming requests\.
++ **Tomcat** – [Add a servlet filter](xray-sdk-java-filters.md#xray-sdk-java-filters-tomcat) to your deployment descriptor \(`web.xml`\) to instrument incoming requests\.
 
-+ **Spring Boot** – Add a servlet filter to your `WebConfig` class to instrument incoming requests\.
++ **Spring Boot** – [Add a servlet filter](xray-sdk-java-filters.md#xray-sdk-java-filters-spring) to your `WebConfig` class to instrument incoming requests\.
 
 + **Java on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\. Add the X\-Ray SDK for Java to instrument AWS SDK, HTTP, and SQL clients\.
 
@@ -65,9 +65,9 @@ In any Node\.js application, you can use the X\-Ray SDK for Node\.js classes to 
 
 On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Node\.js to your function for full instrumentation\.
 
-See  for more information\.
+See [The X\-Ray SDK for Node\.js](xray-sdk-nodejs.md) for more information\.
 
-+ **Express or Restify** – Use the X\-Ray SDK for Node\.js middleware to instrument incoming requests\.
++ **Express or Restify** – [Use the X\-Ray SDK for Node\.js middleware](xray-sdk-nodejs-middleware.md) to instrument incoming requests\.
 
 + **Node\.js on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\. Add the X\-Ray SDK for Node\.js to instrument AWS SDK, HTTP, and SQL clients
 
@@ -79,9 +79,9 @@ In any Python application, you can use the X\-Ray SDK for Python classes to inst
 
 On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Python to your function for full instrumentation\.
 
-See  for more information\.
+See [AWS X\-Ray SDK for Python](xray-sdk-python.md) for more information\.
 
-+ **Django or Flask** – Use the X\-Ray SDK for Node\.js middleware to instrument incoming requests\.
++ **Django or Flask** – [Use the X\-Ray SDK for Node\.js middleware](xray-sdk-python-middleware.md) to instrument incoming requests\.
 
 + **Python on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\. Add the X\-Ray SDK for Python to instrument AWS SDK, HTTP, and SQL clients\.
 
@@ -91,15 +91,15 @@ See  for more information\.
 
 In any Ruby application, you can use the X\-Ray SDK for Ruby classes to instrument incoming requests, AWS SDK clients, SQL clients, and HTTP clients\. Automatic request instrumentation is available for applications that use the Rails framework\.
 
-+ **Rails** – Add the X\-Ray SDK for Ruby gem and railtie to your gemfile, and configure the recorder in an initializer to instrument incoming requests\.
++ **Rails** – Add the X\-Ray SDK for Ruby gem and railtie to your gemfile, and [configure the recorder](xray-sdk-ruby-middleware.md) in an initializer to instrument incoming requests\.
 
-+ **Other frameworks** – Manually create a segment for each incoming request\.
++ **Other frameworks** – [Manually create a segment](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-manual) for each incoming request\.
 
-If the X\-Ray SDK isn't available for your language or platform, you can generate trace data manually and send it to the X\-Ray daemon, or directly to the X\-Ray API\.
+If the X\-Ray SDK isn't available for your language or platform, you can generate trace data manually and send it to the X\-Ray daemon, or directly to [the X\-Ray API](xray-api.md)\.
 
 ## Supported AWS Services<a name="xray-usage-services"></a>
 
-Several AWS services provide **X\-Ray integration**\. Integrated services offer varying levels of integration that can include sampling and adding headers to incoming requests, running the X\-Ray daemon, and automatically sending trace data to X\-Ray\.
+Several AWS services provide **X\-Ray integration**\. [Integrated services](xray-services.md) offer varying levels of integration that can include sampling and adding headers to incoming requests, running the X\-Ray daemon, and automatically sending trace data to X\-Ray\.
 
 + **Active instrumentation** – Samples and instruments incoming requests\.
 
@@ -111,11 +111,11 @@ Several AWS services provide **X\-Ray integration**\. Integrated services offer 
 
 Services with X\-Ray integration include:
 
-+ **AWS Lambda** – Active and passive instrumentation of incoming requests on all runtimes\. When you enable instrumentation, AWS Lambda also runs the X\-Ray daemon on Java and Node\.js runtimes for use with the X\-Ray SDK\. Learn more\.
++ **AWS Lambda** – Active and passive instrumentation of incoming requests on all runtimes\. When you enable instrumentation, AWS Lambda also runs the X\-Ray daemon on Java and Node\.js runtimes for use with the X\-Ray SDK\. [Learn more](xray-services-lambda.md)\.
 
-+ **Amazon API Gateway** – Request tracing\. API Gateway passes the trace ID to AWS Lambda and adds it to the request header for other downstream services\. Learn more\.
++ **Amazon API Gateway** – Request tracing\. API Gateway passes the trace ID to AWS Lambda and adds it to the request header for other downstream services\. [Learn more](xray-services-apigateway.md)\.
 
-+ **Elastic Load Balancing** – Request tracing on application load balancers\. The application load balancer adds the trace ID to the request header before sending it to a target group\. Learn more\.
++ **Elastic Load Balancing** – Request tracing on application load balancers\. The application load balancer adds the trace ID to the request header before sending it to a target group\. [Learn more](xray-services-elb.md)\.
 
 + **AWS Elastic Beanstalk** – Tooling\. Elastic Beanstalk includes the X\-Ray daemon on the following platforms:
 
@@ -127,7 +127,7 @@ Services with X\-Ray integration include:
 
   + **Windows Server** – All configurations other than Windows Server Core released since December 9th, 2016\.
 
-  You can tell Elastic Beanstalk to run the daemon on these platforms in the Elastic Beanstalk console, or by using the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. Learn more\.
+  You can tell Elastic Beanstalk to run the daemon on these platforms in the Elastic Beanstalk console, or by using the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. [Learn more](xray-services-beanstalk.md)\.
 
 ## Code and Configuration Changes<a name="xray-usage-codechanges"></a>
 

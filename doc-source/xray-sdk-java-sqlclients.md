@@ -6,7 +6,7 @@ Instrument SQL database queries by adding the X\-Ray SDK for Java JDBC intercept
 
 +  **MySQL** – `com.amazonaws.xray.sql.mysql.TracingInterceptor` 
 
-These interceptors are in the `aws-xray-recorder-sql-postgres` and `aws-xray-recorder-sql-mysql` submodules, respectively\. They implement `org.apache.tomcat.jdbc.pool.JdbcInterceptor` and are compatible with Tomcat connection pools\.
+These interceptors are in the [`aws-xray-recorder-sql-postgres` and `aws-xray-recorder-sql-mysql` submodules](xray-sdk-java.md), respectively\. They implement `org.apache.tomcat.jdbc.pool.JdbcInterceptor` and are compatible with Tomcat connection pools\.
 
 For Spring, add the interceptor in a properties file and build the data source with Spring Boot's `DataSourceBuilder`\.
 

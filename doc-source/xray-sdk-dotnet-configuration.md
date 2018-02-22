@@ -28,7 +28,7 @@ For \.NET Core, create a file named `appsettings.json` with a top\-level key nam
 }
 ```
 
-Then, in your application code, build a configuration object and use it to initialize the X\-Ray recorder\. Do this before you initialize the recorder\.
+Then, in your application code, build a configuration object and use it to initialize the X\-Ray recorder\. Do this before you [initialize the recorder](xray-sdk-dotnet-messagehandler.md#xray-sdk-dotnet-messagehandler-startupcs)\.
 
 **Example Program\.cs – \.NET Core Configuration**  
 
@@ -38,7 +38,7 @@ using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dot
 AWSXRayRecorder.InitializeInstance(configuration);
 ```
 
-If you are instrumenting a \.NET Core web application, you can also pass the configuration object to the `UseXRay` method when you configure the message handler\. For Lambda functions, use the `InitializeInstance` method as shown above\.
+If you are instrumenting a \.NET Core web application, you can also pass the configuration object to the `UseXRay` method when you [configure the message handler](xray-sdk-dotnet-messagehandler.md#xray-sdk-dotnet-messagehandler-startupcs)\. For Lambda functions, use the `InitializeInstance` method as shown above\.
 
 For more information on the \.NET Core configuration API, see [Configure an ASP\.NET Core App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration) on docs\.microsoft\.com\.
 
@@ -218,9 +218,9 @@ For more information on configuring log4net, see [Configuration](https://logging
 
 You can use environment variables to configure the X\-Ray SDK for \.NET\. The SDK supports the following variables\.
 
-+ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's segment naming strategy\.
++ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-dotnet-messagehandler.md#xray-sdk-dotnet-messagehandler-naming)\.
 
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to listen on a different port or if it is running on a different host\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 

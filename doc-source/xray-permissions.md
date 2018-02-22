@@ -2,11 +2,11 @@
 
 You can use AWS Identity and Access Management \(IAM\) to grant X\-Ray permissions to users and compute resources in your account\. IAM controls access to the X\-Ray service at the API level to enforce permissions uniformly, regardless of which client \(console, AWS SDK, AWS CLI\) your users employ\.
 
-To use the X\-Ray console to view service maps and segments, you only need read permissions\. To enable console access, add the `AWSXrayReadOnlyAccess` managed policy to your IAM user\.
+To [use the X\-Ray console](xray-console.md) to view service maps and segments, you only need read permissions\. To enable console access, add the `AWSXrayReadOnlyAccess` [managed policy](#xray-permissions-managedpolicies) to your IAM user\.
 
-For local development and testing, create an IAM user with read and write permissions\. Generate access keys for the user and store them in the standard AWS SDK location\. You can use these credentials with the X\-Ray daemon, the AWS CLI, and the AWS SDK\.
+For [local development and testing](#xray-permissions-local), create an IAM user with read and write permissions\. Generate access keys for the user and store them in the standard AWS SDK location\. You can use these credentials with the X\-Ray daemon, the AWS CLI, and the AWS SDK\.
 
-To deploy your instrumented app to AWS, create an IAM role with write permissions and assign it to the resources running your application\.
+To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM role with write permissions and assign it to the resources running your application\.
 
 
 + [IAM Managed Policies for X\-Ray](#xray-permissions-managedpolicies)
@@ -15,7 +15,7 @@ To deploy your instrumented app to AWS, create an IAM role with write permission
 
 ## IAM Managed Policies for X\-Ray<a name="xray-permissions-managedpolicies"></a>
 
-To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides managed policies for read only, write only, and read/write use cases\.
+To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides [managed policies](#xray-permissions-managedpolicies) for read only, write only, and read/write use cases\.
 
 + `AWSXrayReadOnlyAccess` – Read permissions for using the X\-Ray console, AWS CLI, or AWS SDK to get trace data and service maps from the X\-Ray API\.
 
@@ -92,7 +92,7 @@ To make granting permissions easy, IAM supports **managed policies** for each se
 
 Your instrumented application sends trace data to the X\-Ray daemon\. The daemon buffers segment documents and uploads them to the X\-Ray service in batches\. The daemon needs write permissions to upload trace data and telemetry to the X\-Ray service\.
 
-When you run the daemon locally, store your IAM user's access key and secret key in a file named `credentials` in a folder named `.aws` in your user folder\.
+When you [run the daemon locally](xray-daemon-local.md), store your IAM user's access key and secret key in a file named `credentials` in a folder named `.aws` in your user folder\.
 
 **Example \~/\.aws/credentials**  
 

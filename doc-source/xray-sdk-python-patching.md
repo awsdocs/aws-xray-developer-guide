@@ -49,7 +49,7 @@ libraries = ('botocore', 'requests')
 patch(libraries)
 ```
 
-For `asyncio` integrated libraries, or to create subsegments for asynchronous functions, you must also configure the X\-Ray SDK for Python with an async context\.
+For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\.
 
 **Example main\.py – patch aioboto3**  
 

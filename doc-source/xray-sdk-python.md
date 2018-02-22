@@ -11,16 +11,16 @@ $ pip install aws-xray-sdk
 **Note**  
 The X\-Ray SDK for Python is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-sdk\-python](https://github.com/aws/aws-xray-sdk-python)
 
-If you use Django or Flask, start by adding the SDK middleware to your application to trace incoming requests\. The middleware creates a segment for each traced request, and completes the segment when the response is sent\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\. For other applications, you can create segments manually\.
+If you use Django or Flask, start by [adding the SDK middleware to your application](xray-sdk-python-middleware.md) to trace incoming requests\. The middleware creates a [segment](xray-concepts.md#xray-concepts-segments) for each traced request, and completes the segment when the response is sent\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\. For other applications, you can [create segments manually](xray-sdk-python-middleware.md#xray-sdk-python-middleware-manual)\.
 
-For Lambda functions called by an instrumented application or service, Lambda reads the tracing header and traces sampled requests automatically\. For other functions, you can configure Lambda to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
+For Lambda functions called by an instrumented application or service, Lambda reads the [tracing header](xray-concepts.md#xray-concepts-tracingheader) and traces sampled requests automatically\. For other functions, you can [configure Lambda](xray-services-lambda.md) to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
 
 **Note**  
-On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See  for more information\.
+On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
-See  for a example Python function instrumented in Lambda\.
+See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for a example Python function instrumented in Lambda\.
 
-Next, use the X\-Ray SDK for Python to instrument downstream calls by patching your application's libraries\. The SDK supports the following libraries\.
+Next, use the X\-Ray SDK for Python to instrument downstream calls by [patching your application's libraries](xray-sdk-python-patching.md)\. The SDK supports the following libraries\.
 
 **Supported Libraries**
 
@@ -36,14 +36,14 @@ Next, use the X\-Ray SDK for Python to instrument downstream calls by patching y
 
 Whenever your application makes calls to AWS, an SQL database, or other HTTP services, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
-Once you get going with the SDK, customize its behavior by configuring the recorder and middleware\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
+Once you get going with the SDK, customize its behavior by [configuring the recorder and middleware](xray-sdk-python-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
 
-Record additional information about requests and the work that your application does in annotations and metadata\. Annotations are simple key\-value pairs that are indexed for use with filter expressions, so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
+Record additional information about requests and the work that your application does in [annotations and metadata](xray-sdk-python-segment.md)\. Annotations are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md), so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
 
 **Annotations and Metadata**  
 Annotations and metadata are arbitrary text that you add to segments with the X\-Ray SDK\. Annotations are indexed for use with filter expressions\. Metadata are not indexed, but can be viewed in the raw segment with the X\-Ray console or API\. Anyone that you grant read access to X\-Ray can view this data\.
 
-When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in custom subsegments\. You can create a custom subsegment for an entire function or any section of code\. You can then you can record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
+When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in [custom subsegments](xray-sdk-python-subsegments.md)\. You can create a custom subsegment for an entire function or any section of code\. You can then you can record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
 For reference documentation for the SDK's classes and methods, see the [AWS X\-Ray SDK for Python API Reference](http://docs.aws.amazon.com/xray-sdk-for-python/latest/reference)\.
 

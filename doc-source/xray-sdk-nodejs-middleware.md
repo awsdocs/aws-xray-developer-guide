@@ -5,7 +5,7 @@ You can use the X\-Ray SDK for Node\.js to trace incoming HTTP requests that you
 The X\-Ray SDK for Node\.js provides middleware for applications that use the Express and Restify frameworks\. When you add the X\-Ray middleware to your application, the X\-Ray SDK for Node\.js creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
 **Note**  
-For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
 Each segment has a name that identifies your application in the service map\. The segment can be named statically, or you can configure the SDK to name it dynamically based on the host header in the incoming request\. Dynamic naming lets you group traces based on the domain name in the request, and apply a default name if the name doesn't match an expected pattern \(for example, if the host header is forged\)\.
 
@@ -75,7 +75,7 @@ server.get('/', function (req, res) {
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-nodejs-middleware-naming"></a>
 
-AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's name field\.
+AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
 The X\-Ray SDK can name segments after the hostname in the HTTP request header\. However, this header can be forged, which could result in unexpected nodes in your service map\. To prevent the SDK from naming segments incorrectly due to requests with forged host headers, you must specify a default name for incoming requests\.
 
@@ -86,7 +86,7 @@ For example, you might have a single application serving requests to three subdo
 To use the same name for all request segments, specify the name of your application when you initialize the middleware, as shown in the previous sections\.
 
 **Note**  
-You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` environment variable\.
+You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` [environment variable](xray-sdk-nodejs-configuration.md#xray-sdk-nodejs-configuration-envvars)\.
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically, use `AWSXRay.middleware.enableDynamicNaming`\.
 

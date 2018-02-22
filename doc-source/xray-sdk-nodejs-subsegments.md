@@ -1,6 +1,6 @@
 # Generating Custom Subsegments with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-subsegments"></a>
 
-Subsegments extend a trace's segment with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
+Subsegments extend a trace's [segment](xray-concepts.md#xray-concepts-segments) with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
 To create a custom subsegment for a function that makes calls to downstream services, use the `captureAsyncFunc` function\.
 

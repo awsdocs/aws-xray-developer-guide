@@ -109,7 +109,7 @@ func main() {
 }
 ```
 
-See  for more informations\.
+See [Using Configure](#xray-sdk-go-configuration-configure) for more information\.
 
 ## Environment Variables<a name="xray-sdk-go-configuration-envvars"></a>
 
@@ -117,7 +117,7 @@ You can use environment variables to configure the X\-Ray SDK for Go\. The SDK s
 
 + `AWS_XRAY_TRACING_NAME` – Set the service name that the SDK uses for segments\.
 
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to listen on a different port or if it is running on a different host\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 Environment variables override equivalent values set in code\.
 

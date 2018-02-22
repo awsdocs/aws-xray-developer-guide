@@ -35,7 +35,7 @@ To use the middleware, update your gemfile to include the required [railtie](htt
 gem 'aws-xray-sdk', require: ['aws-xray-sdk/facets/rails/railtie']
 ```
 
-To use the middleware, you must also configure the recorder with a name that represents the application in the service map\.
+To use the middleware, you must also [configure the recorder](xray-sdk-ruby-configuration.md#xray-sdk-ruby-middleware-configuration-rails) with a name that represents the application in the service map\.
 
 **Example config/initializers/aws\_xray\.rb**  
 
@@ -75,7 +75,7 @@ XRay.recorder.end_segment
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-ruby-middleware-naming"></a>
 
-AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's name field\.
+AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
 The X\-Ray SDK can name segments after the hostname in the HTTP request header\. However, this header can be forged, which could result in unexpected nodes in your service map\. To prevent the SDK from naming segments incorrectly due to requests with forged host headers, you must specify a default name for incoming requests\.
 
@@ -83,7 +83,7 @@ If your application serves requests for multiple domains, you can configure the 
 
 For example, you might have a single application serving requests to three subdomains– `www.example.com`, `api.example.com`, and `static.example.com`\. You can use a dynamic naming strategy with the pattern `*.example.com` to identify segments for each subdomain with a different name, resulting in three service nodes on the service map\. If your application receives requests with a hostname that doesn't match the pattern, you will see a fourth node on the service map with a fallback name that you specify\.
 
-To use the same name for all request segments, specify the name of your application when you configure the recorder, as shown in the previous sections\.
+To use the same name for all request segments, specify the name of your application when you configure the recorder, as shown in the [previous sections](#xray-sdk-ruby-middleware-rails)\.
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request doesn't match the pattern\. To name segments dynamically, specify a naming pattern in the config hash\.
 
@@ -101,4 +101,4 @@ XRay.recorder.configure(config)
 You can use '\*' in the pattern to match any string, or '?' to match any single character\.
 
 **Note**  
-You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` environment variable\.
+You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` [environment variable](xray-sdk-ruby-configuration.md#xray-sdk-ruby-configuration-envvars)\.

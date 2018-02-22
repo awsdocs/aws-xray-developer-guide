@@ -1,8 +1,8 @@
 # Getting Started with AWS X\-Ray<a name="xray-gettingstarted"></a>
 
-To get started with AWS X\-Ray, launch a sample app in Elastic Beanstalk that is already instrumented to generate trace data\. In a few minutes, you can launch the sample app, generate traffic, send segments to X\-Ray, and view a service graph and traces in the AWS Management Console\.
+To get started with AWS X\-Ray, launch a sample app in Elastic Beanstalk that is already [instrumented](xray-sdk-java.md) to generate trace data\. In a few minutes, you can launch the sample app, generate traffic, send segments to X\-Ray, and view a service graph and traces in the AWS Management Console\.
 
-This tutorial uses a sample Java application to generate segments and send them to X\-Ray\. The application uses the Spring framework to implement a JSON web API and the AWS SDK for Java to persist data to Amazon DynamoDB\. A servlet filter in the application instruments all incoming requests served by the application, and a request handler on the AWS SDK client instruments downstream calls to DynamoDB\.
+This tutorial uses a [sample Java application](xray-scorekeep.md) to generate segments and send them to X\-Ray\. The application uses the Spring framework to implement a JSON web API and the AWS SDK for Java to persist data to Amazon DynamoDB\. A servlet filter in the application instruments all incoming requests served by the application, and a request handler on the AWS SDK client instruments downstream calls to DynamoDB\.
 
 ![\[Scorekeep sample application flow\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-flow.png)
 
@@ -303,7 +303,7 @@ The sampling rules file defines four custom sampling rules and the default rule\
 
 The other three custom rules apply a five percent rate with no fixed target to session, game, and state reads \(GET requests\)\. This minimizes the number of traces for periodic calls that the front end makes automatically every few seconds to ensure the content is up to date\. For all other requests, the file defines a default rate of one request per second and a rate of 10 percent\.
 
-The sample application also shows how to use advanced features such as manual SDK client instrumentation, creating additional subsegments, and outgoing HTTP calls\. For more information, see \.
+The sample application also shows how to use advanced features such as manual SDK client instrumentation, creating additional subsegments, and outgoing HTTP calls\. For more information, see [AWS X\-Ray Sample Application](xray-scorekeep.md)\.
 
 ## Clean Up<a name="xray-gettingstarted-cleanup"></a>
 
@@ -325,16 +325,16 @@ Trace data is automatically deleted from X\-Ray after 30 days\.
 
 ## Next Steps<a name="xray-gettingstarted-nextsteps"></a>
 
-Learn more about X\-Ray in the next chapter, \.
+Learn more about X\-Ray in the next chapter, [AWS X\-Ray Concepts](xray-concepts.md)\.
 
 To instrument your own app, learn more about the X\-Ray SDK for Java or one of the other X\-Ray SDKs:
 
-+ **X\-Ray SDK for Java** – 
++ **X\-Ray SDK for Java** – [AWS X\-Ray SDK for Java](xray-sdk-java.md)
 
-+ **X\-Ray SDK for Node\.js** – 
++ **X\-Ray SDK for Node\.js** – [The X\-Ray SDK for Node\.js](xray-sdk-nodejs.md)
 
-+ **X\-Ray SDK for \.NET** – 
++ **X\-Ray SDK for \.NET** – [AWS X\-Ray SDK for \.NET](xray-sdk-dotnet.md)
 
-To run the X\-Ray daemon locally or on AWS, see \.
+To run the X\-Ray daemon locally or on AWS, see [AWS X\-Ray Daemon](xray-daemon.md)\.
 
 To contribute to the sample application on GitHub, see [eb\-java\-scorekeep](https://github.com/awslabs/eb-java-scorekeep/tree/xray)\.

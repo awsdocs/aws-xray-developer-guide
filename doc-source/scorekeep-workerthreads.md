@@ -39,4 +39,4 @@ Because the request is now resolved before the call to Amazon SNS, the applicati
 
 ![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-workerthread.png)
 
-See  for more information about multithreading\.
+See [Passing Segment Context between Threads in a Multithreaded Application](xray-sdk-java-multithreading.md) for more information about multithreading\.

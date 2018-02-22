@@ -2,11 +2,11 @@
 
 You can record additional information about requests, the environment, or your application with annotations and metadata\. You can add annotations and metadata to the segments that the X\-Ray SDK creates, or to custom subsegments that you create\.
 
-**Annotations** are key\-value pairs with string, number, or Boolean values\. Annotations are indexed for use with filter expressions\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
+**Annotations** are key\-value pairs with string, number, or Boolean values\. Annotations are indexed for use with [filter expressions](xray-console-filters.md)\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
 
 **Metadata** are key\-value pairs that can have values of any type, including objects and lists, but are not indexed for use with filter expressions\. Use metadata to record additional data that you want stored in the trace but don't need to use with search\.
 
-In addition to annotations and metadata, you can also record user ID strings on segments\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
+In addition to annotations and metadata, you can also [record user ID strings](#xray-sdk-python-segment-userid) on segments\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
 
 
 + [Recording Annotations with the X\-Ray SDK for Python](#xray-sdk-python-segment-annotations)
@@ -51,7 +51,7 @@ Use annotations to record information on segments or subsegments that you want i
 
 The SDK records annotations as key\-value pairs in an `annotations` object in the segment document\. Calling `put_annotation` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 
-To find traces that have annotations with specific values, use the `annotations.key` keyword in a filter expression\.
+To find traces that have annotations with specific values, use the `annotations.key` keyword in a [filter expression](xray-console-filters.md)\.
 
 ## Recording Metadata with the X\-Ray SDK for Python<a name="xray-sdk-python-segment-metadata"></a>
 
@@ -113,4 +113,4 @@ Record user IDs on request segments to identify the user who sent the request\.
 
 You can call `set_user` in your controllers to record the user ID as soon as your application starts processing a request\.
 
-To find traces for a user ID, use the `user` keyword in a filter expression\.
+To find traces for a user ID, use the `user` keyword in a [filter expression](xray-console-filters.md)\.

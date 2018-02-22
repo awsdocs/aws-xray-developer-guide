@@ -25,7 +25,7 @@ The compute resources running your application logic send data about their work 
 
 + **The work done** – start and end times, subsegments
 
-+ **Issues that occur** – errors, faults and exceptions, including automatic capture of exception stacks\.
++ **Issues that occur** – [errors, faults and exceptions](#xray-concepts-errors), including automatic capture of exception stacks\.
 
 ![\[Segment data for Scorekeep\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-overview.png)
 
@@ -34,7 +34,7 @@ The X\-Ray SDK gathers information from request and response headers, the code i
 **Forwarded Requests**  
 If a load balancer or other intermediary forwards a request to your application, X\-Ray takes the client IP from the `X-Forwarded-For` header in the request instead of from the source IP in the IP packet\. The client IP that is recorded for a forwarded request can be forged, so it should not be trusted\.
 
-You can use the X\-Ray SDK to record additional information such as annotations and metadata\. For details about the structure and information that is recorded in segments and subsegments, see \. Segment documents can be up to 64 kB in size\.
+You can use the X\-Ray SDK to record additional information such as [annotations and metadata\.](#xray-concepts-annotations) For details about the structure and information that is recorded in segments and subsegments, see [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)\. Segment documents can be up to 64 kB in size\.
 
 ## Subsegments<a name="xray-concepts-subsegments"></a>
 
@@ -67,9 +67,9 @@ A service graph is a JSON document that contains information about the services 
 
 ![\[Service map\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap.png)
 
-For a distributed application, X\-Ray combines nodes from all services that process requests with the same trace ID into a single service graph\. The first service that the request hits adds a tracing header that is propagated between the front end and services that it calls\.
+For a distributed application, X\-Ray combines nodes from all services that process requests with the same trace ID into a single service graph\. The first service that the request hits adds a [tracing header](#xray-concepts-tracingheader) that is propagated between the front end and services that it calls\.
 
-For example, Scorekeep runs a web API that calls a microservice \(an AWS Lambda function\) to generate a random name by using a Node\.js library\. The X\-Ray SDK for Java generates the trace ID and includes it in calls to Lambda\. Lambda sends tracing data and passes the trace ID to the function\. The X\-Ray SDK for Node\.js also uses the trace ID to send data\. As a result, nodes for the API, the Lambda service, and the Lambda function all appear as separate, but connected, nodes on the service map\.
+For example, [Scorekeep](xray-scorekeep.md) runs a web API that calls a microservice \(an AWS Lambda function\) to generate a random name by using a Node\.js library\. The X\-Ray SDK for Java generates the trace ID and includes it in calls to Lambda\. Lambda sends tracing data and passes the trace ID to the function\. The X\-Ray SDK for Node\.js also uses the trace ID to send data\. As a result, nodes for the API, the Lambda service, and the Lambda function all appear as separate, but connected, nodes on the service map\.
 
 ![\[Nodes for the API, Lambda service, and Lambda function appear as separate but connected nodes\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
 
@@ -91,7 +91,7 @@ To avoid incurring service charges when you are getting started, the default sam
 
 For example, you may want to disable sampling and trace all requests for calls that modify state or deal with user accounts or transactions\. For high volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
 
-Learn more about sampling configuration with a hands\-on example in the Getting Started tutorial\.
+Learn more about sampling configuration with a hands\-on example in the [Getting Started tutorial](xray-gettingstarted.md)\.
 
 ## Tracing Header<a name="xray-concepts-tracingheader"></a>
 
@@ -124,7 +124,7 @@ Even with sampling, a complex application generates a lot of data\. The AWS X\-R
 
 When you instrument your application, the X\-Ray SDK records information about incoming and outgoing requests, the AWS resources used, and the application itself\. You can add other information to the segment document as annotations and metadata\.
 
-**Annotations** are simple key\-value pairs that are indexed for use with filter expressions\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
+**Annotations** are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md)\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
 
 X\-Ray indexes up to 50 annotations per trace\.
 
@@ -144,4 +144,4 @@ X\-Ray tracks errors that occur in your application code, and errors that are re
 
 + **`Throttle`** – Throttling errors \(429 Too Many Requests\)
 
-When an exception occurs while your application is serving an instrumented request, the X\-Ray SDK records details about the exception, including the stack trace, if available\. You can view exceptions under segment details in the X\-Ray console\.
+When an exception occurs while your application is serving an instrumented request, the X\-Ray SDK records details about the exception, including the stack trace, if available\. You can view exceptions under [segment details](xray-console.md#xray-console-segments) in the X\-Ray console\.

@@ -2,9 +2,9 @@
 
 The AWS X\-Ray daemon is a software application that listens for traffic on UDP port 2000, gathers raw segment data, and relays it to the AWS X\-Ray API\. The daemon works in conjunction with the AWS X\-Ray SDKs and must be running so that data sent by the SDKs can reach the X\-Ray service\.
 
-On AWS Lambda and AWS Elastic Beanstalk, use those services' integration with X\-Ray to run the daemon\. Lambda runs the daemon automatically any time a function is invoked for a sampled request\. On Elastic Beanstalk, use the `XRayEnabled` configuration option to run the daemon on the instances in your environment\.
+On AWS Lambda and AWS Elastic Beanstalk, use those services' integration with X\-Ray to run the daemon\. Lambda runs the daemon automatically any time a function is invoked for a sampled request\. On Elastic Beanstalk, [use the `XRayEnabled` configuration option](xray-daemon-beanstalk.md) to run the daemon on the instances in your environment\.
 
-To run the X\-Ray daemon locally, on\-premises, or on other AWS services, download it from Amazon S3, run it, and then give it permission to upload segment documents to X\-Ray\.
+To run the X\-Ray daemon locally, on\-premises, or on other AWS services, [download it from Amazon S3](#xray-daemon-downloading), [run it](#xray-daemon-running), and then [give it permission](#xray-daemon-permissions) to upload segment documents to X\-Ray\.
 
 ## Downloading the Daemon<a name="xray-daemon-downloading"></a>
 
@@ -92,15 +92,15 @@ Run the daemon locally from the command line\.
 
 For detailed platform\-specific instructions, see the following topics:
 
-+ **Linux \(local\)** – 
++ **Linux \(local\)** – [Running the X\-Ray Daemon on Linux](xray-daemon-local.md#xray-daemon-local-linux)
 
-+ **Windows \(local\)** – 
++ **Windows \(local\)** – [Running the X\-Ray Daemon on Windows](xray-daemon-local.md#xray-daemon-local-windows)
 
-+ **Elastic Beanstalk** – 
++ **Elastic Beanstalk** – [Running the X\-Ray Daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md)
 
-+ **Amazon EC2** – 
++ **Amazon EC2** – [Running the X\-Ray Daemon on Amazon EC2](xray-daemon-ec2.md)
 
-+ **Amazon ECS** – 
++ **Amazon ECS** – [Running the X\-Ray Daemon on Amazon ECS](xray-daemon-ecs.md)
 
 ## Giving the Daemon Permission to Send Data to X\-Ray<a name="xray-daemon-permissions"></a>
 
@@ -126,7 +126,7 @@ The IAM role or user that the daemon's credentials belong to must have permissio
 
 + To run the daemon locally, create an IAM user and save its access keys on your computer\.
 
-For more information, see \.
+For more information, see [AWS X\-Ray Permissions](xray-permissions.md)\.
 
 ## X\-Ray Daemon Logs<a name="xray-daemon-logging"></a>
 

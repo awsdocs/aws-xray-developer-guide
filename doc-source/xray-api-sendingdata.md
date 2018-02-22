@@ -30,7 +30,7 @@ When a request is received, you can send an in\-progress segment as a placeholde
 }
 ```
 
-You can send segments to X\-Ray directly, with `PutTraceSegments`, or through the X\-Ray daemon\.
+You can send segments to X\-Ray directly, with [`PutTraceSegments`](#xray-api-segments), or [through the X\-Ray daemon](#xray-api-daemon)\.
 
 Most applications call other services or access resources with the AWS SDK\. Record information about downstream calls in *subsegments*\. X\-Ray uses subsegments to identify downstream services that don't send segments and create entries for them on the service graph\.
 
@@ -51,7 +51,7 @@ A subsegment has a `type` of `subsegment` and a `parent_id` that identifies the 
 }
 ```
 
-For more information on the fields and values that you can include in segments and subsegments, see \.
+For more information on the fields and values that you can include in segments and subsegments, see [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)\.
 
 
 + [Generating Trace IDs](#xray-api-traceids)
@@ -145,7 +145,7 @@ $ aws xray put-trace-segments --trace-segment-documents $DOC1 $DOC2
 Instead of sending segment documents to the X\-Ray API, you can send segments and subsegments to the X\-Ray daemon, which will buffer them and upload to the X\-Ray API in batches\. The X\-Ray SDK sends segment documents to the daemon to avoid making calls to AWS directly\.
 
 **Note**  
-See  for instructions on running the daemon\.
+See [Running the X\-Ray Daemon Locally](xray-daemon-local.md) for instructions on running the daemon\.
 
 Send the segment in JSON over UDP port 2000, prepended by the daemon header, `{"format": "json", "version": 1}\n`
 

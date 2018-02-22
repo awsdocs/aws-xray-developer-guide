@@ -11,4 +11,4 @@ The session and game pages of the Scorekeep web app use deep linking to link to 
 </div>
 ```
 
-See  for details on how to construct deep links\.
+See [Deep Linking](xray-console-deeplinks.md) for details on how to construct deep links\.

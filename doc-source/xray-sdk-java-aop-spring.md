@@ -6,11 +6,11 @@ You must perform three tasks to enable this feature\.
 
 **To enable AOP in Spring**
 
-1. Configure Spring
+1. [Configure Spring](#xray-sdk-java-aop-spring-configuration)
 
-1. Annotate your code or implement an interface
+1. [Annotate your code or implement an interface](#xray-sdk-java-aop-annotate-or-implement)
 
-1. Activate X\-Ray in your application
+1. [Activate X\-Ray in your application](#xray-sdk-java-aop-activate-xray)
 
 ## Configuring Spring<a name="xray-sdk-java-aop-spring-configuration"></a>
 

@@ -1,13 +1,13 @@
 # Tracing Incoming Requests with the X\-Ray SDK for Python Middleware<a name="xray-sdk-python-middleware"></a>
 
-If you use Django or Flask, use the Django middleware or Flask middleware to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
+If you use Django or Flask, use the [Django middleware](#xray-sdk-python-adding-middleware-django) or [Flask middleware](#xray-sdk-python-adding-middleware-flask) to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
 **Note**  
-For AWS Lambda functions, Lambda creates a segment for each sampled request\. See  for more information\.
+For AWS Lambda functions, Lambda creates a segment for each sampled request\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
-See  for a example Python function instrumented in Lambda\.
+See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for a example Python function instrumented in Lambda\.
 
-For scripts or Python applications on other frameworks, you can create segments manually\.
+For scripts or Python applications on other frameworks, you can [create segments manually](#xray-sdk-python-middleware-manual)\.
 
 Each segment has a name that identifies your application in the service map\. The segment can be named statically, or you can configure the SDK to name it dynamically based on the host header in the incoming request\. Dynamic naming lets you group traces based on the domain name in the request, and apply a default name if the name doesn't match an expected pattern \(for example, if the host header is forged\)\.
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
 ]
 ```
 
-Configure a segment name in your `settings.py` file\.
+Configure a segment name in your [`settings.py` file](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django)\.
 
 **Example settings\.py – segment name**  
 
@@ -66,7 +66,7 @@ XRAY_RECORDER = {,
 }
 ```
 
-This tells the X\-Ray recorder to trace requests served by your Django application with the default sampling rate\. You can configure the recorder your Django settings file to apply custom sampling rules or change other settings\.
+This tells the X\-Ray recorder to trace requests served by your Django application with the default sampling rate\. You can [configure the recorder your Django settings file](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django) to apply custom sampling rules or change other settings\.
 
 ## Adding the Middleware to Your Application \(Flask\)<a name="xray-sdk-python-adding-middleware-flask"></a>
 
@@ -84,7 +84,7 @@ xray_recorder.configure(service='My application')
 XRayMiddleware(app, xray_recorder)
 ```
 
-This tells the X\-Ray recorder to trace requests served by your Flask application with the default sampling rate\. You can configure the recorder in code to apply custom sampling rules or change other settings\.
+This tells the X\-Ray recorder to trace requests served by your Flask application with the default sampling rate\. You can [configure the recorder in code](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-code) to apply custom sampling rules or change other settings\.
 
 ## Instrumenting Python Code Manually<a name="xray-sdk-python-middleware-manual"></a>
 
@@ -111,7 +111,7 @@ xray_recorder.end_segment()
 
 ## Configuring a Segment Naming Strategy<a name="xray-sdk-python-middleware-naming"></a>
 
-AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's name field\.
+AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
 The X\-Ray SDK can name segments after the hostname in the HTTP request header\. However, this header can be forged, which could result in unexpected nodes in your service map\. To prevent the SDK from naming segments incorrectly due to requests with forged host headers, you must specify a default name for incoming requests\.
 
@@ -119,9 +119,9 @@ If your application serves requests for multiple domains, you can configure the 
 
 For example, you might have a single application serving requests to three subdomains– `www.example.com`, `api.example.com`, and `static.example.com`\. You can use a dynamic naming strategy with the pattern `*.example.com` to identify segments for each subdomain with a different name, resulting in three service nodes on the service map\. If your application receives requests with a hostname that doesn't match the pattern, you will see a fourth node on the service map with a fallback name that you specify\.
 
-To use the same name for all request segments, specify the name of your application when you configure the recorder, as shown in the previous sections\.
+To use the same name for all request segments, specify the name of your application when you configure the recorder, as shown in the [previous sections](#xray-sdk-python-adding-middleware-django)\.
 
-A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request doesn't match the pattern\. To name segments dynamically in Django, add the `DYNAMIC_NAMING` setting to your settings\.py file\.
+A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request doesn't match the pattern\. To name segments dynamically in Django, add the `DYNAMIC_NAMING` setting to your [settings\.py](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django) file\.
 
 **Example settings\.py – dynamic naming**  
 
@@ -134,7 +134,7 @@ XRAY_RECORDER = {
 }
 ```
 
-You can use '\*' in the pattern to match any string, or '?' to match any single character\. For Flask, configure the recorder in code\.
+You can use '\*' in the pattern to match any string, or '?' to match any single character\. For Flask, [configure the recorder in code](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-code)\.
 
 **Example main\.py – segment name**  
 
@@ -145,4 +145,4 @@ xray_recorder.configure(dynamic_naming='*.example.com')
 ```
 
 **Note**  
-You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` environment variable\.
+You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` [environment variable](xray-sdk-python-configuration.md#xray-sdk-python-configuration-envvars)\.

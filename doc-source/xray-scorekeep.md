@@ -6,7 +6,7 @@ The AWS X\-Ray [eb\-java\-scorekeep](https://github.com/awslabs/eb-java-scorekee
 
 The sample is an instrumented version of the [Scorekeep](https://github.com/awslabs/eb-java-scorekeep) project on AWSLabs\. It includes a front\-end web app, the API that it calls, and the DynamoDB tables that it uses to store data\. All the components are hosted in an Elastic Beanstalk environment for portability and ease of deployment\.
 
-Basic instrumentation with filters, plugins, and instrumented AWS SDK clients is shown in the project's `xray-gettingstarted` branch\. This is the branch that you deploy in the getting started tutorial\. Because this branch only includes the basics, you can diff it against the `master` branch to quickly understand the basics\.
+Basic instrumentation with [filters](xray-sdk-java-filters.md), [plugins](xray-sdk-java-configuration.md), and [instrumented AWS SDK clients](xray-sdk-java-awssdkclients.md) is shown in the project's `xray-gettingstarted` branch\. This is the branch that you deploy in the [getting started tutorial](xray-gettingstarted.md)\. Because this branch only includes the basics, you can diff it against the `master` branch to quickly understand the basics\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-after-github.png)
 
@@ -16,7 +16,7 @@ The sample application shows basic instrumentation in these files:
 
 + **AWS SDK client instrumentation** – [https://github.com/awslabs/eb-java-scorekeep/tree/xray-gettingstarted/build.gradle](https://github.com/awslabs/eb-java-scorekeep/tree/xray-gettingstarted/build.gradle)
 
-The `xray` branch of the application adds the use of HTTPClient, Annotations, SQL queries, custom subsegments, an instrumented AWS Lambda function, and instrumented initialization code and scripts\. This service map shows the `xray` branch running without a connected SQL database:
+The `xray` branch of the application adds the use of [HTTPClient](xray-sdk-java-httpclients.md), [Annotations](xray-sdk-java-segment.md), [SQL queries](xray-sdk-java-sqlclients.md), [custom subsegments](xray-sdk-java-subsegments.md), an instrumented [AWS Lambda](xray-services-lambda.md) function, and [instrumented initialization code and scripts](scorekeep-startup.md)\. This service map shows the `xray` branch running without a connected SQL database:
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap.png)
 
@@ -28,7 +28,7 @@ With all features enabled, Scorekeep's service map looks like this:
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-allfeatures.png)
 
-For instructions on using the sample application with X\-Ray, see the getting started tutorial\. In addition to the basic use of the X\-Ray SDK for Java discussed in the tutorial, the sample also shows how to use the following features\.
+For instructions on using the sample application with X\-Ray, see the [getting started tutorial](xray-gettingstarted.md)\. In addition to the basic use of the X\-Ray SDK for Java discussed in the tutorial, the sample also shows how to use the following features\.
 
 
 + [Manually Instrumenting AWS SDK Clients](scorekeep-sdkclients.md)

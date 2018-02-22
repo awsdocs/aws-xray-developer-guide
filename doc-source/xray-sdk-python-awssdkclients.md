@@ -1,8 +1,8 @@
 # Tracing AWS SDK Calls with the X\-Ray SDK for Python<a name="xray-sdk-python-awssdkclients"></a>
 
-When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Python tracks the calls downstream in subsegments\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
+When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Python tracks the calls downstream in [subsegments](xray-sdk-python-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
-The X\-Ray SDK for Python automatically instruments all AWS SDK clients when you patch the `botocore` library\. You cannot instrument individual clients\.
+The X\-Ray SDK for Python automatically instruments all AWS SDK clients when you [patch the `botocore` library](xray-sdk-python-patching.md)\. You cannot instrument individual clients\.
 
 For all services, you can see the name of the API called in the X\-Ray console\. For a subset of services, the X\-Ray SDK adds information to the segment to provide more granularity in the service map\.
 

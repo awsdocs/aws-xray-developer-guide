@@ -130,7 +130,7 @@ public class Startup implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withPlugin(new EC2Plugin());
 
-        URL ruleFile = Context.class.getResource("/sampling-rules.json");
+        URL ruleFile = Startup.class.getResource("/sampling-rules.json");
         builder.withSamplingStrategy(new LocalizedSamplingStrategy(ruleFile));
 
         AWSXRay.setGlobalRecorder(builder.build());
@@ -163,15 +163,15 @@ Set the logging level with the `logging.level.com.amazonaws.xray` property\.
 logging.level.com.amazonaws.xray = DEBUG
 ```
 
-Use debug logs to identify issues, such as unclosed subsegments, when you generate subsegments manually\.
+Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-java-subsegments.md)\.
 
 ## Environment Variables<a name="xray-sdk-java-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Java\. The SDK supports the following variables\.
 
-+ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's segment naming strategy\.
++ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-java-filters.md#xray-sdk-java-filters-naming)\.
 
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to listen on a different port or if it is running on a different host\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
@@ -183,11 +183,11 @@ You can use environment variables to configure the X\-Ray SDK for Java\. The SDK
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
 
-Environment variables override equivalent system properties and values set in code\.
+Environment variables override equivalent [system properties](#xray-sdk-java-configuration-sysprops) and values set in code\.
 
 ## System Properties<a name="xray-sdk-java-configuration-sysprops"></a>
 
-You can use system properties as a JVM\-specific alternative to environment variables\. The SDK supports the following properties\.
+You can use system properties as a JVM\-specific alternative to [environment variables](#xray-sdk-java-configuration-envvars)\. The SDK supports the following properties\.
 
 + `com.amazonaws.xray.strategy.tracingName` – Equivalent to `AWS_XRAY_TRACING_NAME`\.
 

@@ -1,8 +1,8 @@
 # AWS Lambda and AWS X\-Ray<a name="xray-services-lambda"></a>
 
-You can use AWS X\-Ray to trace your AWS Lambda functions\. Lambda runs the X\-Ray daemon and records a segment with details about the function invocation and execution\. For further instrumentation, you can bundle the X\-Ray SDK with your function to record outgoing calls and add annotations and metadata\.
+You can use AWS X\-Ray to trace your AWS Lambda functions\. Lambda runs the [X\-Ray daemon](xray-daemon.md) and records a segment with details about the function invocation and execution\. For further instrumentation, you can bundle the X\-Ray SDK with your function to record outgoing calls and add annotations and metadata\.
 
-If your Lambda funtion is called by another instrumented service, Lambda will trace requests that have already been sampled without any additional configuration\. The upstream service can be an instrumented web application, another Lambda function\.
+If your Lambda function is called by another instrumented service, Lambda will trace requests that have already been sampled without any additional configuration\. The upstream service can be an instrumented web application, another Lambda function\.
 
 If your Lambda function is invoked by a service that is not instrumented, or does not propagate the tracing header from an upstream service, you can configure Lambda to sample and record invocations with active tracing\.
 
