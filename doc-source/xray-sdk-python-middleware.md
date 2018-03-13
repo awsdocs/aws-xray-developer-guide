@@ -16,7 +16,7 @@ If a load balancer or other intermediary forwards a request to your application,
 
 When a request is forwarded, the SDK sets an additional field in the segment to indicate this\. If the segment contains the field `x_forwarded_for` set to `true`, the client IP was taken from the `X-Forwarded-For` header in the HTTP request\.
 
-The mmiddleware creates a segment for each incoming request with an `http` block that contains the following information:
+The middleware creates a segment for each incoming request with an `http` block that contains the following information:
 
 + **HTTP method** – GET, POST, PUT, DELETE, etc\.
 

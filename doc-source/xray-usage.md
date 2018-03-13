@@ -81,7 +81,7 @@ On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming 
 
 See [AWS X\-Ray SDK for Python](xray-sdk-python.md) for more information\.
 
-+ **Django or Flask** – [Use the X\-Ray SDK for Node\.js middleware](xray-sdk-python-middleware.md) to instrument incoming requests\.
++ **Django or Flask** – [Use the X\-Ray SDK for Python middleware](xray-sdk-python-middleware.md) to instrument incoming requests\.
 
 + **Python on AWS Lambda** – Enable X\-Ray on your Lambda function configuration to instrument incoming requests\. Add the X\-Ray SDK for Python to instrument AWS SDK, HTTP, and SQL clients\.
 

@@ -2,6 +2,9 @@
 
 The AWS X\-Ray daemon is a software application that listens for traffic on UDP port 2000, gathers raw segment data, and relays it to the AWS X\-Ray API\. The daemon works in conjunction with the AWS X\-Ray SDKs and must be running so that data sent by the SDKs can reach the X\-Ray service\.
 
+**Note**  
+The X\-Ray daemon is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-daemon](https://github.com/aws/aws-xray-daemon)
+
 On AWS Lambda and AWS Elastic Beanstalk, use those services' integration with X\-Ray to run the daemon\. Lambda runs the daemon automatically any time a function is invoked for a sampled request\. On Elastic Beanstalk, [use the `XRayEnabled` configuration option](xray-daemon-beanstalk.md) to run the daemon on the instances in your environment\.
 
 To run the X\-Ray daemon locally, on\-premises, or on other AWS services, [download it from Amazon S3](#xray-daemon-downloading), [run it](#xray-daemon-running), and then [give it permission](#xray-daemon-permissions) to upload segment documents to X\-Ray\.
@@ -24,7 +27,7 @@ You can download the daemon from Amazon S3 to run it locally, or to install it o
 
 + **Windows \(service\) ** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip.sig)\)
 
-These links always point to the latest v2 release of the daemon\. To download a specific release, replace `2.x` with the version number\. For example, `2.0.0`\.
+These links always point to the latest v2 release of the daemon\. To download a specific release, replace `2.x` with the version number\. For example, `2.1.0`\.
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
 
@@ -84,10 +87,10 @@ Note the warning about trust\. A key is only trusted if you or someone you trust
 
 ## Running the Daemon<a name="xray-daemon-running"></a>
 
-Run the daemon locally from the command line\.
+Run the daemon locally from the command line\. Use the `-o` option to run in local mode, and `-n` to set the region\.
 
 ```
-~/Downloads$ ./xray
+~/Downloads$ ./xray -o -n us-east-2
 ```
 
 For detailed platform\-specific instructions, see the following topics:
@@ -101,6 +104,8 @@ For detailed platform\-specific instructions, see the following topics:
 + **Amazon EC2** – [Running the X\-Ray Daemon on Amazon EC2](xray-daemon-ec2.md)
 
 + **Amazon ECS** – [Running the X\-Ray Daemon on Amazon ECS](xray-daemon-ecs.md)
+
+You can customize the daemon's behavior further by using command line options or a configuration file\. See [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md) for details\.
 
 ## Giving the Daemon Permission to Send Data to X\-Ray<a name="xray-daemon-permissions"></a>
 
@@ -116,7 +121,7 @@ aws_access_key_id = AKIAIOSFODNN7EXAMPLE
 aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 
-For more information about providing credentials to an SDK, see [Specifying Credentials](http://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials) in the *AWS SDK for Go Developer Guide*\.
+If you specify credentials in more than one location \(credentials file, instance profile, or environment variables\), the SDK provider chain determines which credentials are used\. For more information about providing credentials to the SDK, see [Specifying Credentials](http://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials) in the *AWS SDK for Go Developer Guide*\.
 
 The IAM role or user that the daemon's credentials belong to must have permission to write data to the service on your behalf\.
 
@@ -133,9 +138,13 @@ For more information, see [AWS X\-Ray Permissions](xray-permissions.md)\.
 The daemon outputs information about its current configuration and segments that it sends to AWS X\-Ray\.
 
 ```
-2016-11-24T06:07:06Z [Info] Initializing AWS X-Ray daemon 2.0.0
+2016-11-24T06:07:06Z [Info] Initializing AWS X-Ray daemon 2.1.0
 2016-11-24T06:07:06Z [Info] Using memory limit of 49 MB
 2016-11-24T06:07:06Z [Info] 313 segment buffers allocated
 2016-11-24T06:07:08Z [Info] Successfully sent batch of 1 segments (0.123 seconds)
 2016-11-24T06:07:09Z [Info] Successfully sent batch of 1 segments (0.006 seconds)
 ```
+
+By default, the daemon outputs logs to STDOUT\. If you run the daemon in the background, use the `--log-file` command line option or a configuration file to set the log file path\. You can also set the log level and disable log rotation\. See [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md) for instructions\.
+
+On Elastic Beanstalk, the platform sets the location of the daemon logs\. See [Running the X\-Ray Daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md) for details\.

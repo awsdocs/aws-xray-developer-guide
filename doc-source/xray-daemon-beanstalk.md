@@ -1,19 +1,17 @@
 # Running the X\-Ray Daemon on AWS Elastic Beanstalk<a name="xray-daemon-beanstalk"></a>
 
-You can run the X\-Ray daemon on your Elastic Beanstalk environment's EC2 instances to relay trace data from your application to AWS X\-Ray\.
+To relay trace data from your application to AWS X\-Ray, you can run the X\-Ray daemon on your Elastic Beanstalk environment's Amazon EC2 instances\. For a list of supported platforms, see [Configuring AWS X\-Ray Debugging](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-debugging.html) in the *AWS Elastic Beanstalk Developer Guide*\.
 
 **Note**  
-For a list of supported platforms, see [Configuring AWS X\-Ray Debugging](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-debugging.html) in the AWS Elastic Beanstalk Developer Guide\.
-
 The daemon uses your environment's instance profile for permissions\. For instructions about adding permissions to the Elastic Beanstalk instance profile, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
-AWS Elastic Beanstalk platforms provide a configuration option that you can set to run the daemon automatically\. You can enable the daemon in a configuration file in your source code or by checking an option in the Elastic Beanstalk console\.
+Elastic Beanstalk platforms provide a configuration option that you can set to run the daemon automatically\. You can enable the daemon in a configuration file in your source code or by choosing an option in the Elastic Beanstalk console\. When you enable the configuration option, the daemon is installed on the instance and runs as a service\.
 
-The daemon is installed on the instance and runs as a service when you enable the configuration option\.
+The version included on Elastic Beanstalk platforms might not be the latest version\. See the [Supported Platforms topic](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) to find out the version of the daemon that is available for your platform configuration\.
 
-The version included on Elastic Beanstalk platforms may not be the latest version\. See the Elastic Beanstalk release notes to find out the version of the daemon that is available for the platform configuration that you use\.
+Elastic Beanstalk does not provide the X\-Ray daemon on the Multicontainer Docker \(Amazon ECS\) platform\. The Scorekeep sample application shows how to use the X\-Ray daemon on Amazon ECS with Elastic Beanstalk\. See [Instrumenting Amazon ECS Applications](scorekeep-ecs.md) for details\.
 
-## Using Elastic Beanstalk's X\-Ray Integration to Run the X\-Ray Daemon<a name="xray-daemon-beanstalk-option"></a>
+## Using the Elastic Beanstalk X\-Ray Integration to Run the X\-Ray Daemon<a name="xray-daemon-beanstalk-option"></a>
 
 Use the console to turn on X\-Ray integration, or configure it in your application source code with a configuration file\.
 
@@ -47,7 +45,7 @@ Elastic Beanstalk passes a configuration file to the daemon and outputs logs to 
 
 + **Configuration file** – `C:\Progam Files\Amazon\XRay\cfg.yaml`
 
-+ **Logs** – `c:\Progam Files\Amazon\XRay\logs\xray-service.log`
++ **Logs** – `c:\Program Files\Amazon\XRay\logs\xray-service.log`
 
 **On Linux Platforms**
 
@@ -164,4 +162,4 @@ files:
       C:\Program Files\Amazon\XRay\xray-daemon.log
 ```
 
-These examples also adds the daemon's log file to Elastic Beanstalk's tail logs task, to include it when you request logs with the console or Elastic Beanstalk Command Line Interface \(EB CLI\)\.
+These examples also add the daemon's log file to the Elastic Beanstalk tail logs task, so that it's included when you request logs with the console or Elastic Beanstalk Command Line Interface \(EB CLI\)\.

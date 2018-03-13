@@ -4,17 +4,24 @@ To instrument downstream calls, use the X\-Ray SDK for Python to patch the libra
 
 **Supported Libraries**
 
-+ `[botocore](https://pypi.python.org/pypi/botocore)` and `[boto3](https://pypi.python.org/pypi/boto3)` – Instrument AWS SDK for Python \(Boto\) clients\.
++ `[botocore](https://pypi.python.org/pypi/botocore)`, `[boto3](https://pypi.python.org/pypi/boto3)` – Instrument AWS SDK for Python \(Boto\) clients\.
 
-+ `[aiobotocore](https://pypi.python.org/pypi/aiobotocore)` and `[aioboto3](https://pypi.python.org/pypi/aioboto3)` – Instrument [asyncio](https://docs.python.org/3/library/asyncio.html)\-integrated versions of SDK for Python clients\.
++ `[pynamodb](https://pypi.python.org/pypi/pynamodb/)` – Instrument PynamoDB's version of the Amazon DynamoDB client\.
 
-+ `[requests](https://pypi.python.org/pypi/requests)`, `[aiohttp](https://pypi.python.org/pypi/aiohttp)` – Instrument HTTP clients\.
++ `[aiobotocore](https://pypi.python.org/pypi/aiobotocore)`, `[aioboto3](https://pypi.python.org/pypi/aioboto3)` – Instrument [asyncio](https://docs.python.org/3/library/asyncio.html)\-integrated versions of SDK for Python clients\.
+
++ `[requests](https://pypi.python.org/pypi/requests)`, `[aiohttp](https://pypi.python.org/pypi/aiohttp)` – Instrument high\-level HTTP clients\.
+
++ `[httplib](https://docs.python.org/2/library/httplib.html)`, [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html) – Instrument low\-level HTTP clients and the higher level libraries that use them\.
 
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
 
 + `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)` – Instrument MySQL clients\.
 
 When you use a patched library, the X\-Ray SDK for Python creates a subsegment for the call and records information from the request and response\. A segment must be available for the SDK to create the subsegment, either from the SDK middleware or from AWS Lambda\.
+
+**Note**  
+If you use SQLAlchemy ORM, you can instrument your SQL queries by importing the SDK's version of SQLAlchemy's session and query classes\. See [Use SQLAlchemy ORM](https://github.com/aws/aws-xray-sdk-python/blob/master/README.md#use-sqlalchemy-orm) for instructions\.
 
 To patch all available libraries, use the `patch_all` function in `aws_xray_sdk.core`\.
 
@@ -40,14 +47,19 @@ To patch individual libraries, call `patch` with a tuple of library names\.
 import boto3
 import botocore
 import requests
-import sqlite3
+import mysql-connector-python
 
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.core import patch
 
-libraries = ('botocore', 'requests')
+libraries = ('botocore', 'mysql')
 patch(libraries)
 ```
+
+**Note**  
+In some cases, the key that you use to patch a library does not match the library name\. Some keys serve as aliases for one or more libraries\.  
+`httplib` – `[httplib](https://docs.python.org/2/library/httplib.html)` and [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html)
+`mysql` – `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)`
 
 For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\.
 

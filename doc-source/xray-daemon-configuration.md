@@ -1,6 +1,22 @@
 # Configuring the AWS X\-Ray Daemon<a name="xray-daemon-configuration"></a>
 
-You can use command line options or a configuration file to customize the X\-Ray daemon's behavior\.
+You can use command line options or a configuration file to customize the X\-Ray daemon's behavior\. Most options are available using both methods, but some are only available in configuration files and some only at the command line\.
+
+To get started, the only option that you need to know is `-n` or `--region`, which you use to set the region that the daemon uses to send trace data to X\-Ray\.
+
+```
+~/xray-daemon$ ./xray -n us-east-2
+```
+
+If you are running the daemon locally, that is, not on Amazon EC2, you can add the `-o` option to skip checking for instance profile credentials so the daemon will become ready more quickly\.
+
+```
+~/xray-daemon$ ./xray -o -n us-east-2
+```
+
+The rest of the command line options let you configure logging, listen on a different port, limit the amount of memory that the daemon can use, or assume a role to send trace data to a different account\.
+
+You can pass a configuration file to the daemon to access advanced configuration options and do things like limit the number of concurrent calls to X\-Ray, disable log rotation, and send traffic to a proxy\.
 
 
 + [Using Command Line Options](#xray-daemon-configuration-commandline)
@@ -106,9 +122,8 @@ You can also use a YAML format file to configure the daemon\. Pass the configura
 
 + `Version` – Daemon configuration file format version\.
 
-The following configuration file changes the daemon's listening port to 3000, turns off checks for instance metadata, sets a role to use for uploading segments, and changes region and logging options\.
-
 **Example xray\-daemon\.yaml**  
+This configuration file changes the daemon's listening port to 3000, turns off checks for instance metadata, sets a role to use for uploading segments, and changes region and logging options\.  
 
 ```
 Socket:

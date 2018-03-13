@@ -16,7 +16,7 @@ If you use Django or Flask, start by [adding the SDK middleware to your applicat
 For Lambda functions called by an instrumented application or service, Lambda reads the [tracing header](xray-concepts.md#xray-concepts-tracingheader) and traces sampled requests automatically\. For other functions, you can [configure Lambda](xray-services-lambda.md) to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
 
 **Note**  
-On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
+On Lambda, the X\-Ray SDK is optional\. If you don't use it in your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. By adding the SDK, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
 See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for a example Python function instrumented in Lambda\.
 
@@ -24,11 +24,15 @@ Next, use the X\-Ray SDK for Python to instrument downstream calls by [patching 
 
 **Supported Libraries**
 
-+ `[botocore](https://pypi.python.org/pypi/botocore)` and `[boto3](https://pypi.python.org/pypi/boto3)` – Instrument AWS SDK for Python \(Boto\) clients\.
++ `[botocore](https://pypi.python.org/pypi/botocore)`, `[boto3](https://pypi.python.org/pypi/boto3)` – Instrument AWS SDK for Python \(Boto\) clients\.
 
-+ `[aiobotocore](https://pypi.python.org/pypi/aiobotocore)` and `[aioboto3](https://pypi.python.org/pypi/aioboto3)` – Instrument [asyncio](https://docs.python.org/3/library/asyncio.html)\-integrated versions of SDK for Python clients\.
++ `[pynamodb](https://pypi.python.org/pypi/pynamodb/)` – Instrument PynamoDB's version of the Amazon DynamoDB client\.
 
-+ `[requests](https://pypi.python.org/pypi/requests)`, `[aiohttp](https://pypi.python.org/pypi/aiohttp)` – Instrument HTTP clients\.
++ `[aiobotocore](https://pypi.python.org/pypi/aiobotocore)`, `[aioboto3](https://pypi.python.org/pypi/aioboto3)` – Instrument [asyncio](https://docs.python.org/3/library/asyncio.html)\-integrated versions of SDK for Python clients\.
+
++ `[requests](https://pypi.python.org/pypi/requests)`, `[aiohttp](https://pypi.python.org/pypi/aiohttp)` – Instrument high\-level HTTP clients\.
+
++ `[httplib](https://docs.python.org/2/library/httplib.html)`, [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html) – Instrument low\-level HTTP clients and the higher level libraries that use them\.
 
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
 
@@ -72,7 +76,7 @@ Add the SDK as a dependency in your `requirements.txt` file\.
 **Example requirements\.txt**  
 
 ```
-aws-xray-sdk==0.95
+aws-xray-sdk==0.96
 boto3==1.4.4
 botocore==1.5.55
 Django==1.11.3

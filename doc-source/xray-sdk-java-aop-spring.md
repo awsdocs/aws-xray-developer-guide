@@ -22,14 +22,14 @@ If you use Maven to build your application, add the the following dependency in 
 <dependency> 
      <groupId>com.amazonaws</groupId> 
      <artifactId>aws-xray-recorder-sdk-spring</artifactId> 
-     <version>1.3.0</version> 
+     <version>1.3.1</version> 
 </dependency>
 ```
 
 For Gradle, add the following dependency in your `build.gradle` file\.
 
 ```
-compile 'com.amazonaws:aws-xray-recorder-sdk-spring:1.3.0'
+compile 'com.amazonaws:aws-xray-recorder-sdk-spring:1.3.1'
 ```
 
 ## Annotating Your Code or Implementing an Interface<a name="xray-sdk-java-aop-annotate-or-implement"></a>

@@ -13,7 +13,7 @@ For web applications, start by [using the `xray.Handler` function](xray-sdk-go-h
 For Lambda functions called by an instrumented application or service, Lambda reads the [tracing header](xray-concepts.md#xray-concepts-tracingheader) and traces sampled requests automatically\. For other functions, you can [configure Lambda](xray-services-lambda.md) to sample and trace incoming requests\. In either case, Lambda creates the segment and provides it to the X\-Ray SDK\.
 
 **Note**  
-On Lambda, the X\-Ray SDK is optional\. If you don't bundle it with your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. If you do bundle it, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
+On Lambda, the X\-Ray SDK is optional\. If you don't use it in your function, your service map will still include a node for the Lambda service, and one for each Lambda function\. By adding the SDK, you can instrument your function code to add subsegments to the function segment recorded by Lambda\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
 Next, [wrap your client with a call to the `AWS` function](xray-sdk-go-awssdkclients.md)\. This step ensures that X\-Ray instruments calls to any client methods\. You can also [instrument calls to SQL databases](xray-sdk-go-sqlclients.md)\.
 

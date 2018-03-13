@@ -37,6 +37,7 @@ For instructions on using the sample application with X\-Ray, see the [getting s
 + [Instrumenting Outgoing HTTP Calls](scorekeep-httpclient.md)
 + [Instrumenting Calls to a PostgreSQL Database](scorekeep-postgresql.md)
 + [Instrumenting AWS Lambda Functions](scorekeep-lambda.md)
++ [Instrumenting Amazon ECS Applications](scorekeep-ecs.md)
 + [Instrumenting Startup Code](scorekeep-startup.md)
 + [Instrumenting Scripts](scorekeep-scripts.md)
 + [Instrumenting a Web App Client](scorekeep-client.md)

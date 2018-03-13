@@ -35,6 +35,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Instrumenting Outgoing HTTP Calls](scorekeep-httpclient.md)
    + [Instrumenting Calls to a PostgreSQL Database](scorekeep-postgresql.md)
    + [Instrumenting AWS Lambda Functions](scorekeep-lambda.md)
+   + [Instrumenting Amazon ECS Applications](scorekeep-ecs.md)
    + [Instrumenting Startup Code](scorekeep-startup.md)
    + [Instrumenting Scripts](scorekeep-scripts.md)
    + [Instrumenting a Web App Client](scorekeep-client.md)

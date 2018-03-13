@@ -166,7 +166,7 @@ $ cat segment.txt > /dev/udp/127.0.0.1/2000
 {"trace_id": "1-594aed87-ad72e26896b3f9d3a27054bb", "id": "6226467e3f845502", "start_time": 1498082657.37518, "end_time": 1498082695.4042, "name": "test.elasticbeanstalk.com"}
 ```
 
-Check the daemon log to verify that it sent the segment to X\-Ray\.
+Check the [daemon log](xray-daemon.md#xray-daemon-logging) to verify that it sent the segment to X\-Ray\.
 
 ```
 2017-07-07T01:57:24Z [Debug] processor: sending partial batch

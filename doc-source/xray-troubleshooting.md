@@ -5,6 +5,7 @@ This topic lists common errors and issues that you might encounter when using th
 
 + [X\-Ray SDK for Java](#troubleshooting-java)
 + [X\-Ray SDK for Node\.js](#troubleshooting-nodejs)
++ [The X\-Ray daemon](#troubleshooting-daemon)
 
 ## X\-Ray SDK for Java<a name="troubleshooting-java"></a>
 
@@ -41,3 +42,9 @@ var Promise = require('bluebird');
 var clsBluebird = require('cls-bluebird');
 clsBluebird(AWSXRay.getNamespace());
 ```
+
+## The X\-Ray daemon<a name="troubleshooting-daemon"></a>
+
+**Issue:** *The daemon is using the wrong credentials*
+
+The daemon uses the AWS SDK to load credentials\. If you use multiple methods of providing credentials, the method with the highest precedence is used\. See [Running the Daemon](xray-daemon.md#xray-daemon-running) for more information\.

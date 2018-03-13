@@ -5,9 +5,9 @@ The X\-Ray SDK for Java is a set of libraries for Java web applications that pro
 **Note**  
 The X\-Ray SDK for Java is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-sdk\-java](https://github.com/aws/aws-xray-sdk-java)
 
-Starting in release 1\.3, you can now instrument your application using [aspect\-oriented programming \(AOP\) in Spring](xray-sdk-java-aop-spring.md)\. What this means is that you can instrument your application, while it is running on AWS, without adding any code to your application's runtime\.
-
 Start by [adding `AWSXRayServletFilter` as a servlet filter](xray-sdk-java-filters.md) to trace incoming requests\. A servlet filter creates a [segment](xray-concepts.md#xray-concepts-segments) While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
+
+Starting in release 1\.3, you can now instrument your application using [aspect\-oriented programming \(AOP\) in Spring](xray-sdk-java-aop-spring.md)\. What this means is that you can instrument your application, while it is running on AWS, without adding any code to your application's runtime\.
 
 Next, use the X\-Ray SDK for Java to instrument your AWS SDK for Java clients by [including the SDK Instrumentor submodule](#xray-sdk-java-dependencies) in your build configuration\. Whenever you make a call to a downstream AWS service or resource with an instrumented client, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
@@ -34,7 +34,7 @@ You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is
 
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-apache-http](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-apache-http) – Instruments outbound HTTP calls made with Apache HTTP clients\.
 
-+   `aws-xray-recorder-sdk-spring` – Instruments X\-Ray applications using Spring\. 
++  [ `aws-xray-recorder-sdk-spring`](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-spring) – Provides interceptors for Spring AOP Framework applications\.
 
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-postgres](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-postgres) – Instruments outbound calls to a PostgreSQL database made with JDBC\.
 

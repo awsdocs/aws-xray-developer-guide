@@ -184,12 +184,12 @@ Complex keywords let you find requests based on service name, edge name, or anno
 
 + `edge(name) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
 
-+ `annotation.key` – Value of annotation with field *key*\. The value of an annotation can be a boolean, number, or string, so you can use any of those type's comparison operators\.
++ `annotation.key` – Value of annotation with field *key*\. The value of an annotation can be a boolean, number, or string, so you can use any of those type's comparison operators\. You cannot use this keyword in combination with the `service` or `edge` keywords\.
 
 Use the service keyword to find traces for requests that hit a certain node on your service map\.
 
 **Example Service filter**  
-Requests that included a call to "api\.example\.com" with a fault \(500 series error\)\.  
+Requests that included a call to `api.example.com` with a fault \(500 series error\)\.  
 
 ```
 service("api.example.com") { fault }
@@ -207,7 +207,7 @@ service() { fault }
 The edge keyword applies a filter expression to a connection between two nodes\.
 
 **Example Edge filter**  
-Request where the service "api\.example\.com" made a call to "backend\.example\.com" that failed with an error\.  
+Request where the service `api.example.com` made a call to `backend.example.com` that failed with an error\.  
 
 ```
 edge("api.example.com", "backend.example.com") { error }
@@ -216,7 +216,7 @@ edge("api.example.com", "backend.example.com") { error }
 You can also use the `!` operator with service and edge keywords to exclude a service or edge from the results of another filter expression\.
 
 **Example Service and request filter**  
-Request where the URL begins with "http://api\.example\.com/" and contains "/v2/" but does not reach a service named "api\.example\.com"\.  
+Request where the URL begins with `http://api.example.com/` and contains `/v2/` but does not reach a service named `api.example.com`\.  
 
 ```
 http.url BEGINSWITH "http://api.example.com/" AND http.url CONTAINS "/v2/" AND !service("api.example.com")
@@ -225,14 +225,14 @@ http.url BEGINSWITH "http://api.example.com/" AND http.url CONTAINS "/v2/" AND !
 For annotations, use the comparison operators that correspond to the type of value\.
 
 **Example Annotation with string value**  
-Requests that caused a fault anywhere on your service map\.  
+Requests with an annotation named `gameid` with string value `"817DL6VO"`\.  
 
 ```
 annotation.gameid = "817DL6VO"
 ```
 
 **Example Annotation with number value**  
-Requests that caused a fault anywhere on your service map\.  
+Requests with annotation age with numerical value greater than 29\.  
 
 ```
 annotation.age > 29
@@ -240,13 +240,13 @@ annotation.age > 29
 
 ## The ID Function<a name="console-filters-functions"></a>
 
-When you provide a service name to the service\(\) or edge\(\) keywords, you get results for all nodes that have that name\. For more precise filtering, you can use the id\(\) function to specify a service type in addition to a name to distinguish between nodes with the same name\.
+When you provide a service name to the `service` or `edge` keywords, you get results for all nodes that have that name\. For more precise filtering, you can use the `id` function to specify a service type in addition to a name to distinguish between nodes with the same name\.
 
 ```
 id(name: "service-name", type:"service::type")
 ```
 
-You can use the id\(\) function in place of a service name in service and edge filters\.
+You can use the `id` function in place of a service name in service and edge filters\.
 
 ```
 service(id(name: "service-name", type:"service::type")) { filter }
@@ -263,16 +263,16 @@ For example, the [Scorekeep sample application](xray-scorekeep.md) includes an A
 The two nodes have the same name but different types\. A standard service filter will find traces for both\.
 
 **Example Service filter**  
-Requests that include an error on any service named "random\-name"\.  
+Requests that include an error on any service named `random-name`\.  
 
 ```
 service("random-name") { error }
 ```
 
-Use the id\(\) function to narrow the search down to errors on the function itself, excluding errors from the service\.
+Use the `id` function to narrow the search down to errors on the function itself, excluding errors from the service\.
 
-**Example Service filter with id\(\) function**  
-Requests that include an error on a service named "random\-name" with type "AWS::Lambda::Function"\.  
+**Example Service filter with id function**  
+Requests that include an error on a service named `random-name` with type `AWS::Lambda::Function`\.  
 
 ```
 service(id(name: "random-name", type: "AWS::Lambda::Function")) { error }
@@ -281,7 +281,7 @@ service(id(name: "random-name", type: "AWS::Lambda::Function")) { error }
 You can also exclude the name entirely, to search for nodes by type\.
 
 **Example Service filter with id\(\) function**  
-Requests that include an error on a service with type "AWS::Lambda::Function"\.  
+Requests that include an error on a service with type `AWS::Lambda::Function`\.  
 
 ```
 service(id(type: "AWS::Lambda::Function")) { error }
