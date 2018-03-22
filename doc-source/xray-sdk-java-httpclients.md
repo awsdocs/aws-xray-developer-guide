@@ -3,9 +3,7 @@
 When your application makes calls to microservices or public HTTP APIs, you can use the X\-Ray SDK for Java's version of `HttpClient` to instrument those calls and add the API to the service graph as a downstream service\.
 
 The X\-Ray SDK for Java includes `DefaultHttpClient` and `HttpClientBuilder` classes that can be used in place of the Apache HttpComponents equivalents to instrument outgoing HTTP calls\.
-
 + `com.amazonaws.xray.proxies.apache.http.DefaultHttpClient` \- `org.apache.http.impl.client.DefaultHttpClient`
-
 + `com.amazonaws.xray.proxies.apache.http.HttpClientBuilder` \- `org.apache.http.impl.client.HttpClientBuilder`
 
 These libraries are in the [`aws-xray-recorder-sdk-apache-http`](xray-sdk-java.md) submodule\.

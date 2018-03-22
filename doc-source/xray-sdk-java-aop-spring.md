@@ -39,9 +39,7 @@ Your classes must either be annotated with the `@XRayEnabled` annotation, or imp
 ## Activating X\-Ray in Your Application<a name="xray-sdk-java-aop-activate-xray"></a>
 
 To activate X\-Ray tracing in your application, your code must extend the abstract class `AbstractXRayInterceptor` by overriding the following methods\.
-
 + `generateMetadata`—This function allows customization of the metadata attached to the current function’s trace\. By default, the class name of the executing function is recorded in the metadata\. You can add more data if you need additional insights\.
-
 + `xrayEnabledClasses`—This function is empty, and should remain so\. It serves as the host for a pointcut instructing the interceptor about which methods to wrap\. Define the pointcut by specifying which of the classes that are annotated with `@XRayEnabled` to trace\. The following pointcut statement tells the interceptor to wrap all controller beans annotated with the `@XRayEnabled` annotation\.
 
   ```

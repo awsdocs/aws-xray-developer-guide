@@ -2,7 +2,7 @@
 
 The X\-Ray SDK for Python has a class named `xray_recorder` that provides the global recorder\. You can configure the global recorder to customize the middleware that creates segments for incoming HTTP calls\.
 
-
+**Topics**
 + [Service Plugins](#xray-sdk-python-configuration-plugins)
 + [Sampling Rules](#xray-sdk-python-configuration-sampling)
 + [Logging](#xray-sdk-python-configuration-logging)
@@ -15,11 +15,8 @@ The X\-Ray SDK for Python has a class named `xray_recorder` that provides the gl
 Use `plugins` to record information about the service hosting your application\.
 
 **Plugins**
-
 + Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
-
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
-
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 
 ![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources-python09.png)
@@ -108,17 +105,11 @@ Use debug logs to identify issues, such as unclosed subsegments, when you [gener
 ## Recorder Configuration in Code<a name="xray-sdk-python-middleware-configuration-code"></a>
 
 Additional settings are available from the `configure` method on `xray_recorder`\.
-
 + `context_missing` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
-
 + `daemon_address` – Set the host and port of the X\-Ray daemon listener\.
-
 + `service` – Set a service name that the SDK uses for segments\.
-
 + `plugins` – Record information about your application's AWS resources\.
-
 + `sampling` – Set to `False` to disable sampling\.
-
 + `sampling_rules` – Set the path of the JSON file containing your [sampling rules](#xray-sdk-python-configuration-sampling)\.
 
 **Example main\.py – disable context missing exceptions**  
@@ -126,25 +117,18 @@ Additional settings are available from the `configure` method on `xray_recorder`
 ```
 from aws_xray_sdk.core import xray_recorder
 
-xray_recorder.configure(context_missing=LOG_ERROR)
+xray_recorder.configure(context_missing='LOG_ERROR')
 ```
 
 ## Recorder Configuration with Django<a name="xray-sdk-python-middleware-configuration-django"></a>
 
 If you use the Django framework, you can use the Django `settings.py` file to configure options on the global recorder\.
-
 + `AUTO_INSTRUMENT` \(Django only\) – Record subsegments for built\-in database and template rendering operations\.
-
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
-
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\.
-
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\.
-
 + `PLUGINS` – Record information about your application's AWS resources\.
-
 + `SAMPLING` – Set to `False` to disable sampling\.
-
 + `SAMPLING_RULES` – Set the path of the JSON file containing your [sampling rules](#xray-sdk-python-configuration-sampling)\.
 
 To enable recorder configuration in `settings.py`, add the Django middleware to the list of installed apps\.
@@ -177,17 +161,12 @@ XRAY_RECORDER = {
 ## Environment Variables<a name="xray-sdk-python-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Python\. The SDK supports the following variables: 
-
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-python-middleware.md#xray-sdk-python-middleware-naming)\.
-
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
-
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
-
   + `RUNTIME_ERROR` – Throw a runtime exception \(default\)\.
-
   + `LOG_ERROR` – Log an error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.

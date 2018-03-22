@@ -1,7 +1,6 @@
 # Tracing SQL Queries with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-sqlclients"></a>
 
 Instrument SQL database queries by wrapping your SQL client in the corresponding X\-Ray SDK for Node\.js client method\.
-
 +  **PostgreSQL** – `AWSXRay.capturePostgres()` 
 
   ```
@@ -9,7 +8,6 @@ Instrument SQL database queries by wrapping your SQL client in the corresponding
   var pg = AWSXRay.capturePostgres(require('pg'));
   var client = new pg.Client();
   ```
-
 +  **MySQL** – `AWSXRay.captureMySQL()` 
 
   ```

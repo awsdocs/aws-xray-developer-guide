@@ -42,7 +42,7 @@ If you are instrumenting a \.NET Core web application, you can also pass the con
 
 For more information on the \.NET Core configuration API, see [Configure an ASP\.NET Core App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration) on docs\.microsoft\.com\.
 
-
+**Topics**
 + [Plugins](#xray-sdk-dotnet-configuration-plugins)
 + [Sampling Rules](#xray-sdk-dotnet-configuration-sampling)
 + [Logging \(\.NET\)](#xray-sdk-dotnet-configuration-logging)
@@ -54,11 +54,8 @@ For more information on the \.NET Core configuration API, see [Configure an ASP\
 Use plugins to add data about the service that is hosting your application\.
 
 **Plugins**
-
 + Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
-
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
-
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 
 To use a plugin, configure the X\-Ray SDK for \.NET client by adding the `AWSXRayPlugins` setting\. If multiple plugins apply to your application, specify all of them in the same setting, separated by commas\.
@@ -217,17 +214,12 @@ For more information on configuring log4net, see [Configuration](https://logging
 ## Environment Variables<a name="xray-sdk-dotnet-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for \.NET\. The SDK supports the following variables\.
-
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-dotnet-messagehandler.md#xray-sdk-dotnet-messagehandler-naming)\.
-
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
-
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
-
   + `RUNTIME_ERROR` – Throw a runtime exception \(default\)\.
-
   + `LOG_ERROR` – Log an error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.

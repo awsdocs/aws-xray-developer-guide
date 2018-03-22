@@ -25,21 +25,13 @@ Annotations and metadata are arbitrary text that you add to segments with the X\
 When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in [custom subsegments](xray-sdk-java-subsegments.md)\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
 You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is split into submodules by use case, with a bill of materials for version management:
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-core](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-core) \(required\) – Basic functionality for creating segments and transmitting segments\. Includes `AWSXRayServletFilter` for instrumenting incoming requests\.
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk) – Instruments calls to AWS services made with AWS SDK for Java clients by adding a tracing client as a request handler\.
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk-instrumentor](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk-instrumentor) – With `aws-xray-recorder-sdk-aws-sdk`, instruments all AWS SDK for Java clients automatically\.
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-apache-http](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-apache-http) – Instruments outbound HTTP calls made with Apache HTTP clients\.
-
 +  [ `aws-xray-recorder-sdk-spring`](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-spring) – Provides interceptors for Spring AOP Framework applications\.
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-postgres](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-postgres) – Instruments outbound calls to a PostgreSQL database made with JDBC\.
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-mysql](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-mysql) – Instruments outbound calls to a MySQL database made with JDBC\.
-
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom) – Provides a bill of materials that you can use to specify the version to use for all submodules\.
 
 If you use Maven or Gradle to build your application, [add the X\-Ray SDK for Java to your build configuration](#xray-sdk-java-dependencies)\.
@@ -51,9 +43,7 @@ For reference documentation for of the SDK's classes and methods, see [AWS X\-Ra
 The X\-Ray SDK for Java requires Java 8 or later, Servlet API 3, the AWS SDK, and Jackson\.
 
 The SDK depends on the following libraries at compile and runtime:
-
 + AWS SDK for Java version 1\.11\.106 or later
-
 + Servlet API 3\.1\.0
 
 These dependencies are declared in the SDK's `pom.xml` file and are included automatically if you build using Maven or Gradle\.
@@ -63,11 +53,8 @@ If you use a library that is included in the X\-Ray SDK for Java, you must use t
 ## Dependency Management<a name="xray-sdk-java-dependencies"></a>
 
 The X\-Ray SDK for Java is available from Maven:
-
 + **Group** – `com.amazonaws`
-
 + **Bill of Materials** – `aws-xray-recorder-sdk-bom`
-
 + **Version** – `1.3.1`
 
 If you use Maven to build your application, add the SDK as a dependency in your `pom.xml` file\.

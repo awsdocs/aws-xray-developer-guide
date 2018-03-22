@@ -6,7 +6,7 @@ You can record additional information about requests, the environment, or your a
 
 **Metadata** are key\-value pairs that can have values of any type, including objects and lists, but are not indexed for use with filter expressions\. Use metadata to record additional data that you want stored in the trace but don't need to use with search\.
 
-
+**Topics**
 + [Recording Annotations with the X\-Ray SDK for \.NET](#xray-sdk-dotnet-segment-annotations)
 + [Recording Metadata with the X\-Ray SDK for \.NET](#xray-sdk-dotnet-segment-metadata)
 
@@ -15,11 +15,8 @@ You can record additional information about requests, the environment, or your a
 Use annotations to record information on segments or subsegments that you want indexed for search\.
 
 **Annotation Requirements**
-
 + **Keys** – Up to 500 alphanumeric characters\. No spaces or symbols except underscores\.
-
 + **Values** – Up to 1,000 Unicode characters\.
-
 + **Entries** – Up to 50 annotations per trace\.
 
 **To record annotations**

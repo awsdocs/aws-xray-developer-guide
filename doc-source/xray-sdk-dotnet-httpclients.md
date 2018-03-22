@@ -6,8 +6,6 @@ When your application makes calls to microservices or public HTTP APIs, you can 
 
 ```
 using System.Net;
-using Amazon;
-using Amazon.Util;
 using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
 using [Amazon\.XRay\.Recorder\.Handlers\.System\.Net](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_System_Net.htm);
 
@@ -22,6 +20,22 @@ For asynchronous calls, use `GetAsyncResponseTraced`\.
 
 ```
 request.GetAsyncResponseTraced();
+```
+
+If you use [https://msdn.microsoft.com/en-us/library/system.net.http.httpclient.aspx](https://msdn.microsoft.com/en-us/library/system.net.http.httpclient.aspx), use the `HttpClientXRayTracingHandler` delegating handler to record calls\.
+
+**Example HttpClient**  
+
+```
+using System.Net.Http;
+using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.System\.Net](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_System_Net.htm);
+
+private void MakeHttpRequest()
+{
+  var httpClient = new HttpClient(new HttpClientXRayTracingHandler(new HttpClientHandler()));
+  httpClient.GetAsync(URL);
+}
 ```
 
 When you instrument a call to a downstream web API, the X\-Ray SDK for \.NET records a subsegment with information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the API\.

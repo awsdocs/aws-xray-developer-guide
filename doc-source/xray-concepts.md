@@ -2,7 +2,7 @@
 
 AWS X\-Ray receives data from services as *segments*\. X\-Ray then groups segments that have a common request into *traces*\. X\-Ray processes the traces to generate a *service graph* that provides a visual representation of your application\.
 
-
+**Topics**
 + [Segments](#xray-concepts-segments)
 + [Subsegments](#xray-concepts-subsegments)
 + [Service Graph](#xray-concepts-servicegraph)
@@ -16,15 +16,10 @@ AWS X\-Ray receives data from services as *segments*\. X\-Ray then groups segmen
 ## Segments<a name="xray-concepts-segments"></a>
 
 The compute resources running your application logic send data about their work as **segments**\. A segment provides the resource's name, details about the request, and details about the work done\. For example, when an HTTP request reaches your application, it can record the following data about:
-
 + **The host** – hostname, alias or IP address
-
 + **The request** – method, client address, path, user agent
-
 + **The response** – status, content
-
 + **The work done** – start and end times, subsegments
-
 + **Issues that occur** – [errors, faults and exceptions](#xray-concepts-errors), including automatic capture of exception stacks\.
 
 ![\[Segment data for Scorekeep\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-overview.png)
@@ -137,11 +132,8 @@ You can view annotations and metadata in the segment or subsegment details in th
 ## Errors, Faults, and Exceptions<a name="xray-concepts-errors"></a>
 
 X\-Ray tracks errors that occur in your application code, and errors that are returned by downstream services\. Errors are categorized as follows\.
-
 + **`Error`** – Client errors \(400 series errors\)
-
 + **`Fault`** – Server faults \(500 series errors\)
-
 + **`Throttle`** – Throttling errors \(429 Too Many Requests\)
 
 When an exception occurs while your application is serving an instrumented request, the X\-Ray SDK records details about the exception, including the stack trace, if available\. You can view exceptions under [segment details](xray-console.md#xray-console-segments) in the X\-Ray console\.

@@ -13,20 +13,14 @@ Each segment has a name that identifies your application in the service map\. Th
 If a load balancer or other intermediary forwards a request to your application, X\-Ray takes the client IP from the `X-Forwarded-For` header in the request instead of from the source IP in the IP packet\. The client IP that is recorded for a forwarded request can be forged, so it should not be trusted\.
 
 The message handler creates a segment for each incoming request with an `http` block that contains the following information:
-
 + **HTTP method** – GET, POST, PUT, DELETE, etc\.
-
 + **Client address** – The IP address of the client that sent the request\.
-
 + **Response code** – The HTTP response code for the completed request\.
-
 + **Timing** – The start time \(when the request was received\) and end time \(when the response was sent\)\.
-
 + **User agent** — The `user-agent` from the request\.
-
 + **Content length** — The `content-length` from the response\.
 
-
+**Topics**
 + [Instrumenting Incoming Requests \(\.NET\)](#xray-sdk-dotnet-messagehandler-globalasax)
 + [Instrumenting Incoming Requests \(\.NET Core\)](#xray-sdk-dotnet-messagehandler-startupcs)
 + [Configuring a Segment Naming Strategy](#xray-sdk-dotnet-messagehandler-naming)

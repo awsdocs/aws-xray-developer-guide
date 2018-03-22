@@ -2,7 +2,7 @@
 
 The X\-Ray SDK for Ruby has a class named `XRay.recorder` that provides the global recorder\. You can configure the global recorder to customize the middleware that creates segments for incoming HTTP calls\.
 
-
+**Topics**
 + [Service Plugins](#xray-sdk-ruby-configuration-plugins)
 + [Sampling Rules](#xray-sdk-ruby-configuration-sampling)
 + [Logging](#xray-sdk-ruby-configuration-logging)
@@ -15,11 +15,8 @@ The X\-Ray SDK for Ruby has a class named `XRay.recorder` that provides the glob
 Use `plugins` to record information about the service hosting your application\.
 
 **Plugins**
-
 + Amazon EC2 – `ec2` adds the instance ID and Availability Zone\.
-
 + Elastic Beanstalk – `elastic_beanstalk` adds the environment name, version label, and deployment ID\.
-
 + Amazon ECS – `ecs` adds the container ID\.
 
 ![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources-python09.png)
@@ -157,19 +154,12 @@ Use debug logs to identify issues, such as unclosed subsegments, when you [gener
 ## Recorder Configuration in Code<a name="xray-sdk-ruby-configuration-code"></a>
 
 Additional settings are available from the `configure` method on `XRay.recorder`\.
-
 + `context_missing` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
-
 + `daemon_address` – Set the host and port of the X\-Ray daemon listener\.
-
 + `name` – Set a service name that the SDK uses for segments\.
-
 + `naming_pattern` – Set a domain name pattern to use [dynamic naming](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-naming)\.
-
 + `plugins` – Record information about your application's AWS resources with [plugins](#xray-sdk-ruby-configuration-plugins)\.
-
 + `sampling` – Set to `false` to disable sampling\.
-
 + `sampling_rules` – Set the hash containing your [sampling rules](#xray-sdk-ruby-configuration-sampling)\.
 
 **Example main\.py – disable context missing exceptions**  
@@ -186,7 +176,6 @@ XRay.recorder.configure(config)
 ## Recorder Configuration with Rails<a name="xray-sdk-ruby-middleware-configuration-rails"></a>
 
 If you use the Rails framework, you can configure options on the global recorder in a Ruby file under `app_root/initializers`\. The X\-Ray SDK supports an additional configuration key for use with Rails\.
-
 + `active_record` – Set to `true` to record subsegments for Active Record database transactions\.
 
 Configure the available settings in a configuration object named `Rails.application.config.xray`\.
@@ -204,17 +193,12 @@ Rails.application.config.xray = {
 ## Environment Variables<a name="xray-sdk-ruby-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Ruby\. The SDK supports the following variables: 
-
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-naming)\.
-
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
-
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
-
   + `RUNTIME_ERROR` – Throw a runtime exception \(default\)\.
-
   + `LOG_ERROR` – Log an error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.

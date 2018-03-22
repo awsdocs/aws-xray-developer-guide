@@ -2,7 +2,7 @@
 
 This topic lists common errors and issues that you might encounter when using the X\-Ray API, console, or SDKs\. If you find an issue that is not listed here, you can use the **Feedback** button on this page to report it\.
 
-
+**Topics**
 + [X\-Ray SDK for Java](#troubleshooting-java)
 + [X\-Ray SDK for Node\.js](#troubleshooting-nodejs)
 + [The X\-Ray daemon](#troubleshooting-daemon)
@@ -12,11 +12,8 @@ This topic lists common errors and issues that you might encounter when using th
 **Error:** *Exception in thread "Thread\-1" com\.amazonaws\.xray\.exceptions\.SegmentNotFoundException: Failed to begin subsegment named 'AmazonSNS': segment cannot be found\. *
 
 This error indicates that the X\-Ray SDK attempted to record an outgoing call to AWS, but couldn't find an open segment\. This can occur in the following situations:
-
 + **A servlet filter is not configured** – The X\-Ray SDK creates segments for incoming requests with a filter named `AWSXRayServletFilter`\. [Configure a servlet filter](xray-sdk-java-filters.md) to instrument incoming requests\.
-
 + **You're using instrumented clients outside of servlet code** – If you use an instrumented client to make calls in startup code or other code that doesn't run in response to an incoming request, you must create a segment manually\. See [Instrumenting Startup Code](scorekeep-startup.md) for examples\.
-
 + **You're using instrumented clients in worker threads** – When you create a new thread, the X\-Ray recorder loses its reference to the open segment\. You can use the [http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#getTraceEntity--](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#getTraceEntity--) and [http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#setTraceEntity--](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#setTraceEntity--) methods to get a reference to the current segment or subsegment \([http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Entity.html](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Entity.html)\), and pass it back to the recorder inside of the thread\. See [Using Instrumented Clients in Worker Threads](scorekeep-workerthreads.md) for an example\.
 
 ## X\-Ray SDK for Node\.js<a name="troubleshooting-nodejs"></a>

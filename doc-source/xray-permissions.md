@@ -8,7 +8,7 @@ For [local development and testing](#xray-permissions-local), create an IAM user
 
 To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM role with write permissions and assign it to the resources running your application\.
 
-
+**Topics**
 + [IAM Managed Policies for X\-Ray](#xray-permissions-managedpolicies)
 + [Running Your Application Locally](#xray-permissions-local)
 + [Running Your Application in AWS](#xray-permissions-aws)
@@ -16,7 +16,6 @@ To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM r
 ## IAM Managed Policies for X\-Ray<a name="xray-permissions-managedpolicies"></a>
 
 To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides [managed policies](#xray-permissions-managedpolicies) for read only, write only, and read/write use cases\.
-
 + `AWSXrayReadOnlyAccess` – Read permissions for using the X\-Ray console, AWS CLI, or AWS SDK to get trace data and service maps from the X\-Ray API\.
 
   ```
@@ -38,7 +37,6 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-
 + `AWSXrayWriteOnlyAccess` – Write permissions for using the X\-Ray daemon, AWS CLI, or AWS SDK to upload segment documents and telemetry to the X\-Ray API\.
 
   ```
@@ -58,7 +56,6 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-
 + `AWSXrayFullAccess` – Read/write permissions\.
 
   ```
@@ -77,7 +74,6 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-
 + `AmazonS3ReadOnlyAccess` – Permission for the user or resource to download the X\-Ray daemon from Amazon S3\.
 
 **To add a managed policy to an IAM user, group, or role**
@@ -107,13 +103,9 @@ If you already configured credentials for use with the AWS SDK or AWS CLI, the d
 ## Running Your Application in AWS<a name="xray-permissions-aws"></a>
 
 When you run your application on AWS, use a role to grant permission to the Amazon EC2 instance or Lambda function that runs the daemon\.
-
 + **Amazon Elastic Compute Cloud** – Create an IAM role and attach it to the EC2 instance as an [instance profile](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)\.
-
 + **Amazon Elastic Container Service** – Create an IAM role and attach it to container instances as a [container instance IAM role](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html)\.
-
 + **AWS Elastic Beanstalk** – Elastic Beanstalk includes X\-Ray permissions in its [default instance profile](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html#concepts-roles-instance)\. You can use the default instance profile, or add write permissions to a custom instance profile\.
-
 + **AWS Lambda** – Add write permissions to your function's execution role\.
 
 **To create a role for use with X\-Ray**
@@ -129,9 +121,7 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 1. For **Role Type**, choose **Amazon EC2**\.
 
 1. Attach managed policies to give your application access to AWS services\.
-
    + **AWSXrayWriteOnlyAccess** – Gives the X\-Ray daemon permission to upload trace data\.
-
    + **AmazonS3ReadOnlyAccess** \(Amazon EC2 only\) – Gives the instance permission to download the X\-Ray daemon from Amazon S3\.
 
    If your application uses the AWS SDK to access other services, add policies that grant access to those services\.

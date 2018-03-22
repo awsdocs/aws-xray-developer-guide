@@ -3,13 +3,9 @@
 You can use routes and queries to deep link into specific traces, or filtered views of traces and the service map\.
 
 **Console Pages**
-
 + Welcome Page – [xray/home\#/welcome](https://console.aws.amazon.com/xray/home#/welcome)
-
 + Getting Started – [xray/home\#/getting\-started](https://console.aws.amazon.com/xray/home#/getting-started)
-
 + Service Map – [xray/home\#/service\-map](https://console.aws.amazon.com/xray/home#/service-map)
-
 + Traces – [xray/home\#/traces](https://console.aws.amazon.com/xray/home#/traces)
 
 ## Traces<a name="xray-console-deeplinks-traces"></a>
@@ -101,9 +97,6 @@ https://console.aws.amazon.com/xray/home#/traces?timeRange=PT15M&filter=duration
 ```
 
 **Output**
-
 + Page – Traces
-
 + Time Range – Last 15 minutes
-
 + Filter – duration >= 5 AND duration <= 8

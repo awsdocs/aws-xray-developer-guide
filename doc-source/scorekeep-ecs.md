@@ -3,11 +3,8 @@
 In the [https://github.com/awslabs/eb-java-scorekeep/tree/xray-ecs](https://github.com/awslabs/eb-java-scorekeep/tree/xray-ecs) branch, the Scorekeep sample application shows how to instrument an application running in Amazon Elastic Container Service \(Amazon ECS\)\. The branch provides scripts and configuration files for creating, uploading, and running Docker images in a Multicontainer Docker environment in AWS Elastic Beanstalk\.
 
 The project includes three Dockerfiles that define container images for the API, front end, and X\-Ray daemon components\.
-
 + `/Dockerfile` – The Scorekeep API\.
-
 + `/scorekeep-frontend/Dockerfile` – The Angular web app client, and the nginx proxy that routes incoming traffic\.
-
 + `/xray-daemon/Dockerfile` – The X\-Ray daemon\.
 
 The X\-Ray daemon Dockerfile creates an image based on Amazon Linux that runs the X\-Ray daemon\.

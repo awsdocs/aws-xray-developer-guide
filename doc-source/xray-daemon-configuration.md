@@ -18,7 +18,7 @@ The rest of the command line options let you configure logging, listen on a diff
 
 You can pass a configuration file to the daemon to access advanced configuration options and do things like limit the number of concurrent calls to X\-Ray, disable log rotation, and send traffic to a proxy\.
 
-
+**Topics**
 + [Using Command Line Options](#xray-daemon-configuration-commandline)
 + [Using a Configuration File](#xray-daemon-configuration-configfile)
 
@@ -27,7 +27,6 @@ You can pass a configuration file to the daemon to access advanced configuration
 Pass these options to the daemon when you run it locally or with a user data script\.
 
 **Command Line Options**
-
 + `-b`, `--bind` – Bind the daemon to a different port\.
 
   ```
@@ -35,19 +34,16 @@ Pass these options to the daemon when you run it locally or with a user data scr
   ```
 
   Default – `2000`\.
-
 + `-c`, `--config` – Load a configuration file from the specified path\.
 
   ```
   --config "/home/ec2-user/xray-daemon.yaml"
   ```
-
 + `-f`, `--log-file` – Output logs to the specified file path\.
 
   ```
   --log-file "/var/log/xray-daemon.log"
   ```
-
 + `-l`, `--log-level` – Log level, from most verbose to least: dev, debug, info, warn, error, prod\.
 
   ```
@@ -55,7 +51,6 @@ Pass these options to the daemon when you run it locally or with a user data scr
   ```
 
   Default – `prod`
-
 + `-m`, `--buffer-memory` – Change the amount of memory in MB that buffers can use \(minimum 3\)\.
 
   ```
@@ -63,21 +58,15 @@ Pass these options to the daemon when you run it locally or with a user data scr
   ```
 
   Default – 1% of available memory\.
-
 + `-o`, `--local-mode` – Don't check for EC2 instance metadata\.
-
 + `-r`, `--role-arn` – Assume the specified IAM role to upload segments to a different account\.
 
   ```
   --role-arn "arn:aws:iam::123456789012:role/xray-cross-account"
   ```
-
 + `-a`, `--resource-arn` – Amazon Resource Name \(ARN\) of the AWS resource running the daemon\.
-
 + `-n`, `--region` – Send segments to X\-Ray service in a specific region\.
-
 + `-v`, `--version` – Show AWS X\-Ray daemon version\.
-
 + `-h`, `--help` – Show the help screen\.
 
 ## Using a Configuration File<a name="xray-daemon-configuration-configfile"></a>
@@ -89,37 +78,21 @@ You can also use a YAML format file to configure the daemon\. Pass the configura
 ```
 
 **Configuration file options**
-
 + `TotalBufferSizeMB` – Maximum buffer size in MB \(minimum 3\)\. Choose 0 to use 1% of host memory\.
-
 + `Concurrency` – Maximum number of concurrent calls to AWS X\-Ray to upload segment documents\.
-
 + `Region` – Send segments to AWS X\-Ray service in a specific region\.
-
 + `Socket` – Configure the daemon's binding\.
-
   + `UDPAddress` – Change the port on which the daemon listens\.
-
 + `Logging` – Configure logging behavior\.
-
   + `LogRotation` – Set to `false` to disable log rotation\.
-
   + `LogLevel` – Change the log level, from most verbose to least: `dev`, `debug`, `info`, `warn`, `error`, `prod` \(default\)\.
-
   + `LogPath` – Output logs to the specified file path\.
-
 + `LocalMode` – Set to `true` to skip checking for EC2 instance metadata\.
-
 + `ResourceARN` – Amazon Resource Name \(ARN\) of the AWS resource running the daemon\.
-
 + `RoleARN` – Assume the specified IAM role to upload segments to a different account\.
-
 + `ProxyAddress` – Upload segments to AWS X\-Ray through a proxy\.
-
 + `Endpoint` – Change the X\-Ray service endpoint to which the daemon sends segment documents\.
-
 + `NoVerifySSL` – Disable TLS certificate verification\.
-
 + `Version` – Daemon configuration file format version\.
 
 **Example xray\-daemon\.yaml**  

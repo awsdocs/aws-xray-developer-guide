@@ -1,9 +1,7 @@
 # Tracing SQL Queries with the X\-Ray SDK for Java<a name="xray-sdk-java-sqlclients"></a>
 
 Instrument SQL database queries by adding the X\-Ray SDK for Java JDBC interceptor to your data source configuration\.
-
 +  **PostgreSQL** – `com.amazonaws.xray.sql.postgres.TracingInterceptor` 
-
 +  **MySQL** – `com.amazonaws.xray.sql.mysql.TracingInterceptor` 
 
 These interceptors are in the [`aws-xray-recorder-sql-postgres` and `aws-xray-recorder-sql-mysql` submodules](xray-sdk-java.md), respectively\. They implement `org.apache.tomcat.jdbc.pool.JdbcInterceptor` and are compatible with Tomcat connection pools\.

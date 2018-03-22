@@ -53,7 +53,7 @@ A subsegment has a `type` of `subsegment` and a `parent_id` that identifies the 
 
 For more information on the fields and values that you can include in segments and subsegments, see [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)\.
 
-
+**Topics**
 + [Generating Trace IDs](#xray-api-traceids)
 + [Using PutTraceSegments](#xray-api-segments)
 + [Sending Segment Documents to the X\-Ray Daemon](#xray-api-daemon)
@@ -65,13 +65,10 @@ To send data to X\-Ray, you need to generate a unique trace ID for each request\
 **Trace ID Format**
 
 A `trace_id` consists of three numbers separated by hyphens\. For example, `1-58406520-a006649127e371903a2de979`\. This includes:
-
 + The version number, that is, `1`\.
-
 + The time of the original request, in Unix epoch time, in **8 hexadecimal digits**\.
 
-  For example, 10:00AM December 2nd, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
-
+  For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
 + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 
 You can write a script to generate trace IDs for testing\. Here are two examples\.
@@ -98,9 +95,7 @@ TRACE_ID="1-$HEX_TIME-$GUID"
 ```
 
 See the Scorekeep sample application for scripts that create trace IDs and send segments to the X\-Ray daemon\.
-
 + Python – [https://github.com/awslabs/eb-java-scorekeep/blob/xray/bin/xray_start.py](https://github.com/awslabs/eb-java-scorekeep/blob/xray/bin/xray_start.py)
-
 + Bash – [https://github.com/awslabs/eb-java-scorekeep/blob/xray/bin/xray_start.sh](https://github.com/awslabs/eb-java-scorekeep/blob/xray/bin/xray_start.sh)
 
 ## Using PutTraceSegments<a name="xray-api-segments"></a>

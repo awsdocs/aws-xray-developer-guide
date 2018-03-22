@@ -15,7 +15,7 @@ To get the freshest results first, the console starts scanning at the end of the
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-tracescan-parallel.png)
 
-
+**Topics**
 + [Filter Expression Syntax](#console-filters-syntax)
 + [Boolean Keywords](#console-filters-boolean)
 + [Number Keywords](#console-filters-number)
@@ -56,25 +56,17 @@ To find traces with downstream issues, you can use the [complex keywords](#conso
 Boolean keywords are either true or false\. Use these keywords to find traces that resulted in errors\.
 
 **Boolean Keywords**
-
 + `ok` – Response status code was 2XX Success\.
-
 + `error` – Response status code was 4XX Client Error\.
-
 + `throttle` – Response status code was *429 Too Many Requests*\.
-
 + `fault` – Response status code was 5XX Server Error\.
-
 + `partial` – Request has incomplete segments\.
 
 Boolean operators find segments where the specified key is `true` or `false`\.
 
 **Boolean Operators**
-
 + none – The expression is true if the keyword is true\.
-
 + `!` – The expression is true if the keyword is false\.
-
 + `=`,`!=` – Compare the value of the keyword to the string `true` or `false`\. Acts the same as the other operators but is more explicit\.
 
 **Example Response status is 2XX OK**  
@@ -100,19 +92,14 @@ ok = false
 Number keywords let you search for requests with a specific response time, duration, or response status\.
 
 **Number Keywords**
-
 + `responsetime` – Time that the server took to send a response\.
-
 + `duration` – Total request duration, including all downstream calls\.
-
 + `http.status` – Response status code\.
 
 Number keywords use standard equality and comparison operators\.
 
 **Number Operators**
-
 + `=`,`!=` – The keyword is equal to or not equal to a number value\.
-
 + `<`,`<=`, `>`,`>=` – The keyword is less than or greater than a number value\.
 
 **Example Response status is not 200 OK**  
@@ -138,25 +125,17 @@ ok !partial duration <3
 String keywords let you find traces with specific text in the request headers, or user IDs\.
 
 **String Keywords**
-
 + `http.url` – Request URL\.
-
 + `http.method` – Request method\.
-
 + `http.useragent` – Request user agent string\.
-
 + `http.clientip` – Requestor's IP address\.
-
 + `user` – Value of user field on any segment in the trace\.
 
 String operators find values that are equal to or contain specific text\. Values must always be specified in quotation marks\. 
 
 **String Operators**
-
 + `=`,`!=` – The keyword is equal to or not equal to a number value\.
-
 + `CONTAINS` – The keyword contains a specific string\.
-
 + `BEGINSWITH` ,`ENDSWITH` – The keyword starts or ends with a specific string\.
 
 **Example User filter**  
@@ -179,11 +158,8 @@ user CONTAINS ""
 Complex keywords let you find requests based on service name, edge name, or annotation value\. For services and edges, you can specify an additional filter expression that applies to the service or edge\. For annotations, you can filter on the value of an annotation with a specific key using boolean, number or string operators\.
 
 **Complex Keywords**
-
 + `service(name) {filter}` – Service with name *name*\. Optional curly braces can contain a filter expression that applies to segments created by the service\.
-
 + `edge(name) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
-
 + `annotation.key` – Value of annotation with field *key*\. The value of an annotation can be a boolean, number, or string, so you can use any of those type's comparison operators\. You cannot use this keyword in combination with the `service` or `edge` keywords\.
 
 Use the service keyword to find traces for requests that hit a certain node on your service map\.

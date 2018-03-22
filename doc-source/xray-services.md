@@ -5,7 +5,7 @@ Other AWS services provide integration with AWS X\-Ray by adding a tracing heade
 **Note**  
 The X\-Ray SDKs include plugins for additional integration with AWS services\. For example, you can use the X\-Ray SDK for Java's Elastic Beanstalk plugin to add information about the Elastic Beanstalk environment that runs your application including the environment name and ID\.
 
-
+**Topics**
 + [Elastic Load Balancing and AWS X\-Ray](xray-services-elb.md)
 + [AWS Lambda and AWS X\-Ray](xray-services-lambda.md)
 + [Amazon API Gateway and AWS X\-Ray](xray-services-apigateway.md)

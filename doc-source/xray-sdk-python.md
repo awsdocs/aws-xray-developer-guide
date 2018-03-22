@@ -23,19 +23,12 @@ See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for a example Python f
 Next, use the X\-Ray SDK for Python to instrument downstream calls by [patching your application's libraries](xray-sdk-python-patching.md)\. The SDK supports the following libraries\.
 
 **Supported Libraries**
-
 + `[botocore](https://pypi.python.org/pypi/botocore)`, `[boto3](https://pypi.python.org/pypi/boto3)` – Instrument AWS SDK for Python \(Boto\) clients\.
-
 + `[pynamodb](https://pypi.python.org/pypi/pynamodb/)` – Instrument PynamoDB's version of the Amazon DynamoDB client\.
-
 + `[aiobotocore](https://pypi.python.org/pypi/aiobotocore)`, `[aioboto3](https://pypi.python.org/pypi/aioboto3)` – Instrument [asyncio](https://docs.python.org/3/library/asyncio.html)\-integrated versions of SDK for Python clients\.
-
 + `[requests](https://pypi.python.org/pypi/requests)`, `[aiohttp](https://pypi.python.org/pypi/aiohttp)` – Instrument high\-level HTTP clients\.
-
 + `[httplib](https://docs.python.org/2/library/httplib.html)`, [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html) – Instrument low\-level HTTP clients and the higher level libraries that use them\.
-
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
-
 + `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)` – Instrument MySQL clients\.
 
 Whenever your application makes calls to AWS, an SQL database, or other HTTP services, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
@@ -54,21 +47,15 @@ For reference documentation for the SDK's classes and methods, see the [AWS X\-R
 ## Requirements<a name="xray-sdk-python-requirements"></a>
 
 The X\-Ray SDK for Python supports the following language and library versions\.
-
 + **Python** – 2\.7, 3\.4 and newer
-
 + **Django** – 1\.10 and newer
-
 + **Flask** – 0\.10 and newer
-
 + **AWS SDK for Python \(Boto\)** – 1\.4\.0 and newer
-
 + **botocore** – 1\.5\.0 and newer
 
 ## Dependency Management<a name="xray-sdk-python-dependencies"></a>
 
 The X\-Ray SDK for Python is available from `pip`\.
-
 + **Package** – `aws-xray-sdk`
 
 Add the SDK as a dependency in your `requirements.txt` file\.

@@ -30,25 +30,19 @@ For reference documentation about the SDK's classes and methods, see the [AWS X\
 ## Requirements<a name="xray-sdk-nodejs-requirements"></a>
 
 The X\-Ray SDK for Node\.js requires Node\.js and the following libraries:
-
 + `cls` – 0\.1\.5
-
 + `continuation-local-storage` – 3\.2\.0
-
 + `pkginfo` – 0\.4\.0
-
 + `underscore` – 1\.8\.3
 
 The SDK pulls these libraries in when you install it with NPM\.
 
 To trace AWS SDK clients, the X\-Ray SDK for Node\.js requires a minimum version of the AWS SDK for JavaScript in Node\.js\.
-
 + `aws-sdk` – 2\.7\.15
 
 ## Dependency Management<a name="xray-sdk-nodejs-dependencies"></a>
 
 The X\-Ray SDK for Node\.js is available from NPM\.
-
 + **Package** – [https://www.npmjs.com/package/aws-xray-sdk](https://www.npmjs.com/package/aws-xray-sdk)
 
 For local development, install the SDK in your project directory with npm\.

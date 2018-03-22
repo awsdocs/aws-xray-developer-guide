@@ -19,15 +19,10 @@ If your Lambda function is invoked by a service that is not instrumented, or doe
 On runtimes with a corresponding X\-Ray SDK, Lambda also runs the X\-Ray daemon\.
 
 **X\-Ray SDKs on Lambda**
-
 + **X\-Ray SDK for Go** – Go 1\.7 and newer runtimes
-
 + **X\-Ray SDK for Java** – Java 8 runtime
-
 + **X\-Ray SDK for Node\.js** – Node\.js 4\.3 and newer runtimes
-
 + **X\-Ray SDK for Python** – Python 2\.7, Python 3\.6, and newer runtimes
-
 + **X\-Ray SDK for \.NET** – \.NET Core 2\.0 and newer runtimes
 
 To use the X\-Ray SDK on Lambda, bundle it with your function code each time you create a new version\. You can instrument your Lambda functions with the same methods that you use to instrument applications running on other services\. The primary difference is that you do not use the SDK to instrument incoming requests, make sampling decisions, and create segments\.

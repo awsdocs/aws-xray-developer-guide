@@ -2,7 +2,7 @@
 
 The X\-Ray SDK for Java provides a class named `AWSXRay` that provides the global recorder, a `TracingHandler` that you can use to instrument your code\. You can configure the global recorder to customize the `AWSXRayServletFilter` that creates segments for incoming HTTP calls\.
 
-
+**Topics**
 + [Service Plugins](#xray-sdk-java-configuration-plugins)
 + [Sampling Rules](#xray-sdk-java-configuration-sampling)
 + [Logging](#xray-sdk-java-configuration-logging)
@@ -14,11 +14,8 @@ The X\-Ray SDK for Java provides a class named `AWSXRay` that provides the globa
 Use `plugins` to record information about the service hosting your application\.
 
 **Plugins**
-
 + Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
-
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
-
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 
 ![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources.png)
@@ -168,17 +165,12 @@ Use debug logs to identify issues, such as unclosed subsegments, when you [gener
 ## Environment Variables<a name="xray-sdk-java-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Java\. The SDK supports the following variables\.
-
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-java-filters.md#xray-sdk-java-filters-naming)\.
-
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
-
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
-
   + `RUNTIME_ERROR` – Throw a runtime exception \(default\)\.
-
   + `LOG_ERROR` – Log an error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
@@ -188,11 +180,8 @@ Environment variables override equivalent [system properties](#xray-sdk-java-con
 ## System Properties<a name="xray-sdk-java-configuration-sysprops"></a>
 
 You can use system properties as a JVM\-specific alternative to [environment variables](#xray-sdk-java-configuration-envvars)\. The SDK supports the following properties\.
-
 + `com.amazonaws.xray.strategy.tracingName` – Equivalent to `AWS_XRAY_TRACING_NAME`\.
-
 + `com.amazonaws.xray.emitters.daemonAddress` – Equivalent to `AWS_XRAY_DAEMON_ADDRESS`\.
-
 + `com.amazonaws.xray.strategy.contextMissingStrategy` – Equivalent to `AWS_XRAY_CONTEXT_MISSING`\.
 
 If both a system property and the equivalent environment variable are set, the environment variable values is used\. Either method overrides values set in code\.

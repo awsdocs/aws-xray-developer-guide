@@ -5,11 +5,8 @@ AWS X\-Ray is a service that collects data about requests that your application 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-timeline.png)
 
 The X\-Ray SDK provides: 
-
 + **Interceptors** to add to your code to trace incoming HTTP requests
-
 + **Client handlers** to instrument AWS SDK clients that your application uses to call other AWS services
-
 + An **HTTP client** to use to instrument calls to other internal and external HTTP web services
 
 The SDK also supports instrumenting calls to SQL databases, automatic AWS SDK client instrumentation, and other features\.

@@ -9,7 +9,7 @@ The second function, `scorekeep-worker`, is a Python function that runs independ
 
 Scorekeep includes AWS CloudFormation templates and scripts to create both functions\. Because you need to bundle the X\-Ray SDK with the function code, the templates create the functions without any code\. When you deploy Scorekeep, a configuration file included in the `.ebextensions` folder creates a source bundle that includes the SDK, and updates the function code and configuration with the AWS Command Line Interface\.
 
-
+**Topics**
 + [Random Name](#scorekeep-lambda-randomname)
 + [Worker](#scorekeep-lambda-worker)
 

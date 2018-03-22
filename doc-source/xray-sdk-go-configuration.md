@@ -2,7 +2,7 @@
 
 You can specify the configuration for for X\-Ray SDK for Go through environment variables, by calling `Configure` with a `Config` object, or by assuming default values\. Environment variables take precedence over `Config` values, which take precedence over any default value\.
 
-
+**Topics**
 + [Service Plugins](#xray-sdk-go-configuration-plugins)
 + [Sampling Rules](#xray-sdk-go-configuration-sampling)
 + [Logging](#xray-sdk-go-configuration-logging)
@@ -14,11 +14,8 @@ You can specify the configuration for for X\-Ray SDK for Go through environment 
 Use `plugins` to record information about the service hosting your application\.
 
 **Plugins**
-
 + Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
-
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
-
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 
 ![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources-go.png)
@@ -114,9 +111,7 @@ See [Using Configure](#xray-sdk-go-configuration-configure) for more information
 ## Environment Variables<a name="xray-sdk-go-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Go\. The SDK supports the following variables\.
-
 + `AWS_XRAY_TRACING_NAME` – Set the service name that the SDK uses for segments\.
-
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 Environment variables override equivalent values set in code\.

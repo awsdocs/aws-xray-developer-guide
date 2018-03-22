@@ -12,7 +12,7 @@ A subset of segment fields are indexed by X\-Ray for use with filter expressions
 
 When you instrument your application with the X\-Ray SDK, the SDK generates segment documents for you\. Instead of sending segment documents directly to X\-Ray, the SDK transmits them over a local UDP port to the [X\-Ray daemon](xray-daemon.md)\. For more information, see [Sending Segment Documents to the X\-Ray Daemon](xray-api-sendingdata.md#xray-api-daemon)\.
 
-
+**Topics**
 + [Segment Fields](#api-segmentdocuments-fields)
 + [Subsegments](#api-segmentdocuments-subsegments)
 + [HTTP Request Data](#api-segmentdocuments-http)
@@ -44,31 +44,22 @@ The following fields are required, or conditionally required, for segments\.
 Values must be strings \(up to 250 characters\) unless noted otherwise\.
 
 **Required Segment Fields**
-
 + `name` – The logical name of the service that handled the request, up to **200 characters**\. For example, your application's name or domain name\. Names can contain Unicode letters, numbers, and whitespace, and the following symbols: `_`, `.`, `:`, `/`, `%`, `&`, `#`, `=`, `+`, `\`, `-`, `@`
-
 + `id` – A 64\-bit identifier for the segment, unique among segments in the same trace, in **16 hexadecimal digits**\.
-
 + `trace_id` – A unique identifier that connects all segments and subsegments originating from a single client request\.
 
 **Trace ID Format**
 
   A `trace_id` consists of three numbers separated by hyphens\. For example, `1-58406520-a006649127e371903a2de979`\. This includes:
-
   + The version number, that is, `1`\.
-
   + The time of the original request, in Unix epoch time, in **8 hexadecimal digits**\.
 
-    For example, 10:00AM December 2nd, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
-
+    For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
   + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 **Trace ID Security**  
 Trace IDs are visible in [response headers](xray-concepts.md#xray-concepts-tracingheader)\. Generate trace IDs with a secure random algorithm to ensure that attackers cannot calculate future trace IDs and send requests with those IDs to your application\.
-
 + `start_time` – **number** that is the time the segment was created, in floating point seconds in epoch time\. For example, `1480615200.010` or `1.480615200010E9`\. Use as many decimal places as you need\. Microsecond resolution is recommended when available\.
-
 + `end_time` – **number** that is the time the segment was closed\. For example, `1480615200.090` or `1.480615200090E9`\. Specify either an `end_time` or `in_progress`\.
-
 + `in_progress` – **boolean**, set to `true` instead of specifying an `end_time` to record that a segment is started, but is not complete\. Send an in\-progress segment when your application receives a request that will take a long time to serve, to trace the request receipt\. When the response is sent, send the complete segment to overwrite the in\-progress segment\. Only send one complete segment, and one or zero in\-progress segments, per request\.
 
 **Service Names**  
@@ -77,37 +68,23 @@ A segment's `name` should match the domain name or logical name of the service t
 The following fields are optional for segments\.
 
 **Optional Segment Fields**
-
 + `service` – An object with information about your application\.
-
   + `version` – A string that identifies the version of your application that served the request\.
-
 + `user` – A string that identifies the user who sent the request\.
-
 + `origin` – The type of AWS resource running your application\.
 
 **Supported Values**
-
   + `AWS::EC2::Instance` – An Amazon EC2 instance\.
-
   + `AWS::ECS::Container` – An Amazon ECS container\.
-
   + `AWS::ElasticBeanstalk::Environment` – An Elastic Beanstalk environment\.
 
   When multiple values are applicable to your application, use the one that is most specific\. For example, a Multicontainer Docker Elastic Beanstalk environment runs your application on an Amazon ECS container, which in turn runs on an Amazon EC2 instance\. In this case you would set the origin to `AWS::ElasticBeanstalk::Environment` as the environment is the parent of the other two resources\.
-
 + `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the [tracing header](xray-concepts.md#xray-concepts-tracingheader) for downstream HTTP calls\.
-
 + `http` – [`http`](#api-segmentdocuments-http) objects with information about the original HTTP request\.
-
 + `aws` – [`aws`](#api-segmentdocuments-aws) object with information about the AWS resource on which your application served the request\.
-
 + `error`, `throttle`, `fault`, and `cause` – [error](#api-segmentdocuments-errors) fields that indicate an error occurred and that include information about the exception that caused the error\.
-
 + `annotations` – [`annotations`](#api-segmentdocuments-annotations) object with key\-value pairs that you want X\-Ray to index for search\.
-
 + `metadata` – [`metadata`](#api-segmentdocuments-metadata) object with any additional data that you want to store in the segment\.
-
 + `subsegments` – **array** of [`subsegment`](#api-segmentdocuments-subsegments) objects\.
 
 ## Subsegments<a name="api-segmentdocuments-subsegments"></a>
@@ -214,53 +191,34 @@ The following fields are required, or are conditionally required, for subsegment
 Values are strings up to 250 characters unless noted otherwise\.
 
 **Required Subsegment Fields**
-
 + `id` – A 64\-bit identifier for the subsegment, unique among segments in the same trace, in **16 hexadecimal digits**\.
-
 + `name` – The logical name of the subsegment\. For downstream calls, name the subsegment after the resource or service called\. For custom subsegments, name the subsegment after the code that it instruments \(e\.g\., a function name\)\.
-
 + `start_time` – **number** that is the time the subsegment was created, in floating point seconds in epoch time, accurate to milliseconds\. For example, `1480615200.010` or `1.480615200010E9`\.
-
 + `end_time` – **number** that is the time the subsegment was closed\. For example, `1480615200.090` or `1.480615200090E9`\. Specify an `end_time` or `in_progress`\.
-
 + `in_progress` – **boolean** that is set to `true` instead of specifying an `end_time` to record that a subsegment is started, but is not complete\. Only send one complete subsegment, and one or zero in\-progress subsegments, per downstream request\.
-
 + `trace_id` – Trace ID of the subsegment's parent segment\. Required only if sending a subsegment separately\.
 
 **Trace ID Format**
 
   A `trace_id` consists of three numbers separated by hyphens\. For example, `1-58406520-a006649127e371903a2de979`\. This includes:
-
   + The version number, that is, `1`\.
-
   + The time of the original request, in Unix epoch time, in **8 hexadecimal digits**\.
 
-    For example, 10:00AM December 2nd, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
-
+    For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
   + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
-
 + `parent_id` – Segment ID of the subsegment's parent segment\. Required only if sending a subsegment separately\.
-
 + `type` – `subsegment`\. Required only if sending a subsegment separately\.
 
 The following fields are optional for subsegments\.
 
 **Optional Subsegment Fields**
-
 + `namespace` – `aws` for AWS SDK calls; `remote` for other downstream calls\.
-
 + `http` – [`http`](#api-segmentdocuments-http) object with information about an outgoing HTTP call\.
-
 + `aws` – [`aws`](#api-segmentdocuments-aws) object with information about the downstream AWS resource that your application called\.
-
 + `error`, `throttle`, `fault`, and `cause` – [error](#api-segmentdocuments-errors) fields that indicate an error occurred and that include information about the exception that caused the error\.
-
 + `annotations` – [`annotations`](#api-segmentdocuments-annotations) object with key\-value pairs that you want X\-Ray to index for search\.
-
 + `metadata` – [`metadata`](#api-segmentdocuments-metadata) object with any additional data that you want to store in the segment\.
-
 + `subsegments` – **array** of [`subsegment`](#api-segmentdocuments-subsegments) objects\.
-
 + `precursor_ids` – **array** of subsegment IDs that identifies subsegments with the same parent that completed prior to this subsegment\.
 
 ## HTTP Request Data<a name="api-segmentdocuments-http"></a>
@@ -270,25 +228,15 @@ Use an HTTP block to record details about an HTTP request that your application 
 **`http`**
 
 All fields are optional\.
-
 + `request` – Information about a request\.
-
   + `method` – The request method\. For example, `GET`\.
-
   + `url` – The full URL of the request, compiled from the protocol, hostname, and path of the request\.
-
   + `user_agent` – The user agent string from the requester's client\.
-
   + `client_ip` – The IP address of the requester\. Can be retrieved from the IP packet's `Source Address` or, for forwarded requests, from an `X-Forwarded-For` header\.
-
   + `x_forwarded_for` – \(segments only\) **boolean** indicating that the `client_ip` was read from an `X-Forwarded-For` header and is not reliable as it could have been forged\.
-
   + `traced` – \(subsegments only\) **boolean** indicating that the downstream call is to another traced service\. If this field is set to `true`, X\-Ray considers the trace to be broken until the downstream service uploads a segment with a `parent_id` that matches the `id` of the subsegment that contains this block\.
-
 + `response` – Information about a response\.
-
   + `status` – **number** indicating the HTTP status of the response\.
-
   + `content_length` – **number** indicating the length of the response body in bytes\.
 
 When you instrument a call to a downstream web api, record a subsegment with information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the remote API\.
@@ -467,17 +415,11 @@ For segments, the `aws` object contains information about the resource on which 
 **`aws` \(Segments\)**
 
 All fields are optional\.
-
 + `account_id` – If your application sends segments to a different AWS account, record the ID of the account running your application\.
-
 + `ecs` – Information about an Amazon ECS container\.
-
   + `container` – The container ID of the container running your application\.
-
 + `ec2` – Information about an EC2 instance\.
-
   + `instance_id` – The instance ID of the EC2 instance\.
-
   + `availability_zone` – The Availability Zone in which the instance is running\.  
 **Example AWS Block with Plugins**  
 
@@ -497,13 +439,9 @@ All fields are optional\.
     }
   }
   ```
-
 + `elastic_beanstalk` – Information about an Elastic Beanstalk environment\. You can find this information in a file named `/var/elasticbeanstalk/xray/environment.conf` on the latest Elastic Beanstalk platforms\.
-
   + `environment_name` – The name of the environment\.
-
   + `version_label` – The name of the application version that is currently deployed to the instance that served the request\.
-
   + `deployment_id` – **number** indicating the ID of the last successful deployment to the instance that served the request\.
 
 For subsegments, record information about the AWS services and resources that your application accesses\. X\-Ray uses this information to create inferred segments that represent the downstream services in your service map\.
@@ -511,17 +449,11 @@ For subsegments, record information about the AWS services and resources that yo
 **`aws` \(Subsegments\)**
 
 All fields are optional\.
-
 + `operation` – The name of the API action invoked against an AWS service or resource\.
-
 + `account_id` – If your application accesses resources in a different account, or sends segments to a different account, record the ID of the account that owns the AWS resource that your application accessed\.
-
 + `region` – If the resource is in a region different from your application, record the region\. For example, `us-west-2`\.
-
 + `request_id` – Unique identifier for the request\.
-
 + `queue_url` – For operations on an Amazon SQS queue, the queue's URL\.
-
 + `table_name` – For operations on a DynamoDB table, the name of the table\.
 
 **Example Subsegment for a Call to DynamoDB to Save an Item**  
@@ -554,11 +486,8 @@ When an error occurs, you can record details about the error and exceptions that
 **error types**
 
 Set one or more of the following fields to `true` to indicate that an error occurred\. Multiple types can apply if errors compound\. For example, a `429 Too Many Requests` error from a downstream call may cause your application to return `500 Internal Server Error`, in which case all three types would apply\.
-
 + `error` – **boolean** indicating that a client error occurred \(response status code was 4XX Client Error\)\.
-
 + `throttle` – **boolean** indicating that a request was throttled \(response status code was *429 Too Many Requests*\)\.
-
 + `fault` – **boolean** indicating that a server error occurred \(response status code was 5XX Server Error\)\.
 
 Indicate the cause of the error by including a **cause** object in the segment or subsegment\.
@@ -566,11 +495,8 @@ Indicate the cause of the error by including a **cause** object in the segment o
 **`cause`**
 
 A cause can be either a **16 character** exception ID or an object with the following fields:
-
 + `working_directory` – The full path of the working directory when the exception occurred\.
-
 + `paths` – The **array** of paths to libraries or modules in use when the exception occurred\.
-
 + `exceptions` – The **array** of **exception** objects\.
 
 Include detailed information about the error in one or more **exception** objects\.
@@ -578,21 +504,13 @@ Include detailed information about the error in one or more **exception** object
 **`exception`**
 
 All fields are optional except `id`\.
-
 + `id` – A 64\-bit identifier for the exception, unique among segments in the same trace, in **16 hexadecimal digits**\.
-
 + `message` – The exception message\.
-
 + `type` – The exception type\.
-
 + `remote` – **boolean** indicating that the exception was caused by an error returned by a downstream service\.
-
 + `truncated` – **integer** indicating the number of stack frames that are omitted from the `stack`\.
-
 + `skipped` – **integer** indicating the number of exceptions that were skipped between this exception and its child, that is, the exception that it caused\.
-
 + `cause` – Exception ID of the exception's parent, that is, the exception that caused this exception\.
-
 + `stack` – **array** of **stackFrame** objects\.
 
 If available, record information about the call stack in **stackFrame** objects\.
@@ -600,11 +518,8 @@ If available, record information about the call stack in **stackFrame** objects\
 **`stackFrame`**
 
 All fields are optional\.
-
 + `path` – The relative path to the file\.
-
 + `line` – The line in the file\.
-
 + `label` – The function or method name\.
 
 ## SQL Queries<a name="api-segmentdocuments-sql"></a>
@@ -614,21 +529,13 @@ You can create subsegments for queries that your application makes to an SQL dat
 **`sql`**
 
 All fields are optional\.
-
 + `connection_string` – For SQL Server or other database connections that don't use URL connection strings, record the connection string, excluding passwords\.
-
 + `url` – For a database connection that uses a URL connection string, record the URL, excluding passwords\.
-
 + `sanitized_query` – The database query, with any user provided values removed or replaced by a placeholder\.
-
 + `database_type` – The name of the database engine\.
-
 + `database_version` – The version number of the database engine\.
-
 + `driver_version` – The name and version number of the database engine driver that your application uses\.
-
 + `user` – The database username\.
-
 + `preparation` – `call` if the query used a `PreparedCall`; `statement` if the query used a `PreparedStatement`\.
 
 **Example Subsegment with an SQL Query**  

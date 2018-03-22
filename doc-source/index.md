@@ -78,6 +78,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tracing Incoming Requests with the X-Ray SDK for Python Middleware](xray-sdk-python-middleware.md)
    + [Patching Libraries to Instrument Downstream Calls](xray-sdk-python-patching.md)
    + [Tracing AWS SDK Calls with the X-Ray SDK for Python](xray-sdk-python-awssdkclients.md)
+   + [Tracing Calls to Downstream HTTP Web Services Using the X-Ray SDK for Python](xray-sdk-python-httpclients.md)
    + [Generating Custom Subsegments with the X-Ray SDK for Python](xray-sdk-python-subsegments.md)
    + [Add Annotations and Metadata to Segments with the X-Ray SDK for Python](xray-sdk-python-segment.md)
 + [AWS X-Ray SDK for Ruby](xray-sdk-ruby.md)

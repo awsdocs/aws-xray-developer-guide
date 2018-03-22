@@ -15,20 +15,14 @@ If a load balancer or other intermediary forwards a request to your application,
 When a request is forwarded, the SDK sets an additional field in the segment to indicate this\. If the segment contains the field `x_forwarded_for` set to `true`, the client IP was taken from the `X-Forwarded-For` header in the HTTP request\.
 
 The message handler creates a segment for each incoming request with an `http` block that contains the following information:
-
 + **HTTP method** – GET, POST, PUT, DELETE, etc\.
-
 + **Client address** – The IP address of the client that sent the request\.
-
 + **Response code** – The HTTP response code for the completed request\.
-
 + **Timing** – The start time \(when the request was received\) and end time \(when the response was sent\)\.
-
 + **User agent** — The `user-agent` from the request\.
-
 + **Content length** — The `content-length` from the response\.
 
-
+**Topics**
 + [Adding a Tracing Filter to your Application \(Tomcat\)](#xray-sdk-java-filters-tomcat)
 + [Adding a Tracing Filter to your Application \(Spring\)](#xray-sdk-java-filters-spring)
 + [Configuring a Segment Naming Strategy](#xray-sdk-java-filters-naming)

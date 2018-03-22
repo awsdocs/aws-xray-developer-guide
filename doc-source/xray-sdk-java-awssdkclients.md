@@ -51,9 +51,6 @@ For example, when you make a call with an instrumented DynamoDB client, the SDK 
 ```
 
 When you access named resources, calls to the following services create additional nodes in the service map\. Calls that don't target specific resources create a generic node for the service\.
-
 + **Amazon DynamoDB** – Table name
-
 + **Amazon Simple Storage Service** – Bucket and key name
-
 + **Amazon Simple Queue Service** – Queue name

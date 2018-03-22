@@ -8,7 +8,7 @@ You can record additional information about requests, the environment, or your a
 
 In addition to annotations and metadata, you can also [record user ID strings](#xray-sdk-ruby-segment-userid) on segments\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
 
-
+**Topics**
 + [Recording Annotations with the X\-Ray SDK for Ruby](#xray-sdk-ruby-segment-annotations)
 + [Recording Metadata with the X\-Ray SDK for Ruby](#xray-sdk-ruby-segment-metadata)
 + [Recording User IDs with the X\-Ray SDK for Ruby](#xray-sdk-ruby-segment-userid)
@@ -18,11 +18,8 @@ In addition to annotations and metadata, you can also [record user ID strings](#
 Use annotations to record information on segments or subsegments that you want indexed for search\.
 
 **Annotation Requirements**
-
 + **Keys** – Up to 500 alphanumeric characters\. No spaces or symbols except underscores\.
-
 + **Values** – Up to 1,000 Unicode characters\.
-
 + **Entries** – Up to 50 annotations per trace\.
 
 **To record annotations**

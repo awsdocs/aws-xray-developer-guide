@@ -28,7 +28,5 @@ For reference documentation for the SDK's classes and methods, see the [AWS X\-R
 ## Requirements<a name="xray-sdk-ruby-requirements"></a>
 
 The X\-Ray SDK requires Ruby 2\.3 or later and is compatible with the following libraries:
-
 + AWS SDK for Ruby version 3\.0 or later
-
 + Rails version 5\.1 or later

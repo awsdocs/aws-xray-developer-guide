@@ -42,15 +42,11 @@ option_settings:
 Elastic Beanstalk passes a configuration file to the daemon and outputs logs to a standard location\.
 
 **On Windows Server Platforms**
-
 + **Configuration file** – `C:\Progam Files\Amazon\XRay\cfg.yaml`
-
 + **Logs** – `c:\Program Files\Amazon\XRay\logs\xray-service.log`
 
 **On Linux Platforms**
-
 + **Configuration file** – `/etc/amazon/xray/cfg.yaml`
-
 + **Logs** – `/var/log/xray/xray.log`
 
 Elastic Beanstalk provides tools for pulling instance logs from the AWS Management Console or command line\. You can tell Elastic Beanstalk to include the X\-Ray daemon logs by adding a task with a configuration file\.

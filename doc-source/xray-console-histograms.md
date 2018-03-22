@@ -7,9 +7,7 @@ When you select a node or edge on an AWS X\-Ray [service map](xray-console.md#xr
 This histogram shows a service that completes most requests in less than 300 ms\. A small percentage of requests take up to 2 seconds, and a few outliers take more time\.
 
 Service histograms and edge histograms provide a visual representation of latency from the viewpoint of a service or requester\.
-
 + Choose a *service node* by clicking the circle\. X\-Ray shows a histogram for requests served by the service\. The latencies are those recorded by the service, and do not include any network latency between the service and the requester\.
-
 + Choose an *edge* by clicking the line or arrow tip of the edge between two services\. X\-Ray shows a histogram for requests from the requester that were served by the downstream service\. The latencies are those recorded by the requester, and include latency in the network connection between the two services\.
 
 To interpret the **Service details** panel histogram, you can look for values that differ the most from the majority of values in the histogram\. These *outliers* can be seen as peaks or spikes in the histogram, and you can view the traces for a specific area to investigate what's going on\.

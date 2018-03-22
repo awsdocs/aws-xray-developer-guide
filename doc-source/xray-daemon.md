@@ -14,17 +14,11 @@ To run the X\-Ray daemon locally, on\-premises, or on other AWS services, [downl
 You can download the daemon from Amazon S3 to run it locally, or to install it on an Amazon EC2 instance on launch\.
 
 **X\-Ray daemon installers and executables**
-
 + **Linux \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-2.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-2.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-2.x.zip.sig)\)
-
 + **Linux \(RPM installer\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-2.x.rpm](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-2.x.rpm)
-
 + **Linux \(DEB installer\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-2.x.deb](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-2.x.deb)
-
 + **OS X \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-2.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-2.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-2.x.zip.sig)\) 
-
 + **Windows \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-2.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-2.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-2.x.zip.sig)\)
-
 + **Windows \(service\) ** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip.sig)\)
 
 These links always point to the latest v2 release of the daemon\. To download a specific release, replace `2.x` with the version number\. For example, `2.1.0`\.
@@ -94,15 +88,10 @@ Run the daemon locally from the command line\. Use the `-o` option to run in loc
 ```
 
 For detailed platform\-specific instructions, see the following topics:
-
 + **Linux \(local\)** – [Running the X\-Ray Daemon on Linux](xray-daemon-local.md#xray-daemon-local-linux)
-
 + **Windows \(local\)** – [Running the X\-Ray Daemon on Windows](xray-daemon-local.md#xray-daemon-local-windows)
-
 + **Elastic Beanstalk** – [Running the X\-Ray Daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md)
-
 + **Amazon EC2** – [Running the X\-Ray Daemon on Amazon EC2](xray-daemon-ec2.md)
-
 + **Amazon ECS** – [Running the X\-Ray Daemon on Amazon ECS](xray-daemon-ecs.md)
 
 You can customize the daemon's behavior further by using command line options or a configuration file\. See [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md) for details\.
@@ -124,11 +113,8 @@ aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 If you specify credentials in more than one location \(credentials file, instance profile, or environment variables\), the SDK provider chain determines which credentials are used\. For more information about providing credentials to the SDK, see [Specifying Credentials](http://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials) in the *AWS SDK for Go Developer Guide*\.
 
 The IAM role or user that the daemon's credentials belong to must have permission to write data to the service on your behalf\.
-
 + To use the daemon on Amazon EC2, create a new instance profile role or add the managed policy to an existing one\.
-
 + To use the daemon on Elastic Beanstalk, add the managed policy to the Elastic Beanstalk default instance profile role\.
-
 + To run the daemon locally, create an IAM user and save its access keys on your computer\.
 
 For more information, see [AWS X\-Ray Permissions](xray-permissions.md)\.

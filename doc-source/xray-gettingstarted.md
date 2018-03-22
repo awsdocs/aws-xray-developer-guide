@@ -11,14 +11,12 @@ You use the X\-Ray console to view the connections among client, server, and Dyn
 ![\[Viewing the connections among client, server, and DynamoDB in a service map\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-after.png)
 
 With the X\-Ray SDK for Java, you can trace all of your application's primary and downstream AWS resources by making two configuration changes:
-
 + Add the X\-Ray SDK for Java's tracing filter to your servlet configuration in a `WebConfig` class or `web.xml` file\.
-
 + Take the X\-Ray SDK for Java's submodules as build dependencies in your Maven or Gradle build configuration\.
 
 You can also access the raw service map and trace data by using the AWS CLI to call the X\-Ray API\. The service map and trace data are JSON that you can query to ensure that your application is sending data, or to check specific fields as part of your test automation\.
 
-
+**Topics**
 + [Prerequisites](#xray-gettingstarted-prereqs)
 + [Deploy to Elastic Beanstalk and Generate Trace Data](#xray-gettingstarted-deploy)
 + [View the Service Map in the X\-Ray Console](#xray-gettingstarted-console)
@@ -328,11 +326,8 @@ Trace data is automatically deleted from X\-Ray after 30 days\.
 Learn more about X\-Ray in the next chapter, [AWS X\-Ray Concepts](xray-concepts.md)\.
 
 To instrument your own app, learn more about the X\-Ray SDK for Java or one of the other X\-Ray SDKs:
-
 + **X\-Ray SDK for Java** – [AWS X\-Ray SDK for Java](xray-sdk-java.md)
-
 + **X\-Ray SDK for Node\.js** – [The X\-Ray SDK for Node\.js](xray-sdk-nodejs.md)
-
 + **X\-Ray SDK for \.NET** – [AWS X\-Ray SDK for \.NET](xray-sdk-dotnet.md)
 
 To run the X\-Ray daemon locally or on AWS, see [AWS X\-Ray Daemon](xray-daemon.md)\.

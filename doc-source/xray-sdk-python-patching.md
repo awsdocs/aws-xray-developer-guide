@@ -3,19 +3,12 @@
 To instrument downstream calls, use the X\-Ray SDK for Python to patch the libraries that your application uses\. The X\-Ray SDK for Python can patch the following libraries\.
 
 **Supported Libraries**
-
 + `[botocore](https://pypi.python.org/pypi/botocore)`, `[boto3](https://pypi.python.org/pypi/boto3)` – Instrument AWS SDK for Python \(Boto\) clients\.
-
 + `[pynamodb](https://pypi.python.org/pypi/pynamodb/)` – Instrument PynamoDB's version of the Amazon DynamoDB client\.
-
 + `[aiobotocore](https://pypi.python.org/pypi/aiobotocore)`, `[aioboto3](https://pypi.python.org/pypi/aioboto3)` – Instrument [asyncio](https://docs.python.org/3/library/asyncio.html)\-integrated versions of SDK for Python clients\.
-
 + `[requests](https://pypi.python.org/pypi/requests)`, `[aiohttp](https://pypi.python.org/pypi/aiohttp)` – Instrument high\-level HTTP clients\.
-
 + `[httplib](https://docs.python.org/2/library/httplib.html)`, [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html) – Instrument low\-level HTTP clients and the higher level libraries that use them\.
-
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
-
 + `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)` – Instrument MySQL clients\.
 
 When you use a patched library, the X\-Ray SDK for Python creates a subsegment for the call and records information from the request and response\. A segment must be available for the SDK to create the subsegment, either from the SDK middleware or from AWS Lambda\.
@@ -61,7 +54,9 @@ In some cases, the key that you use to patch a library does not match the librar
 `httplib` – `[httplib](https://docs.python.org/2/library/httplib.html)` and [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html)
 `mysql` – `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)`
 
-For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\.
+## Tracing Context for Asynchronous Work<a name="xray-sdk-python-patching-async"></a>
+
+For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\. Import the `AsyncContext` class and pass an instance of it to the X\-Ray recorder\.
 
 **Example main\.py – patch aioboto3**  
 
