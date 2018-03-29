@@ -84,7 +84,7 @@ This tells the X\-Ray recorder to trace requests served by your Flask applicatio
 
 If you don't use Django or Flask, you can create segments manually\. You can create a segment for each incoming request, or create segments around patched HTTP or AWS SDK clients to provide context for the recorder to add subsegments\.
 
-**Example main\.rb – manual instrumentation**  
+**Example main\.py – manual instrumentation**  
 
 ```
 from aws_xray_sdk.core import xray_recorder
