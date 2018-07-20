@@ -109,4 +109,5 @@ If you run your cluster in the private subnet of a VPC, you can use the [`awsvpc
             ]
         }
     ]
+}
 ```
