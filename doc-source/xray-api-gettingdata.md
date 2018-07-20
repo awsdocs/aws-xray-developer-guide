@@ -24,16 +24,298 @@ EPOCH=$(date +%s)
 aws xray get-service-graph --start-time $(($EPOCH-600)) --end-time $EPOCH
 ```
 
+The following example shows a service graph with 4 nodes, including a client node, an EC2 instance, a DynamoDB table, and an Amazon SNS topic\.
+
+**Example GetServiceGraph output**  
+
+```
+{
+    "Services": [
+        {
+            "ReferenceId": 0,
+            "Name": "xray-sample.elasticbeanstalk.com",
+            "Names": [
+                "xray-sample.elasticbeanstalk.com"
+            ],
+            "Type": "client",
+            "State": "unknown",
+            "StartTime": 1528317567.0,
+            "EndTime": 1528317589.0,
+            "Edges": [
+                {
+                    "ReferenceId": 2,
+                    "StartTime": 1528317567.0,
+                    "EndTime": 1528317589.0,
+                    "SummaryStatistics": {
+                        "OkCount": 3,
+                        "ErrorStatistics": {
+                            "ThrottleCount": 0,
+                            "OtherCount": 1,
+                            "TotalCount": 1
+                        },
+                        "FaultStatistics": {
+                            "OtherCount": 0,
+                            "TotalCount": 0
+                        },
+                        "TotalCount": 4,
+                        "TotalResponseTime": 0.273
+                    },
+                    "ResponseTimeHistogram": [
+                        {
+                            "Value": 0.005,
+                            "Count": 1
+                        },
+                        {
+                            "Value": 0.015,
+                            "Count": 1
+                        },
+                        {
+                            "Value": 0.157,
+                            "Count": 1
+                        },
+                        {
+                            "Value": 0.096,
+                            "Count": 1
+                        }
+                    ],
+                    "Aliases": []
+                }
+            ]
+        },
+        {
+            "ReferenceId": 1,
+            "Name": "awseb-e-dixzws4s9p-stack-StartupSignupsTable-4IMSMHAYX2BA",
+            "Names": [
+                "awseb-e-dixzws4s9p-stack-StartupSignupsTable-4IMSMHAYX2BA"
+            ],
+            "Type": "AWS::DynamoDB::Table",
+            "State": "unknown",
+            "StartTime": 1528317583.0,
+            "EndTime": 1528317589.0,
+            "Edges": [],
+            "SummaryStatistics": {
+                "OkCount": 2,
+                "ErrorStatistics": {
+                    "ThrottleCount": 0,
+                    "OtherCount": 0,
+                    "TotalCount": 0
+                },
+                "FaultStatistics": {
+                    "OtherCount": 0,
+                    "TotalCount": 0
+                },
+                "TotalCount": 2,
+                "TotalResponseTime": 0.12
+            },
+            "DurationHistogram": [
+                {
+                    "Value": 0.076,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.044,
+                    "Count": 1
+                }
+            ],
+            "ResponseTimeHistogram": [
+                {
+                    "Value": 0.076,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.044,
+                    "Count": 1
+                }
+            ]
+        },
+        {
+            "ReferenceId": 2,
+            "Name": "xray-sample.elasticbeanstalk.com",
+            "Names": [
+                "xray-sample.elasticbeanstalk.com"
+            ],
+            "Root": true,
+            "Type": "AWS::EC2::Instance",
+            "State": "active",
+            "StartTime": 1528317567.0,
+            "EndTime": 1528317589.0,
+            "Edges": [
+                {
+                    "ReferenceId": 1,
+                    "StartTime": 1528317567.0,
+                    "EndTime": 1528317589.0,
+                    "SummaryStatistics": {
+                        "OkCount": 2,
+                        "ErrorStatistics": {
+                            "ThrottleCount": 0,
+                            "OtherCount": 0,
+                            "TotalCount": 0
+                        },
+                        "FaultStatistics": {
+                            "OtherCount": 0,
+                            "TotalCount": 0
+                        },
+                        "TotalCount": 2,
+                        "TotalResponseTime": 0.12
+                    },
+                    "ResponseTimeHistogram": [
+                        {
+                            "Value": 0.076,
+                            "Count": 1
+                        },
+                        {
+                            "Value": 0.044,
+                            "Count": 1
+                        }
+                    ],
+                    "Aliases": []
+                },
+                {
+                    "ReferenceId": 3,
+                    "StartTime": 1528317567.0,
+                    "EndTime": 1528317589.0,
+                    "SummaryStatistics": {
+                        "OkCount": 2,
+                        "ErrorStatistics": {
+                            "ThrottleCount": 0,
+                            "OtherCount": 0,
+                            "TotalCount": 0
+                        },
+                        "FaultStatistics": {
+                            "OtherCount": 0,
+                            "TotalCount": 0
+                        },
+                        "TotalCount": 2,
+                        "TotalResponseTime": 0.125
+                    },
+                    "ResponseTimeHistogram": [
+                        {
+                            "Value": 0.049,
+                            "Count": 1
+                        },
+                        {
+                            "Value": 0.076,
+                            "Count": 1
+                        }
+                    ],
+                    "Aliases": []
+                }
+            ],
+            "SummaryStatistics": {
+                "OkCount": 3,
+                "ErrorStatistics": {
+                    "ThrottleCount": 0,
+                    "OtherCount": 1,
+                    "TotalCount": 1
+                },
+                "FaultStatistics": {
+                    "OtherCount": 0,
+                    "TotalCount": 0
+                },
+                "TotalCount": 4,
+                "TotalResponseTime": 0.273
+            },
+            "DurationHistogram": [
+                {
+                    "Value": 0.005,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.015,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.157,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.096,
+                    "Count": 1
+                }
+            ],
+            "ResponseTimeHistogram": [
+                {
+                    "Value": 0.005,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.015,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.157,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.096,
+                    "Count": 1
+                }
+            ]
+        },
+        {
+            "ReferenceId": 3,
+            "Name": "SNS",
+            "Names": [
+                "SNS"
+            ],
+            "Type": "AWS::SNS",
+            "State": "unknown",
+            "StartTime": 1528317583.0,
+            "EndTime": 1528317589.0,
+            "Edges": [],
+            "SummaryStatistics": {
+                "OkCount": 2,
+                "ErrorStatistics": {
+                    "ThrottleCount": 0,
+                    "OtherCount": 0,
+                    "TotalCount": 0
+                },
+                "FaultStatistics": {
+                    "OtherCount": 0,
+                    "TotalCount": 0
+                },
+                "TotalCount": 2,
+                "TotalResponseTime": 0.125
+            },
+            "DurationHistogram": [
+                {
+                    "Value": 0.049,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.076,
+                    "Count": 1
+                }
+            ],
+            "ResponseTimeHistogram": [
+                {
+                    "Value": 0.049,
+                    "Count": 1
+                },
+                {
+                    "Value": 0.076,
+                    "Count": 1
+                }
+            ]
+        }
+    ]
+}
+```
+
 ## Retrieving Traces<a name="xray-api-traces"></a>
 
 You can use the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API to get a list of trace summaries\. Trace summaries include information that you can use to identify traces that you want to download in full, including annotations, request and response information, and IDs\.
 
 Use the `aws xray get-trace-summaries` command to get a list of trace summaries\. The following commands get a list of trace summaries from between 1 and 2 minutes in the past\.
 
+**Example Script to get trace summaries**  
+
 ```
-$ EPOCH=$(date +%s)
-$ aws xray get-trace-summaries --start-time $(($EPOCH-120)) --end-time $(($EPOCH-60))
+EPOCH=$(date +%s)
+aws xray get-trace-summaries --start-time $(($EPOCH-120)) --end-time $(($EPOCH-60))
 ```
+
+**Example GetTraceSummaries output**  
 
 ```
 {
@@ -99,9 +381,13 @@ $ aws xray get-trace-summaries --start-time $(($EPOCH-120)) --end-time $(($EPOCH
 
 Use the trace ID from the output to retrieve a full trace with the [http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) API\.
 
+**Example BatchGetTraces command**  
+
 ```
 $ aws xray batch-get-traces --trace-ids 1-596025b4-7170afe49f7aa708b1dd4a6b
 ```
+
+**Example BatchGetTraces output**  
 
 ```
 {

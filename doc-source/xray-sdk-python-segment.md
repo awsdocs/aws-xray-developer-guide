@@ -46,6 +46,12 @@ Use annotations to record information on segments or subsegments that you want i
    document.put_annotation("mykey", "my value");
    ```
 
+Alternatively, you can use the `put_annotation` method on the `xray_recorder`\. This method records annotations on the current subsegment or, if no subsegment is open, on the segment\.
+
+```
+xray_recorder.put_annotation("mykey", "my value");
+```
+
 The SDK records annotations as key\-value pairs in an `annotations` object in the segment document\. Calling `put_annotation` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 
 To find traces that have annotations with specific values, use the `annotations.key` keyword in a [filter expression](xray-console-filters.md)\.
@@ -85,6 +91,12 @@ Use metadata to record information on segments or subsegments that you don't nee
    ```
    document.put_metadata("my key", "my value");
    ```
+
+Alternatively, you can use the `put_metadata` method on the `xray_recorder`\. This method records metadata on the current subsegment or, if no subsegment is open, on the segment\.
+
+```
+xray_recorder.put_metadata("my key", "my value");
+```
 
 If you don't specify a namespace, the SDK uses `default`\. Calling `put_metadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 

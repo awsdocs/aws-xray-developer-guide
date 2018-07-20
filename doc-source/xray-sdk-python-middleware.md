@@ -32,7 +32,7 @@ The middleware creates a segment for each incoming request with an `http` block 
 
 ## Adding the Middleware to Your Application \(Django\)<a name="xray-sdk-python-adding-middleware-django"></a>
 
-Add the middleware to the `MIDDLEWARE` list in your `settings.py` file\. The X\-Ray middleware should be the first line in your `settings.py` file to to ensure that requests that fail in other middleware are recorded\.
+Add the middleware to the `MIDDLEWARE` list in your `settings.py` file\. The X\-Ray middleware should be the first line in your `settings.py` file to ensure that requests that fail in other middleware are recorded\.
 
 **Example settings\.py \- X\-Ray SDK for Python middleware**  
 
@@ -84,7 +84,7 @@ This tells the X\-Ray recorder to trace requests served by your Flask applicatio
 
 If you don't use Django or Flask, you can create segments manually\. You can create a segment for each incoming request, or create segments around patched HTTP or AWS SDK clients to provide context for the recorder to add subsegments\.
 
-**Example main\.rb – manual instrumentation**  
+**Example main\.py – manual instrumentation**  
 
 ```
 from aws_xray_sdk.core import xray_recorder

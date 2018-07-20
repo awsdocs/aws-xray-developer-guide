@@ -54,7 +54,7 @@ Values must be strings \(up to 250 characters\) unless noted otherwise\.
   + The version number, that is, `1`\.
   + The time of the original request, in Unix epoch time, in **8 hexadecimal digits**\.
 
-    For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
+    For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal digits\.
   + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 **Trace ID Security**  
 Trace IDs are visible in [response headers](xray-concepts.md#xray-concepts-tracingheader)\. Generate trace IDs with a secure random algorithm to ensure that attackers cannot calculate future trace IDs and send requests with those IDs to your application\.
@@ -204,7 +204,7 @@ Values are strings up to 250 characters unless noted otherwise\.
   + The version number, that is, `1`\.
   + The time of the original request, in Unix epoch time, in **8 hexadecimal digits**\.
 
-    For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
+    For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal digits\.
   + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 + `parent_id` – Segment ID of the subsegment's parent segment\. Required only if sending a subsegment separately\.
 + `type` – `subsegment`\. Required only if sending a subsegment separately\.

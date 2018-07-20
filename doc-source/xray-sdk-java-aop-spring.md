@@ -16,7 +16,7 @@ You must perform three tasks to enable this feature\.
 
 You can use Maven or Gradle to configure Spring to use AOP to instrument you application\.
 
-If you use Maven to build your application, add the the following dependency in your `pom.xml` file\.
+If you use Maven to build your application, add the following dependency in your `pom.xml` file\.
 
 ```
 <dependency> 

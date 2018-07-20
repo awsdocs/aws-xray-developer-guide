@@ -68,7 +68,7 @@ A `trace_id` consists of three numbers separated by hyphens\. For example, `1-58
 + The version number, that is, `1`\.
 + The time of the original request, in Unix epoch time, in **8 hexadecimal digits**\.
 
-  For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal\.
+  For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal digits\.
 + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 
 You can write a script to generate trace IDs for testing\. Here are two examples\.

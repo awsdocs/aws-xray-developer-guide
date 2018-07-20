@@ -5,7 +5,7 @@ The X\-Ray SDK for Go is a set of libraries for Go applications that provide cla
 Download the SDK from its [GitHub repository](https://github.com/aws/aws-xray-sdk-go) with `go get`:
 
 ```
-$ go get -u github.com/aws/aws-xray-sdk-go
+$ go get -u github.com/aws/aws-xray-sdk-go/... 
 ```
 
 For web applications, start by [using the `xray.Handler` function](xray-sdk-go-handler.md) to trace incoming requests\. The message handler creates a [segment](xray-concepts.md#xray-concepts-segments) for each traced request, and completes the segment when the response is sent\. While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
