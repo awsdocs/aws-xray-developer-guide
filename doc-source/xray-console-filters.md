@@ -159,7 +159,7 @@ Complex keywords let you find requests based on service name, edge name, or anno
 
 **Complex Keywords**
 + `service(name) {filter}` – Service with name *name*\. Optional curly braces can contain a filter expression that applies to segments created by the service\.
-+ `edge(name) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
++ `edge(source, destination) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
 + `annotation.key` – Value of annotation with field *key*\. The value of an annotation can be a boolean, number, or string, so you can use any of those type's comparison operators\. You cannot use this keyword in combination with the `service` or `edge` keywords\.
 
 Use the service keyword to find traces for requests that hit a certain node on your service map\.
