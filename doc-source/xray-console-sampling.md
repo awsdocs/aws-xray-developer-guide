@@ -44,7 +44,7 @@ The following options are available for each rule\. String values can use wildca
 + **Service type** \(string\) – The service type, as it appears in the service map\. For the X\-Ray SDK, set the service type by applying the appropriate plugin\.
   + `AWS::ElasticBeanstalk::Environment` – An AWS Elastic Beanstalk environment \(plugin\)\.
   + `AWS::EC2::Instance` – An Amazon Elastic Compute Cloud instance \(plugin\)\.
-  + `AWS::ECS::Cluster` – An Amazon Elastic Container Service cluster \(plugin\)\.
+  + `AWS::ECS::Container` – An Amazon Elastic Container Service container \(plugin\)\.
 + **Host** \(string\) – The hostname from the HTTP host header\.
 + **HTTP method** \(string\) – The method of the HTTP request\.
 + **URL path** \(string\) – The URL path of the request\.
