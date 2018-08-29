@@ -35,17 +35,24 @@ When you use multiple plugins, the SDK uses the plugin that was loaded last to d
 
 ## Sampling Rules<a name="xray-sdk-nodejs-configuration-sampling"></a>
 
-The SDK has a default sampling strategy that determines which requests get traced\. By default, the SDK traces the first request each second, and five percent of any additional requests\. You can customize the SDK's sampling behavior by applying rules you define in a local file\.
+The SDK uses the sampling rules you define in the X\-Ray console to determine which requests to record\. The default rule traces the first request each second, and five percent of any additional requests across all services sending traces to X\-Ray\. [Create additional rules in the X\-Ray console](xray-console-sampling.md) to customize the amount of data recorded for each of your applications\.
+
+The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
+
+**Note**  
+If the SDK can't reach X\-Ray to get sampling rules, it reverts to a default local rule of the first request each second, and five percent of any additional requests per host\. This can occur if the host doesn't have permission to call sampling APIs, or can't connect to the X\-Ray daemon, which acts as a TCP proxy for API calls made by the SDK\.
+
+You can also configure the SDK to load sampling rules from a JSON document\. The SDK can use local rules as a backup for cases where X\-Ray sampling is unavailable, or use local rules exclusively\.
 
 **Example sampling\-rules\.json**  
 
 ```
 {
-  "version": 1,
+  "version": 2,
   "rules": [
     {
       "description": "Player moves.",
-      "service_name": "*",
+      "host": "*",
       "http_method": "*",
       "url_path": "/api/move/*",
       "fixed_target": 0,
@@ -61,11 +68,11 @@ The SDK has a default sampling strategy that determines which requests get trace
 
 This example defines one custom rule and a default rule\. The custom rule applies a five\-percent sampling rate with no minimum number of requests to trace for paths under `/api/move/`\. The default rule traces the first request each second and 10 percent of additional requests\.
 
-The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
+The disadvantage of defining rules locally is that the fixed target is applied by each instance of the recorder independently, instead of being managed by the X\-Ray service\. As you deploy more hosts, the fixed rate is multiplied, making it harder to control the amount of data recorded\.
 
 On Lambda, you cannot modify the sampling rate\. If your function is called by an instrumented service, calls generated requests that were sampled by that service will be recorded by Lambda\. If active tracing is enabled and no tracing header is present, Lambda makes the sampling decision\.
 
-Tell the X\-Ray SDK for Node\.js to load sampling rules from a file with `setSamplingRules`\.
+To configure backup rules, tell the X\-Ray SDK for Node\.js to load sampling rules from a file with `setSamplingRules`\.
 
 **Example app\.js \- Sampling rules from a file**  
 
@@ -89,6 +96,12 @@ var rules = {
 AWSXRay.middleware.setSamplingRules(rules);
 ```
 
+To use only local rules, call `disableCentralizedSampling`\.
+
+```
+AWSXRay.middleware.disableCentralizedSampling()
+```
+
 ## Logging<a name="xray-sdk-nodejs-configuration-logging"></a>
 
  To log output from the SDK, call `AWSXRay.setLogger(logger)`, where `logger` is an object that provides standard logging methods \(`warn`, `info`, etc\.\)\.
@@ -108,7 +121,7 @@ To configure the SDK to output logs to the console without using a logging libra
 
 ## X\-Ray Daemon Address<a name="xray-sdk-nodejs-configuration-daemon"></a>
 
-If the X\-Ray daemon listens on a port or host other than `127.0.0.1:2000`, you can configure the X\-Ray SDK for Node\.js to send trace data to a different UDP address\.
+If the X\-Ray daemon listens on a port or host other than `127.0.0.1:2000`, you can configure the X\-Ray SDK for Node\.js to send trace data to a different address\.
 
 ```
 AWSXRay.setDaemonAddress('host:port');
@@ -123,13 +136,26 @@ var AWSXRay = require('aws-xray-sdk');
 AWSXRay.setDaemonAddress('daemonhost:8082');
 ```
 
+If you configured the daemon to listen on different ports for TCP and UDP, you can specify both in the daemon address setting\.
+
+**Example app\.js \- Daemon address on separate ports**  
+
+```
+var AWSXRay = require('aws-xray-sdk');
+AWSXRay.setDaemonAddress('tcp:daemonhost:8082 udp:daemonhost:8083');
+```
+
 You can also set the daemon address by using the `AWS_XRAY_DAEMON_ADDRESS` [environment variable](#xray-sdk-nodejs-configuration-envvars)\.
 
 ## Environment Variables<a name="xray-sdk-nodejs-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Node\.js\. The SDK supports the following variables\.
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the segment name that you [set on the Express middleware](xray-sdk-nodejs-middleware.md)\.
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK uses `127.0.0.1:2000` for both trace data \(UDP\) and sampling \(TCP\)\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
+
+**Format**
+  + **Same port** – `address:port`
+  + **Different ports** – `tcp:address:port udp:address:port`
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**

@@ -64,7 +64,7 @@ Add the SDK as a dependency in your `requirements.txt` file\.
 **Example requirements\.txt**  
 
 ```
-aws-xray-sdk==1.0
+aws-xray-sdk==2.0.0
 boto3==1.4.4
 botocore==1.5.55
 Django==1.11.3

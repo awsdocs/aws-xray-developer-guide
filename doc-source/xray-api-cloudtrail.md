@@ -36,7 +36,7 @@ CloudTrail records API calls of the types you chose to log files in Amazon S3\. 
         "sessionContext"=>{
             "attributes"=>{
                 "mfaAuthenticated"=>"false",
-                "creationDate"=>"2018-6-01T00:24:36Z"
+                "creationDate"=>"2018-8-01T00:24:36Z"
             },
             "sessionIssuer"=>{
                 "type"=>"Role",
@@ -47,7 +47,7 @@ CloudTrail records API calls of the types you chose to log files in Amazon S3\. 
             }
         }
     },
-    "eventTime"=>"2018-6-01T00:24:36Z",
+    "eventTime"=>"2018-8-01T00:24:36Z",
     "eventSource"=>"xray.amazonaws.com",
     "eventName"=>"GetEncryptionConfig",
     "awsRegion"=>"us-east-2",

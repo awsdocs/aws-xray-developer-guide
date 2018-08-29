@@ -82,11 +82,11 @@ Service graph data is retained for 30 days\.
 
 To ensure efficient tracing and provide a representative sample of the requests that your application serves, the X\-Ray SDK applies a **sampling** algorithm to determine which requests get traced\. By default, the X\-Ray SDK records the first request each second, and five percent of any additional requests\.
 
-To avoid incurring service charges when you are getting started, the default sampling rate is conservative\. You can configure the SDK to modify the default sampling rules and configure different sampling rates for different routes that your application serves\.
+To avoid incurring service charges when you are getting started, the default sampling rate is conservative\. You can configure X\-Ray to modify the default sampling rule and configure additional rules that apply sampling based on properties of the service or request\.
 
-For example, you may want to disable sampling and trace all requests for calls that modify state or deal with user accounts or transactions\. For high volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
+For example, you might want to disable sampling and trace all requests for calls that modify state or handle user accounts or transactions\. For high\-volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
 
-Learn more about sampling configuration with a hands\-on example in the [Getting Started tutorial](xray-gettingstarted.md)\.
+For more information, see [Configuring Sampling Rules in the AWS X\-Ray Console](xray-console-sampling.md)\.
 
 ## Tracing Header<a name="xray-concepts-tracingheader"></a>
 

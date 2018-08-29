@@ -25,10 +25,13 @@ To make granting permissions easy, IAM supports **managed policies** for each se
           {
               "Effect": "Allow",
               "Action": [
+                  "xray:GetSamplingRules",
+                  "xray:GetSamplingTargets",
+                  "xray:GetSamplingStatisticSummaries",
                   "xray:BatchGetTraces",
                   "xray:GetServiceGraph",
                   "xray:GetTraceGraph",
-                  "xray:GetTraceSummaries"
+                  "xray:GetTraceSummaries"     
               ],
               "Resource": [
                   "*"
@@ -37,7 +40,7 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-+ `AWSXrayWriteOnlyAccess` – Write permissions for using the X\-Ray daemon, AWS CLI, or AWS SDK to upload segment documents and telemetry to the X\-Ray API\.
++ `AWSXRayDaemonWriteAccess` – Write permissions for using the X\-Ray daemon, AWS CLI, or AWS SDK to upload segment documents and telemetry to the X\-Ray API\.
 
   ```
   {
@@ -47,7 +50,10 @@ To make granting permissions easy, IAM supports **managed policies** for each se
               "Effect": "Allow",
               "Action": [
                   "xray:PutTraceSegments",
-                  "xray:PutTelemetryRecords"
+                  "xray:PutTelemetryRecords",
+                  "xray:GetSamplingRules",
+                  "xray:GetSamplingTargets",
+                  "xray:GetSamplingStatisticSummaries"
               ],
               "Resource": [
                   "*"
@@ -121,7 +127,7 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 1. For **Role Type**, choose **Amazon EC2**\.
 
 1. Attach managed policies to give your application access to AWS services\.
-   + **AWSXrayWriteOnlyAccess** – Gives the X\-Ray daemon permission to upload trace data\.
+   + **AWSXRayDaemonWriteAccess** – Gives the X\-Ray daemon permission to upload trace data\.
    + **AmazonS3ReadOnlyAccess** \(Amazon EC2 only\) – Gives the instance permission to download the X\-Ray daemon from Amazon S3\.
 
    If your application uses the AWS SDK to access other services, add policies that grant access to those services\.

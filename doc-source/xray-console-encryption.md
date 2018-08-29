@@ -30,4 +30,4 @@ See [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing/) fo
 
 If X\-Ray is unable to access your encryption key, it stops storing data\. This can happen if your user loses access to the CMK, or if you disable a key that's currently in use\. When this happens, X\-Ray shows a notification in the navigation bar\.
 
-To configure encryption settings with the X\-Ray API, see [Configuring AWS X\-Ray Encryption Settings](xray-api-configuration.md)\.
+To configure encryption settings with the X\-Ray API, see [Configuring AWS X\-Ray Sampling and Encryption Settings with the API](xray-api-configuration.md)\.

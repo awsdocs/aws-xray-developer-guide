@@ -27,10 +27,17 @@ You can pass a configuration file to the daemon to access advanced configuration
 Pass these options to the daemon when you run it locally or with a user data script\.
 
 **Command Line Options**
-+ `-b`, `--bind` – Bind the daemon to a different port\.
++ `-b`, `--bind` – Listen for segment documents on a different UDP port\.
 
   ```
   --bind "127.0.0.1:3000"
+  ```
+
+  Default – `2000`\.
++ `-t`, `--bind-tcp` – Listen for calls to the X\-Ray service on a different TCP port\.
+
+  ```
+  -bind-tcp "127.0.0.1:3000"
   ```
 
   Default – `2000`\.
@@ -65,6 +72,7 @@ Pass these options to the daemon when you run it locally or with a user data scr
   --role-arn "arn:aws:iam::123456789012:role/xray-cross-account"
   ```
 + `-a`, `--resource-arn` – Amazon Resource Name \(ARN\) of the AWS resource running the daemon\.
++ `-p`, `--proxy-address` – Upload segments to AWS X\-Ray through a proxy\.
 + `-n`, `--region` – Send segments to X\-Ray service in a specific region\.
 + `-v`, `--version` – Show AWS X\-Ray daemon version\.
 + `-h`, `--help` – Show the help screen\.
@@ -83,6 +91,7 @@ You can also use a YAML format file to configure the daemon\. Pass the configura
 + `Region` – Send segments to AWS X\-Ray service in a specific region\.
 + `Socket` – Configure the daemon's binding\.
   + `UDPAddress` – Change the port on which the daemon listens\.
+  + `TCPAddress` – Listen for [calls to the X\-Ray service](xray-api-sampling.md) on a different TCP port\.
 + `Logging` – Configure logging behavior\.
   + `LogRotation` – Set to `false` to disable log rotation\.
   + `LogLevel` – Change the log level, from most verbose to least: `dev`, `debug`, `info`, `warn`, `error`, `prod` \(default\)\.
@@ -101,11 +110,12 @@ This configuration file changes the daemon's listening port to 3000, turns off c
 ```
 Socket:
   UDPAddress: "127.0.0.1:3000"
+  TCPAddress: "127.0.0.1:3000"
 Region: "us-west-2"
 Logging:
   LogLevel: "warn"
   LogPath: "/var/log/xray-daemon.log"
 LocalMode: true
 RoleARN: "arn:aws:iam::123456789012:role/xray-cross-account"
-Version: 1
+Version: 2
 ```

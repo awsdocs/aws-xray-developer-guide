@@ -55,10 +55,7 @@ You must have the ARN of a custom AWS Lambda function before you can generate a 
        {
            "Sid": "Stmt1529350291539",
            "Action": [
-               "xray:BatchGetTraces",
-               "xray:GetServiceGraph",
-               "xray:GetTraceGraph",
-               "xray:GetTraceSummaries"
+               "xray:GetEncryptionConfig"
            ],
            "Effect": "Allow",
            "Resource": "*"
