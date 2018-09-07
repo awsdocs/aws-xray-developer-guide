@@ -106,6 +106,6 @@ Amazon's trademarks and trade dress may not be used in
 + [Integrating AWS X-Ray with Other AWS Services](xray-services.md)
    + [Elastic Load Balancing and AWS X-Ray](xray-services-elb.md)
    + [AWS Lambda and AWS X-Ray](xray-services-lambda.md)
-   + [Amazon API Gateway and AWS X-Ray](xray-services-apigateway.md)
+   + [Amazon API Gateway Active Tracing Support for AWS X-Ray](xray-services-apigateway.md)
    + [Amazon Elastic Compute Cloud and AWS X-Ray](xray-services-ec2.md)
    + [AWS Elastic Beanstalk and AWS X-Ray](xray-services-beanstalk.md)

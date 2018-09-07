@@ -35,7 +35,7 @@ To run the daemon locally in a Docker container, save the following text to a fi
 ```
 FROM amazonlinux
 RUN yum install -y unzip
-RUN curl -o daemon.zip https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-2.x.zip
+RUN curl -o daemon.zip https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip
 RUN unzip daemon.zip && cp xray /usr/bin/xray
 ENTRYPOINT ["/usr/bin/xray", "-b", "0.0.0.0:2000"]
 EXPOSE 2000/udp
@@ -100,12 +100,12 @@ if ( Get-Item -path aws-xray-daemon -ErrorAction SilentlyContinue ) {
 }
 
 $currentLocation = Get-Location
-$zipFileName = "aws-xray-daemon-windows-service-2.x.zip"
+$zipFileName = "aws-xray-daemon-windows-service-3.x.zip"
 $zipPath = "$currentLocation\$zipFileName"
 $destPath = "$currentLocation\aws-xray-daemon"
 $daemonPath = "$destPath\xray.exe"
 $daemonLogPath = "C:\inetpub\wwwroot\xray-daemon.log"
-$url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip"
+$url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip"
 
 Invoke-WebRequest -Uri $url -OutFile $zipPath
 Add-Type -Assembly "System.IO.Compression.Filesystem"

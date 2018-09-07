@@ -13,7 +13,7 @@ Use a user data script to run the daemon automatically when you launch the insta
 
 ```
 #!/bin/bash
-curl https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-2.x.rpm -o /home/ec2-user/xray.rpm
+curl https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm -o /home/ec2-user/xray.rpm
 yum install -y /home/ec2-user/xray.rpm
 ```
 
@@ -31,7 +31,7 @@ if ((Test-Path $targetLocation) -eq 0) {
     mkdir $targetLocation
 }
 
-$zipFileName = "aws-xray-daemon-windows-service-2.x.zip"
+$zipFileName = "aws-xray-daemon-windows-service-3.x.zip"
 $zipPath = "$targetLocation\$zipFileName"
 $destPath = "$targetLocation\aws-xray-daemon"
 if ((Test-Path $destPath) -eq 1) {
@@ -40,7 +40,7 @@ if ((Test-Path $destPath) -eq 1) {
 
 $daemonPath = "$destPath\xray.exe"
 $daemonLogPath = "$targetLocation\xray-daemon.log"
-$url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip"
+$url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip"
 
 Invoke-WebRequest -Uri $url -OutFile $zipPath
 Add-Type -Assembly "System.IO.Compression.Filesystem"

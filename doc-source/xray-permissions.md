@@ -6,17 +6,20 @@ To [use the X\-Ray console](xray-console.md) to view service maps and segments, 
 
 For [local development and testing](#xray-permissions-local), create an IAM user with read and write permissions\. Generate access keys for the user and store them in the standard AWS SDK location\. You can use these credentials with the X\-Ray daemon, the AWS CLI, and the AWS SDK\.
 
-To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM role with write permissions and assign it to the resources running your application\.
+To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM role with write permissions and assign it to the resources running your application\. `AWSXRayDaemonWriteAccess` includes permission to upload traces, and some read permissions as well to support the use of [sampling rules](xray-console-sampling.md)\.
+
+The read and write policies do not include permission to configure [encryption key settings](xray-console-encryption.md) and sampling rules\. Use `AWSXrayFullAccess` to access these settings, or add [configuration APIs](xray-api-configuration.md) in a custom policy\. For encryption and decryption with a customer managed key that you create, you also need [permission to use the key](#xray-permissions-encryption)\.
 
 **Topics**
 + [IAM Managed Policies for X\-Ray](#xray-permissions-managedpolicies)
 + [Running Your Application Locally](#xray-permissions-local)
 + [Running Your Application in AWS](#xray-permissions-aws)
++ [User Permissions for Encryption](#xray-permissions-encryption)
 
 ## IAM Managed Policies for X\-Ray<a name="xray-permissions-managedpolicies"></a>
 
-To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides [managed policies](#xray-permissions-managedpolicies) for read only, write only, and read/write use cases\.
-+ `AWSXrayReadOnlyAccess` – Read permissions for using the X\-Ray console, AWS CLI, or AWS SDK to get trace data and service maps from the X\-Ray API\.
+To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides [managed policies](#xray-permissions-managedpolicies) for read only, write only, and administrator use cases\.
++ `AWSXrayReadOnlyAccess` – Read permissions for using the X\-Ray console, AWS CLI, or AWS SDK to get trace data and service maps from the X\-Ray API\. Includes permission to view sampling rules\.
 
   ```
   {
@@ -40,7 +43,7 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-+ `AWSXRayDaemonWriteAccess` – Write permissions for using the X\-Ray daemon, AWS CLI, or AWS SDK to upload segment documents and telemetry to the X\-Ray API\.
++ `AWSXRayDaemonWriteAccess` – Write permissions for using the X\-Ray daemon, AWS CLI, or AWS SDK to upload segment documents and telemetry to the X\-Ray API\. Includes read permissions to get [sampling rules](xray-console-sampling.md) and report sampling results\.
 
   ```
   {
@@ -62,7 +65,7 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-+ `AWSXrayFullAccess` – Read/write permissions\.
++ `AWSXrayFullAccess` – Permission to use all X\-Ray APIs, including read permissions, write permissions, and permission to configure encryption key settings and sampling rules\.
 
   ```
   {
@@ -80,7 +83,6 @@ To make granting permissions easy, IAM supports **managed policies** for each se
       ]
   }
   ```
-+ `AmazonS3ReadOnlyAccess` – Permission for the user or resource to download the X\-Ray daemon from Amazon S3\.
 
 **To add a managed policy to an IAM user, group, or role**
 
@@ -135,3 +137,15 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 1. Choose **Next Step**\.
 
 1. Choose **Create Role**\.
+
+## User Permissions for Encryption<a name="xray-permissions-encryption"></a>
+
+X\-Ray encrypts all trace data and by default, and you can [configure it to use a key that you manage](xray-console-encryption.md)\. If you choose a AWS Key Management Service customer managed customer master key \(CMK\), you need to ensure that the key's access policy lets you grant permission to X\-Ray to use it to encrypt\. Other users in your account also need access to the key to view encrypted trace data in the X\-Ray console\.
+
+For a customer managed CMK, configure your key with an access policy that allows the following actions\.
++ User who configures the key in X\-Ray has permission to call `kms:CreateGrant` and `kms:DescribeKey`\.
++ Users who access encrypted trace data have permission to call `kms:Decrypt`\.
+
+When you add a user to the **Key users** group in the key configuration section of the AWS Identity and Access Management console, they have permission for both of these operations\. Permission only needs to be set on the key policy, so you don't need any AWS KMS permissions on your IAM users, groups, or roles\. See [Using Key Policies](http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the AWS KMS Developer Guide for more information\.
+
+For default encryption, or if you choose the AWS managed CMK \(`aws/xray`\), permission is based on who has access to X\-Ray APIs\. Anyone with access to [http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html), included in `AWSXrayFullAccess`, can change the encryption configuration\. To prevent a user from changing the encryption key, do not give them permission to use [http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html)\.

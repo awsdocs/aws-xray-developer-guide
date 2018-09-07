@@ -87,19 +87,19 @@ Several AWS services provide **X\-Ray integration**\. [Integrated services](xray
 + **Active instrumentation** – Samples and instruments incoming requests\.
 + **Passive instrumentation** – Instruments requests that have been sampled by another service\.
 + **Request tracing** – Adds a tracing header to all incoming requests and propagates it downstream\.
-+ **Tooling** – Runs the AWS X\-Ray daemon to receive segments from the X\-Ray SDK\. 
++ **Tooling** – Runs the X\-Ray daemon to receive segments from the X\-Ray SDK\. 
 
-Services with X\-Ray integration include:
-+ **AWS Lambda** – Active and passive instrumentation of incoming requests on all runtimes\. When you enable instrumentation, AWS Lambda also runs the X\-Ray daemon on Java and Node\.js runtimes for use with the X\-Ray SDK\. [Learn more](xray-services-lambda.md)\.
-+ **Amazon API Gateway** – Request tracing\. API Gateway passes the trace ID to AWS Lambda and adds it to the request header for other downstream services\. [Learn more](xray-services-apigateway.md)\.
+The following services provide X\-Ray integration:
++ **AWS Lambda** – Active and passive instrumentation of incoming requests on all runtimes\. AWS Lambda adds two nodes to your service map, one for the AWS Lambda service, and one for the function\. When you enable instrumentation, AWS Lambda also runs the X\-Ray daemon on Java and Node\.js runtimes for use with the X\-Ray SDK\. [Learn more](xray-services-lambda.md)\.
++ **Amazon API Gateway** – Active and passive instrumentation\. API Gateway uses sampling rules to determine which requests to record, and adds a node for the gateway stage to your service map\. [Learn more](xray-services-apigateway.md)\.
 + **Elastic Load Balancing** – Request tracing on application load balancers\. The application load balancer adds the trace ID to the request header before sending it to a target group\. [Learn more](xray-services-elb.md)\.
 + **AWS Elastic Beanstalk** – Tooling\. Elastic Beanstalk includes the X\-Ray daemon on the following platforms:
-  + **Java SE** – 2\.3\.0 and newer configurations
-  + **Tomcat** – 2\.4\.0 and newer configurations
-  + **Node\.js** – 3\.2\.0 and newer configurations
-  + **Windows Server** – All configurations other than Windows Server Core released since December 9th, 2016\.
+  + **Java SE** – 2\.3\.0 and later configurations
+  + **Tomcat** – 2\.4\.0 and later configurations
+  + **Node\.js** – 3\.2\.0 and later configurations
+  + **Windows Server** – All configurations other than Windows Server Core that have been released since December 9th, 2016\.
 
-  You can tell Elastic Beanstalk to run the daemon on these platforms in the Elastic Beanstalk console, or by using the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. [Learn more](xray-services-beanstalk.md)\.
+  You can use the Elastic Beanstalk console tell Elastic Beanstalk to run the daemon on these platforms, or use the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. [Learn more](xray-services-beanstalk.md)\.
 
 ## Code and Configuration Changes<a name="xray-usage-codechanges"></a>
 

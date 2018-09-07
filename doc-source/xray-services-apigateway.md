@@ -1,6 +1,24 @@
-# Amazon API Gateway and AWS X\-Ray<a name="xray-services-apigateway"></a>
+# Amazon API Gateway Active Tracing Support for AWS X\-Ray<a name="xray-services-apigateway"></a>
 
-Amazon API Gateway provides [request tracing](xray-usage.md#xray-usage-services) support for AWS X\-Ray\. An API Gateway gateway adds a [tracing header](xray-concepts.md#xray-concepts-tracingheader) to incoming HTTP requests that don't already have one\.
+Amazon API Gateway provides [active tracing](xray-usage.md#xray-usage-services) support for AWS X\-Ray\. Enable active tracing on your API stages to sample incoming requests and send traces to X\-Ray\.
+
+**To enable active tracing on an API stage**
+
+1. Open the API Gateway console at [https://console\.aws\.amazon\.com/apigateway/](https://console.aws.amazon.com/apigateway/)\. 
+
+1. Choose an API\.
+
+1. Choose a stage\.
+
+1. On the **Logs/Tracing** tab, choose **Enable X\-Ray Tracing**\.
+
+1. Choose **Resources** in the left side navigation panel\.
+
+1. To redeploy the API with the new settings, choose **Actions**, **Deploy API**\.
+
+API Gateway uses sampling rules that you define in the X\-Ray console to determine which requests to record\. You can create rules that only apply to APIs, or that apply only to requests that contain certain headers\. API Gateway records headers in attributes on the segment, along with details about the stage and request\. For more information, see [Configuring Sampling Rules in the AWS X\-Ray Console](xray-console-sampling.md)\.
+
+For all incoming requests, API Gateway adds a [tracing header](xray-concepts.md#xray-concepts-tracingheader) to incoming HTTP requests that don't already have one\.
 
 ```
 X-Amzn-Trace-Id: Root=1-5759e988-bd862e3fe1be46a994272793
@@ -15,8 +33,8 @@ A `trace_id` consists of three numbers separated by hyphens\. For example, `1-58
   For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal digits\.
 + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
 
-API Gateway doesn't make sampling decisions or send trace data to X\-Ray\. However, by adding the trace header, it records the time that the request reached the gateway\. By comparing the timestamp on the trace to the timestamp on the segment sent by the instrumented service behind the gateway, you can see how long the request took to reach your service after hitting the gateway\.
-
-If your gateway is downstream of instrumented services in your application, the gateway propagates the tracing header to your backend AWS Lambda functions or HTTP service\. The upstream service and the service fronted by the gateway are connected by the trace ID, but the gateway itself doesn't appear as a node on your service map\.
+If active tracing is disabled, the stage still records a segment if the request comes from a service that sampled the request and started a trace\. For example, an instrumented web application can call an API Gateway API with an HTTP client\. When you instrument an HTTP client with the X\-Ray SDK, it adds a tracing header to the outgoing request that contains the sampling decision\. API Gateway reads the tracing header and creates a segment for sampled requests\.
 
 If you use API Gateway to [generate a Java SDK for your API](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-generate-sdk.html), you can instrument the SDK client by adding a request handler with the client builder, in the same way that you would manually instrument an AWS SDK client\. See [Tracing AWS SDK Calls with the X\-Ray SDK for Java](xray-sdk-java-awssdkclients.md) for instructions\.
+
+For more information, see [Trace API Gateway API Execution with AWS X\-Ray](http://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html) in the Amazon API Gateway Developer Guide\.

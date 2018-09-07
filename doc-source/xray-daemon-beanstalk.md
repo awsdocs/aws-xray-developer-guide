@@ -91,7 +91,7 @@ commands:
     command: yum remove -y xray
     ignoreErrors: true
   02-copy-tracing:
-    command: curl https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-2.x.rpm -o /home/ec2-user/xray.rpm
+    command: curl https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm -o /home/ec2-user/xray.rpm
   03-start-tracing:
     command: yum install -y /home/ec2-user/xray.rpm
 
@@ -132,7 +132,7 @@ files:
           mkdir $targetLocation
       }
 
-      $zipFileName = "aws-xray-daemon-windows-service-2.x.zip"
+      $zipFileName = "aws-xray-daemon-windows-service-3.x.zip"
       $zipPath = "$targetLocation\$zipFileName"
       $destPath = "$targetLocation\aws-xray-daemon"
       if ((Test-Path $destPath) -eq 1) {
@@ -141,7 +141,7 @@ files:
 
       $daemonPath = "$destPath\xray.exe"
       $daemonLogPath = "$targetLocation\xray-daemon.log"
-      $url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-2.x.zip"
+      $url = "https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip"
 
       Invoke-WebRequest -Uri $url -OutFile $zipPath
       Add-Type -Assembly "System.IO.Compression.Filesystem"

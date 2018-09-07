@@ -41,15 +41,24 @@ The following options are available for each rule\. String values can use wildca
 + **Reservoir** \(non\-negative integer\) – A fixed number of matching requests to instrument per second, before applying the fixed rate\. The reservoir is not used directly by services, but applies to all services using the rule collectively\.
 + **Rate** \(number between 0 and 100\) – The percentage of matching requests to instrument, after the reservoir is exhausted\.
 + **Service name** \(string\) – The name of the instrumented service, as it appears in the service map\.
+  + X\-Ray SDK – The service name that you configure on the recorder\.
+  + Amazon API Gateway – `api-name/stage`\.
 + **Service type** \(string\) – The service type, as it appears in the service map\. For the X\-Ray SDK, set the service type by applying the appropriate plugin\.
   + `AWS::ElasticBeanstalk::Environment` – An AWS Elastic Beanstalk environment \(plugin\)\.
   + `AWS::EC2::Instance` – An Amazon Elastic Compute Cloud instance \(plugin\)\.
   + `AWS::ECS::Container` – An Amazon Elastic Container Service container \(plugin\)\.
+  + `AWS::APIGateway::Stage` – An Amazon API Gateway stage\.
 + **Host** \(string\) – The hostname from the HTTP host header\.
 + **HTTP method** \(string\) – The method of the HTTP request\.
 + **URL path** \(string\) – The URL path of the request\.
+  + X\-Ray SDK – The path portion of the HTTP request URL\.
+  + Amazon API Gateway – Not supported\.
 + **Resource ARN** \(string\) – The ARN of the AWS resource running the service\.
+  + X\-Ray SDK – Not supported\. The SDK can only use rules with **Resource ARN** set to `*`\.
+  + Amazon API Gateway – The stage ARN\.
 + \(optional\) **Attributes** \(key and value\) – Segment attributes that are known when the sampling decision is made\.
+  + X\-Ray SDK – Not supported\. The SDK ignores rules that specify attributes\.
+  + Amazon API Gateway – Headers from the original HTTP request\.
 
 ## Sampling Rule Examples<a name="xray-console-sampling-examples"></a>
 
@@ -92,6 +101,8 @@ The X\-Ray SDK requires additional configuration to use sampling rules that you 
 + Python – [Sampling Rules](xray-sdk-python-configuration.md#xray-sdk-python-configuration-sampling)\.
 + Ruby – [Sampling Rules](xray-sdk-ruby-configuration.md#xray-sdk-ruby-configuration-sampling)\.
 + \.NET – [Sampling Rules](xray-sdk-dotnet-configuration.md#xray-sdk-dotnet-configuration-sampling)\.
+
+For API Gateway, see [Amazon API Gateway Active Tracing Support for AWS X\-Ray](xray-services-apigateway.md)\.
 
 ## Viewing Sampling Results<a name="xray-console-sampling-results"></a>
 

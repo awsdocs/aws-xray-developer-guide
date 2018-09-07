@@ -11,7 +11,7 @@ You can use the AWS SDK to develop programs that use the X\-Ray API\. The X\-Ray
 + **Ruby** – [AWS SDK for Ruby](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/XRay.html)
 + **Go** – [AWS SDK for Go](http://docs.aws.amazon.com/sdk-for-go/api/service/xray/)
 + **PHP** – [AWS SDK for PHP](http://docs.aws.amazon.com/aws-sdk-php/v3/api/namespace-Aws.XRay.html)
-+ **Python** – [AWS SDK for Python \(Boto\)](http://boto3.readthedocs.org/en/latest/reference/services/xray.html)
++ **Python** – [AWS SDK for Python \(Boto\)](http://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/xray.html)
 
 The AWS Command Line Interface is a command line tool that uses the SDK for Python to call AWS APIs\. When you are first learning an AWS API, the AWS CLI provides an easy way to explore the available parameters and view the service output in JSON or text form\.
 

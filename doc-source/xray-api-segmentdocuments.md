@@ -322,7 +322,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
 
 ## Annotations<a name="api-segmentdocuments-annotations"></a>
 
-Segments and subsegments can include an `annotations` object containing one or more fields that X\-Ray indexes for use with filter expressions\. Fields can have string, number, or Boolean values \(no objects or arrays\)\.
+Segments and subsegments can include an `annotations` object containing one or more fields that X\-Ray indexes for use with filter expressions\. Fields can have string, number, or Boolean values \(no objects or arrays\)\. X\-Ray indexes up to 50 annotations per trace\.
 
 **Example Segment for HTTP Call with Annotations**  
 

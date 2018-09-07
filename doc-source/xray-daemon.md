@@ -21,7 +21,7 @@ You can download the daemon from Amazon S3 to run it locally, or to install it o
 + **Windows \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip.sig)\)
 + **Windows \(service\) ** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip.sig)\)
 
-These links always point to the latest v2 release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
+These links always point to the latest release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
 
@@ -62,14 +62,14 @@ Use the imported key to verify the signature of the daemon's ZIP archive\.
 
    ```
    $ BUCKETURL=https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
-   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-2.0.0.zip
-   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-2.0.0.zip.sig
+   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip
+   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip.sig
    ```
 
 1. Run `gpg --verify` to verify the signature\.
 
    ```
-   $ gpg --verify aws-xray-daemon-linux-2.0.0.zip.sig aws-xray-daemon-linux-2.0.0.zip
+   $ gpg --verify aws-xray-daemon-linux-3.0.0.zip.sig aws-xray-daemon-linux-3.0.0.zip
    gpg: Signature made Wed 19 Apr 2017 05:06:31 AM UTC using RSA key ID FE6157D3
    gpg: Good signature from "AWS X-Ray <aws-xray@amazon.com>"
    gpg: WARNING: This key is not certified with a trusted signature!
