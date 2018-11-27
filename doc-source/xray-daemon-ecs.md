@@ -92,7 +92,7 @@ If you run your cluster in the private subnet of a VPC, you can use the [`awsvpc
                   "protocol": "udp"
               }
           ]
-        }
+        },
         {
             "name": "scorekeep-api",
             "image": "123456789012.dkr.ecr.us-east-2.amazonaws.com/scorekeep-api",
