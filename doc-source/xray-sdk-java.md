@@ -54,7 +54,7 @@ If you use a library that is included in the X\-Ray SDK for Java, you must use t
 
 The X\-Ray SDK for Java is available from Maven:
 + **Group** – `com.amazonaws`
-+ **Bill of Materials** – `aws-xray-recorder-sdk-bom`
++ **Artifact** – `aws-xray-recorder-sdk-bom`
 + **Version** – `2.0.0`
 
 If you use Maven to build your application, add the SDK as a dependency in your `pom.xml` file\.
