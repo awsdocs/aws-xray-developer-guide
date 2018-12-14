@@ -157,7 +157,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Configure the available settings in a list named `XRAY_RECORDER`\.
+Configure the available settings in a dict named `XRAY_RECORDER`\.
 
 **Example settings\.py – installed apps**  
 
