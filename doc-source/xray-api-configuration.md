@@ -1,14 +1,15 @@
-# Configuring AWS X\-Ray Sampling and Encryption Settings with the API<a name="xray-api-configuration"></a>
+# Configuring Sampling, Groups, and Encryption Settings with the AWS X\-Ray API<a name="xray-api-configuration"></a>
 
-AWS X\-Ray provides APIs for configuring [sampling rules](xray-console-sampling.md) and [encryption settings](xray-console-encryption.md)\.
+AWS X\-Ray provides APIs for configuring [sampling rules](xray-console-sampling.md), group rules, and [encryption settings](xray-console-encryption.md)\.
 
 **Topics**
 + [Encryption Settings](#xray-api-configuration-encryption)
 + [Sampling Rules](#xray-api-configuration-sampling)
++ [Groups](#xray-api-configuration-groups)
 
 ## Encryption Settings<a name="xray-api-configuration-encryption"></a>
 
-Use [http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) to specify a customer master key \(CMK\) to use for encryption\.
+Use [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) to specify a customer master key \(CMK\) to use for encryption\.
 
 ```
 $ aws xray put-encryption-config --type KMS --key-id alias/aws/xray
@@ -23,7 +24,7 @@ $ aws xray put-encryption-config --type KMS --key-id alias/aws/xray
 
 For the key ID, you can use an alias \(as shown in the example\), a key ID, or an Amazon Resource Name \(ARN\)\.
 
-Use [http://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html](http://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html) to get the current configuration\. When X\-Ray finishes applying your settings, the status changes from `UPDATING` to `ACTIVE`\.
+Use [https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html) to get the current configuration\. When X\-Ray finishes applying your settings, the status changes from `UPDATING` to `ACTIVE`\.
 
 ```
 $ aws xray get-encryption-config
@@ -52,7 +53,7 @@ $ aws xray put-encryption-config --type NONE
 
 You can manage the [sampling rules](xray-console-sampling.md) in your account with the X\-Ray API\.
 
-Get all sampling rules with [http://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html](http://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)\.
+Get all sampling rules with [https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html](https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)\.
 
 ```
 $ aws xray get-sampling-rules
@@ -81,9 +82,9 @@ $ aws xray get-sampling-rules
 }
 ```
 
-The default rule applies to all requests that don't match another rule\. It is the lowest priority rule and cannot be deleted\. You can, however, change the rate and reservoir size with [http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html)\.
+The default rule applies to all requests that don't match another rule\. It is the lowest priority rule and cannot be deleted\. You can, however, change the rate and reservoir size with [https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html)\.
 
-**Example API input for [http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html) – 10000\-default\.json**  
+**Example API input for [https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html) – 10000\-default\.json**  
 
 ```
 {
@@ -122,9 +123,9 @@ $ aws xray update-sampling-rule --cli-input-json file://1000-default.json
         },
 ```
 
-Create additional sampling rules with [http://docs.aws.amazon.com/xray/latest/api/API_CreateSamplingRule.html](http://docs.aws.amazon.com/xray/latest/api/API_CreateSamplingRule.html)\. When you create a rule, most of the rule fields are required\. The following example creates two rules\. This first rule sets a base rate for the Scorekeep sample application\. It matches all requests served by the API that don't match a higher priority rule\.
+Create additional sampling rules with [https://docs.aws.amazon.com/xray/latest/api/API_CreateSamplingRule.html](https://docs.aws.amazon.com/xray/latest/api/API_CreateSamplingRule.html)\. When you create a rule, most of the rule fields are required\. The following example creates two rules\. This first rule sets a base rate for the Scorekeep sample application\. It matches all requests served by the API that don't match a higher priority rule\.
 
-**Example API input for [http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html) – 9000\-base\-scorekeep\.json**  
+**Example API input for [https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html) – 9000\-base\-scorekeep\.json**  
 
 ```
 {
@@ -146,7 +147,7 @@ Create additional sampling rules with [http://docs.aws.amazon.com/xray/latest/ap
 
 The second rule also applies to Scorekeep, but it has a higher priority and is more specific\. This rule sets a very low sampling rate for polling requests\. These are GET requests made by the client every few seconds to check for changes to the game state\.
 
-**Example API input for [http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](http://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html) – 5000\-polling\-scorekeep\.json**  
+**Example API input for [https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html](https://docs.aws.amazon.com/xray/latest/api/API_UpdateSamplingRule.html) – 5000\-polling\-scorekeep\.json**  
 
 ```
 {
@@ -213,7 +214,7 @@ $ aws xray create-sampling-rule --cli-input-json file://9000-base-scorekeep.json
 }
 ```
 
-To delete a sampling rule, use [http://docs.aws.amazon.com/xray/latest/api/API_DeleteSamplingRule.html](http://docs.aws.amazon.com/xray/latest/api/API_DeleteSamplingRule.html)\.
+To delete a sampling rule, use [https://docs.aws.amazon.com/xray/latest/api/API_DeleteSamplingRule.html](https://docs.aws.amazon.com/xray/latest/api/API_DeleteSamplingRule.html)\.
 
 ```
 $ aws xray delete-sampling-rule --rule-name polling-scorekeep
@@ -238,4 +239,59 @@ $ aws xray delete-sampling-rule --rule-name polling-scorekeep
         "ModifiedAt": 1530574399.0
     }
 }
+```
+
+## Groups<a name="xray-api-configuration-groups"></a>
+
+You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting Data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\.
+
+Create a group with `CreateGroup`\.
+
+```
+$ aws xray create-group --group-name "TestGroup" --filter-expression "service(\"example.com\") {fault}"
+{
+    "GroupName": "TestGroup",
+    "GroupARN": "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID",
+    "FilterExpression": "service(\"example.com\") {fault OR error}"
+}
+```
+
+Get all existing groups with `GetGroups`\.
+
+```
+$ aws xray get-groups
+{
+    "Groups": [
+        {
+            "GroupName": "TestGroup",
+            "GroupARN": "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID",
+            "FilterExpression": "service(\"example.com\") {fault OR error}"
+        },
+		{
+            "GroupName": "TestGroup2",
+            "GroupARN": "arn:aws:xray:us-east-2:123456789012:group/TestGroup2/UniqueID",
+            "FilterExpression": "responsetime > 2"
+        }
+    ],
+	"NextToken": "tokenstring"
+}
+```
+
+Update a group with `UpdateGroup`\.
+
+```
+$ aws xray update-group --group-name "TestGroup" --group-arn "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID" --filter-expression "service(\"example.com\") {fault OR error}"
+{
+    "GroupName": "TestGroup",
+    "GroupARN": "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID",
+    "FilterExpression": "service(\"example.com\") {fault OR error}"
+}
+```
+
+Delete a group with `DeleteGroup`\.
+
+```
+$ aws xray delete-group --group-name "TestGroup" --group-arn "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID" 
+    {
+    }
 ```

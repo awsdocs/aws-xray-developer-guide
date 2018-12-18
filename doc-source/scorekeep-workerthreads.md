@@ -19,11 +19,11 @@ To fix this, the application uses `GetTraceEntity` to get a reference to the seg
 **Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/MoveFactory.java#L70](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/MoveFactory.java#L70) – Passing trace context to a worker thread**  
 
 ```
-import [com\.amazonaws\.xray\.AWSXRay](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
-import [com\.amazonaws\.xray\.AWSXRayRecorder](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html);
-import [com\.amazonaws\.xray\.entities\.Entity](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Entity.html);
-import [com\.amazonaws\.xray\.entities\.Segment](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Segment.html);
-import [com\.amazonaws\.xray\.entities\.Subsegment](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Subsegment.html);
+import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
+import [com\.amazonaws\.xray\.AWSXRayRecorder](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html);
+import [com\.amazonaws\.xray\.entities\.Entity](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Entity.html);
+import [com\.amazonaws\.xray\.entities\.Segment](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Segment.html);
+import [com\.amazonaws\.xray\.entities\.Subsegment](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Subsegment.html);
 ...
       Entity segment = recorder.getTraceEntity();
       Thread comm = new Thread() {

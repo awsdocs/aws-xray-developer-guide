@@ -7,8 +7,8 @@ The SDK provides a wrapper class for `System.Data.SqlClient.SqlCommand` named `T
 ```
 using Amazon;
 using Amazon.Util;
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
-using [Amazon\.XRay\.Recorder\.Handlers\.SqlServer](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_SqlServer.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.SqlServer](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_SqlServer.htm);
 
 private void QuerySql(int id)
 {
@@ -29,8 +29,8 @@ You can also execute the query asynchronously with the `ExecuteReaderAsync` meth
 ```
 using Amazon;
 using Amazon.Util;
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
-using [Amazon\.XRay\.Recorder\.Handlers\.SqlServer](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_SqlServer.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.SqlServer](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_SqlServer.htm);
 private void QuerySql(int id)
 {
   var connectionString = ConfigurationManager.AppSettings["RDS_CONNECTION_STRING"];

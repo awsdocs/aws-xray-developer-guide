@@ -13,7 +13,7 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL94Dialect
 ```
 
 **Note**  
-See [Configuring Databases with Elastic Beanstalk](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.db.html) in the *AWS Elastic Beanstalk Developer Guide* for details on how to add a PostgreSQL database to the application environment\.
+See [Configuring Databases with Elastic Beanstalk](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.db.html) in the *AWS Elastic Beanstalk Developer Guide* for details on how to add a PostgreSQL database to the application environment\.
 
 The X\-Ray demo page in the `xray` branch includes a demo that uses the instrumented data source to generate traces that show information about the SQL queries that it generates\. Navigate to the `/#/xray` path in the running application or choose **Powered by AWS X\-Ray** in the navigation bar to see the demo page\.
 

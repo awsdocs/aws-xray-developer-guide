@@ -9,8 +9,8 @@ using Amazon;
 using Amazon.Util;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
-using [Amazon\.XRay\.Recorder\.Handlers\.AwsSdk](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AwsSdk.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.AwsSdk](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AwsSdk.htm);
 
 namespace SampleEBWebApplication.Controllers
 {

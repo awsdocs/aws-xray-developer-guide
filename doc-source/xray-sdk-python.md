@@ -42,7 +42,7 @@ Annotations and metadata are arbitrary text that you add to segments with the X\
 
 When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in [custom subsegments](xray-sdk-python-subsegments.md)\. You can create a custom subsegment for an entire function or any section of code\. You can then you can record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
-For reference documentation for the SDK's classes and methods, see the [AWS X\-Ray SDK for Python API Reference](http://docs.aws.amazon.com/xray-sdk-for-python/latest/reference)\.
+For reference documentation for the SDK's classes and methods, see the [AWS X\-Ray SDK for Python API Reference](https://docs.aws.amazon.com/xray-sdk-for-python/latest/reference)\.
 
 ## Requirements<a name="xray-sdk-python-requirements"></a>
 

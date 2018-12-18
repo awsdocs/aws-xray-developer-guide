@@ -110,7 +110,7 @@ aws_access_key_id = AKIAIOSFODNN7EXAMPLE
 aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 
-If you specify credentials in more than one location \(credentials file, instance profile, or environment variables\), the SDK provider chain determines which credentials are used\. For more information about providing credentials to the SDK, see [Specifying Credentials](http://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials) in the *AWS SDK for Go Developer Guide*\.
+If you specify credentials in more than one location \(credentials file, instance profile, or environment variables\), the SDK provider chain determines which credentials are used\. For more information about providing credentials to the SDK, see [Specifying Credentials](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials) in the *AWS SDK for Go Developer Guide*\.
 
 The IAM role or user that the daemon's credentials belong to must have permission to write data to the service on your behalf\.
 + To use the daemon on Amazon EC2, create a new instance profile role or add the managed policy to an existing one\.

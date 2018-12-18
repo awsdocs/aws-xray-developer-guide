@@ -4,11 +4,12 @@ AWS X\-Ray processes the trace data that you send to it to generate full traces,
 
 **Topics**
 + [Retrieving the Service Graph](#xray-api-servicegraph)
++ [Retrieving the Service Graph by Group](#xray-api-servicegraphgroup)
 + [Retrieving Traces](#xray-api-traces)
 
 ## Retrieving the Service Graph<a name="xray-api-servicegraph"></a>
 
-You can use the [http://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html](http://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html) API to retrieve the JSON service graph\. The API requires a start time and end time, which you can calculate from a Linux terminal with the `date` command\.
+You can use the [https://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html](https://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html) API to retrieve the JSON service graph\. The API requires a start time and end time, which you can calculate from a Linux terminal with the `date` command\.
 
 ```
 $ date +%s
@@ -302,9 +303,19 @@ The following example shows a service graph with 4 nodes, including a client nod
 }
 ```
 
+## Retrieving the Service Graph by Group<a name="xray-api-servicegraphgroup"></a>
+
+To call for a service graph based on the contents of a group, include a `groupName` or `groupARN`\. The following example shows a service graph call to a group named Example1\.
+
+**Example Script to retrieve a service graph by name for group Example1**  
+
+```
+aws xray get-service-graph --group-name "Example1"
+```
+
 ## Retrieving Traces<a name="xray-api-traces"></a>
 
-You can use the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API to get a list of trace summaries\. Trace summaries include information that you can use to identify traces that you want to download in full, including annotations, request and response information, and IDs\.
+You can use the [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API to get a list of trace summaries\. Trace summaries include information that you can use to identify traces that you want to download in full, including annotations, request and response information, and IDs\.
 
 Use the `aws xray get-trace-summaries` command to get a list of trace summaries\. The following commands get a list of trace summaries from between 1 and 2 minutes in the past\.
 
@@ -379,7 +390,7 @@ aws xray get-trace-summaries --start-time $(($EPOCH-120)) --end-time $(($EPOCH-6
 }
 ```
 
-Use the trace ID from the output to retrieve a full trace with the [http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) API\.
+Use the trace ID from the output to retrieve a full trace with the [https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) API\.
 
 **Example BatchGetTraces command**  
 
@@ -427,7 +438,7 @@ The full trace includes a document for each segment, compiled from all of the se
 
 X\-Ray also creates *inferred segments* for downstream calls to services that don't send segments themselves\. For example, when you call DynamoDB with an instrumented client, the X\-Ray SDK records a subsegment with details about the call from its point of view\. However, DynamoDB doesn't send a corresponding segment\. X\-Ray uses the information in the subsegment to create an inferred segment to represent the DynamoDB resource in the service map, and adds it to the trace document\.
 
-To get multiple traces from the API, you need a list of trace IDs, which you can extract from the output of `get-trace-summaries` with an [AWS CLI query](http://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html#controlling-output-filter)\. Redirect the list to the intput of `batch-get-traces` to get full traces for a specific time period\.
+To get multiple traces from the API, you need a list of trace IDs, which you can extract from the output of `get-trace-summaries` with an [AWS CLI query](https://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html#controlling-output-filter)\. Redirect the list to the intput of `batch-get-traces` to get full traces for a specific time period\.
 
 **Example Script to get full traces for a one minute period**  
 

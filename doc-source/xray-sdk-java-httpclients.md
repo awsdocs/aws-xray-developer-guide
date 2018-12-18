@@ -19,7 +19,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
-import [com\.amazonaws\.xray\.proxies\.apache\.http\.HttpClientBuilder](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/proxies/apache/http/HttpClientBuilder.html);
+import [com\.amazonaws\.xray\.proxies\.apache\.http\.HttpClientBuilder](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/proxies/apache/http/HttpClientBuilder.html);
 ...
   public String randomName() throws IOException {
     CloseableHttpClient httpclient = HttpClientBuilder.create().build();

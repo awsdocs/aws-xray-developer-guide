@@ -33,7 +33,7 @@ To instrument requests served by your application, call `RegisterXRay` in the `I
 
 ```
 using System.Web.Http;
-using [Amazon\.XRay\.Recorder\.Handlers\.AspNet](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AspNet.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.AspNet](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_AspNet.htm);
 
 namespace SampleEBWebApplication
 {
@@ -84,7 +84,7 @@ If your application serves requests for multiple domains, you can configure the 
 
 For example, you might have a single application serving requests to three subdomains– `www.example.com`, `api.example.com`, and `static.example.com`\. You can use a dynamic naming strategy with the pattern `*.example.com` to identify segments for each subdomain with a different name, resulting in three service nodes on the service map\. If your application receives requests with a hostname that doesn't match the pattern, you will see a fourth node on the service map with a fallback name that you specify\.
 
-To use the same name for all request segments, specify the name of your application when you initialize the message handler, as shown in [the previous section](#xray-sdk-dotnet-messagehandler-globalasax)\. This has the same effect as creating a [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm) and passing it to the `RegisterXRay` method\.
+To use the same name for all request segments, specify the name of your application when you initialize the message handler, as shown in [the previous section](#xray-sdk-dotnet-messagehandler-globalasax)\. This has the same effect as creating a [https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_FixedSegmentNamingStrategy.htm) and passing it to the `RegisterXRay` method\.
 
 ```
 AWSXRayASPNET.RegisterXRay(this, new FixedSegmentNamingStrategy("MyApp"));
@@ -93,7 +93,7 @@ AWSXRayASPNET.RegisterXRay(this, new FixedSegmentNamingStrategy("MyApp"));
 **Note**  
 You can override the default service name that you define in code with the `AWS_XRAY_TRACING_NAME` [environment variable](xray-sdk-dotnet-configuration.md#xray-sdk-dotnet-configuration-envvars)\.
 
-A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically, create a [http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm) and pass it to the `RegisterXRay` method\.
+A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically, create a [https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/T_Amazon_XRay_Recorder_Core_Strategies_DynamicSegmentNamingStrategy.htm) and pass it to the `RegisterXRay` method\.
 
 ```
 AWSXRayASPNET.RegisterXRay(this, new DynamicSegmentNamingStrategy("MyApp", "*.example.com"));

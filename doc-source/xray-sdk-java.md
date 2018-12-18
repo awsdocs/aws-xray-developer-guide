@@ -36,7 +36,7 @@ You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is
 
 If you use Maven or Gradle to build your application, [add the X\-Ray SDK for Java to your build configuration](#xray-sdk-java-dependencies)\.
 
-For reference documentation for of the SDK's classes and methods, see [AWS X\-Ray SDK for Java API Reference](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc)\.
+For reference documentation for of the SDK's classes and methods, see [AWS X\-Ray SDK for Java API Reference](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc)\.
 
 ## Requirements<a name="xray-sdk-java-requirements"></a>
 

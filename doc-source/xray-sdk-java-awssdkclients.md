@@ -11,8 +11,8 @@ For example, to instrument an `AmazonDynamoDB` client, pass a tracing handler to
 **Example MyModel\.java \- DynamoDB Client**  
 
 ```
-import [com\.amazonaws\.xray\.AWSXRay](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
-import [com\.amazonaws\.xray\.handlers\.TracingHandler](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/handlers/TracingHandler.html);
+import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
+import [com\.amazonaws\.xray\.handlers\.TracingHandler](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/handlers/TracingHandler.html);
 
 ...
 public class MyModel {

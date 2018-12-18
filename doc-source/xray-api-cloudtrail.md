@@ -3,8 +3,8 @@
 AWS X\-Ray integrates with AWS CloudTrail to record API actions made by a user, a role, or an AWS service in X\-Ray\. You can use CloudTrail to monitor X\-Ray API requests in real time and store logs in Amazon S3, Amazon CloudWatch Logs, and Amazon CloudWatch Events\. X\-Ray supports logging the following actions as events in CloudTrail log files:
 
 **Supported API Actions**
-+ [http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](http://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) – Management event \(write\)
-+ [http://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html](http://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html) – Management event \(read\)
++ [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) – Management event \(write\)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html) – Management event \(read\)
 
 **To create a trail**
 
@@ -12,11 +12,11 @@ AWS X\-Ray integrates with AWS CloudTrail to record API actions made by a user, 
 
 1. Choose **Create trail**\.
 
-1. Enter a trail name, and then choose the [types of event](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html) to record\.
+1. Enter a trail name, and then choose the [types of event](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html) to record\.
    + **Management events** – Record API actions that create, read, update, or delete AWS resources\. Records calls to all supported API actions for all AWS services\.
    + **Data events** – Record API actions that target specific resources, like Amazon S3 object reads or AWS Lambda function invocations\. You choose which buckets and functions to monitor\.
 
-1. Choose an Amazon S3 bucket and [encryption settings](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html)\.
+1. Choose an Amazon S3 bucket and [encryption settings](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html)\.
 
 1. Choose **Create**\.
 
@@ -36,7 +36,7 @@ CloudTrail records API calls of the types you chose to log files in Amazon S3\. 
         "sessionContext"=>{
             "attributes"=>{
                 "mfaAuthenticated"=>"false",
-                "creationDate"=>"2018-8-01T00:24:36Z"
+                "creationDate"=>"2018-9-01T00:24:36Z"
             },
             "sessionIssuer"=>{
                 "type"=>"Role",
@@ -47,7 +47,7 @@ CloudTrail records API calls of the types you chose to log files in Amazon S3\. 
             }
         }
     },
-    "eventTime"=>"2018-8-01T00:24:36Z",
+    "eventTime"=>"2018-9-01T00:24:36Z",
     "eventSource"=>"xray.amazonaws.com",
     "eventName"=>"GetEncryptionConfig",
     "awsRegion"=>"us-east-2",
@@ -62,11 +62,11 @@ CloudTrail records API calls of the types you chose to log files in Amazon S3\. 
 }
 ```
 
-The [userIdentity element](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html) contains information about who generated the request\. The identity information helps you determine the following:
+The [userIdentity element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html) contains information about who generated the request\. The identity information helps you determine the following:
 + Whether the request was made with root or IAM user credentials\.
 + Whether the request was made with temporary security credentials for a role or federated user\.
 + Whether the request was made by another AWS service\.
 
-To be notified when a new log file is available, configure CloudTrail to publish Amazon SNS notifications\. For more information, see [Configuring Amazon SNS Notifications for CloudTrail](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)\.
+To be notified when a new log file is available, configure CloudTrail to publish Amazon SNS notifications\. For more information, see [Configuring Amazon SNS Notifications for CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)\.
 
-You can also aggregate X\-Ray log files from multiple AWS Regions and multiple AWS accounts into a single Amazon S3 bucket\. For more information, see [Receiving CloudTrail Log Files from Multiple Regions](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html) and [Receiving CloudTrail Log Files from Multiple Accounts](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html)\.
+You can also aggregate X\-Ray log files from multiple AWS Regions and multiple AWS accounts into a single Amazon S3 bucket\. For more information, see [Receiving CloudTrail Log Files from Multiple Regions](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html) and [Receiving CloudTrail Log Files from Multiple Accounts](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html)\.

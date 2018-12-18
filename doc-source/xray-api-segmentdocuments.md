@@ -2,9 +2,9 @@
 
 A **trace segment** is a JSON representation of a request that your application serves\. A trace segment records information about the original request, information about the work that your application does locally, and **subsegments** with information about downstream calls that your application makes to AWS resources, HTTP APIs, and SQL databases\.
 
-A **segment document** conveys information about a segment to X\-Ray\. A segment document can be up to 64 kB and contain a whole segment with subsegments, a fragment of a segment that indicates that a request is in progress, or a single subsegment that is sent separately\. You can send segment documents directly to X\-Ray by using the [http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) API\.
+A **segment document** conveys information about a segment to X\-Ray\. A segment document can be up to 64 kB and contain a whole segment with subsegments, a fragment of a segment that indicates that a request is in progress, or a single subsegment that is sent separately\. You can send segment documents directly to X\-Ray by using the [https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) API\.
 
-X\-Ray compiles and processes segment documents to generate queryable **trace summaries** and **full traces** that you can access by using the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) and [http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) APIs, respectively\. In addition to the segments and subsegments that you send to X\-Ray, the service uses information in subsegments to generate **inferred segments** and adds them to the full trace\. Inferred segments represent downstream services and resources in the service map\.
+X\-Ray compiles and processes segment documents to generate queryable **trace summaries** and **full traces** that you can access by using the [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) and [https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) APIs, respectively\. In addition to the segments and subsegments that you send to X\-Ray, the service uses information in subsegments to generate **inferred segments** and adds them to the full trace\. Inferred segments represent downstream services and resources in the service map\.
 
 X\-Ray provides a **JSON schema** for segment documents\. You can download the schema here: [xray\-segmentdocument\-schema\-v1\.0\.0](samples/xray-segmentdocument-schema-v1.0.0.zip)\. The fields and objects listed in the schema are described in more detail in the following sections\.
 
@@ -63,7 +63,7 @@ Trace IDs are visible in [response headers](xray-concepts.md#xray-concepts-traci
 + `in_progress` – **boolean**, set to `true` instead of specifying an `end_time` to record that a segment is started, but is not complete\. Send an in\-progress segment when your application receives a request that will take a long time to serve, to trace the request receipt\. When the response is sent, send the complete segment to overwrite the in\-progress segment\. Only send one complete segment, and one or zero in\-progress segments, per request\.
 
 **Service Names**  
-A segment's `name` should match the domain name or logical name of the service that generates the segment\. However, this is not enforced\. Any application that has permission to [http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) can send segments with any name\.
+A segment's `name` should match the domain name or logical name of the service that generates the segment\. However, this is not enforced\. Any application that has permission to [https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) can send segments with any name\.
 
 The following fields are optional for segments\.
 
@@ -257,7 +257,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
       "instance_id": "i-0b5a4678fc325bg98"
     },
     "xray": {
-        "sdk_version": "2.0.0 for Java"
+        "sdk_version": "2.1.0 for Java"
     },
   },
   "http": {
@@ -340,7 +340,7 @@ Segments and subsegments can include an `annotations` object containing one or m
       "instance_id": "i-0b5a4678fc325bg98"
     },
     "xray": {
-        "sdk_version": "2.0.0 for Java"
+        "sdk_version": "2.1.0 for Java"
     },
   },
   "annotations": {
@@ -367,7 +367,7 @@ Keys must be alphanumeric in order to work with filters\. Underscore is allowed\
 
 ## Metadata<a name="api-segmentdocuments-metadata"></a>
 
-Segments and subsegments can include a `metadata` object containing one or more fields with values of any type, including objects and arrays\. X\-Ray does not index metadata, and values can be any size, as long as the segment document doesn't exceed the maximum size \(64 kB\)\. You can view metadata in the full segment document returned by the [http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](http://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) API\. Field keys \(`debug` in the following example\) starting with `AWS.` are reserved for use by AWS\-provided SDKs and clients\.
+Segments and subsegments can include a `metadata` object containing one or more fields with values of any type, including objects and arrays\. X\-Ray does not index metadata, and values can be any size, as long as the segment document doesn't exceed the maximum size \(64 kB\)\. You can view metadata in the full segment document returned by the [https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) API\. Field keys \(`debug` in the following example\) starting with `AWS.` are reserved for use by AWS\-provided SDKs and clients\.
 
 **Example Custom Subsegment with Metadata**  
 
@@ -435,7 +435,7 @@ All fields are optional\.
       "instance_id": "i-075ad396f12bc325a"
     },
     "xray": {
-      "sdk": "2.0.0 for Java"
+      "sdk": "2.1.0 for Java"
     }
   }
   ```

@@ -5,8 +5,8 @@ In the user model class, the application manually creates subsegments to group a
 **Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserModel.java) \- Custom Subsegments**  
 
 ```
-import [com\.amazonaws\.xray\.AWSXRay](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
-import [com\.amazonaws\.xray\.entities\.Subsegment](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Subsegment.html);
+import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
+import [com\.amazonaws\.xray\.entities\.Subsegment](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Subsegment.html);
 ...
     public void saveUser(User user) {
     // Wrap in subsegment

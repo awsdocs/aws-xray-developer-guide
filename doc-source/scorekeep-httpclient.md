@@ -5,7 +5,7 @@ The user factory class shows how the application uses the X\-Ray SDK for Java's 
 **Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserFactory.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserFactory.java) – HTTPClient Instrumentation**  
 
 ```
-import [com\.amazonaws\.xray\.proxies\.apache\.http\.HttpClientBuilder](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/proxies/apache/http/HttpClientBuilder.html);
+import [com\.amazonaws\.xray\.proxies\.apache\.http\.HttpClientBuilder](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/proxies/apache/http/HttpClientBuilder.html);
 
   public String randomName() throws IOException {
     CloseableHttpClient httpclient = HttpClientBuilder.create().build();

@@ -6,8 +6,8 @@ When your application makes calls to microservices or public HTTP APIs, you can 
 
 ```
 using System.Net;
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
-using [Amazon\.XRay\.Recorder\.Handlers\.System\.Net](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_System_Net.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.System\.Net](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_System_Net.htm);
 
 private void MakeHttpRequest()
 {
@@ -28,8 +28,8 @@ If you use [https://msdn.microsoft.com/en-us/library/system.net.http.httpclient.
 
 ```
 using System.Net.Http;
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
-using [Amazon\.XRay\.Recorder\.Handlers\.System\.Net](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_System_Net.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Handlers\.System\.Net](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Handlers_System_Net.htm);
 
 private void MakeHttpRequest()
 {

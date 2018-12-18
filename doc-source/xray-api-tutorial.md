@@ -6,7 +6,7 @@ The AWS CLI lets your access the X\-Ray service directly and use the same APIs t
 
 This tutorial uses the Scorekeep sample application and included scripts to generate tracing data and a service map\. Follow the instructions in the [getting started tutorial](xray-gettingstarted.md) to launch the application\.
 
-This tutorial uses the AWS CLI to show basic use of the X\-Ray API\. The AWS CLI, [available for Windows, Linux, and OS\-X](http://docs.aws.amazon.com/cli/latest/userguide/installing.html), provides command line access to the public APIs for all AWS services\.
+This tutorial uses the AWS CLI to show basic use of the X\-Ray API\. The AWS CLI, [available for Windows, Linux, and OS\-X](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), provides command line access to the public APIs for all AWS services\.
 
 Scripts included to test the sample application uses `cURL` to send traffic to the API and `jq` to parse the output\. You can download the `jq` executable from [stedolan\.github\.io](https://stedolan.github.io/jq/), and the `curl` executable from [https://curl.haxx.se/download.html](https://curl.haxx.se/download.html)\. Most Linux and OS X installations include cURL\.
 
@@ -18,7 +18,7 @@ The web app continues to generate traffic to the API every few seconds while the
 
 1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)\.
 
-1. Navigate to the [management console](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
+1. Navigate to the [management console](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
 
 1. Copy the environment **URL** from the page header\.
 
@@ -45,7 +45,7 @@ The web app continues to generate traffic to the API every few seconds while the
 
 ## Use the X\-Ray API<a name="xray-api-tutorial-useapi"></a>
 
-The AWS CLI provides commands for all of the API actions that X\-Ray provides, including [http://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html](http://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html) and [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html)\. See the [AWS X\-Ray API Reference](http://docs.aws.amazon.com/xray/latest/api/Welcome.html) for more information on all of the supported actions and the data types that they use\.
+The AWS CLI provides commands for all of the API actions that X\-Ray provides, including [https://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html](https://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html) and [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html)\. See the [AWS X\-Ray API Reference](https://docs.aws.amazon.com/xray/latest/api/Welcome.html) for more information on all of the supported actions and the data types that they use\.
 
 **Example bin/service\-graph\.sh**  
 
@@ -157,7 +157,7 @@ Terminate your Elastic Beanstalk environment to shut down the Amazon EC2 instanc
 
 1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)\.
 
-1. Navigate to the [management console](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
+1. Navigate to the [management console](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
 
 1. Choose **Actions**\.
 

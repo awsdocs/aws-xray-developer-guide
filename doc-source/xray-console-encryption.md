@@ -2,7 +2,7 @@
 
 AWS X\-Ray always encrypts traces and related data at rest\. If you need to audit and disable encryption keys for compliance or internal requirements, you can configure X\-Ray to use an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to encrypt data\.
 
-X\-Ray provides an AWS managed CMK named `aws/xray`\. Use this key if you just want to [audit key usage in AWS CloudTrail](http://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html) and don't need to manage the key itself\. If you need to manage access to the key or configure key rotation, you can [create a customer managed CMK](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)\.
+X\-Ray provides an AWS managed CMK named `aws/xray`\. Use this key if you just want to [audit key usage in AWS CloudTrail](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html) and don't need to manage the key itself\. If you need to manage access to the key or configure key rotation, you can [create a customer managed CMK](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)\.
 
 You must have user\-level access to a customer managed CMK to configure X\-Ray to use it, and to then view encrypted traces\. See [User Permissions for Encryption](xray-permissions.md#xray-permissions-encryption) for more information\.
 
@@ -32,4 +32,4 @@ See [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing/) fo
 
 If X\-Ray is unable to access your encryption key, it stops storing data\. This can happen if your user loses access to the CMK, or if you disable a key that's currently in use\. When this happens, X\-Ray shows a notification in the navigation bar\.
 
-To configure encryption settings with the X\-Ray API, see [Configuring AWS X\-Ray Sampling and Encryption Settings with the API](xray-api-configuration.md)\.
+To configure encryption settings with the X\-Ray API, see [Configuring  Sampling, Groups, and Encryption Settings with the AWS X\-Ray API](xray-api-configuration.md)\.

@@ -10,6 +10,7 @@ AWS X\-Ray receives data from services as *segments*\. X\-Ray then groups segmen
 + [Sampling](#xray-concepts-sampling)
 + [Tracing Header](#xray-concepts-tracingheader)
 + [Filter Expressions](#xray-concepts-filterexpressions)
++ [Groups](#xray-concepts-groups)
 + [Annotations and Metadata](#xray-concepts-annotations)
 + [Errors, Faults, and Exceptions](#xray-concepts-errors)
 
@@ -56,7 +57,7 @@ Both viewpoints are useful, as the downstream service records precisely when it 
 X\-Ray uses the data that your application sends to generate a **service graph**\. Each AWS resource that sends data to X\-Ray appears as a service in the graph\. **Edges** connect the services that work together to serve requests\. Edges connect clients to your application, and your application to the downstream services and resources that it uses\.
 
 **Service Names**  
-A segment's `name` should match the domain name or logical name of the service that generates the segment\. However, this is not enforced\. Any application that has permission to [http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) can send segments with any name\.
+A segment's `name` should match the domain name or logical name of the service that generates the segment\. However, this is not enforced\. Any application that has permission to [https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) can send segments with any name\.
 
 A service graph is a JSON document that contains information about the services and resources that make up your application\. The X\-Ray console uses the service graph to generate a visualization or *service map*\.
 
@@ -115,11 +116,22 @@ Even with sampling, a complex application generates a lot of data\. The AWS X\-R
 
 ![\[Drill down to traces for individual requests\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-filter-httpurlCONTAINSuser-cropped.png)
 
+## Groups<a name="xray-concepts-groups"></a>
+
+Extending filter expressions, X\-Ray also supports the group feature\. Using a filter expression, you can define criteria by which to accept traces into the group\. 
+
+You can call the group by name or by Amazon Resource Name \(ARN\) to generate its own service graph, trace summaries, and Amazon CloudWatch metrics\. Once a group is created, incoming traces are checked against the group’s filter expression as they are stored in the X\-Ray service\. Metrics for the number of traces matching each criteria are published to CloudWatch every minute\. 
+
+Updating a group's filter expression doesn't change data that's already recorded\. The update applies only to subsequent traces\. This can result in a merged graph of the new and old expressions\. To avoid this, delete the current group and create a fresh one\.
+
+**Note**  
+Groups are billed by the number of retrieved traces that match the filter expression\. For more information, see [AWS X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\. 
+
 ## Annotations and Metadata<a name="xray-concepts-annotations"></a>
 
 When you instrument your application, the X\-Ray SDK records information about incoming and outgoing requests, the AWS resources used, and the application itself\. You can add other information to the segment document as annotations and metadata\.
 
-**Annotations** are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md)\. Use annotations to record data that you want to use to group traces in the console, or when calling the [http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](http://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
+**Annotations** are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md)\. Use annotations to record data that you want to use to group traces in the console, or when calling the [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
 
 X\-Ray indexes up to 50 annotations per trace\.
 

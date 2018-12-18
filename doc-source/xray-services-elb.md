@@ -17,4 +17,4 @@ A `trace_id` consists of three numbers separated by hyphens\. For example, `1-58
 
 Load balancers do not send data to X\-Ray, and do not appear as a node on your service map\.
 
-For more information, see [Request Tracing for Your Application Load Balancer](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-request-tracing.html) in the Elastic Load Balancing Developer Guide\.
+For more information, see [Request Tracing for Your Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-request-tracing.html) in the Elastic Load Balancing Developer Guide\.

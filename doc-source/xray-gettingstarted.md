@@ -27,7 +27,7 @@ You can also access the raw service map and trace data by using the AWS CLI to c
 
 ## Prerequisites<a name="xray-gettingstarted-prereqs"></a>
 
-This tutorial uses Elastic Beanstalk to create and configure the resources that run the sample application and X\-Ray daemon\. If you use an IAM user with limited permissions, add the [Elastic Beanstalk managed user policy](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) to grant your IAM user permission to use Elastic Beanstalk, and the `AWSXrayReadOnlyAccess` managed policy for permission to read the service map and traces in the X\-Ray console\.
+This tutorial uses Elastic Beanstalk to create and configure the resources that run the sample application and X\-Ray daemon\. If you use an IAM user with limited permissions, add the [Elastic Beanstalk managed user policy](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) to grant your IAM user permission to use Elastic Beanstalk, and the `AWSXrayReadOnlyAccess` managed policy for permission to read the service map and traces in the X\-Ray console\.
 
 Create an Elastic Beanstalk environment for the sample application\. If you haven't used Elastic Beanstalk before, this will also create a service role and instance profile for your application\.
 
@@ -61,7 +61,7 @@ Deploy the sample application to your Elastic Beanstalk environment\. The sample
 
 1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)\.
 
-1. Navigate to the [management console](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
+1. Navigate to the [management console](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
 
 1. Choose **Upload and Deploy**\.
 
@@ -121,7 +121,7 @@ Scorekeep uses Amazon SNS to send notifications when users complete a game\. Whe
 
 1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)\.
 
-1. Navigate to the [management console](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
+1. Navigate to the [management console](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
 
 1. Choose **Configuration**\.
 
@@ -130,7 +130,7 @@ Scorekeep uses Amazon SNS to send notifications when users complete a game\. Whe
 1. Under **Environment Properties**, replace the default value with your email address\.  
 ![\[Setting environment properties\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-beanstalk-envvars.png)
 **Note**  
-The default value uses an AWS CloudFormation [function](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions-functions.html) to retrieve a parameter stored in a configuration file \(a dummy value in this case\)\.
+The default value uses an AWS CloudFormation [function](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions-functions.html) to retrieve a parameter stored in a configuration file \(a dummy value in this case\)\.
 
 1. Choose **Apply**\.
 
@@ -148,7 +148,7 @@ To instrument incoming HTTP requests, the application adds the `TracingFilter` p
 
 ```
 import javax.servlet.Filter;
-import [com\.amazonaws\.xray\.javax\.servlet\.AWSXRayServletFilter](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html);
+import [com\.amazonaws\.xray\.javax\.servlet\.AWSXRayServletFilter](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html);
 ...
 
 @Configuration
@@ -167,7 +167,7 @@ This filter sends trace data about all incoming requests that the application se
 
 The application also makes downstream calls to DynamoDB using the AWS SDK for Java\. To instrument these calls, the application simply takes the AWS SDK\-related submodules as dependencies, and the X\-Ray SDK for Java automatically instruments all AWS SDK clients\.
 
-The application uses a `Buildfile` file to build the source code on\-instance with `Gradle` and a `Procfile` file to run the executable JAR that Gradle generates\. `Buildfile` and `Procfile` support is a feature of the [Elastic Beanstalk Java SE platform](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-se-platform.html)\.
+The application uses a `Buildfile` file to build the source code on\-instance with `Gradle` and a `Procfile` file to run the executable JAR that Gradle generates\. `Buildfile` and `Procfile` support is a feature of the [Elastic Beanstalk Java SE platform](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-se-platform.html)\.
 
 **Example Buildfile**  
 
@@ -199,7 +199,7 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom("com.amazonaws:aws-java-sdk-bom:1.11.67")
-        mavenBom("com.amazonaws:aws-xray-recorder-sdk-bom:2.0.0")
+        mavenBom("com.amazonaws:aws-xray-recorder-sdk-bom:2.1.0")
     }
 }
 ```
@@ -229,11 +229,11 @@ The X\-Ray SDK for Java provides a class named `AWSXRay` that provides the globa
 **Example src/main/java/scorekeep/WebConfig\.java \- Recorder**  
 
 ```
-import [com\.amazonaws\.xray\.AWSXRay](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
-import [com\.amazonaws\.xray\.AWSXRayRecorderBuilder](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorderBuilder.html);
-import [com\.amazonaws\.xray\.plugins\.EC2Plugin](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/plugins/EC2Plugin.html);
-import [com\.amazonaws\.xray\.plugins\.ElasticBeanstalkPlugin](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/plugins/ElasticBeanstalkPlugin.html);
-import [com\.amazonaws\.xray\.strategy\.sampling\.LocalizedSamplingStrategy](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/strategy/sampling/LocalizedSamplingStrategy.html);
+import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
+import [com\.amazonaws\.xray\.AWSXRayRecorderBuilder](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorderBuilder.html);
+import [com\.amazonaws\.xray\.plugins\.EC2Plugin](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/plugins/EC2Plugin.html);
+import [com\.amazonaws\.xray\.plugins\.ElasticBeanstalkPlugin](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/plugins/ElasticBeanstalkPlugin.html);
+import [com\.amazonaws\.xray\.strategy\.sampling\.LocalizedSamplingStrategy](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/strategy/sampling/LocalizedSamplingStrategy.html);
 
 @Configuration
 public class WebConfig {
@@ -311,7 +311,7 @@ Terminate your Elastic Beanstalk environment to shut down the Amazon EC2 instanc
 
 1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)\.
 
-1. Navigate to the [management console](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
+1. Navigate to the [management console](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-console.html) for your environment\.
 
 1. Choose **Actions**\.
 

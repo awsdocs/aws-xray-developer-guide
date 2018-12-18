@@ -7,7 +7,7 @@ To manage subsegments, use the `beginSubsegment` and `endSubsegment` methods\.
 **Example GameModel\.java \- Custom Subsegment**  
 
 ```
-import [com\.amazonaws\.xray\.AWSXRay](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
+import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
 ...
   public void saveGame(Game game) throws SessionNotFoundException {
     // wrap in subsegment
@@ -39,7 +39,7 @@ For code that doesn't throw checked exceptions, you can pass the code to `AWSXRa
 **Example Subsegment Lambda Function**  
 
 ```
-import [com\.amazonaws\.xray\.AWSXRay](http://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
+import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
 
 AWSXRay.createSubsegment("getMovies", (subsegment) -> {
     // function code

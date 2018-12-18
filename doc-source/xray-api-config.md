@@ -98,4 +98,4 @@ Following is an example of an AWS Config change entry\. The from/to format illus
 
 ## Amazon SNS Notifications<a name="SNSNotifs"></a>
 
-To be notified of configuration changes, set AWS Config to publish Amazon SNS notifications\. For more information, see [Monitoring AWS Config Resource Changes by Email](http://docs.aws.amazon.com/config/latest/developerguide/monitoring-resource-changes-by-email.html)\.
+To be notified of configuration changes, set AWS Config to publish Amazon SNS notifications\. For more information, see [Monitoring AWS Config Resource Changes by Email](https://docs.aws.amazon.com/config/latest/developerguide/monitoring-resource-changes-by-email.html)\.

@@ -36,17 +36,24 @@ When you use multiple plugins, the SDK uses the plugin that was loaded last to d
 
 ## Sampling Rules<a name="xray-sdk-go-configuration-sampling"></a>
 
-The SDK has a default sampling strategy that determines which requests get traced\. By default, the SDK traces the first request each second, and five percent of any additional requests\. You can customize the SDK's sampling behavior by applying rules you define in a local file\.
+The SDK uses the sampling rules you define in the X\-Ray console to determine which requests to record\. The default rule traces the first request each second, and five percent of any additional requests across all services sending traces to X\-Ray\. [Create additional rules in the X\-Ray console](xray-console-sampling.md) to customize the amount of data recorded for each of your applications\.
+
+The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
+
+**Note**  
+If the SDK can't reach X\-Ray to get sampling rules, it reverts to a default local rule of the first request each second, and five percent of any additional requests per host\. This can occur if the host doesn't have permission to call sampling APIs, or can't connect to the X\-Ray daemon, which acts as a TCP proxy for API calls made by the SDK\.
+
+You can also configure the SDK to load sampling rules from a JSON document\. The SDK can use local rules as a backup for cases where X\-Ray sampling is unavailable, or use local rules exclusively\.
 
 **Example sampling\-rules\.json**  
 
 ```
 {
-  "version": 1,
+  "version": 2,
   "rules": [
     {
       "description": "Player moves.",
-      "service_name": "*",
+      "host": "*",
       "http_method": "*",
       "url_path": "/api/move/*",
       "fixed_target": 0,
@@ -62,26 +69,26 @@ The SDK has a default sampling strategy that determines which requests get trace
 
 This example defines one custom rule and a default rule\. The custom rule applies a five\-percent sampling rate with no minimum number of requests to trace for paths under `/api/move/`\. The default rule traces the first request each second and 10 percent of additional requests\.
 
-The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
+The disadvantage of defining rules locally is that the fixed target is applied by each instance of the recorder independently, instead of being managed by the X\-Ray service\. As you deploy more hosts, the fixed rate is multiplied, making it harder to control the amount of data recorded\.
 
 On Lambda, you cannot modify the sampling rate\. If your function is called by an instrumented service, calls generated requests that were sampled by that service will be recorded by Lambda\. If active tracing is enabled and no tracing header is present, Lambda makes the sampling decision\.
 
-Once you've defined your rules, use `xray.Configure` to add them to your Go application\.
+To provide backup rules, point to the local sampling JSON file by using `NewCentralizedStrategyWithFilePath`\.
 
-**Example main\.go – sampling rule configuration**  
+**Example main\.go – local sampling rule**  
 
 ```
-func init() {
-    ss, err := sampling.NewLocalizedStrategyFromFilePath("conf/sampling.json")
+s, _ := sampling.NewCentralizedStrategyWithFilePath("sampling.json") // path to local sampling json
+xray.Configure(xray.Config{SamplingStrategy: s})
+```
 
-    if err != nil {
-        panic(err)
-    }
+To use only local rules, point to the local sampling JSON file by using `NewLocalizedStrategyFromFilePath`\.
 
-    xray.Configure(xray.Config{
-        SamplingStrategy: ss,
-    })
-}
+**Example main\.go – disable sampling**  
+
+```
+s, _ := sampling.NewLocalizedStrategyFromFilePath("sampling.json") // path to local sampling json
+xray.Configure(xray.Config{SamplingStrategy: s})
 ```
 
 ## Logging<a name="xray-sdk-go-configuration-logging"></a>

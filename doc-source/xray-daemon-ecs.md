@@ -20,6 +20,8 @@ ENTRYPOINT ["/usr/bin/xray", "-b", "0.0.0.0:2000"]
 EXPOSE 2000/udp
 ```
 
+Download the complete [example image](https://hub.docker.com/r/amazon/aws-xray-daemon/) on Docker Hub\.
+
 **Example Dockerfile – Ubuntu**  
 For Debian derivatives, you also need to install certificate authority \(CA\) certificates to avoid issues when downloading the installer\.  
 
@@ -72,7 +74,7 @@ In your task definition, the configuration depends on the networking mode that y
     }
 ```
 
-If you run your cluster in the private subnet of a VPC, you can use the [`awsvpc` network mode](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) to attach an elastic network interface \(ENI\) to your containers\. This enables you to avoid using links\. Omit the host port in the port mappings, the link, and the `AWS_XRAY_DAEMON_ADDRESS` environment variable\.
+If you run your cluster in the private subnet of a VPC, you can use the [`awsvpc` network mode](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) to attach an elastic network interface \(ENI\) to your containers\. This enables you to avoid using links\. Omit the host port in the port mappings, the link, and the `AWS_XRAY_DAEMON_ADDRESS` environment variable\.
 
 **Example VPC task definition**  
 

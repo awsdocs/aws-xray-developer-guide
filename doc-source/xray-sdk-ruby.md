@@ -23,7 +23,7 @@ Annotations and metadata are arbitrary text that you add to segments with the X\
 
 When you have a lot of instrumented clients in your code, a single request segment can contain a large number of subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in [custom subsegments](xray-sdk-ruby-subsegments.md)\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
-For reference documentation for the SDK's classes and methods, see the [AWS X\-Ray SDK for Ruby API Reference](http://docs.aws.amazon.com/xray-sdk-for-ruby/latest/reference)\.
+For reference documentation for the SDK's classes and methods, see the [AWS X\-Ray SDK for Ruby API Reference](https://docs.aws.amazon.com/xray-sdk-for-ruby/latest/reference)\.
 
 ## Requirements<a name="xray-sdk-ruby-requirements"></a>
 

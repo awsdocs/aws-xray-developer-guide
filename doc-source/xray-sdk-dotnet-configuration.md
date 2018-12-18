@@ -33,7 +33,7 @@ Then, in your application code, build a configuration object and use it to initi
 **Example \.NET Core Program\.cs – Recorder Configuration**  
 
 ```
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
 ...
 AWSXRayRecorder.InitializeInstance(configuration);
 ```
@@ -177,11 +177,11 @@ To configure logging, add a configuration section named `aws` to your `App.confi
 </configuration>
 ```
 
-For more information, see [Configuring Your AWS SDK for \.NET Application](http://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-config.html) in the *AWS SDK for \.NET Developer Guide*\.
+For more information, see [Configuring Your AWS SDK for \.NET Application](https://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-config.html) in the *AWS SDK for \.NET Developer Guide*\.
 
 ## Logging \(\.NET Core\)<a name="xray-sdk-dotnet-configuration-corelogging"></a>
 
-For \.NET Core applications, the X\-Ray SDK supports the logging options in the AWS SDK for \.NET [LoggingOptions enum](http://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TLoggingOptions.html)\. To configure logging, pass one of these options to the `RegisterLogger` method\.
+For \.NET Core applications, the X\-Ray SDK supports the logging options in the AWS SDK for \.NET [LoggingOptions enum](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TLoggingOptions.html)\. To configure logging, pass one of these options to the `RegisterLogger` method\.
 
 ```
 AWSXRayRecorder.RegisterLogger(LoggingOptions.Console);
@@ -213,7 +213,7 @@ Then, create the logger and apply the configuration in your program code\.
 
 ```
 using log4net;
-using [Amazon\.XRay\.Recorder\.Core](http://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
+using [Amazon\.XRay\.Recorder\.Core](https://docs.aws.amazon.com/xray-sdk-for-dotnet/latest/reference/html/N_Amazon_XRay_Recorder_Core.htm);
 
 class Program
 {

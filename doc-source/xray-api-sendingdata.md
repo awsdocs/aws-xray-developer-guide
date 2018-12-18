@@ -100,7 +100,7 @@ See the Scorekeep sample application for scripts that create trace IDs and send 
 
 ## Using PutTraceSegments<a name="xray-api-segments"></a>
 
-You can upload segment documents with the [http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](http://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) API\. The API has a single parameter, `TraceSegmentDocuments`, that takes a list of JSON segment documents\.
+You can upload segment documents with the [https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html](https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html) API\. The API has a single parameter, `TraceSegmentDocuments`, that takes a list of JSON segment documents\.
 
 With the AWS CLI, use the `aws xray put-trace-segments` command to send segment documents directly to X\-Ray\.
 
@@ -113,7 +113,7 @@ $ aws xray put-trace-segments --trace-segment-documents $DOC
 ```
 
 **Note**  
-Windows Command Processor and Windows PowerShell have different requirements for quoting and escaping quotes in JSON strings\. See [Quoting Strings](http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#quoting-strings) in the AWS CLI User Guide for details\.
+Windows Command Processor and Windows PowerShell have different requirements for quoting and escaping quotes in JSON strings\. See [Quoting Strings](https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#quoting-strings) in the AWS CLI User Guide for details\.
 
 The output lists any segments that failed processing\. For example, if the date in the trace ID is too far in the past, you see an error like the following\.
 

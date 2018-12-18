@@ -121,7 +121,7 @@ For more information on sampling statistics and how services use sampling rules,
 
 ## Next Steps<a name="xray-console-sampling-nextsteps"></a>
 
-You can use the X\-Ray API to manage sampling rules\. With the API, you can create and update rules programmatically on a schedule, or in response to alarms or notifications\. See [Configuring AWS X\-Ray Sampling and Encryption Settings with the API](xray-api-configuration.md) for instructions and additional rule examples\.
+You can use the X\-Ray API to manage sampling rules\. With the API, you can create and update rules programmatically on a schedule, or in response to alarms or notifications\. See [Configuring  Sampling, Groups, and Encryption Settings with the AWS X\-Ray API](xray-api-configuration.md) for instructions and additional rule examples\.
 
 The X\-Ray SDK and AWS services also use the X\-Ray API to read sampling rules, report sampling results, and get sampling targets\. Services must keep track of how often they apply each rule, evaluate rules based on priority, and borrow from the reservoir when a request matches a rule for which X\-Ray has not yet assigned the service a quota\. For more detail about how a service uses the API for sampling, see [Using Sampling Rules with the X\-Ray API](xray-api-sampling.md)\.
 

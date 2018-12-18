@@ -41,6 +41,13 @@ If your service map is large, the console defaults to a zoomed out view\. Use th
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-icons-arrows.png) – scroll the service map\. Click and drag to scroll with the mouse\.
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-icons-frame.png) – frame the selected node or edge in the center of map\.
 
+**To view a group service map**
+
+1. Open the [service map page](https://console.aws.amazon.com/xray/home#/service-map) of the X\-Ray console\.
+
+1. Choose a group name from the drop\-down menu to the left of the search bar\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-select-console.png)
+
 ## Viewing Traces<a name="xray-console-traces"></a>
 
 Use the trace list in the X\-Ray console to find traces by URL, response code, or other data from the trace summary\.

@@ -7,7 +7,7 @@ The project includes three Dockerfiles that define container images for the API,
 + `/scorekeep-frontend/Dockerfile` – The Angular web app client, and the nginx proxy that routes incoming traffic\.
 + `/xray-daemon/Dockerfile` – The X\-Ray daemon\.
 
-The X\-Ray daemon Dockerfile creates an image based on Amazon Linux that runs the X\-Ray daemon\.
+The X\-Ray daemon Dockerfile creates an image based on Amazon Linux that runs the X\-Ray daemon\. Download the complete [example image](https://hub.docker.com/r/amazon/aws-xray-daemon/) on Docker Hub\.
 
 **Example Dockerfile – Amazon Linux**  
 

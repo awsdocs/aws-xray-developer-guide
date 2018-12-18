@@ -15,7 +15,17 @@ To get the freshest results first, the console starts scanning at the end of the
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-tracescan-parallel.png)
 
+## Using Filter Expressions with Groups<a name="groups"></a>
+
+Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. Groups are identified by their name or an Amazon Resource Name \(ARN\), and contain a filter expression\. The service compares incoming traces to the expression and stores them accordingly\.
+
+You can create and modify groups by using the drop\-down menu to the left of the filter expression search bar\.
+
+**Note**  
+If the service encounters an error in qualifying a group, that group is no longer included in processing incoming traces and an error metric is recorded\.
+
 **Topics**
++ [Using Filter Expressions with Groups](#groups)
 + [Filter Expression Syntax](#console-filters-syntax)
 + [Boolean Keywords](#console-filters-boolean)
 + [Number Keywords](#console-filters-number)
