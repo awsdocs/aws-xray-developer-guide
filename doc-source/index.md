@@ -1,7 +1,7 @@
 # AWS X-Ray Developer Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -87,6 +87,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tracing Calls to Downstream HTTP Web Services Using the X-Ray SDK for Python](xray-sdk-python-httpclients.md)
    + [Generating Custom Subsegments with the X-Ray SDK for Python](xray-sdk-python-subsegments.md)
    + [Add Annotations and Metadata to Segments with the X-Ray SDK for Python](xray-sdk-python-segment.md)
+   + [Instrumenting Web Frameworks Deployed to Serverless Environments](xray-sdk-python-serverless.md)
 + [AWS X-Ray SDK for Ruby](xray-sdk-ruby.md)
    + [Configuring the X-Ray SDK for Ruby](xray-sdk-ruby-configuration.md)
    + [Tracing Incoming Requests with the X-Ray SDK for Ruby Middleware](xray-sdk-ruby-middleware.md)

@@ -176,6 +176,9 @@ XRAY_RECORDER = {
 
 You can use environment variables to configure the X\-Ray SDK for Python\. The SDK supports the following variables: 
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-python-middleware.md#xray-sdk-python-middleware-naming)\.
++ `AWS_XRAY_SDK_ENABLED` – When set to `false`, disables the SDK\. By default, the SDK is enabled unless the environment variable is set to false\. 
+  + When disabled, the global recorder automatically generates dummy segments and subsegments that are not sent to the daemon, and automatic patching is disabled\. Middlewares are written as a wrapper over the global recorder\. All segment and subsegment generation through the middleware also become dummy segment and dummy subsegments\.
+  + Set the value of `AWS_XRAY_SDK_ENABLED` through the environment variable or through direct interaction with the `global_sdk_config` object from the `aws_xray_sdk` library\. Settings to the environment variable override these interactions\.
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK uses `127.0.0.1:2000` for both trace data \(UDP\) and sampling \(TCP\)\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 
 **Format**

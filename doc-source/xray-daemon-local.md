@@ -1,6 +1,6 @@
 # Running the X\-Ray Daemon Locally<a name="xray-daemon-local"></a>
 
-You can run the AWS X\-Ray daemon locally on Linux, MacOS, Windows, or in a Docker container\. Run the daemon to relay trace date to X\-Ray when you are developing and testing your instrumented application\. Download and extract the daemon by using the instructions [here](xray-daemon.md#xray-daemon-downloading)\.
+You can run the AWS X\-Ray daemon locally on Linux, MacOS, Windows, or in a Docker container\. Run the daemon to relay trace data to X\-Ray when you are developing and testing your instrumented application\. Download and extract the daemon by using the instructions [here](xray-daemon.md#xray-daemon-downloading)\.
 
 When running locally, the daemon can read credentials from an AWS SDK credentials file \(`.aws/credentials` in your user directory\) or from environment variables\. For more information, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
@@ -37,7 +37,7 @@ FROM amazonlinux
 RUN yum install -y unzip
 RUN curl -o daemon.zip https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip
 RUN unzip daemon.zip && cp xray /usr/bin/xray
-ENTRYPOINT ["/usr/bin/xray", "-b", "0.0.0.0:2000"]
+ENTRYPOINT ["/usr/bin/xray", "-t", "0.0.0.0:2000"]
 EXPOSE 2000/udp
 ```
 

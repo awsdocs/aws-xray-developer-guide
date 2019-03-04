@@ -25,7 +25,7 @@ Use annotations to record information on segments that you want indexed for sear
 To record annotations, call `AddAnnotation` with a string containing the metadata you want to associate with the segment\.
 
 ```
-xray.AddAnnotation(context, "value", error)
+xray.AddAnnotation(key string, value interface{})
 ```
 
 The SDK records annotations as key\-value pairs in an `annotations` object in the segment document\. Calling `AddAnnotation` twice with the same key overwrites previously recorded values on the same segment\.
@@ -39,7 +39,7 @@ Use metadata to record information on segments that you don't need indexed for s
 To record metadata, call `AddMetadata` with a string containing the metadata you want to associate with the segment\.
 
 ```
-xray.AddMetadata(context, "value", error)
+xray.AddMetadata(key string, value interface{})
 ```
 
 ## Recording User IDs with the X\-Ray SDK for Go<a name="xray-sdk-go-segment-userid"></a>

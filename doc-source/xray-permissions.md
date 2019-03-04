@@ -34,7 +34,9 @@ To make granting permissions easy, IAM supports **managed policies** for each se
                   "xray:BatchGetTraces",
                   "xray:GetServiceGraph",
                   "xray:GetTraceGraph",
-                  "xray:GetTraceSummaries"     
+                  "xray:GetTraceSummaries",
+                  "xray:GetGroups",
+                  "xray:GetGroup"
               ],
               "Resource": [
                   "*"
