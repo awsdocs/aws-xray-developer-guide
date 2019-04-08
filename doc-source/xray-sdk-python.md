@@ -53,6 +53,10 @@ The X\-Ray SDK for Python supports the following language and library versions\.
 + **aiohttp** – 2\.3\.0 and newer
 + **AWS SDK for Python \(Boto\)** – 1\.4\.0 and newer
 + **botocore** – 1\.5\.0 and newer
++ **enum** – 0\.4\.7 and newer, for Python versions 3\.4\.0 and older
++ **jsonpickle** – 1\.0\.0 and newer
++ **setuptools** – 40\.6\.3 and newer
++ **wrapt** – 1\.11\.0 and newer
 
 ## Dependency Management<a name="xray-sdk-python-dependencies"></a>
 
@@ -64,7 +68,7 @@ Add the SDK as a dependency in your `requirements.txt` file\.
 **Example requirements\.txt**  
 
 ```
-aws-xray-sdk==2.0.0
+aws-xray-sdk==2.4.2
 boto3==1.4.4
 botocore==1.5.55
 Django==1.11.3

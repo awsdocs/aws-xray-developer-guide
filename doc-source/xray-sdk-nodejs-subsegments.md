@@ -4,7 +4,7 @@ Subsegments extend a trace's [segment](xray-concepts.md#xray-concepts-segments) 
 
 To create a custom subsegment for a function that makes calls to downstream services, use the `captureAsyncFunc` function\.
 
-**Example app\.js \- Custom Subsegments**  
+**Example app\.js \- Custom Subsegments Express**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');

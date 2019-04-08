@@ -1,6 +1,36 @@
 # Running the X\-Ray Daemon on Amazon ECS<a name="xray-daemon-ecs"></a>
 
-On Amazon ECS, create a Docker image that runs the X\-Ray daemon, upload it to a Docker image repository, and then deploy it to your Amazon ECS cluster\. You can use port mappings and network mode settings in your task definition file to allow your application to communicate with the daemon container\.
+In Amazon ECS, create a Docker image that runs the X\-Ray daemon, upload it to a Docker image repository, and then deploy it to your Amazon ECS cluster\. You can use port mappings and network mode settings in your task definition file to allow your application to communicate with the daemon container\.
+
+## Using the Official Docker Image<a name="xray-daemon-ecs-image"></a>
+
+X\-Ray provides a Docker container image that you can deploy alongside your application\.
+
+```
+$ docker pull amazon/aws-xray-daemon
+```
+
+**Example Task definition**  
+
+```
+    {
+      "name": "xray-daemon",
+      "image": "amazon/aws-xray-daemon",
+      "cpu": 32,
+      "memoryReservation": 256,
+      "portMappings" : [
+          {
+              "hostPort": 0,
+              "containerPort": 2000,
+              "protocol": "udp"
+          }
+       ],
+    }
+```
+
+## Create and Build a Docker Image<a name="xray-daemon-ecs-build"></a>
+
+For custom configuration, you may need to define your own Docker image\.
 
 **Note**  
 The Scorekeep sample application shows how to use the X\-Ray daemon on Amazon ECS\. See [Instrumenting Amazon ECS Applications](scorekeep-ecs.md) for details\.
@@ -16,11 +46,13 @@ FROM amazonlinux
 RUN yum install -y unzip
 RUN curl -o daemon.zip https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip
 RUN unzip daemon.zip && cp xray /usr/bin/xray
-ENTRYPOINT ["/usr/bin/xray", "-t", "0.0.0.0:2000"]
+ENTRYPOINT ["/usr/bin/xray", "-t", "0.0.0.0:2000" "-b", "0.0.0.0:2000"]
 EXPOSE 2000/udp
+EXPOSE 2000/tcp
 ```
 
-Download the complete [example image](https://hub.docker.com/r/amazon/aws-xray-daemon/) on Docker Hub\.
+**Note**  
+Flags `-t` and `-b` are required to specify a binding address to listen to the loopback of a multi\-container environment\.
 
 **Example Dockerfile – Ubuntu**  
 For Debian derivatives, you also need to install certificate authority \(CA\) certificates to avoid issues when downloading the installer\.  
@@ -46,7 +78,7 @@ In your task definition, the configuration depends on the networking mode that y
       "memoryReservation": 256,
       "portMappings" : [
           {
-              "hostPort": 2000,
+              "hostPort": 0,
               "containerPort": 2000,
               "protocol": "udp"
           }

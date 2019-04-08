@@ -2,7 +2,7 @@
 
 The AWS X\-Ray SDK for Python supports instrumenting web frameworks deployed in serverless applications\. Serverless is the native architecture of the cloud that enables you to shift more of your operational responsibilities to AWS, increasing your agility and innovation\.
 
-Serverless architecture is a software applicatino model that enables you to build and run applications and services without thinking about servers\. It eliminates infrastructure management tasks such as server or cluster provisioning, patching, operating system maintenance, and capacity provisioning\. You can build serverless solutions for nearly any type of application or backend service, and everything required to run and scale your application with high availability is handled for you\.
+Serverless architecture is a software application model that enables you to build and run applications and services without thinking about servers\. It eliminates infrastructure management tasks such as server or cluster provisioning, patching, operating system maintenance, and capacity provisioning\. You can build serverless solutions for nearly any type of application or backend service, and everything required to run and scale your application with high availability is handled for you\.
 
 This tutorial shows you how to automatically instrument AWS X\-Ray on a web framework, such as Flask or Django, that is deployed to a serverless environment\. X\-Ray instrumentation of the application enables you to view all downstream calls that are made, starting from Amazon API Gateway through your AWS Lambda function, and the outgoing calls your application makes\. 
 

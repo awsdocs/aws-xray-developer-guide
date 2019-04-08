@@ -58,6 +58,9 @@ In some cases, the key that you use to patch a library does not match the librar
 
 For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\. Import the `AsyncContext` class and pass an instance of it to the X\-Ray recorder\.
 
+**Note**  
+Web framework support libraries, such as AIOHTTP, are not handled through the `aws_xray_sdk.core.patcher` module\. They will not appear in the `patcher` catalog of supported libraries\.
+
 **Example main\.py – patch aioboto3**  
 
 ```
