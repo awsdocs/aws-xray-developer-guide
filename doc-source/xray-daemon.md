@@ -21,6 +21,9 @@ You can download the daemon from Amazon S3 to run it locally, or to install it o
 + **Windows \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip.sig)\)
 + **Windows \(service\) ** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip.sig)\)
 
+**Note**
+Because X\-Ray daemon compiled using GNU C Library, linux distributions compiled with `musl libc` require GNU C Library compatibility packages installed. For example Alpine Linux must have `libc6-compat` package installed in order to run X\-Ray daemon.
+
 These links always point to the latest release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
