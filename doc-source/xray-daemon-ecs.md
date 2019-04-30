@@ -62,8 +62,9 @@ FROM ubuntu:16.04
 RUN apt-get update && apt-get install -y --force-yes --no-install-recommends apt-transport-https curl ca-certificates wget && apt-get clean && apt-get autoremove && rm -rf /var/lib/apt/lists/*
 RUN wget https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.deb
 RUN dpkg -i aws-xray-daemon-3.x.deb
-CMD ["/usr/bin/xray", "--bind=0.0.0.0:2000"]
+ENTRYPOINT ["/usr/bin/xray", "--bind=0.0.0.0:2000", "--bind-tcp=0.0.0.0:2000"]
 EXPOSE 2000/udp
+EXPOSE 2000/tcp
 ```
 
 In your task definition, the configuration depends on the networking mode that you use\. Bridge networking is the default and can be used in your default VPC\. In a bridge network, publish UDP port 2000, and create a link from your application container to the daemon container\. Use the `AWS_XRAY_DAEMON_ADDRESS` environment variable to tell the X\-Ray SDK where to send traces\.

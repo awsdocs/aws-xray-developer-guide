@@ -12,6 +12,7 @@ The read and write policies do not include permission to configure [encryption k
 
 **Topics**
 + [IAM Managed Policies for X\-Ray](#xray-permissions-managedpolicies)
++ [Specifying a Resource within an IAM Policy](#xray-permissions-resources)
 + [Running Your Application Locally](#xray-permissions-local)
 + [Running Your Application in AWS](#xray-permissions-aws)
 + [User Permissions for Encryption](#xray-permissions-encryption)
@@ -93,6 +94,64 @@ To make granting permissions easy, IAM supports **managed policies** for each se
 1. Open the role associated with your instance profile, an IAM user, or an IAM group\.
 
 1. Under **Permissions**, attach the managed policy\.
+
+## Specifying a Resource within an IAM Policy<a name="xray-permissions-resources"></a>
+
+You can control access to resources by using an IAM policy\. For actions that support resource\-level permissions, you use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\.
+
+All X\-Ray actions can be used in an IAM policy to grant or deny users permission to use that action\. However, not all [X\-Ray actions](https://docs.aws.amazon.com/xray/latest/api/API_Operations.html) support resource\-level permissions, which enable you to specify the resources on which an action can be performed\.
+
+For actions that don't support resource\-level permissions, you must use "`*`" as the resource\.
+
+The following X\-Ray actions support resource\-level permissions:
++ `CreateGroup`
++ `GetGroup`
++ `UpdateGroup`
++ `DeleteGroup`
++ `CreateSamplingRule`
++ `UpdateSamplingRule`
++ `DeleteSamplingRule`
+
+The following is an example of an identity\-based permissions policy for a `CreateGroup` action\. The example shows the use of an ARN relating to Group name `local-users` with the unique ID as a wildcard\. The unique ID is generated when the group is created, and so it can't be predicted in the policy in advance\. When using `GetGroup`, `UpdateGroup`, or `DeleteGroup`, you can define this as either a wildcard or the exact ARN, including ID\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "xray:CreateGroup"
+            ],
+            "Resource": [
+                "arn:aws:xray:eu-west-1:123456789012:group/local-users/*"
+            ]
+        }
+    ]
+}
+```
+
+The following is an example of an identity\-based permissions policy for a `CreateSamplingRule` action\. 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "xray:CreateSamplingRule"
+            ],
+            "Resource": [
+                "arn:aws:xray:eu-west-1:123456789012:sampling-rule/base-scorekeep"
+            ]
+        }
+    ]
+}
+```
+
+**Note**  
+The ARN of a sampling rule is defined by its name\. Unlike group ARNs, sampling rules have no uniquely generated ID\.
 
 ## Running Your Application Locally<a name="xray-permissions-local"></a>
 

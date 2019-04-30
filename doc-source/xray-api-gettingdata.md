@@ -6,6 +6,7 @@ AWS X\-Ray processes the trace data that you send to it to generate full traces,
 + [Retrieving the Service Graph](#xray-api-servicegraph)
 + [Retrieving the Service Graph by Group](#xray-api-servicegraphgroup)
 + [Retrieving Traces](#xray-api-traces)
++ [Retrieving and Refining Root Cause Analytics](#xray-api-analytics)
 
 ## Retrieving the Service Graph<a name="xray-api-servicegraph"></a>
 
@@ -446,4 +447,88 @@ To get multiple traces from the API, you need a list of trace IDs, which you can
 EPOCH=$(date +%s)
 TRACEIDS=$(aws xray get-trace-summaries --start-time $(($EPOCH-120)) --end-time $(($EPOCH-60)) --query 'TraceSummaries[*].Id' --output text)
 aws xray batch-get-traces --trace-ids $TRACEIDS --query 'Traces[*]'
+```
+
+## Retrieving and Refining Root Cause Analytics<a name="xray-api-analytics"></a>
+
+Upon generating a trace summary with the [GetTraceSummaries API](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) , partial trace summaries can be reused in their JSON format to create a refined filter expression based upon root causes\. See the examples below for a walkthrough of the refinement steps\. 
+
+**Example Example GetTraceSummaries output \- Response Time Root Cause Section**  
+
+```
+{
+  "Services": [
+    {
+      "Name": "GetWeatherData",
+      "Names": ["GetWeatherData"],
+      "AccountId": 123456789012,
+      "Type": null,
+      "Inferred": false,
+      "EntityPath": [
+        {
+          "Name": "GetWeatherData",
+          "Coverage": 1.0,
+          'Remote": false
+        },
+        {
+          "Name": "get_temperature",
+          "Coverage": 0.8,
+          "Remote": false
+        }
+      ]
+    },
+    {
+      "Name": "GetTemperature",
+      "Names": ["GetTemperature"],
+      "AccountId": 123456789012,
+      "Type": null,
+      "Inferred": false,
+      "EntityPath": [
+        {
+          "Name": "GetTemperature",
+          "Coverage": 0.7,
+          "Remote": false
+        }
+      ]
+    }
+  ] 
+}
+```
+
+By editing and making omissions to the above output, this JSON can become a filter for matched root cause entities\. For every field present in the JSON, any candidate match must be exact, or the trace will not be returned\. Removed fields become wildcard values, a format which is compatible with the filter expression query structure\. 
+
+**Example Reformatted Response Time Root Cause**  
+
+```
+{
+  "Services": [
+    {
+      "Name": "GetWeatherData",
+      "EntityPath": [
+        {
+          "Name": "GetWeatherData"
+        },
+        {
+          "Name": "get_temperature"
+        }
+      ]
+    },
+    {
+      "Name": "GetTemperature",
+      "EntityPath": [
+        {
+          "Name": "GetTemperature"
+        }
+      ]
+    }
+  ]
+}
+```
+
+This JSON is then used as part of a filter expression through a call to `rootcause.json = #[{}]`\. Refer to the [Filter Expressions](xray-console-filters.md) chapter for more details about querying with filter expressions\.
+
+**Example Example JSON Filter**  
+
+```
+rootcause.json = #[{ "Services": [ { "Name": "GetWeatherData", "EntityPath": [{ "Name": "GetWeatherData" }, { "Name": "get_temperature" } ] }, { "Name": "GetTemperature", "EntityPath": [ { "Name": "GetTemperature" } ] } ] }]
 ```

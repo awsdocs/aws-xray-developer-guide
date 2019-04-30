@@ -24,6 +24,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using Latency Histograms in the AWS X-Ray Console](xray-console-histograms.md)
    + [Configuring Sampling Rules in the AWS X-Ray Console](xray-console-sampling.md)
    + [Configuring Encryption Settings in the AWS X-Ray Console](xray-console-encryption.md)
+   + [Interacting with the AWS X-Ray Analytics Console](xray-console-analytics.md)
 + [AWS X-Ray API](xray-api.md)
    + [Using the AWS X-Ray API with the AWS CLI](xray-api-tutorial.md)
    + [Sending Trace Data to AWS X-Ray](xray-api-sendingdata.md)

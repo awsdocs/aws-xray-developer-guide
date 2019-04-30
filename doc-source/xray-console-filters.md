@@ -71,6 +71,11 @@ Boolean keywords are either true or false\. Use these keywords to find traces th
 + `throttle` – Response status code was *429 Too Many Requests*\.
 + `fault` – Response status code was 5XX Server Error\.
 + `partial` – Request has incomplete segments\.
++ `inferred` – Request has inferred segments\.
++ `first` – Element is the first of an enumerated list\.
++ `last` – Element is the last of an enumerated list\.
++ `remote` – Request has remote segments\.
++ `root` – Request is the entry point or root segment of a trace\.
 
 Boolean operators find segments where the specified key is `true` or `false`\.
 
@@ -97,6 +102,30 @@ ok
 ok = false
 ```
 
+**Example Last enumerated fault trace has error name "deserialize"**  
+
+```
+rootcause.fault.entity { last and name = "deserialize" }
+```
+
+**Example Requests with remote segments where coverage > 0\.7 and service name "traces"**  
+
+```
+rootcause.responsetime.entity { remote and coverage > 0.7 and name = "traces" }
+```
+
+**Example Requests with inferred segments where service type "AWS:DynamonDB"**  
+
+```
+rootcause.fault.service { inferred and name = traces and type = "AWS::DynamoDB" }
+```
+
+**Example Requests that have a segment with the name "data\-plane" as the root\.**  
+
+```
+service("data-plane") {root = true and fault = true}
+```
+
 ## Number Keywords<a name="console-filters-number"></a>
 
 Number keywords let you search for requests with a specific response time, duration, or response status\.
@@ -105,6 +134,8 @@ Number keywords let you search for requests with a specific response time, durat
 + `responsetime` – Time that the server took to send a response\.
 + `duration` – Total request duration, including all downstream calls\.
 + `http.status` – Response status code\.
++ `index` – Position of an element in an enumerated list\.
++ `coverage` – Decimal percentage of entity response time over root segment response time\. Applicable only for response time root cause entities\.
 
 Number keywords use standard equality and comparison operators\.
 
@@ -130,6 +161,18 @@ duration >= 5 AND duration <= 8
 ok !partial duration <3
 ```
 
+**Example Enumerated list entity has index > 5**  
+
+```
+rootcause.fault.service { index > 5 }
+```
+
+**Example Requests where last entity has coverage > 0\.8**  
+
+```
+rootcause.responsetime.entity { last and coverage > 0.8 }
+```
+
 ## String Keywords<a name="console-filters-string"></a>
 
 String keywords let you find traces with specific text in the request headers, or user IDs\.
@@ -140,6 +183,12 @@ String keywords let you find traces with specific text in the request headers, o
 + `http.useragent` – Request user agent string\.
 + `http.clientip` – Requestor's IP address\.
 + `user` – Value of user field on any segment in the trace\.
++ `name` – The name of a service or exception\.
++ `type` – Service type\.
++ `message` – Exception message\.
++ `availabilityzone` – Value of availabilityzone field on any segment in the trace\.
++ `instance.id` – Value of instance ID field on any segment in the trace\.
++ `resource.arn` – Value of resource ARN field on any segment in the trace\.
 
 String operators find values that are equal to or contain specific text\. Values must always be specified in quotation marks\. 
 
@@ -163,6 +212,24 @@ Find all traces with user IDs\.
 user CONTAINS ""
 ```
 
+**Example Select traces with a fault root cause that includes service named "Auth"**  
+
+```
+rootcause.fault.service { name = "Auth" }
+```
+
+**Example Select traces with a response time root cause whose last service has a type of DynamoDB**  
+
+```
+rootcause.responsetime.service { last and type = "AWS::DynamoDB" }
+```
+
+**Example Select traces with a fault root cause whose last exception has the message "Access Denied for account\_id: 1234567890"**  
+
+```
+rootcause.fault.exception { last and message = "Access Denied for account_id: 1234567890" 
+```
+
 ## Complex Keywords<a name="console-filters-complex"></a>
 
 Complex keywords let you find requests based on service name, edge name, or annotation value\. For services and edges, you can specify an additional filter expression that applies to the service or edge\. For annotations, you can filter on the value of an annotation with a specific key using boolean, number or string operators\.
@@ -171,6 +238,7 @@ Complex keywords let you find requests based on service name, edge name, or anno
 + `service(name) {filter}` – Service with name *name*\. Optional curly braces can contain a filter expression that applies to segments created by the service\.
 + `edge(source, destination) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
 + `annotation.key` – Value of annotation with field *key*\. The value of an annotation can be a boolean, number, or string, so you can use any of those type's comparison operators\. You cannot use this keyword in combination with the `service` or `edge` keywords\.
++ `json` – JSON root cause object\. See [Getting Data from AWS X\-Ray](xray-api-gettingdata.md) for steps to create JSON entities programatically\.
 
 Use the service keyword to find traces for requests that hit a certain node on your service map\.
 
@@ -222,6 +290,13 @@ Requests with annotation age with numerical value greater than 29\.
 
 ```
 annotation.age > 29
+```
+
+**Example JSON with root cause entity**  
+Requests with matching root cause entities\.  
+
+```
+rootcause.json = #[{ "Services": [ { "Name": "GetWeatherData", "EntityPath": [{ "Name": "GetWeatherData" }, { "Name": "get_temperature" } ] }, { "Name": "GetTemperature", "EntityPath": [ { "Name": "GetTemperature" } ] } ] }]
 ```
 
 ## The ID Function<a name="console-filters-functions"></a>
