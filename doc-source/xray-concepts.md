@@ -40,7 +40,7 @@ A segment can break down the data about the work done into **subsegments**\. Sub
 
 For services that don't send their own segments, like Amazon DynamoDB, X\-Ray uses subsegments to generate *inferred segments* and downstream nodes on the service map\. This lets you see all of your downstream dependencies, even if they don't support tracing, or are external\.
 
-Subsegments represent your application's view of a downstream call as a client\. If the downstream service is also instrumented, the segment that it sends replaces the inferred segment generated from the uptsream client's subsegment\. The node on the service graph always uses information from the service's segment, if it's available, while the edge between the two nodes uses the upstream service's subsegment\.
+Subsegments represent your application's view of a downstream call as a client\. If the downstream service is also instrumented, the segment that it sends replaces the inferred segment generated from the upstream client's subsegment\. The node on the service graph always uses information from the service's segment, if it's available, while the edge between the two nodes uses the upstream service's subsegment\.
 
 For example, when you call DynamoDB with an instrumented AWS SDK client, the X\-Ray SDK records a subsegment for that call\. DynamoDB doesn't send a segment, so the inferred segment in the trace, the DynamoDB node on the service graph, and the edge between your service and DynamoDB all contain information from the subsegment\.
 

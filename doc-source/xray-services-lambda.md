@@ -29,4 +29,4 @@ To use the X\-Ray SDK on Lambda, bundle it with your function code each time you
 
 The other difference between instrumenting Lambda functions and web applications is that the segment that Lambda creates and sends to X\-Ray cannot be modified by your function code\. You can create subsegments and record annotations and metadata on them, but you can't add annotations and metadata to the parent segment\.
 
-For more information, see [Troubleshooting Lambda\-based Applications](https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html) in the *AWS Lambda Developer Guide*\.
+For more information, see [Using AWS X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html) in the *AWS Lambda Developer Guide*\.
