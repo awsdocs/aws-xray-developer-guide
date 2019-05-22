@@ -117,7 +117,7 @@ The IAM role or user that the daemon's credentials belong to must have permissio
 + To use the daemon on Elastic Beanstalk, add the managed policy to the Elastic Beanstalk default instance profile role\.
 + To run the daemon locally, create an IAM user and save its access keys on your computer\.
 
-For more information, see [AWS X\-Ray Permissions](xray-permissions.md)\.
+For more information, see [Identity and Access Management in AWS X\-Ray](xray-permissions.md)\.
 
 ## X\-Ray Daemon Logs<a name="xray-daemon-logging"></a>
 

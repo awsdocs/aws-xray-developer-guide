@@ -1,4 +1,4 @@
-# Configuring Encryption Settings in the AWS X\-Ray Console<a name="xray-console-encryption"></a>
+# Data Protection in AWS X\-Ray<a name="xray-console-encryption"></a>
 
 AWS X\-Ray always encrypts traces and related data at rest\. If you need to audit and disable encryption keys for compliance or internal requirements, you can configure X\-Ray to use an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to encrypt data\.
 
@@ -14,7 +14,7 @@ You must have user\-level access to a customer managed CMK to configure X\-Ray t
 
 1. Choose **Use a customer master key**\.
 
-1. Choose a key from the drop\-down menu:
+1. Choose a key from the dropdown menu:
    + **aws/xray** – Use the AWS managed CMK\.
    + *key alias* – Use a customer managed CMK in your account\.
    + **Manually enter a key ARN** – Use a customer managed CMK in a different account\. Enter the full Amazon Resource Name \(ARN\) of the key in the field that appears\.

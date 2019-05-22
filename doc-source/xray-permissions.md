@@ -1,4 +1,4 @@
-# AWS X\-Ray Permissions<a name="xray-permissions"></a>
+# Identity and Access Management in AWS X\-Ray<a name="xray-permissions"></a>
 
 You can use AWS Identity and Access Management \(IAM\) to grant X\-Ray permissions to users and compute resources in your account\. IAM controls access to the X\-Ray service at the API level to enforce permissions uniformly, regardless of which client \(console, AWS SDK, AWS CLI\) your users employ\.
 
@@ -172,10 +172,10 @@ If you already configured credentials for use with the AWS SDK or AWS CLI, the d
 ## Running Your Application in AWS<a name="xray-permissions-aws"></a>
 
 When you run your application on AWS, use a role to grant permission to the Amazon EC2 instance or Lambda function that runs the daemon\.
-+ **Amazon Elastic Compute Cloud** – Create an IAM role and attach it to the EC2 instance as an [instance profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)\.
-+ **Amazon Elastic Container Service** – Create an IAM role and attach it to container instances as a [container instance IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html)\.
-+ **AWS Elastic Beanstalk** – Elastic Beanstalk includes X\-Ray permissions in its [default instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html#concepts-roles-instance)\. You can use the default instance profile, or add write permissions to a custom instance profile\.
-+ **AWS Lambda** – Add write permissions to your function's execution role\.
++ **Amazon Elastic Compute Cloud \(Amazon EC2\)** – Create an IAM role and attach it to the EC2 instance as an [instance profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)\.
++ **Amazon Elastic Container Service \(Amazon ECS\)** – Create an IAM role and attach it to container instances as a [container instance IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html)\.
++ **AWS Elastic Beanstalk \(Elastic Beanstalk\)** – Elastic Beanstalk includes X\-Ray permissions in its [default instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles.html#concepts-roles-instance)\. You can use the default instance profile, or add write permissions to a custom instance profile\.
++ **AWS Lambda \(Lambda\)** – Add write permissions to your function's execution role\.
 
 **To create a role for use with X\-Ray**
 
@@ -203,10 +203,10 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 
 X\-Ray encrypts all trace data and by default, and you can [configure it to use a key that you manage](xray-console-encryption.md)\. If you choose a AWS Key Management Service customer managed customer master key \(CMK\), you need to ensure that the key's access policy lets you grant permission to X\-Ray to use it to encrypt\. Other users in your account also need access to the key to view encrypted trace data in the X\-Ray console\.
 
-For a customer managed CMK, configure your key with an access policy that allows the following actions\.
+For a customer managed CMK, configure your key with an access policy that allows the following actions:
 + User who configures the key in X\-Ray has permission to call `kms:CreateGrant` and `kms:DescribeKey`\.
-+ Users who access encrypted trace data have permission to call `kms:Decrypt`\.
++ Users who can access encrypted trace data have permission to call `kms:Decrypt`\.
 
-When you add a user to the **Key users** group in the key configuration section of the AWS Identity and Access Management console, they have permission for both of these operations\. Permission only needs to be set on the key policy, so you don't need any AWS KMS permissions on your IAM users, groups, or roles\. See [Using Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the AWS KMS Developer Guide for more information\.
+When you add a user to the **Key users** group in the key configuration section of the IAM console, they have permission for both of these operations\. Permission only needs to be set on the key policy, so you don't need any AWS KMS permissions on your IAM users, groups, or roles\. For more information, see [Using Key Policies in the AWS KMS Developer Guide](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 For default encryption, or if you choose the AWS managed CMK \(`aws/xray`\), permission is based on who has access to X\-Ray APIs\. Anyone with access to [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html), included in `AWSXrayFullAccess`, can change the encryption configuration\. To prevent a user from changing the encryption key, do not give them permission to use [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html)\.
