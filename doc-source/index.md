@@ -21,6 +21,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Security in AWS X-Ray](security.md)
    + [Data Protection in AWS X-Ray](xray-console-encryption.md)
    + [Identity and Access Management in AWS X-Ray](xray-permissions.md)
+   + [Logging and Monitoring in AWS X-Ray](security-logging-monitoring.md)
    + [Compliance Validation for AWS X-Ray](xray-compliance.md)
    + [Resilience in AWS X-Ray](disaster-recovery-resiliency.md)
    + [Infrastructure Security in AWS X-Ray](infrastructure-security.md)

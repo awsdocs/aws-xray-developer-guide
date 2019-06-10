@@ -130,7 +130,7 @@ dependencyManagement {
 
 If you use Elastic Beanstalk to deploy your application, you can use Maven or Gradle to build on\-instance each time you deploy, instead of building and uploading a large archive that includes all of your dependencies\. See the [sample application](xray-scorekeep.md) for an example that uses Gradle\.
 
-To instrument downstream calls to AWS services with AWS SDK for Java 2\.2 and later, you can omit the `aws-xray-recorder-sdk-aws-sdk-v2-instrumentor` module from your build configuration\. Include the `aws-xrya-recorder-sdk-aws-sdk-v2 module` instead, then instrument individual clients by configuring them with a `TracingInterceptor`\. 
+To instrument downstream calls to AWS services with AWS SDK for Java 2\.2 and later, you can omit the `aws-xray-recorder-sdk-aws-sdk-v2-instrumentor` module from your build configuration\. Include the `aws-xray-recorder-sdk-aws-sdk-v2 module` instead, then instrument individual clients by configuring them with a `TracingInterceptor`\. 
 
 **Example AWS SDK for Java 2\.2 and later \- tracing interceptor**  
 
