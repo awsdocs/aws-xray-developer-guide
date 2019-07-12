@@ -177,7 +177,7 @@ In this step you will interact with the X\-Ray console to view the trace created
 
 1. During initialization, Lambda might also generate a third subsegment named `initialization`\.
 
-![\[Trace segement view.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/serverless-traceView.png)
+![\[Trace segment view.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/serverless-traceView.png)
 
 ![\[Service graph view.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/serverless-serviceView.png)
 

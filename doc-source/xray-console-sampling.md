@@ -1,8 +1,12 @@
 # Configuring Sampling Rules in the AWS X\-Ray Console<a name="xray-console-sampling"></a>
 
-You can use the AWS X\-Ray console to configure sampling rules for your services\. The X\-Ray SDK and AWS services that support active tracing with sampling configuration use sampling rules to determine which requests to record\. By customizing sampling rules, you can control the amount of data that you record, and modify sampling behavior on the fly without modifying or redeploying your code\.
+You can use the AWS X\-Ray console to configure sampling rules for your services\. The X\-Ray SDK and AWS services that support [active tracing](xray-usage.md#xray-usage-services) with sampling configuration use sampling rules to determine which requests to record\. 
 
-Sampling rules tell the X\-Ray SDK how many requests to record for a set of criteria\. By default, the X\-Ray SDK records the first request each second, and five percent of any additional requests\. One request per second is the *reservoir*, which ensures that at least one trace is recorded each second as long the service is serving requests\. Five percent is the *rate* at which additional requests beyond the reservoir size are sampled\.
+You can configure sampling for the following use cases:
++ **API Gateway Entrypoint** – API Gateway supports sampling and active tracing\. To enable active tracing on an API stage, see [Amazon API Gateway Active Tracing Support for AWS X\-Ray](xray-services-apigateway.md)\.
++ **Instrument X\-Ray SDK on compute platforms** – When using compute platforms such as Amazon Elastic Compute Cloud \(Amazon EC2\), Amazon Elastic Container Service \(Amazon ECS\), or AWS Elastic Beanstalk \(Elastic Beanstalk\) sampling is supported when the application has been instrumented with the lastest X\-Ray SDK\.
+
+By customizing sampling rules, you can control the amount of data that you record, and modify sampling behavior on the fly without modifying or redeploying your code\. Sampling rules tell the X\-Ray SDK how many requests to record for a set of criteria\. By default, the X\-Ray SDK records the first request each second, and five percent of any additional requests\. One request per second is the *reservoir*, which ensures that at least one trace is recorded each second as long the service is serving requests\. Five percent is the *rate* at which additional requests beyond the reservoir size are sampled\.
 
 You can configure the X\-Ray SDK to read sampling rules from a JSON document that you include with your code\. However, when you run multiple instances of your service, each instance performs sampling independently\. This causes the overall percentage of requests sampled to increase because all of the instances' reservoirs are effectively added together\. Additionally, to update local sampling rules, you need to redeploy your code\.
 
