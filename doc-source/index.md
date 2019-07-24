@@ -117,3 +117,4 @@ Amazon's trademarks and trade dress may not be used in
    + [Amazon Elastic Compute Cloud and AWS X-Ray](xray-services-ec2.md)
    + [AWS Elastic Beanstalk and AWS X-Ray](xray-services-beanstalk.md)
    + [Amazon EC2 and AWS App Mesh](xray-services-appmesh.md)
+   + [Amazon SNS and AWS X-Ray](xray-services-sns.md)

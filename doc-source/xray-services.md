@@ -12,3 +12,4 @@ The X\-Ray SDKs include plugins for additional integration with AWS services\. F
 + [Amazon Elastic Compute Cloud and AWS X\-Ray](xray-services-ec2.md)
 + [AWS Elastic Beanstalk and AWS X\-Ray](xray-services-beanstalk.md)
 + [Amazon EC2 and AWS App Mesh](xray-services-appmesh.md)
++ [Amazon SNS and AWS X\-Ray](xray-services-sns.md)
