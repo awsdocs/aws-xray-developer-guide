@@ -102,6 +102,12 @@ You can choose any node in the service graph to view traces for requests that ge
 
 1. Choose the node named **SNS**\.
 
+The **Service details panel** opens to the right.
+
+1. Click **View Traces**.
+
+The **Trace Overview** screen appears.
+
 1. Choose the trace from the **Trace list**\. This trace doesn't have a method or URL because it was recorded during startup instead of in response to an incoming request\.  
 ![\[Choosing a trace from the Trace list\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-tracelist-sns.png)
 
