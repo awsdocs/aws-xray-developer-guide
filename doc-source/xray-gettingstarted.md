@@ -119,7 +119,7 @@ The **Trace Overview** screen appears.
 
 The cause indicates that the email address provided in a call to `createSubscription` made in the `WebConfig` class was invalid\. Let's fix that\.
 
-## Configuration Amazon SNS Notifications<a name="xray-gettingstarted-notifications"></a>
+## Configuring Amazon SNS Notifications<a name="xray-gettingstarted-notifications"></a>
 
 Scorekeep uses Amazon SNS to send notifications when users complete a game\. When the application starts up, it tries to create a subscription for an email address defined in an environment variable\. That call is currently failing, causing the Amazon SNS node in your service map to be red\. Configure a notification email in an environment variable to enable notifications and make the service map green\.
 
