@@ -102,6 +102,12 @@ You can choose any node in the service graph to view traces for requests that ge
 
 1. Choose the node named **SNS**\.
 
+The **Service details panel** opens to the right.
+
+1. Click **View Traces**.
+
+The **Trace Overview** screen appears.
+
 1. Choose the trace from the **Trace list**\. This trace doesn't have a method or URL because it was recorded during startup instead of in response to an incoming request\.  
 ![\[Choosing a trace from the Trace list\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-tracelist-sns.png)
 
@@ -113,7 +119,7 @@ You can choose any node in the service graph to view traces for requests that ge
 
 The cause indicates that the email address provided in a call to `createSubscription` made in the `WebConfig` class was invalid\. Let's fix that\.
 
-## Configuration Amazon SNS Notifications<a name="xray-gettingstarted-notifications"></a>
+## Configuring Amazon SNS Notifications<a name="xray-gettingstarted-notifications"></a>
 
 Scorekeep uses Amazon SNS to send notifications when users complete a game\. When the application starts up, it tries to create a subscription for an email address defined in an environment variable\. That call is currently failing, causing the Amazon SNS node in your service map to be red\. Configure a notification email in an environment variable to enable notifications and make the service map green\.
 
