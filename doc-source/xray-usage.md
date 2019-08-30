@@ -99,7 +99,9 @@ The following services provide X\-Ray integration:
   + **Node\.js** – 3\.2\.0 and later configurations
   + **Windows Server** – All configurations other than Windows Server Core that have been released since December 9th, 2016\.
 
-  You can use the Elastic Beanstalk console tell Elastic Beanstalk to run the daemon on these platforms, or use the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. [Learn more](xray-services-beanstalk.md)\.
+  You can use the Elastic Beanstalk console to tell Elastic Beanstalk to run the daemon on these platforms, or use the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. [Learn more](xray-services-beanstalk.md)\.
++ **Amazon Simple Notification Service** – Passive instrumentation\. If an Amazon SNS publisher traces its client with the X\-Ray SDK, subscribers can retrieve the tracing header and continue to propagate the original trace from the publisher with the same trace ID\. [Learn more](xray-services-sns.md)\.
++ **Amazon Simple Queue Service** – Passive instrumentation\. If a service traces requests by using the X\-Ray SDK, Amazon SQS can send the tracing header and continue to propagate the original trace from the sender to the consumer with a consistent trace ID\. [Learn more](xray-services-sqs.md)\.
 
 ## Code and Configuration Changes<a name="xray-usage-codechanges"></a>
 

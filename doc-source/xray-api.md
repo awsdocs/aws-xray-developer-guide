@@ -23,6 +23,4 @@ See [the AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/refer
 + [Getting Data from AWS X\-Ray](xray-api-gettingdata.md)
 + [Configuring Sampling, Groups, and Encryption Settings with the AWS X\-Ray API](xray-api-configuration.md)
 + [Using Sampling Rules with the X\-Ray API](xray-api-sampling.md)
-+ [Logging X\-Ray API Calls with AWS CloudTrail](xray-api-cloudtrail.md)
-+ [Tracking X\-Ray Encryption Configuration Changes with AWS Config](xray-api-config.md)
 + [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)

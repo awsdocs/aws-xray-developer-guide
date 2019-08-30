@@ -20,7 +20,7 @@ You can also access the raw service map and trace data by using the AWS CLI to c
 + [Prerequisites](#xray-gettingstarted-prereqs)
 + [Deploy to Elastic Beanstalk and Generate Trace Data](#xray-gettingstarted-deploy)
 + [View the Service Map in the X\-Ray Console](#xray-gettingstarted-console)
-+ [Configuration Amazon SNS Notifications](#xray-gettingstarted-notifications)
++ [Configuring Amazon SNS Notifications](#xray-gettingstarted-notifications)
 + [Explore the Sample Application](#xray-gettingstarted-sample)
 + [Clean Up](#xray-gettingstarted-cleanup)
 + [Next Steps](#xray-gettingstarted-nextsteps)
@@ -100,13 +100,9 @@ You can choose any node in the service graph to view traces for requests that ge
 
 **To find the cause of the error**
 
-1. Choose the node named **SNS**\.
+1. Choose the node named **SNS**\. The **Service details panel** opens to the right\.
 
-The **Service details panel** opens to the right.
-
-1. Click **View Traces**.
-
-The **Trace Overview** screen appears.
+1. Choose **View traces** to access the **Trace overview** screen\.
 
 1. Choose the trace from the **Trace list**\. This trace doesn't have a method or URL because it was recorded during startup instead of in response to an incoming request\.  
 ![\[Choosing a trace from the Trace list\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-tracelist-sns.png)

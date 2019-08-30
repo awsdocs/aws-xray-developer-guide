@@ -3,8 +3,13 @@
 AWS X\-Ray integrates with AWS CloudTrail to record API actions made by a user, a role, or an AWS service in X\-Ray\. You can use CloudTrail to monitor X\-Ray API requests in real time and store logs in Amazon S3, Amazon CloudWatch Logs, and Amazon CloudWatch Events\. X\-Ray supports logging the following actions as events in CloudTrail log files:
 
 **Supported API Actions**
-+ [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) – Management event \(write\)
-+ [https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html) – Management event \(read\)
++ [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_GetEncryptionConfig.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_CreateGroup.html](https://docs.aws.amazon.com/xray/latest/api/API_CreateGroup.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_UpdateGroup.html](https://docs.aws.amazon.com/xray/latest/api/API_UpdateGroup.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_DeleteGroup.html](https://docs.aws.amazon.com/xray/latest/api/API_DeleteGroup.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetGroup.html](https://docs.aws.amazon.com/xray/latest/api/API_GetGroup.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetGroups.html](https://docs.aws.amazon.com/xray/latest/api/API_GetGroups.html)
 
 **To create a trail**
 

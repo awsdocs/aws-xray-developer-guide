@@ -16,7 +16,7 @@ To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_
 ```
 {
       "name": "envoy",
-      "image": "111345817488.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.9.1.0-prod",
+      "image": "111345817488.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.11.1.0-prod",
       "essential": true,
       "environment": [
         {
@@ -39,6 +39,9 @@ To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_
         "retries": 3
       }
 ```
+
+**Note**  
+You can replace the AWS Region with any Region that App Mesh is supported in\. For a list of supported Regions, see [AWS Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#appmesh_region)\.
 
 For details on running the X\-Ray daemon in a container, see [Running the X\-Ray Daemon on Amazon ECS](xray-daemon-ecs.md)\. For a sample application that includes a service mesh, microservice, Envoy proxy, and X\-Ray daemon, deploy the `colorapp` sample in the [App Mesh Examples GitHub repository](https://github.com/aws/aws-app-mesh-examples/tree/master/examples)\.
 

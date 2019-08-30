@@ -28,7 +28,7 @@ In the following steps, the sample Lambda function *MessageSubscriber* is implem
    ```
    var AWSXRay = require('aws-xray-sdk');
    
-   exports.handler = function(event, context) {
+   exports.handler = function(event, context, callback) {
        AWSXRay.captureFunc('process_message', function(subsegment) {
            var message = event.Records[0].Sns.Message;
            subsegment.addAnnotation('message_content', message);
@@ -88,7 +88,7 @@ When Amazon SNS receives requests, it propagates the trace header to its endpoin
 
 1. Choose **Topics**, and then choose **Create topic**\. For **Name**, provide a name\. 
 
-1. In **Subscriptions**, choose **Create topic**\. 
+1. In **Subscriptions**, choose **Create subscription**\. 
 
 1. Record the topic ARN \(for example, `arn:aws:sns:{region}:{account id}:{topic name}`\)\.
 
@@ -108,30 +108,26 @@ In the following steps, the sample Lambda function *MessagePublisher* is impleme
 
 1. Create two files: `index.js` and `package.json`\.
 
-1. Paste the following code into `index.js` and make the indicated replacement\. 
+1. Paste the following code into `index.js`\.
 
    ```
-   // You will replace the following line with your SNS topic ARN.
-   const topicArn = "arn:aws:sns:us-east-1:12345678910:SNS-XRay";
-   
-   console.log("Loading function...");
    var AWSXRay = require('aws-xray-sdk');
-   var AWS = require('aws-sdk');
-   var SNS = AWSXRay.captureAWSClient(new AWS.SNS());
+   var AWS = AWSXRay.captureAWS(require('aws-sdk'));
    
-   exports.handler = function(event, context) {
-       console.log('Sender\'s trace Header is: ', process.env._X_AMZN_TRACE_ID);
+   exports.handler = function(event, context, callback) {
+       var sns = new AWS.SNS();
    
-       SNS.publish({
-           // You can replace the following line with your custom message.
+       sns.publish({
+   	 // You can replace the following line with your custom message.
            Message: process.env.MESSAGE || "Testing X-Ray trace header propagation", 
            TopicArn: process.env.TOPIC_ARN
        }, function(err, data) {
            if (err) {
                console.log(err.stack);
-               return;
+               callback(err);
+           } else {
+               callback(null, "Message sent.");
            }
-           context.done(null, 'Message sent');  
        });
    };
    ```
@@ -177,7 +173,7 @@ In the following steps, the sample Lambda function *MessagePublisher* is impleme
 1. Choose the publisher package that you created\. To upload, choose **Save** in the upper right of the console\.
 
 1. In **Environment variables**, add a variable:
-   + For **Key**, provide a key name \(for example, *TOPIC\_ARN*\)\.
+   + For **Key**, use the key name `TOPIC_ARN`, which is defined in the publisher function\.
    + For **Value**, use the Amazon SNS topic ARN you recorded previously\.
 
 1. Optionally, add another variable:

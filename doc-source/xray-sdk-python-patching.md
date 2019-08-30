@@ -16,7 +16,7 @@ When you use a patched library, the X\-Ray SDK for Python creates a subsegment f
 **Note**  
 If you use SQLAlchemy ORM, you can instrument your SQL queries by importing the SDK's version of SQLAlchemy's session and query classes\. See [Use SQLAlchemy ORM](https://github.com/aws/aws-xray-sdk-python/blob/master/README.md#use-sqlalchemy-orm) for instructions\.
 
-To patch all available libraries, use the `patch_all` function in `aws_xray_sdk.core`\.
+To patch all available libraries, use the `patch_all` function in `aws_xray_sdk.core`\. Some libraries, such as `httplib` and `urllib`, may need to enable double patching by calling `patch_all(double_patch=True)`\.
 
 **Example main\.py – patch all supported libraries**  
 

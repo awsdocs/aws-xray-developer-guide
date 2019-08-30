@@ -19,8 +19,15 @@ The rest of the command line options let you configure logging, listen on a diff
 You can pass a configuration file to the daemon to access advanced configuration options and do things like limit the number of concurrent calls to X\-Ray, disable log rotation, and send traffic to a proxy\.
 
 **Topics**
++ [Supported Environment Variables](#xray-daemon-configuration-variables)
 + [Using Command Line Options](#xray-daemon-configuration-commandline)
 + [Using a Configuration File](#xray-daemon-configuration-configfile)
+
+## Supported Environment Variables<a name="xray-daemon-configuration-variables"></a>
+
+The X\-Ray daemon supports the following environment variables:
++ `AWS_REGION` – Specifies the [AWS Region](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration-region) of the X\-Ray service endpoint\. 
++ `HTTPS_PROXY` – Specifies a proxy address for the daemon to upload segments through\. This can be either the DNS domain names or IP addresses and port numbers used by your proxy servers\.
 
 ## Using Command Line Options<a name="xray-daemon-configuration-commandline"></a>
 

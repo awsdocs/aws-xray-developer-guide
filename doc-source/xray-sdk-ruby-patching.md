@@ -17,7 +17,7 @@ require 'aws-xray-sdk'
 
 config = {
   name: 'my app',
-  patch: %I[net_http aws_sdk]
+  patch: %I[:net_http aws_sdk]
 }
 
 XRay.recorder.configure(config)
