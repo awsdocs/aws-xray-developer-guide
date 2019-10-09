@@ -129,7 +129,7 @@ Groups are billed by the number of retrieved traces that match the filter expres
 
 ## Annotations and Metadata<a name="xray-concepts-annotations"></a>
 
-When you instrument your application, the X\-Ray SDK records information about incoming and outgoing requests, the AWS resources used, and the application itself\. You can add other information to the segment document as annotations and metadata\.
+When you instrument your application, the X\-Ray SDK records information about incoming and outgoing requests, the AWS resources used, and the application itself\. You can add other information to the segment document as annotations and metadata\. Annotations and metadata are aggregated at the trace level, and can be added to any segment or subsegment\.
 
 **Annotations** are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md)\. Use annotations to record data that you want to use to group traces in the console, or when calling the [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API\.
 
@@ -137,7 +137,7 @@ X\-Ray indexes up to 50 annotations per trace\.
 
 **Metadata** are key\-value pairs with values of any type, including objects and lists, but that are not indexed\. Use metadata to record data you want to store in the trace but don't need to use for searching traces\.
 
-You can view annotations and metadata in the segment or subsegment details in the X\-Ray console\.
+ You can view annotations and metadata in the segment or subsegment details in the X\-Ray console\.
 
 ![\[Annotations and metadata are viewable in the segment or subsegment details in the X-Ray console\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-customsubsegment-metadata.png)
 

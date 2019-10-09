@@ -1,6 +1,6 @@
 # Tracing AWS SDK Calls with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-sdkclients"></a>
 
-When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Ruby tracks the calls downstream in [subsegments](xray-sdk-ruby-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
+When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for \.NET tracks the calls downstream in [subsegments](xray-sdk-dotnet-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
 You can instrument all of your AWS SDK for \.NET clients by calling `RegisterXRayForAllServices` before you create them\.
 

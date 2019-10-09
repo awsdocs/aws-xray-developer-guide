@@ -8,6 +8,9 @@ This tutorial uses the Scorekeep sample application and included scripts to gene
 
 This tutorial uses the AWS CLI to show basic use of the X\-Ray API\. The AWS CLI, [available for Windows, Linux, and OS\-X](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), provides command line access to the public APIs for all AWS services\.
 
+**Note**  
+You must verify that your AWS CLI is configured to the same Region that your Scorekeep sample application was created in\.
+
 Scripts included to test the sample application uses `cURL` to send traffic to the API and `jq` to parse the output\. You can download the `jq` executable from [stedolan\.github\.io](https://stedolan.github.io/jq/), and the `curl` executable from [https://curl.haxx.se/download.html](https://curl.haxx.se/download.html)\. Most Linux and OS X installations include cURL\.
 
 ## Generate Trace Data<a name="xray-api-tutorial-generatedata"></a>
@@ -26,7 +29,7 @@ The web app continues to generate traffic to the API every few seconds while the
 
    ```
    #!/bin/bash
-   API=scorekeep.9hbtbm23t2.us-west-2.elasticbeanstalk.com
+   API=scorekeep.9hbtbm23t2.us-west-2.elasticbeanstalk.com/api
    ```
 
 1. Run the script to generate traffic to the API\.

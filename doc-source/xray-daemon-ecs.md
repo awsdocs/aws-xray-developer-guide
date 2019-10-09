@@ -146,28 +146,3 @@ If you run your cluster in the private subnet of a VPC, you can use the [`awsvpc
     ]
 }
 ```
-
-## Configure Command Line Options in the Amazon ECS Console<a name="xray-daemon-ecs-cmdline"></a>
-
-In order to set command line options for the container through the Amazon ECS console, there are fields in the task definition that must be\. Command line arguments, in this case, are typically used for local testing, but can also be used for convenience while setting environment variables or to control the startup process\. To learn more about the available command line arguments in X\-Ray, see [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md)\.
-
-To set a command line option, you will access your container settings file\. By default this file should be located at `/etc/amazon/xray/cfg.yaml`\. Within the `environemnt` object array, add a comma\-separated list of command line arguments within a string array named `command`\.
-
-The following steps shows a sample where a user wants to set a different account than the one originally instrumented to receive traces\. This sample applies for all implementations of X\-Ray except AWS integrations, such as Lambda, API Gateway, etc\. 
-
-**Requirements**
-+ An X\-Ray daemon Docker image\.
-+ An Amazon ECS container\.
-+ A task definition setup with the X\-Ray daemon\.
-
-**To set X\-Ray to send traces to another account**
-
-1. Ensure that the new resource you want to send traces to has the permissions required to send traces\. For information on permissions, see [Identity and Access Management in AWS X\-Ray](xray-permissions.md)\. 
-
-1. Update the daemon configuration file `/etc/amazon/xray/cfg.yaml` with the ARN of your new resource\.
-**Note**  
-If you are using the official X\-Ray Docker image, you will need to create a new image with the configuration changes, and have that consume the official base image\. When working with Amazon ECS, you will rerun the configured image as a task\.
-
-1. Restart the daemon, if it is a typical application\. In the case of an Amazon ECS container, you will need to rerun the image with a new task definition\. To learn more, see [Running a Task Using the Fargate Launch Type](         https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs_run_task_fargate.html)\. 
-
-1. \[How to verify results?\]

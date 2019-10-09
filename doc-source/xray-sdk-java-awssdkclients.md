@@ -2,7 +2,7 @@
 
 When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Java tracks the calls downstream in [subsegments](xray-sdk-java-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
-The X\-Ray SDK for Java automatically instruments all AWS SDK clients when you include the `aws-sdk` and `aws-sdk-instrumentor` [submodules](xray-sdk-java.md#xray-sdk-java-dependencies) in your build\. If you don't include the Instrumentor submodule, you can choose to instrument some clients while excluding others\.
+The X\-Ray SDK for Java automatically instruments all AWS SDK clients when you include the `aws-sdk` and an `aws-sdk-instrumentor` [submodules](xray-sdk-java.md#xray-sdk-java-submodules) in your build\. If you don't include the Instrumentor submodule, you can choose to instrument some clients while excluding others\.
 
 To instrument individual clients, remove the `aws-sdk-instrumentor` submodule from your build and add an `XRayClient` as a `TracingHandler` on your AWS SDK client using the service's client builder\.
 
@@ -54,3 +54,23 @@ When you access named resources, calls to the following services create addition
 + **Amazon DynamoDB** – Table name
 + **Amazon Simple Storage Service** – Bucket and key name
 + **Amazon Simple Queue Service** – Queue name
+
+To instrument downstream calls to AWS services with AWS SDK for Java 2\.2 and later, you can omit the `aws-xray-recorder-sdk-aws-sdk-v2-instrumentor` module from your build configuration\. Include the `aws-xray-recorder-sdk-aws-sdk-v2 module` instead, then instrument individual clients by configuring them with a `TracingInterceptor`\. 
+
+**Example AWS SDK for Java 2\.2 and later \- tracing interceptor**  
+
+```
+import com.amazonaws.xray.interceptors.TracingInterceptor;
+import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+//...
+public class MyModel {
+private DynamoDbClient client = DynamoDbClient.builder()
+.region(Region.US_WEST_2)
+.overrideConfiguration(ClientOverrideConfiguration.builder()
+.addExecutionInterceptor(new TracingInterceptor())
+.build()
+)
+.build();
+//...
+```

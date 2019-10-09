@@ -74,8 +74,8 @@ Boolean keywords are either true or false\. Use these keywords to find traces th
 + `inferred` – Request has inferred segments\.
 + `first` – Element is the first of an enumerated list\.
 + `last` – Element is the last of an enumerated list\.
-+ `remote` – Request has remote segments\.
-+ `root` – Request is the entry point or root segment of a trace\.
++ `remote` – Root cause entity is remote\.
++ `root` – Service is the entry point or root segment of a trace\.
 
 Boolean operators find segments where the specified key is `true` or `false`\.
 
@@ -197,7 +197,7 @@ String operators find values that are equal to or contain specific text\. Values
 + `CONTAINS` – The keyword contains a specific string\.
 + `BEGINSWITH` ,`ENDSWITH` – The keyword starts or ends with a specific string\.
 
-**Example User filter**  
+**Example Http\.url filter**  
 
 ```
 http.url CONTAINS "/api/game/"

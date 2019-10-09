@@ -24,6 +24,8 @@ Annotations and metadata are arbitrary text that you add to segments with the X\
 
 When you have a lot of instrumented clients in your code, a single request segment can contain many subsegments, one for each call made with an instrumented client\. You can organize and group subsegments by wrapping client calls in [custom subsegments](xray-sdk-java-subsegments.md)\. You can create a custom subsegment for an entire function or any section of code, and record metadata and annotations on the subsegment instead of writing everything on the parent segment\.
 
+## Submodules<a name="xray-sdk-java-submodules"></a>
+
 You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is split into submodules by use case, with a bill of materials for version management:
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-core](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-core) \(required\) – Basic functionality for creating segments and transmitting segments\. Includes `AWSXRayServletFilter` for instrumenting incoming requests\.
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk) – Instruments calls to AWS services made with AWS SDK for Java clients by adding a tracing client as a request handler\.
@@ -57,7 +59,7 @@ If you use a library that is included in the X\-Ray SDK for Java, you must use t
 The X\-Ray SDK for Java is available from Maven:
 + **Group** – `com.amazonaws`
 + **Artifact** – `aws-xray-recorder-sdk-bom`
-+ **Version** – `2.2.0`
++ **Version** – `2.3.0`
 
 If you use Maven to build your application, add the SDK as a dependency in your `pom.xml` file\.
 
@@ -69,7 +71,7 @@ If you use Maven to build your application, add the SDK as a dependency in your 
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-xray-recorder-sdk-bom</artifactId>
-      <version>2.2.0</version>
+      <version>2.3.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -123,29 +125,9 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom('com.amazonaws:aws-java-sdk-bom:1.11.39')
-        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.2.0')
+        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.3.0')
     }
 }
 ```
 
 If you use Elastic Beanstalk to deploy your application, you can use Maven or Gradle to build on\-instance each time you deploy, instead of building and uploading a large archive that includes all of your dependencies\. See the [sample application](xray-scorekeep.md) for an example that uses Gradle\.
-
-To instrument downstream calls to AWS services with AWS SDK for Java 2\.2 and later, you can omit the `aws-xray-recorder-sdk-aws-sdk-v2-instrumentor` module from your build configuration\. Include the `aws-xray-recorder-sdk-aws-sdk-v2 module` instead, then instrument individual clients by configuring them with a `TracingInterceptor`\. 
-
-**Example AWS SDK for Java 2\.2 and later \- tracing interceptor**  
-
-```
-import com.amazonaws.xray.interceptors.TracingInterceptor;
-import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-//...
-public class MyModel {
-private DynamoDbClient client = DynamoDbClient.builder()
-.region(Region.US_WEST_2)
-.overrideConfiguration(ClientOverrideConfiguration.builder()
-.addExecutionInterceptor(new TracingInterceptor())
-.build()
-)
-.build();
-//...
-```
