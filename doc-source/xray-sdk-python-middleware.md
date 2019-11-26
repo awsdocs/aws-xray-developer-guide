@@ -54,7 +54,7 @@ Configure a segment name in your [`settings.py` file](xray-sdk-python-configurat
 **Example settings\.py – segment name**  
 
 ```
-XRAY_RECORDER = {
+XRAY_RECORDER = {,
     'AWS_XRAY_TRACING_NAME': 'My application',
     'PLUGINS': ('EC2Plugin'),
 }
@@ -124,7 +124,7 @@ XRAY_RECORDER = {
     'AUTO_INSTRUMENT': True,
     'AWS_XRAY_TRACING_NAME': 'My application',
     'DYNAMIC_NAMING': '*.example.com',
-    'PLUGINS': ('ElasticBeanstalkPlugin', 'EC2Plugin'),
+    'PLUGINS': ('ElasticBeanstalkPlugin', 'EC2Plugin')
 }
 ```
 

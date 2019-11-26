@@ -165,7 +165,7 @@ Record user IDs on request segments to identify the user who sent the request\.
    Segment document = AWSXRay.getCurrentSegment();
    ```
 
-1. Call `setUser` with a String ID of the user who sent the request\.
+1. Call `setUser` with a string ID of the user who sent the request\.
 
    ```
    document.setUser("U12345");

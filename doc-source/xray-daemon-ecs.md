@@ -146,3 +146,37 @@ If you run your cluster in the private subnet of a VPC, you can use the [`awsvpc
     ]
 }
 ```
+
+## Configure Command Line Options in the Amazon ECS Console<a name="xray-daemon-ecs-cmdline"></a>
+
+Command line options override any conflicting values in your image's config file\. Command line options are typically used for local testing, but can also be used for convenience while setting environment variables, or to control the startup process\. 
+
+By adding command line options, you are updating the Docker `CMD` that is passed to the container\. For more information, see [the Docker run reference](https://docs.docker.com/engine/reference/run/#overriding-dockerfile-image-defaults)\.
+
+**To set a command line option**
+
+1. Open the Amazon ECS console at [https://console\.aws\.amazon\.com/ecs/](https://console.aws.amazon.com/ecs/)\.
+
+1. From the navigation bar, choose the region that contains your task definition\.
+
+1. In the navigation pane, choose **Task Definitions**\.
+
+1. On the **Task Definitions** page, select the box to the left of the task definition to revise and choose **Create new revision**\.
+
+1. On the **Create new revision of Task Definition** page, select the container\.
+
+1. In the **ENVIRONMENT** section, add your comma\-separated list of command line options to the **Command** field\.
+
+1. Choose **Update**\.
+
+1. Verify the information and choose **Create**\.
+
+The following example shows how to write a comma\-separated command line option for the `RoleARN` option\. The `RoleARN` option assumes the specified IAM role to upload segments to a different account\.
+
+**Example**  
+
+```
+--role-arn, arn:aws:iam::123456789012:role/xray-cross-account
+```
+
+To learn more about the available command line options in X\-Ray, see [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md)\.

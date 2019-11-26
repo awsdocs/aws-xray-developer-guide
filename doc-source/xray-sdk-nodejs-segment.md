@@ -6,9 +6,12 @@ You can record additional information about requests, the environment, or your a
 
 **Metadata** are key\-value pairs that can have values of any type, including objects and lists, but are not indexed for use with filter expressions\. Use metadata to record additional data that you want stored in the trace but don't need to use with search\.
 
+In addition to annotations and metadata, you can also [record user ID strings](#xray-sdk-nodejs-segment-userid) on segments\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
+
 **Topics**
 + [Recording Annotations with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-annotations)
 + [Recording Metadata with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-metadata)
++ [Recording User IDs with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-userid)
 
 ## Recording Annotations with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-annotations"></a>
 
@@ -94,3 +97,55 @@ Use metadata to record information on segments or subsegments that you don't nee
    ```
 
 If you don't specify a namespace, the SDK uses `default`\. Calling `addMetadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
+
+## Recording User IDs with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-userid"></a>
+
+Record user IDs on request segments to identify the user who sent the request\. This operation isn’t compatible with AWS Lambda functions because segments in Lambda environments are immutable\. The `setUser` call can be applied only to segments, not subsegments\.
+
+**To record user IDs**
+
+1. Get a reference to the current segment or subsegment\.
+
+   ```
+   var AWSXRay = require('aws-xray-sdk');
+   ...
+   var document = AWSXRay.getSegment();
+   ```
+
+1. Call `setUser()` with a string ID of the user who sent the request\.
+
+   ```
+   var user = 'john123';
+   
+   AWSXRay.getSegment().setUser(user);
+   ```
+
+You can call `setUser` to record the user ID as soon as your express application starts processing a request\. If you will use the segment only to set the user ID, you can chain the calls in a single line\.
+
+**Example app\.js \- User ID**  
+
+```
+var AWS = require('aws-sdk');
+var AWSXRay = require('aws-xray-sdk');
+var uuidv4 = require('uuid/v4');
+var ddb = AWSXRay.captureAWSClient(new AWS.DynamoDB());
+...
+    app.post('/signup', function(req, res) {
+    var userId = uuidv4();
+    var item = {
+        'userId': {'S': userId},
+        'email': {'S': req.body.email},
+        'name': {'S': req.body.name}
+    };
+
+    var seg = AWSXRay.getSegment().setUser(userId);
+  
+    ddb.putItem({
+      'TableName': ddbTable,
+      'Item': item,
+      'Expected': { email: { Exists: false } }
+  }, function(err, data) {
+...
+```
+
+To find traces for a user ID, use the `user` keyword in a [filter expression](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)\.

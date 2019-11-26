@@ -40,7 +40,7 @@ You can also use [environment variables](#xray-sdk-ruby-configuration-envvars), 
 
 The SDK also uses plugin settings to set the `origin` field on the segment\. This indicates the type of AWS resource that runs your application\. The resource type appears under your application's name in the service map\. For example, `AWS::ElasticBeanstalk::Environment`\.
 
-![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
+![\[Service node with resource type.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
 
 When you use multiple plugins, the SDK uses the plugin that was loaded last to determine the origin\.
 

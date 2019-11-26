@@ -318,7 +318,11 @@ aws xray get-service-graph --group-name "Example1"
 
 You can use the [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API to get a list of trace summaries\. Trace summaries include information that you can use to identify traces that you want to download in full, including annotations, request and response information, and IDs\.
 
-Use the `aws xray get-trace-summaries` command to get a list of trace summaries\. The following commands get a list of trace summaries from between 1 and 2 minutes in the past\.
+There are two `TimeRangeType` flags available when calling `aws xray get-trace-summaries`:
++ **TraceId** – The default `GetTraceSummaries` search uses TraceID time and returns traces started within the computed `[start_time, end_time)` range\. This range of timestamps is calculated based on the encoding of the timestamp within the TraceId, or can be defined manually\.
++ **Event time **– To search for events as they happen over the time, AWS X\-Ray allows searching for traces using event timestamps\. Event time returns traces active during the `[start_time, end_time)` range, regardless of when the trace began\.
+
+Use the `aws xray get-trace-summaries` command to get a list of trace summaries\. The following commands get a list of trace summaries from between 1 and 2 minutes in the past using the default TraceId time\.
 
 **Example Script to get trace summaries**  
 

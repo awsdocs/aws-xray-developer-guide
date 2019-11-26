@@ -1,6 +1,6 @@
 # Configuring the X\-Ray SDK for Java<a name="xray-sdk-java-configuration"></a>
 
-The X\-Ray SDK for Java provides a class named `AWSXRay` that provides the global recorder, a `TracingHandler` that you can use to instrument your code\. You can configure the global recorder to customize the `AWSXRayServletFilter` that creates segments for incoming HTTP calls\.
+The X\-Ray SDK for Java includes a class named `AWSXRay` that provides the global recorder\. This is a `TracingHandler` that you can use to instrument your code\. You can configure the global recorder to customize the `AWSXRayServletFilter` that creates segments for incoming HTTP calls\.
 
 **Topics**
 + [Service Plugins](#xray-sdk-java-configuration-plugins)
@@ -18,7 +18,7 @@ Use `plugins` to record information about the service hosting your application\.
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 
-![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources.png)
+![\[Segment resource data with Amazon EC2 and Elastic Beanstalk plugins.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources.png)
 
 To use a plugin, call `withPlugin` on your `AWSXRayRecorderBuilder`\.
 
@@ -47,7 +47,7 @@ public class WebConfig {
 
 The SDK also uses plugin settings to set the `origin` field on the segment\. This indicates the type of AWS resource that runs your application\. The resource type appears under your application's name in the service map\. For example, `AWS::ElasticBeanstalk::Environment`\.
 
-![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
+![\[Service node with resource type.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
 
 When you use multiple plugins, the SDK uses the plugin that was loaded last to determine the origin\.
 
@@ -88,9 +88,9 @@ This example defines one custom rule and a default rule\. The custom rule applie
 
 The disadvantage of defining rules locally is that the fixed target is applied by each instance of the recorder independently, instead of being managed by the X\-Ray service\. As you deploy more hosts, the fixed rate is multiplied, making it harder to control the amount of data recorded\.
 
-On Lambda, you cannot modify the sampling rate\. If your function is called by an instrumented service, calls generated requests that were sampled by that service will be recorded by Lambda\. If active tracing is enabled and no tracing header is present, Lambda makes the sampling decision\.
+On AWS Lambda, you cannot modify the sampling rate\. If your function is called by an instrumented service, calls that generated requests that were sampled by that service will be recorded by Lambda\. If active tracing is enabled and no tracing header is present, Lambda makes the sampling decision\.
 
-To provide backup rules in Spring, configure the global recorder with a `CentralizedSamplingStrategy` in a configuration class:
+To provide backup rules in Spring, configure the global recorder with a `CentralizedSamplingStrategy` in a configuration class\.
 
 **Example src/main/java/myapp/WebConfig\.java \- Recorder Configuration**  
 
@@ -162,7 +162,7 @@ builder.withSamplingStrategy(new LocalizedSamplingStrategy(ruleFile));
 
 ## Logging<a name="xray-sdk-java-configuration-logging"></a>
 
-By default, the SDK outputs `SEVERE` level and `ERROR` level messages to your application logs\. You can enable debug\-level logging on the SDK to output more detailed logs to your application log file\.
+By default, the SDK outputs `SEVERE`\-level and `ERROR`\-level messages to your application logs\. You can enable debug\-level logging on the SDK to output more detailed logs to your application log file\.
 
 **Example application\.properties**  
 Set the logging level with the `logging.level.com.amazonaws.xray` property\.  
@@ -172,6 +172,100 @@ logging.level.com.amazonaws.xray = DEBUG
 ```
 
 Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-java-subsegments.md)\.
+
+### Trace ID Injection Into Logs<a name="xray-sdk-java-configuration-logging-id-injection"></a>
+
+To expose the current trace ID to your log statements, you can inject the ID into the mapped diagnostic context \(MDC\)\. Using the `SegmentListener` interface, methods are called from the X\-Ray recorder during segment lifecycle events\. When a segment begins, the trace ID is injected into the MDC with the key `AWS-XRAY-TRACE-ID`\. When that segment ends, the key is removed from the MDC\. This exposes the trace ID to the logging library in use\.
+
+This feature works with Java applications instrumented with the AWS X\-Ray SDK for Java, and supports the following logging configurations:
++ SLF4J front\-end API with Logback backend
++ SLF4J front\-end API with Log4J2 backend
++ Log4J2 front\-end API with Log4J2 backend
+
+See the following tabs for the needs of each front end and each backend\.
+
+------
+#### [ SLF4J Frontend ]
+
+1. Add the following Maven dependency to your project\.
+
+   ```
+   <dependency>
+       <groupId>com.amazonaws</groupId>
+       <artifactId>aws-xray-recorder-sdk-slf4j</artifactId>
+       <version>2.4.0</version>
+   </dependency>
+   ```
+
+1. Include the `withSegmentListener` method when building the `AWSXRayRecorder`\. This adds a `SegmentListener` class, which automatically injects new trace IDs into the SLF4J MDC\.  
+**Example `AWSXRayRecorderBuilder` statement**  
+
+   ```
+   AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder
+           .standard().withSegmentListener(new SLF4JSegmentListener());
+   ```
+
+------
+#### [ Log4J2 front end ]
+
+1. Add the following Maven dependency to your project\.
+
+   ```
+   <dependency>
+       <groupId>com.amazonaws</groupId>
+       <artifactId>aws-xray-recorder-sdk-log4j</artifactId>
+       <version>2.4.0</version>
+   </dependency>
+   ```
+
+1. Include the `withSegmentListener` method when building the `AWSXRayRecorder`\. This will add a `SegmentListener` class, which automatically injects new trace IDs into the SLF4J MDC\.  
+**Example `AWSXRayRecorderBuilder` statement**  
+
+   ```
+   AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder
+           .standard().withSegmentListener(new Log4JSegmentListener());
+   ```
+
+------
+#### [ Logback backend ]
+
+To insert the trace ID into your log events, you must modify the logger's `PatternLayout`, which formats each logging statement\.
+
+1. Find where the `patternLayout` is configured\. You can do this programmatically, or through an XML configuration file\. To learn more, see [Logback configuration](http://logback.qos.ch/manual/configuration.html)\.
+
+1. Insert `%X{AWS-XRAY-TRACE-ID}` anywhere in the `patternLayout` to insert the trace ID in future logging statements\. `%X{}` indicates that you are retrieving a value with the provided key from the MDC\. To learn more about PatternLayouts in Logback, see [PatternLayout](https://logback.qos.ch/manual/layouts.html#ClassicPatternLayout)\.
+
+------
+#### [ Log4J2 backend ]
+
+1. Find where the `patternLayout` is configured\. You can do this programmatically, or through a configuration file written in XML, JSON, YAML, or properties format\. 
+
+   To learn more about configuring Log4J2 through a configuration file, see [Configuration](https://logging.apache.org/log4j/2.x/manual/configuration.html)\. 
+
+   To learn more about configuring Log4J2 programmatically, see [Programmatic Configuration](https://logging.apache.org/log4j/2.x/manual/customconfig.html)\. 
+
+1. Insert `%X{AWS-XRAY-TRACE-ID}` anywhere in the `PatternLayout` to insert the trace ID in future logging statements\. `%X{}` indicates that you are retrieving a value with the provided key from the MDC\. To learn more about PatternLayouts in Log4J2, see [Pattern Layout](https://logging.apache.org/log4j/2.x/manual/layouts.html#Pattern_Layout)\.
+
+------
+
+**Trace ID Injection Example**  
+The following shows a `PatternLayout` string modified to include the trace ID\. The trace ID is printed after the thread name \(`%t`\) and before the log level \(`%-5p`\)\.
+
+**Example `PatternLayout` with ID injection**  
+
+```
+%d{HH:mm:ss.SSS} [%t] %X{AWS-XRAY-TRACE-ID} %-5p %m%n
+```
+
+AWS X\-Ray automatically prints the key and the trace ID in the log statement for easy parsing\. The following shows a log statement using the modified `PatternLayout`\.
+
+**Example log statement with ID injection**  
+
+```
+2019-09-10 18:58:30.844 [nio-5000-exec-4]  AWS-XRAY-TRACE-ID: 1-5d77f256-19f12e4eaa02e3f76c78f46a WARN 1 - Your logging message here
+```
+
+ The logging message itself is housed in the pattern `%m` and is set when calling the logger\.
 
 ## Environment Variables<a name="xray-sdk-java-configuration-envvars"></a>
 
@@ -194,9 +288,9 @@ Environment variables override equivalent [system properties](#xray-sdk-java-con
 
 ## System Properties<a name="xray-sdk-java-configuration-sysprops"></a>
 
-You can use system properties as a JVM\-specific alternative to [environment variables](#xray-sdk-java-configuration-envvars)\. The SDK supports the following properties\.
+You can use system properties as a JVM\-specific alternative to [environment variables](#xray-sdk-java-configuration-envvars)\. The SDK supports the following properties:
 + `com.amazonaws.xray.strategy.tracingName` – Equivalent to `AWS_XRAY_TRACING_NAME`\.
 + `com.amazonaws.xray.emitters.daemonAddress` – Equivalent to `AWS_XRAY_DAEMON_ADDRESS`\.
 + `com.amazonaws.xray.strategy.contextMissingStrategy` – Equivalent to `AWS_XRAY_CONTEXT_MISSING`\.
 
-If both a system property and the equivalent environment variable are set, the environment variable values is used\. Either method overrides values set in code\.
+If both a system property and the equivalent environment variable are set, the environment variable value is used\. Either method overrides values set in code\.

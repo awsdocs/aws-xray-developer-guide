@@ -7,3 +7,6 @@ AWS X\-Ray integrates with AWS CloudTrail to record API actions made by a user, 
 
 **AWS Config Tracking**  
 AWS X\-Ray integrates with AWS Config to record configuration changes made to your X\-Ray encryption resources\. You can use AWS Config to inventory X\-Ray encryption resources, audit the X\-Ray configuration history, and send notifications based on resource changes\. For more information, see [Tracking X\-Ray Encryption Configuration Changes with AWS Config](xray-api-config.md)\.
+
+**Amazon CloudWatch Monitoring**  
+You can use the X\-Ray SDK for Java to publish unsampled Amazon CloudWatch metrics from your collected X\-Ray segments\. These metrics are derived from the segment’s start and end time, and the error, fault and throttled status flags\. Use these trace metrics to expose retries and dependency issues within subsegments\. For more information, see [AWS X\-Ray Metrics for the X\-Ray SDK for Java](xray-sdk-java-monitoring.md)\.

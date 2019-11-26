@@ -50,7 +50,7 @@ For local development, install the SDK in your project directory with npm\.
 ```
 ~/nodejs-xray$ npm install aws-xray-sdk
 nodejs-xray@0.0.0 ~/nodejs-xray
-└─┬ aws-xray-sdk@2.0.0
+└─┬ aws-xray-sdk@2.4.0
   ├─┬ continuation-local-storage@3.2.0
   │ ├─┬ async-listener@0.6.3
   │ │ └── shimmer@1.0.0
@@ -73,5 +73,5 @@ Use the `--save` option to save the SDK as a dependency in your application's `p
 ```
 ~/nodejs-xray$ npm install aws-xray-sdk --save
 nodejs-xray@0.0.0 ~/nodejs-xray
-└── aws-xray-sdk@2.0.0
+└── aws-xray-sdk@2.4.0
 ```

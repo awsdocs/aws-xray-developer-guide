@@ -76,6 +76,22 @@ From the timeline view, you can also access the raw trace data that the console 
 
 ![\[Raw data JSON document that contains all segments and subsegments that make up the trace\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-tracedata.png)
 
+## Viewing the Trace Map<a name="xray-console-trace-map"></a>
+
+Use the trace map to visually map the end\-to\-end path of a single request\. 
+
+**To view a trace map**
+
+1. Open the [traces page](https://console.aws.amazon.com/xray/home#/traces) of the X\-Ray console\.
+
+1. Choose a URL to filter the trace list\.
+
+1. Choose a trace ID to view the timeline for a trace\.
+
+1. The trace map is displayed above the trace timeline\. 
+
+![\[Trace map displayed above the trace timeline.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-trace-map-timeline.png)
+
 ## Viewing Segment Details<a name="xray-console-segments"></a>
 
 From the trace timeline, choose the name of a segment to view its details\. The **Overview** shows information about the request and response\.

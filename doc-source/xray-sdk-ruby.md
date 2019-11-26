@@ -7,7 +7,7 @@ You can download the SDK by adding it to your gemfile and running `bundle instal
 **Example Gemfile**  
 
 ```
-gem 'aws-xray-sdk'
+gem 'aws-sdk-ruby'
 ```
 
 If you use Rails, start by [adding the X\-Ray SDK middleware](xray-sdk-ruby-middleware.md) to trace incoming requests\. A request filter creates a [segment](xray-concepts.md#xray-concepts-segments)\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\. For non\-Rails applications, you can [create segments manually](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-manual)\.
