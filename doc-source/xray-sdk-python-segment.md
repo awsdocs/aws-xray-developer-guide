@@ -117,7 +117,7 @@ Record user IDs on request segments to identify the user who sent the request\.
 1. Call `setUser` with a String ID of the user who sent the request\.
 
    ```
-   document.set_user("U12345");
+   document.set_user("U12345")
    ```
 
 You can call `set_user` in your controllers to record the user ID as soon as your application starts processing a request\.
