@@ -9,3 +9,11 @@ Client creates a shallow copy of the provided http client, defaulting to `http.D
 ```
 myClient := xray.Client(http-client)
 ```
+
+**Custom HTTP client**
+
+```
+request, err := httpNewRequest("PUT", myURL, bytes.NewBuffer(myPayload))
+myClient := xray.Client(&http.Client{})
+response, err := client.Do(request.WithContext(ctx))
+```
