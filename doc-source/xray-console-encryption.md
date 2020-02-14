@@ -4,7 +4,7 @@ AWS X\-Ray always encrypts traces and related data at rest\. If you need to audi
 
 X\-Ray provides an AWS managed CMK named `aws/xray`\. Use this key if you just want to [audit key usage in AWS CloudTrail](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html) and don't need to manage the key itself\. If you need to manage access to the key or configure key rotation, you can [create a customer managed CMK](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)\.
 
-You must have user\-level access to a customer managed CMK to configure X\-Ray to use it, and to then view encrypted traces\. See [User Permissions for Encryption](xray-permissions.md#xray-permissions-encryption) for more information\.
+You must have user\-level access to a customer managed CMK to configure X\-Ray to use it, and to then view encrypted traces\. See [User Permissions for Encryption](security_iam_service-with-iam.md#xray-permissions-encryption) for more information\.
 
 **To configure X\-Ray to use a CMK for encryption**
 
@@ -18,6 +18,8 @@ You must have user\-level access to a customer managed CMK to configure X\-Ray t
    + **aws/xray** – Use the AWS managed CMK\.
    + *key alias* – Use a customer managed CMK in your account\.
    + **Manually enter a key ARN** – Use a customer managed CMK in a different account\. Enter the full Amazon Resource Name \(ARN\) of the key in the field that appears\.
+**Note**  
+X\-Ray does not support asymmetric CMKs\.
 
 1. Choose **Apply**\.
 

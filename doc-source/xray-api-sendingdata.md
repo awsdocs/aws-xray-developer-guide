@@ -106,7 +106,7 @@ With the AWS CLI, use the `aws xray put-trace-segments` command to send segment 
 
 ```
 $ DOC='{"trace_id": "1-5960082b-ab52431b496add878434aa25", "id": "6226467e3f845502", "start_time": 1498082657.37518, "end_time": 1498082695.4042, "name": "test.elasticbeanstalk.com"}'
-$ aws xray put-trace-segments --trace-segment-documents $DOC
+$ aws xray put-trace-segments --trace-segment-documents "$DOC"
 {
     "UnprocessedTraceSegments": []
 }
@@ -132,7 +132,7 @@ The output lists any segments that failed processing\. For example, if the date 
 You can pass multiple segment documents at the same time, separated by spaces\.
 
 ```
-$ aws xray put-trace-segments --trace-segment-documents $DOC1 $DOC2
+$ aws xray put-trace-segments --trace-segment-documents "$DOC1" "$DOC2"
 ```
 
 ## Sending Segment Documents to the X\-Ray Daemon<a name="xray-api-daemon"></a>

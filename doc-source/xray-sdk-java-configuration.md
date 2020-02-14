@@ -14,9 +14,10 @@ The X\-Ray SDK for Java includes a class named `AWSXRay` that provides the globa
 Use `plugins` to record information about the service hosting your application\.
 
 **Plugins**
-+ Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
++ Amazon EC2 – `EC2Plugin` adds the instance ID, Availability Zone, and the CloudWatch Logs Group\.
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
 + Amazon ECS – `ECSPlugin` adds the container ID\.
++ Amazon EKS – `EKSPlugin` adds the container ID, cluster name, pod ID, and the CloudWatch Logs Group\.
 
 ![\[Segment resource data with Amazon EC2 and Elastic Beanstalk plugins.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-resources.png)
 
@@ -49,7 +50,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 ![\[Service node with resource type.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
 
-When you use multiple plugins, the SDK uses the plugin that was loaded last to determine the origin\.
+When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
 ## Sampling Rules<a name="xray-sdk-java-configuration-sampling"></a>
 

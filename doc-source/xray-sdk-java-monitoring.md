@@ -37,7 +37,7 @@ Use the following procedure to enable trace metrics in your instrumented Java ap
 
 **To configure trace metrics**
 
-1. Add the `aws-xray-recorder-metrics` package as a Maven dependency\. For more information, see [X\-Ray SDK for Java Submodules](xray-sdk-java.md#xray-sdk-java-submodules)\.
+1. Add the `aws-xray-recorder-sdk-metrics` package as a Maven dependency\. For more information, see [X\-Ray SDK for Java Submodules](xray-sdk-java.md#xray-sdk-java-submodules)\.
 
 1. Enable a new `MetricsSegmentListener()` as part of the global recorder build\.  
 **Example src/com/myapp/web/Startup\.java**  

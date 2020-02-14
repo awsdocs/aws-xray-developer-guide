@@ -67,7 +67,7 @@ EXPOSE 2000/udp
 EXPOSE 2000/tcp
 ```
 
-In your task definition, the configuration depends on the networking mode that you use\. Bridge networking is the default and can be used in your default VPC\. In a bridge network, publish UDP port 2000, and create a link from your application container to the daemon container\. Use the `AWS_XRAY_DAEMON_ADDRESS` environment variable to tell the X\-Ray SDK where to send traces\.
+In your task definition, the configuration depends on the networking mode that you use\. Bridge networking is the default and can be used in your default VPC\. In a bridge network, set the `AWS_XRAY_DAEMON_ADDRESS` environment variable to tell the X\-Ray SDK which container\-port to reference and set the host port\. For example, you could publish UDP port 2000, and create a link from your application container to the daemon container\. 
 
 **Example Task definition**  
 

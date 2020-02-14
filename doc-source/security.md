@@ -1,6 +1,6 @@
 # Security in AWS X\-Ray<a name="security"></a>
 
-## <a name="w12aac14b3"></a>
+## <a name="w15aac14b3"></a>
 
 Cloud security at AWS is the highest priority\. As an AWS customer, you benefit from a data center and network architecture that is built to meet the requirements of the most security\-sensitive organizations\.
 
@@ -12,7 +12,7 @@ This documentation will help you understand how to apply the shared responsibili
 
 **Topics**
 + [Data Protection in AWS X\-Ray](xray-console-encryption.md)
-+ [Identity and Access Management in AWS X\-Ray](xray-permissions.md)
++ [Identity and Access Management for AWS X\-Ray](security-iam.md)
 + [Compliance Validation for AWS X\-Ray](xray-compliance.md)
 + [Resilience in AWS X\-Ray](disaster-recovery-resiliency.md)
 + [Infrastructure Security in AWS X\-Ray](infrastructure-security.md)

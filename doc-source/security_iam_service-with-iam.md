@@ -1,8 +1,10 @@
-# Identity and Access Management in AWS X\-Ray<a name="xray-permissions"></a>
+# How AWS X\-Ray Works with IAM<a name="security_iam_service-with-iam"></a>
+
+Before you use IAM to manage access to X\-Ray, you should understand what IAM features are available to use with X\-Ray\. To get a high\-level view of how X\-Ray and other AWS services work with IAM, see [AWS Services That Work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide*\.
 
 You can use AWS Identity and Access Management \(IAM\) to grant X\-Ray permissions to users and compute resources in your account\. IAM controls access to the X\-Ray service at the API level to enforce permissions uniformly, regardless of which client \(console, AWS SDK, AWS CLI\) your users employ\.
 
-To [use the X\-Ray console](xray-console.md) to view service maps and segments, you only need read permissions\. To enable console access, add the `AWSXrayReadOnlyAccess` [managed policy](#xray-permissions-managedpolicies) to your IAM user\.
+To [use the X\-Ray console](xray-console.md) to view service maps and segments, you only need read permissions\. To enable console access, add the `AWSXrayReadOnlyAccess` [managed policy](security_iam_id-based-policy-examples.md#xray-permissions-managedpolicies) to your IAM user\.
 
 For [local development and testing](#xray-permissions-local), create an IAM user with read and write permissions\. Generate access keys for the user and store them in the standard AWS SDK location\. You can use these credentials with the X\-Ray daemon, the AWS CLI, and the AWS SDK\.
 
@@ -11,91 +13,42 @@ To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM r
 The read and write policies do not include permission to configure [encryption key settings](xray-console-encryption.md) and sampling rules\. Use `AWSXrayFullAccess` to access these settings, or add [configuration APIs](xray-api-configuration.md) in a custom policy\. For encryption and decryption with a customer managed key that you create, you also need [permission to use the key](#xray-permissions-encryption)\.
 
 **Topics**
-+ [IAM Managed Policies for X\-Ray](#xray-permissions-managedpolicies)
-+ [Specifying a Resource within an IAM Policy](#xray-permissions-resources)
++ [X\-Ray Identity\-Based Policies](#security_iam_service-with-iam-id-based-policies)
++ [X\-Ray Resource\-Based Policies](#security_iam_service-with-iam-resource-based-policies)
++ [Authorization Based on X\-Ray Tags](#security_iam_service-with-iam-tags)
 + [Running Your Application Locally](#xray-permissions-local)
 + [Running Your Application in AWS](#xray-permissions-aws)
 + [User Permissions for Encryption](#xray-permissions-encryption)
 
-## IAM Managed Policies for X\-Ray<a name="xray-permissions-managedpolicies"></a>
+## X\-Ray Identity\-Based Policies<a name="security_iam_service-with-iam-id-based-policies"></a>
 
-To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides [managed policies](#xray-permissions-managedpolicies) for read only, write only, and administrator use cases\.
-+ `AWSXrayReadOnlyAccess` – Read permissions for using the X\-Ray console, AWS CLI, or AWS SDK to get trace data and service maps from the X\-Ray API\. Includes permission to view sampling rules\.
+With IAM identity\-based policies, you can specify allowed or denied actions and resources as well as the conditions under which actions are allowed or denied\. X\-Ray supports specific actions, resources, and condition keys\. To learn about all of the elements that you use in a JSON policy, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html) in the *IAM User Guide*\.
 
-  ```
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "xray:GetSamplingRules",
-                  "xray:GetSamplingTargets",
-                  "xray:GetSamplingStatisticSummaries",
-                  "xray:BatchGetTraces",
-                  "xray:GetServiceGraph",
-                  "xray:GetTraceGraph",
-                  "xray:GetTraceSummaries",
-                  "xray:GetGroups",
-                  "xray:GetGroup"
-              ],
-              "Resource": [
-                  "*"
-              ]
-          }
-      ]
-  }
-  ```
-+ `AWSXRayDaemonWriteAccess` – Write permissions for using the X\-Ray daemon, AWS CLI, or AWS SDK to upload segment documents and telemetry to the X\-Ray API\. Includes read permissions to get [sampling rules](xray-console-sampling.md) and report sampling results\.
+### Actions<a name="security_iam_service-with-iam-id-based-policies-actions"></a>
 
-  ```
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "xray:PutTraceSegments",
-                  "xray:PutTelemetryRecords",
-                  "xray:GetSamplingRules",
-                  "xray:GetSamplingTargets",
-                  "xray:GetSamplingStatisticSummaries"
-              ],
-              "Resource": [
-                  "*"
-              ]
-          }
-      ]
-  }
-  ```
-+ `AWSXrayFullAccess` – Permission to use all X\-Ray APIs, including read permissions, write permissions, and permission to configure encryption key settings and sampling rules\.
+The `Action` element of an IAM identity\-based policy describes the specific action or actions that will be allowed or denied by the policy\. Policy actions usually have the same name as the associated AWS API operation\. The action is used in a policy to grant permissions to perform the associated operation\. 
 
-  ```
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "xray:*"
-              ],
-              "Resource": [
-                  "*"
-              ]
-          }
-      ]
-  }
-  ```
+Policy actions in X\-Ray use the following prefix before the action: `xray:`\. For example, to grant someone permission to retrieve group resource details with the X\-Ray `GetGroup` API operation, you include the `xray:GetGroup` action in their policy\. Policy statements must include either an `Action` or `NotAction` element\. X\-Ray defines its own set of actions that describe tasks that you can perform with this service\.
 
-**To add a managed policy to an IAM user, group, or role**
+To specify multiple actions in a single statement, separate them with commas as follows:
 
-1. Open the [IAM console](https://console.aws.amazon.com/iam/home)\.
+```
+"Action": [
+      "xray:action1",
+      "xray:action2"
+```
 
-1. Open the role associated with your instance profile, an IAM user, or an IAM group\.
+You can specify multiple actions using wildcards \(\*\)\. For example, to specify all actions that begin with the word `Get`, include the following action:
 
-1. Under **Permissions**, attach the managed policy\.
+```
+"Action": "xray:Get*"
+```
 
-## Specifying a Resource within an IAM Policy<a name="xray-permissions-resources"></a>
+To see a list of X\-Ray actions, see [Actions Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsx-ray.html) in the *IAM User Guide*\.
+
+### Resources<a name="security_iam_service-with-iam-id-based-policies-resources"></a>
+
+The `Resource` element specifies the object or objects to which the action applies\. Statements must include either a `Resource` or a `NotResource` element\. You specify a resource using an ARN or using the wildcard \(\*\) to indicate that the statement applies to all resources\.
 
 You can control access to resources by using an IAM policy\. For actions that support resource\-level permissions, you use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\.
 
@@ -152,6 +105,24 @@ The following is an example of an identity\-based permissions policy for a `Crea
 
 **Note**  
 The ARN of a sampling rule is defined by its name\. Unlike group ARNs, sampling rules have no uniquely generated ID\.
+
+To see a list of X\-Ray resource types and their ARNs, see [Resources Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awskeymanagementservice.html#awskeymanagementservice-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsx-ray.html)\.
+
+### Condition Keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
+
+X\-Ray does not provide any service\-specific condition keys, but it does support using some global condition keys\. To see all AWS global condition keys, see [AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
+
+### Examples<a name="security_iam_service-with-iam-id-based-policies-examples"></a>
+
+To view examples of X\-Ray identity\-based policies, see [AWS X\-Ray Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)\.
+
+## X\-Ray Resource\-Based Policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
+
+X\-Ray does not support resource\-based policies\.
+
+## Authorization Based on X\-Ray Tags<a name="security_iam_service-with-iam-tags"></a>
+
+X\-Ray does not support tagging resources or controlling access based on tags\.
 
 ## Running Your Application Locally<a name="xray-permissions-local"></a>
 

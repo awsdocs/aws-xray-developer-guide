@@ -9,7 +9,10 @@ AWS X\-Ray provides APIs for configuring [sampling rules](xray-console-sampling.
 
 ## Encryption Settings<a name="xray-api-configuration-encryption"></a>
 
-Use [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) to specify a customer master key \(CMK\) to use for encryption\.
+Use [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) to specify an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to use for encryption\. 
+
+**Note**  
+X\-Ray does not support asymmetric CMKs\.
 
 ```
 $ aws xray put-encryption-config --type KMS --key-id alias/aws/xray

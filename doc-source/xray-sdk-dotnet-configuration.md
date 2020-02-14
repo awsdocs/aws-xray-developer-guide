@@ -54,7 +54,7 @@ For more information on the \.NET Core configuration API, see [Configure an ASP\
 Use plugins to add data about the service that is hosting your application\.
 
 **Plugins**
-+ Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
++ Amazon EC2 – `EC2Plugin` adds the instance ID, Availability Zone, and the CloudWatch Logs Group\.
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 

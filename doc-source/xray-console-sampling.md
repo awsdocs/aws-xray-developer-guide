@@ -4,13 +4,14 @@ You can use the AWS X\-Ray console to configure sampling rules for your services
 
 You can configure sampling for the following use cases:
 + **API Gateway Entrypoint** – API Gateway supports sampling and active tracing\. To enable active tracing on an API stage, see [Amazon API Gateway Active Tracing Support for AWS X\-Ray](xray-services-apigateway.md)\.
++ **AWS AppSync** – AWS AppSync supports sampling and active tracing\. To enable active tracing on AWS AppSync requests, see [Tracing with AWS X\-Ray](https://docs.aws.amazon.com/appsync/latest/devguide/x-ray-tracing.html)\.
 + **Instrument X\-Ray SDK on compute platforms** – When using compute platforms such as Amazon Elastic Compute Cloud \(Amazon EC2\), Amazon Elastic Container Service \(Amazon ECS\), or AWS Elastic Beanstalk \(Elastic Beanstalk\) sampling is supported when the application has been instrumented with the lastest X\-Ray SDK\.
 
 By customizing sampling rules, you can control the amount of data that you record, and modify sampling behavior on the fly without modifying or redeploying your code\. Sampling rules tell the X\-Ray SDK how many requests to record for a set of criteria\. By default, the X\-Ray SDK records the first request each second, and five percent of any additional requests\. One request per second is the *reservoir*, which ensures that at least one trace is recorded each second as long the service is serving requests\. Five percent is the *rate* at which additional requests beyond the reservoir size are sampled\.
 
 You can configure the X\-Ray SDK to read sampling rules from a JSON document that you include with your code\. However, when you run multiple instances of your service, each instance performs sampling independently\. This causes the overall percentage of requests sampled to increase because all of the instances' reservoirs are effectively added together\. Additionally, to update local sampling rules, you need to redeploy your code\.
 
-By defining sampling rules in the X\-Ray console, and [configuring the SDK](#xray-console-sampling-service) to read rules from the X\-Ray service, you can avoid both of these issues\. The service manages the reservoir for each rule, and assigns quotas to each instance of your service to distribute the reservoir evenly, based on the number of instances that are running\. And because the rules are configured in the service, you can manage rules without making additional deployments\.
+By defining sampling rules in the X\-Ray console, and [configuring the SDK](#xray-console-sampling-service) to read rules from the X\-Ray service, you can avoid both of these issues\. The service manages the reservoir for each rule, and assigns quotas to each instance of your service to distribute the reservoir evenly, based on the number of instances that are running\. The reservoir limit is calculated according to the rules you set\. And because the rules are configured in the service, you can manage rules without making additional deployments\.
 
 **To configure sampling rules in the X\-Ray console**
 
@@ -52,6 +53,7 @@ The following options are available for each rule\. String values can use wildca
   + `AWS::EC2::Instance` – An Amazon Elastic Compute Cloud instance \(plugin\)\.
   + `AWS::ECS::Container` – An Amazon Elastic Container Service container \(plugin\)\.
   + `AWS::APIGateway::Stage` – An Amazon API Gateway stage\.
+  + `AWS::AppSync::GraphQLAPI ` – An AWS AppSync API request\.
 + **Host** \(string\) – The hostname from the HTTP host header\.
 + **HTTP method** \(string\) – The method of the HTTP request\.
 + **URL path** \(string\) – The URL path of the request\.

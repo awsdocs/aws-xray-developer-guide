@@ -32,7 +32,7 @@ from aws_xray_sdk.core import patch_all
 patch_all()
 ```
 
-To patch individual libraries, call `patch` with a tuple of library names\.
+To patch a single library, call `patch` with a tuple of the library name\. In order to achieve this, you will need to provide a single element list\.
 
 **Example main\.py – patch specific libraries**  
 
@@ -45,7 +45,7 @@ import mysql-connector-python
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.core import patch
 
-libraries = ('botocore', 'mysql')
+libraries = (['botocore'])
 patch(libraries)
 ```
 

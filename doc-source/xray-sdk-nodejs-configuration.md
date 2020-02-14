@@ -14,7 +14,7 @@ You can configure the X\-Ray SDK for Node\.js with plugins to include informatio
 Use `plugins` to record information about the service hosting your application\.
 
 **Plugins**
-+ Amazon EC2 – `EC2Plugin` adds the instance ID and Availability Zone\.
++ Amazon EC2 – `EC2Plugin` adds the instance ID, Availability Zone, and the CloudWatch Logs Group\.
 + Elastic Beanstalk – `ElasticBeanstalkPlugin` adds the environment name, version label, and deployment ID\.
 + Amazon ECS – `ECSPlugin` adds the container ID\.
 
@@ -31,7 +31,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 ![\[Service node with resource type.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
 
-When you use multiple plugins, the SDK uses the plugin that was loaded last to determine the origin\.
+When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
 ## Sampling Rules<a name="xray-sdk-nodejs-configuration-sampling"></a>
 

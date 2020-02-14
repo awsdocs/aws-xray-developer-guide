@@ -42,7 +42,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 ![\[Service node with resource type.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-rootnode.png)
 
-When you use multiple plugins, the SDK uses the plugin that was loaded last to determine the origin\.
+When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
 ## Sampling Rules<a name="xray-sdk-ruby-configuration-sampling"></a>
 

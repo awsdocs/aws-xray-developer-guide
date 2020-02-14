@@ -47,7 +47,7 @@ The instances in your environment need permission to send data to the AWS X\-Ray
 
 1. Open the Elastic Beanstalk instance profile in the IAM console: [aws\-elasticbeanstalk\-ec2\-role](https://console.aws.amazon.com/iam/home#roles/aws-elasticbeanstalk-ec2-role)\.
 
-1. Choose **Attach Policy**\.
+1. Choose **Attach Policices**\.
 
 1. Attach **AWSXrayFullAccess**, **AmazonS3FullAccess**, and **AmazonDynamoDBFullAccess** to the role\.
 

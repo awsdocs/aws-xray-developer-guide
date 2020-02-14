@@ -8,6 +8,7 @@ The X\-Ray SDKs include plugins for additional integration with AWS services\. F
 **Topics**
 + [Amazon API Gateway Active Tracing Support for AWS X\-Ray](xray-services-apigateway.md)
 + [Amazon EC2 and AWS App Mesh](xray-services-appmesh.md)
++ [AWS AppSync and AWS X\-Ray](xray-services-appsync.md)
 + [Logging X\-Ray API Calls with AWS CloudTrail](xray-api-cloudtrail.md)
 + [Monitoring Endpoints and APIs with CloudWatch](xray-services-cloudwatch.md)
 + [Tracking X\-Ray Encryption Configuration Changes with AWS Config](xray-api-config.md)

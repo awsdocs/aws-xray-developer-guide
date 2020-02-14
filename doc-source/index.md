@@ -1,7 +1,7 @@
 # AWS X-Ray Developer Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -20,7 +20,10 @@ Amazon's trademarks and trade dress may not be used in
 + [AWS X-Ray Concepts](xray-concepts.md)
 + [Security in AWS X-Ray](security.md)
    + [Data Protection in AWS X-Ray](xray-console-encryption.md)
-   + [Identity and Access Management in AWS X-Ray](xray-permissions.md)
+   + [Identity and Access Management for AWS X-Ray](security-iam.md)
+      + [How AWS X-Ray Works with IAM](security_iam_service-with-iam.md)
+      + [AWS X-Ray Identity-Based Policy Examples](security_iam_id-based-policy-examples.md)
+      + [Troubleshooting AWS X-Ray Identity and Access](security_iam_troubleshoot.md)
    + [Logging and Monitoring in AWS X-Ray](security-logging-monitoring.md)
    + [Compliance Validation for AWS X-Ray](xray-compliance.md)
    + [Resilience in AWS X-Ray](disaster-recovery-resiliency.md)
@@ -60,6 +63,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Integrating AWS X-Ray with Other AWS Services](xray-services.md)
    + [Amazon API Gateway Active Tracing Support for AWS X-Ray](xray-services-apigateway.md)
    + [Amazon EC2 and AWS App Mesh](xray-services-appmesh.md)
+   + [AWS AppSync and AWS X-Ray](xray-services-appsync.md)
    + [Logging X-Ray API Calls with AWS CloudTrail](xray-api-cloudtrail.md)
    + [Monitoring Endpoints and APIs with CloudWatch](xray-services-cloudwatch.md)
       + [Debugging CloudWatch Synthetics Canaries Using X-Ray](xray-services-cloudwatch-synthetics.md)
