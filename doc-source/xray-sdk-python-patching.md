@@ -54,23 +54,6 @@ In some cases, the key that you use to patch a library does not match the librar
 `httplib` – `[httplib](https://docs.python.org/2/library/httplib.html)` and [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html)
 `mysql` – `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)`
 
-To patch a single library, call `patch` with a tuple of the library name\. In order to achieve this you will need to provide a single element list\.
-
-**Example main\.py – patch single library**  
-
-```
-import boto3
-import botocore
-import requests
-import mysql-connector-python
-
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.core import patch
-
-libraries = (['botocore'])
-patch(libraries)
-```
-
 ## Tracing Context for Asynchronous Work<a name="xray-sdk-python-patching-async"></a>
 
 For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\. Import the `AsyncContext` class and pass an instance of it to the X\-Ray recorder\.
