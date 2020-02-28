@@ -18,3 +18,20 @@ Instrument SQL database queries by wrapping your SQL client in the corresponding
   ```
 
 When you use an instrumented client to make SQL queries, the X\-Ray SDK for Node\.js records information about the connection and query in a subsegment\.
+
+## Including Additional Data in SQL Subsegments
+
+You can add additional information to subsegments generated for SQL queries as long as it's mapped to a whitelisted SQL field. For example, to record the sanitized SQL query string in a subsegment, you can add it directly to the subsegment's SQL object.
+
+```
+const queryString = 'SELECT * FROM MyTable';
+connection.query(queryString, ...);
+
+// Retrieve the most recently created subsegment
+const subs = AWSXRay.getSegment().subsegments;
+var sqlSub = subs[subs.length - 1];
+sqlSub.sql.sanitized_query = queryString;
+
+```
+
+For a full list of whitelisted SQL fields, see [SQL Queries](https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html#api-segmentdocuments-sql).
