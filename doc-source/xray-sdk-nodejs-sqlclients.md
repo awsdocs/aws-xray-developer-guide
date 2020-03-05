@@ -30,7 +30,7 @@ connection.query(queryString, ...);
 // Retrieve the most recently created subsegment
 const subs = AWSXRay.getSegment().subsegments;
 
-if (subs.length > 0) {
+if (subs && subs.length > 0) {
   var sqlSub = subs[subs.length - 1];
   sqlSub.sql.sanitized_query = queryString;
 }
