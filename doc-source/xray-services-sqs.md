@@ -10,7 +10,7 @@ Amazon SQS supports the following tracing header instrumentation:
 
 When running on Amazon EC2, Amazon SQS supports processing one message at a time\. This applies when running on an on\-premises host, and when using container services, such as AWS Fargate, Amazon ECS, or AWS App Mesh\. 
 
-The trace header is excluded from both Amazon SQS message size and message attribute limits\. Enabling X\-Ray tracing will not exceed your Amazon SQS limits\. To learn more about AWS limits, see [Amazon SQS Limits](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html)\.
+The trace header is excluded from both Amazon SQS message size and message attribute quoatas\. Enabling X\-Ray tracing will not exceed your Amazon SQS quotas\. To learn more about AWS quotas, see [Amazon SQS Quotas](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html)\.
 
 ## Send the HTTP Trace Header<a name="xray-services-sqs-sending"></a>
 

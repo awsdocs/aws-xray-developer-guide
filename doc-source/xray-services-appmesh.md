@@ -1,6 +1,6 @@
 # Amazon EC2 and AWS App Mesh<a name="xray-services-appmesh"></a>
 
-AWS X\-Ray integrates with [AWS App Mesh](https://docs.aws.amazon.com//app-mesh/latest/userguide/what-is-app-mesh.html) to manage Envoy proxies for microservices\. App Mesh provides a version of Envoy that you can configure to send trace data to the X\-Ray daemon running in a container of the same task or pod\. X\-Ray supports tracing with the following App Mesh compatible services: 
+AWS X\-Ray integrates with [AWS App Mesh](https://docs.aws.amazon.com/app-mesh/latest/userguide/what-is-app-mesh.html) to manage Envoy proxies for microservices\. App Mesh provides a version of Envoy that you can configure to send trace data to the X\-Ray daemon running in a container of the same task or pod\. X\-Ray supports tracing with the following App Mesh compatible services: 
 + Amazon Elastic Container Service \(Amazon ECS\)
 + Amazon Elastic Kubernetes Service \(Amazon EKS\)
 + Amazon Elastic Compute Cloud \(Amazon EC2\)
@@ -9,7 +9,7 @@ Use the following instructions to learn how to enable X\-Ray tracing through App
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/appmesh-traceContents.png)
 
-To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_TRACING` [environment variable](https://docs.aws.amazon.com//app-mesh/latest/userguide/envoy.html#envoy-config) in its container definition\.
+To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_TRACING` [environment variable](https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html#envoy-config) in its container definition\.
 
 **Example Envoy Container Definition for Amazon ECS**  
 

@@ -14,7 +14,7 @@ This tutorial develops an example serverless application that is deployed to Lam
 
 ## Prerequisites<a name="xray-sdk-python-serverless-prereqs"></a>
 + [Zappa](https://github.com/Miserlou/Zappa)
-+ [Python](https://docs.aws.amazon.com/xray/latest/devguide//xray-sdk-python.html) – Version 2\.7 or 3\.6\.
++ [Python](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python.html) – Version 2\.7 or 3\.6\.
 + [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) – Verify that your AWS CLI is configured with the account and AWS Region in which you will deploy your application\. 
 + [Pip](https://pypi.org/project/pip/)
 + [Virtualenv](https://virtualenv.pypa.io/en/latest/)
@@ -167,7 +167,7 @@ In this step you will interact with the API Gateway console to enable X\-Ray tra
 
 ## Step 4: View the Created Trace<a name="xray-sdk-python-serverless-trace"></a>
 
-In this step you will interact with the X\-Ray console to view the trace created by the example application\. For a more detailed walkthrough on trace analysis, see [Viewing the Service Map](https://docs.aws.amazon.com/xray/latest/devguide//xray-console.html#xray-console-servicemap)\.
+In this step you will interact with the X\-Ray console to view the trace created by the example application\. For a more detailed walkthrough on trace analysis, see [Viewing the Service Map](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html#xray-console-servicemap)\.
 
 1. Sign in to the AWS Management Console and open the X\-Ray console at [https://console\.aws\.amazon\.com/xray/home](https://console.aws.amazon.com/xray/home)\.
 
