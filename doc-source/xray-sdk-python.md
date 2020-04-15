@@ -30,6 +30,7 @@ Next, use the X\-Ray SDK for Python to instrument downstream calls by [patching 
 + `[httplib](https://docs.python.org/2/library/httplib.html)`, [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html) – Instrument low\-level HTTP clients and the higher level libraries that use them\.
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
 + `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)` – Instrument MySQL clients\.
++ `[pymysql](https://pypi.org/project/PyMySQL/)` - Instrument PyMySQL based clients for MySQL & MariaDB\.
 
 Whenever your application makes calls to AWS, an SQL database, or other HTTP services, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
