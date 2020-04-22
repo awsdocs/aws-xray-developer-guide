@@ -23,7 +23,7 @@ Use `plugins` to record information about the service hosting your application\.
 
 To use plugins, specify it in the configuration object that you pass to the recorder\.
 
-**Example main\.rb – plugin configuration**  
+**Example main\.rb – plugin configuration**
 
 ```
 my_plugins = %I[ec2 elastic_beanstalk]
@@ -50,12 +50,12 @@ The SDK uses the sampling rules you define in the X\-Ray console to determine wh
 
 The SDK applies custom rules in the order in which they are defined\. If a request matches multiple custom rules, the SDK applies only the first rule\.
 
-**Note**  
+**Note**
 If the SDK can't reach X\-Ray to get sampling rules, it reverts to a default local rule of the first request each second, and five percent of any additional requests per host\. This can occur if the host doesn't have permission to call sampling APIs, or can't connect to the X\-Ray daemon, which acts as a TCP proxy for API calls made by the SDK\.
 
 You can also configure the SDK to load sampling rules from a JSON document\. The SDK can use local rules as a backup for cases where X\-Ray sampling is unavailable, or use local rules exclusively\.
 
-**Example sampling\-rules\.json**  
+**Example sampling\-rules\.json**
 
 ```
 {
@@ -83,7 +83,7 @@ The disadvantage of defining rules locally is that the fixed target is applied b
 
 To configure backup rules, define a hash for the document in the configuration object that you pass to the recorder\.
 
-**Example main\.rb – backup rule configuration**  
+**Example main\.rb – backup rule configuration**
 
 ```
 require 'aws-xray-sdk'
@@ -103,7 +103,7 @@ XRay.recorder.configure(config)
 
 To store the sampling rules independently, define the hash in a separate file and require the file to pull it into your application\.
 
-**Example config/sampling\-rules\.rb**  
+**Example config/sampling\-rules\.rb**
 
 ```
 my_sampling_rules =  {
@@ -115,7 +115,7 @@ my_sampling_rules =  {
 }
 ```
 
-**Example main\.rb – sampling rule from a file**  
+**Example main\.rb – sampling rule from a file**
 
 ```
 require 'aws-xray-sdk'
@@ -128,9 +128,9 @@ config = {
 XRay.recorder.configure(config)
 ```
 
-To use only local rules, require the sampling rules and configure the `LocalSampler`\. 
+To use only local rules, require the sampling rules and configure the `LocalSampler`\.
 
-**Example main\.rb – local rule sampling**  
+**Example main\.rb – local rule sampling**
 
 ```
 require 'aws-xray-sdk'
@@ -145,7 +145,7 @@ XRay.recorder.configure(config)
 
 You can also configure the global recorder to disable sampling and instrument all incoming requests\.
 
-**Example main\.rb – disable sampling**  
+**Example main\.rb – disable sampling**
 
 ```
 require 'aws-xray-sdk'
@@ -160,7 +160,7 @@ XRay.recorder.configure(config)
 
 By default, the recorder outputs info\-level events to `$stdout`\. You can customize logging by defining a [logger](https://ruby-doc.org/stdlib-2.4.2/libdoc/logger/rdoc/Logger.html) in the configuration object that you pass to the recorder\.
 
-**Example main\.rb – logging**  
+**Example main\.rb – logging**
 
 ```
 require 'aws-xray-sdk'
@@ -184,12 +184,12 @@ Additional settings are available from the `configure` method on `XRay.recorder`
 + `sampling` – Set to `false` to disable sampling\.
 + `sampling_rules` – Set the hash containing your [sampling rules](#xray-sdk-ruby-configuration-sampling)\.
 
-**Example main\.py – disable context missing exceptions**  
+**Example main\.py – disable context missing exceptions**
 
 ```
 require 'aws-xray-sdk'
 config = {
-  context_missing: LOG_ERROR
+  context_missing: 'LOG_ERROR'
 }
 
 XRay.recorder.configure(config)
@@ -202,7 +202,7 @@ If you use the Rails framework, you can configure options on the global recorder
 
 Configure the available settings in a configuration object named `Rails.application.config.xray`\.
 
-**Example config/initializers/aws\_xray\.rb**  
+**Example config/initializers/aws\_xray\.rb**
 
 ```
 Rails.application.config.xray = {
@@ -214,7 +214,7 @@ Rails.application.config.xray = {
 
 ## Environment Variables<a name="xray-sdk-ruby-configuration-envvars"></a>
 
-You can use environment variables to configure the X\-Ray SDK for Ruby\. The SDK supports the following variables: 
+You can use environment variables to configure the X\-Ray SDK for Ruby\. The SDK supports the following variables:
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-naming)\.
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
