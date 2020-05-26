@@ -11,6 +11,7 @@ To instrument downstream calls, use the X\-Ray SDK for Python to patch the libra
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
 + `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)` – Instrument MySQL clients\.
 + `[pymysql](https://pypi.org/project/PyMySQL/)` - Instrument PyMySQL based clients for MySQL & MariaDB\.
++ `[psycopg2](https://pypi.org/project/psycopg2/)` - Instrument Psycopg2 based clients for PostgreSQL\.
 
 When you use a patched library, the X\-Ray SDK for Python creates a subsegment for the call and records information from the request and response\. A segment must be available for the SDK to create the subsegment, either from the SDK middleware or from AWS Lambda\.
 
