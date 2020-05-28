@@ -109,6 +109,7 @@ files:
     content: |
       Logging:
         LogLevel: "debug"
+      Version: 2
 ```
 
 **Example \.ebextensions/xray\.config \- Windows Server**  
