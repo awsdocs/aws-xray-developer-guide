@@ -1,4 +1,4 @@
-# Tracing SQL Queries with the X\-Ray SDK for Java<a name="xray-sdk-java-sqlclients"></a>
+# Tracing SQL queries with the X\-Ray SDK for Java<a name="xray-sdk-java-sqlclients"></a>
 
 Instrument SQL database queries by adding the X\-Ray SDK for Java JDBC interceptor to your data source configuration\.
 +  **PostgreSQL** – `com.amazonaws.xray.sql.postgres.TracingInterceptor` 
@@ -6,9 +6,12 @@ Instrument SQL database queries by adding the X\-Ray SDK for Java JDBC intercept
 
 These interceptors are in the [`aws-xray-recorder-sql-postgres` and `aws-xray-recorder-sql-mysql` submodules](xray-sdk-java.md), respectively\. They implement `org.apache.tomcat.jdbc.pool.JdbcInterceptor` and are compatible with Tomcat connection pools\.
 
+**Note**  
+SQL interceptors do not record the SQL query itself within subsegments for security purposes\.
+
 For Spring, add the interceptor in a properties file and build the data source with Spring Boot's `DataSourceBuilder`\.
 
-**Example `src/main/java/resources/application.properties` \- PostgreSQL JDBC Interceptor**  
+**Example `src/main/java/resources/application.properties` \- PostgreSQL JDBC interceptor**  
 
 ```
 spring.datasource.continue-on-error=true
@@ -18,7 +21,7 @@ spring.datasource.jdbc-interceptors=com.amazonaws.xray.sql.postgres.TracingInter
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL94Dialect
 ```
 
-**Example `src/main/java/myapp/WebConfig.java` \- Data Source**  
+**Example `src/main/java/myapp/WebConfig.java` \- Data source**  
 
 ```
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -54,7 +57,7 @@ public class RdsWebConfig {
 
 For Tomcat, call `setJdbcInterceptors` on the JDBC data source with a reference to the X\-Ray SDK for Java class\.
 
-**Example `src/main/myapp/model.java` \- Data Source**  
+**Example `src/main/myapp/model.java` \- Data source**  
 
 ```
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -69,7 +72,7 @@ source.setJdbcInterceptors("com.amazonaws.xray.sql.mysql.TracingInterceptor;");
 
 The Tomcat JDBC Data Source library is included in the X\-Ray SDK for Java, but you can declare it as a provided dependency to document that you use it\.
 
-**Example `pom.xml` \- JDBC Data Source**  
+**Example `pom.xml` \- JDBC data source**  
 
 ```
 <dependency>

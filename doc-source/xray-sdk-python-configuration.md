@@ -3,14 +3,14 @@
 The X\-Ray SDK for Python has a class named `xray_recorder` that provides the global recorder\. You can configure the global recorder to customize the middleware that creates segments for incoming HTTP calls\.
 
 **Topics**
-+ [Service Plugins](#xray-sdk-python-configuration-plugins)
-+ [Sampling Rules](#xray-sdk-python-configuration-sampling)
++ [Service plugins](#xray-sdk-python-configuration-plugins)
++ [Sampling rules](#xray-sdk-python-configuration-sampling)
 + [Logging](#xray-sdk-python-configuration-logging)
-+ [Recorder Configuration in Code](#xray-sdk-python-middleware-configuration-code)
-+ [Recorder Configuration with Django](#xray-sdk-python-middleware-configuration-django)
-+ [Environment Variables](#xray-sdk-python-configuration-envvars)
++ [Recorder configuration in code](#xray-sdk-python-middleware-configuration-code)
++ [Recorder configuration with Django](#xray-sdk-python-middleware-configuration-django)
++ [Environment variables](#xray-sdk-python-configuration-envvars)
 
-## Service Plugins<a name="xray-sdk-python-configuration-plugins"></a>
+## Service plugins<a name="xray-sdk-python-configuration-plugins"></a>
 
 Use `plugins` to record information about the service hosting your application\.
 
@@ -27,7 +27,7 @@ To use a plugin, call `configure` on the `xray_recorder`\.
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.core import patch_all
 
-xray_recorder.configure(aws_xray_tracing_name='My app')
+xray_recorder.configure(service='My app')
 plugins = ('ElasticBeanstalkPlugin', 'EC2Plugin')
 xray_recorder.configure(plugins=plugins)
 patch_all()
@@ -43,7 +43,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
-## Sampling Rules<a name="xray-sdk-python-configuration-sampling"></a>
+## Sampling rules<a name="xray-sdk-python-configuration-sampling"></a>
 
 The SDK uses the sampling rules you define in the X\-Ray console to determine which requests to record\. The default rule traces the first request each second, and five percent of any additional requests across all services sending traces to X\-Ray\. [Create additional rules in the X\-Ray console](xray-console-sampling.md) to customize the amount of data recorded for each of your applications\.
 
@@ -97,7 +97,7 @@ xray_recorder.configure(sampler=LocalSampler())
 
 You can also configure the global recorder to disable sampling and instrument all incoming requests\.
 
-**Example main\.py – disable sampling**  
+**Example main\.py – Disable sampling**  
 
 ```
 xray_recorder.configure(sampling=False)
@@ -107,7 +107,7 @@ xray_recorder.configure(sampling=False)
 
 The SDK uses Python’s built\-in `logging` module\. Get a reference to the logger for the `aws_xray_sdk` class and call `setLevel` on it to configure the different log level for the library and the rest of your application\.
 
-**Example app\.py – logging**  
+**Example app\.py – Logging**  
 
 ```
 logging.basicConfig(level='WARNING')
@@ -116,7 +116,7 @@ logging.getLogger('aws_xray_sdk').setLevel(logging.DEBUG)
 
 Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-python-subsegments.md)\.
 
-## Recorder Configuration in Code<a name="xray-sdk-python-middleware-configuration-code"></a>
+## Recorder configuration in code<a name="xray-sdk-python-middleware-configuration-code"></a>
 
 Additional settings are available from the `configure` method on `xray_recorder`\.
 + `context_missing` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
@@ -126,7 +126,7 @@ Additional settings are available from the `configure` method on `xray_recorder`
 + `sampling` – Set to `False` to disable sampling\.
 + `sampling_rules` – Set the path of the JSON file containing your [sampling rules](#xray-sdk-python-configuration-sampling)\.
 
-**Example main\.py – disable context missing exceptions**  
+**Example main\.py – Disable context missing exceptions**  
 
 ```
 from aws_xray_sdk.core import xray_recorder
@@ -134,7 +134,7 @@ from aws_xray_sdk.core import xray_recorder
 xray_recorder.configure(context_missing='LOG_ERROR')
 ```
 
-## Recorder Configuration with Django<a name="xray-sdk-python-middleware-configuration-django"></a>
+## Recorder configuration with Django<a name="xray-sdk-python-middleware-configuration-django"></a>
 
 If you use the Django framework, you can use the Django `settings.py` file to configure options on the global recorder\.
 + `AUTO_INSTRUMENT` \(Django only\) – Record subsegments for built\-in database and template rendering operations\.
@@ -147,7 +147,7 @@ If you use the Django framework, you can use the Django `settings.py` file to co
 
 To enable recorder configuration in `settings.py`, add the Django middleware to the list of installed apps\.
 
-**Example settings\.py – installed apps**  
+**Example settings\.py – Installed apps**  
 
 ```
 INSTALLED_APPS = [
@@ -159,7 +159,7 @@ INSTALLED_APPS = [
 
 Configure the available settings in a dict named `XRAY_RECORDER`\.
 
-**Example settings\.py – installed apps**  
+**Example settings\.py – Installed apps**  
 
 ```
 XRAY_RECORDER = {
@@ -172,10 +172,10 @@ XRAY_RECORDER = {
 }
 ```
 
-## Environment Variables<a name="xray-sdk-python-configuration-envvars"></a>
+## Environment variables<a name="xray-sdk-python-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Python\. The SDK supports the following variables: 
-+ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-python-middleware.md#xray-sdk-python-middleware-naming)\.
++ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set programmatically\.
 + `AWS_XRAY_SDK_ENABLED` – When set to `false`, disables the SDK\. By default, the SDK is enabled unless the environment variable is set to false\. 
   + When disabled, the global recorder automatically generates dummy segments and subsegments that are not sent to the daemon, and automatic patching is disabled\. Middlewares are written as a wrapper over the global recorder\. All segment and subsegment generation through the middleware also become dummy segment and dummy subsegments\.
   + Set the value of `AWS_XRAY_SDK_ENABLED` through the environment variable or through direct interaction with the `global_sdk_config` object from the `aws_xray_sdk` library\. Settings to the environment variable override these interactions\.

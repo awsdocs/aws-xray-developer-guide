@@ -11,12 +11,12 @@ Use the following instructions to learn how to enable X\-Ray tracing through App
 
 To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_TRACING` [environment variable](https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html#envoy-config) in its container definition\.
 
-**Example Envoy Container Definition for Amazon ECS**  
+**Example Envoy container definition for Amazon ECS**  
 
 ```
 {
       "name": "envoy",
-      "image": "840364872350.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.12.1.1-prod",
+      "image": "840364872350.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.12.3.0-prod",
       "essential": true,
       "environment": [
         {
@@ -41,9 +41,9 @@ To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_
 ```
 
 **Note**  
-You can replace the AWS Region with any Region that App Mesh is supported in\. For a list of supported Regions, see [AWS Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#appmesh_region)\.
+To learn more about available Envoy region addresses, see [Envoy image](https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html) in the AWS App Mesh User Guide\.
 
-For details on running the X\-Ray daemon in a container, see [Running the X\-Ray Daemon on Amazon ECS](xray-daemon-ecs.md)\. For a sample application that includes a service mesh, microservice, Envoy proxy, and X\-Ray daemon, deploy the `colorapp` sample in the [App Mesh Examples GitHub repository](https://github.com/aws/aws-app-mesh-examples/tree/master/examples)\.
+For details on running the X\-Ray daemon in a container, see [Running the X\-Ray daemon on Amazon ECS](xray-daemon-ecs.md)\. For a sample application that includes a service mesh, microservice, Envoy proxy, and X\-Ray daemon, deploy the `colorapp` sample in the [App Mesh Examples GitHub repository](https://github.com/aws/aws-app-mesh-examples/tree/master/examples)\.
 
 **Learn More**
 + [Getting Started with AWS App Mesh](https://docs.aws.amazon.com/app-mesh/latest/userguide/getting_started.html)

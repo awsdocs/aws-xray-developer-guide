@@ -1,8 +1,8 @@
-# Instrumenting Calls to a PostgreSQL Database<a name="scorekeep-postgresql"></a>
+# Instrumenting calls to a PostgreSQL database<a name="scorekeep-postgresql"></a>
 
 The `application-pgsql.properties` file adds the X\-Ray PostgreSQL tracing interceptor to the data source created in [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/RdsWebConfig.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/RdsWebConfig.java)\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/resources/application-pgsql.properties](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/resources/application-pgsql.properties) – PostgreSQL Database Instrumentation**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/resources/application-pgsql.properties](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/resources/application-pgsql.properties) – PostgreSQL database instrumentation**  
 
 ```
 spring.datasource.continue-on-error=true

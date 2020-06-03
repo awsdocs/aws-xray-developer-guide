@@ -1,4 +1,4 @@
-# AWS X\-Ray Daemon<a name="xray-daemon"></a>
+# AWS X\-Ray daemon<a name="xray-daemon"></a>
 
 The AWS X\-Ray daemon is a software application that listens for traffic on UDP port 2000, gathers raw segment data, and relays it to the AWS X\-Ray API\. The daemon works in conjunction with the AWS X\-Ray SDKs and must be running so that data sent by the SDKs can reach the X\-Ray service\.
 
@@ -9,29 +9,29 @@ On AWS Lambda and AWS Elastic Beanstalk, use those services' integration with X\
 
 To run the X\-Ray daemon locally, on\-premises, or on other AWS services, [download it from Amazon S3](#xray-daemon-downloading), [run it](#xray-daemon-running), and then [give it permission](#xray-daemon-permissions) to upload segment documents to X\-Ray\.
 
-## Downloading the Daemon<a name="xray-daemon-downloading"></a>
+## Downloading the daemon<a name="xray-daemon-downloading"></a>
 
 You can download the daemon from Amazon S3 to run it locally, or to install it on an Amazon EC2 instance on launch\.
 
 **X\-Ray daemon installers and executables**
-+ **Linux \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip.sig)\)
-+ **Linux \(RPM installer\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm)
-+ **Linux \(DEB installer\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.deb](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.deb)
-+ **OS X \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-3.x.zip.sig)\) 
-+ **Windows \(executable\)** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip.sig)\)
-+ **Windows \(service\) ** – [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip) \([sig](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip.sig)\)
++ **Linux \(executable\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip.sig)\)
++ **Linux \(RPM installer\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm)
++ **Linux \(DEB installer\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.deb](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.deb)
++ **OS X \(executable\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-macos-3.x.zip.sig)\) 
++ **Windows \(executable\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip.sig)\)
++ **Windows \(service\) ** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip.sig)\)
 
 These links always point to the latest release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
 
 ```
-https://s3.dualstack.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-3.x.rpm
+https://s3.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-3.x.rpm
 ```
 
-## Verifying the Daemon Archive's Signature<a name="xray-daemon-signature"></a>
+## Verifying the daemon archive's signature<a name="xray-daemon-signature"></a>
 
-GPG signature files are included for daemon assets compressed in ZIP archives\. The public key is here: [https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray.gpg](https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray.gpg)\.
+GPG signature files are included for daemon assets compressed in ZIP archives\. The public key is here: [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray.gpg](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray.gpg)\.
 
 You can use the public key to verify that the daemon's ZIP archive is original and unmodified\. First, import the public key with [GnuPG](https://gnupg.org/index.html)\.
 
@@ -40,7 +40,7 @@ You can use the public key to verify that the daemon's ZIP archive is original a
 1. Download the public key\.
 
    ```
-   $ BUCKETURL=https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
+   $ BUCKETURL=https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
    $ wget $BUCKETURL/xray-daemon/aws-xray.gpg
    ```
 
@@ -61,7 +61,7 @@ Use the imported key to verify the signature of the daemon's ZIP archive\.
 1. Download the archive and signature file\.
 
    ```
-   $ BUCKETURL=https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
+   $ BUCKETURL=https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
    $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip
    $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip.sig
    ```
@@ -79,7 +79,7 @@ Use the imported key to verify the signature of the daemon's ZIP archive\.
 
 Note the warning about trust\. A key is only trusted if you or someone you trust has signed it\. This does not mean that the signature is invalid, only that you have not verified the public key\.
 
-## Running the Daemon<a name="xray-daemon-running"></a>
+## Running the daemon<a name="xray-daemon-running"></a>
 
 Run the daemon locally from the command line\. Use the `-o` option to run in local mode, and `-n` to set the region\.
 
@@ -88,15 +88,15 @@ Run the daemon locally from the command line\. Use the `-o` option to run in loc
 ```
 
 For detailed platform\-specific instructions, see the following topics:
-+ **Linux \(local\)** – [Running the X\-Ray Daemon on Linux](xray-daemon-local.md#xray-daemon-local-linux)
-+ **Windows \(local\)** – [Running the X\-Ray Daemon on Windows](xray-daemon-local.md#xray-daemon-local-windows)
-+ **Elastic Beanstalk** – [Running the X\-Ray Daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md)
-+ **Amazon EC2** – [Running the X\-Ray Daemon on Amazon EC2](xray-daemon-ec2.md)
-+ **Amazon ECS** – [Running the X\-Ray Daemon on Amazon ECS](xray-daemon-ecs.md)
++ **Linux \(local\)** – [Running the X\-Ray daemon on Linux](xray-daemon-local.md#xray-daemon-local-linux)
++ **Windows \(local\)** – [Running the X\-Ray daemon on Windows](xray-daemon-local.md#xray-daemon-local-windows)
++ **Elastic Beanstalk** – [Running the X\-Ray daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md)
++ **Amazon EC2** – [Running the X\-Ray daemon on Amazon EC2](xray-daemon-ec2.md)
++ **Amazon ECS** – [Running the X\-Ray daemon on Amazon ECS](xray-daemon-ecs.md)
 
-You can customize the daemon's behavior further by using command line options or a configuration file\. See [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md) for details\.
+You can customize the daemon's behavior further by using command line options or a configuration file\. See [Configuring the AWS X\-Ray daemon](xray-daemon-configuration.md) for details\.
 
-## Giving the Daemon Permission to Send Data to X\-Ray<a name="xray-daemon-permissions"></a>
+## Giving the daemon permission to send data to X\-Ray<a name="xray-daemon-permissions"></a>
 
 The X\-Ray daemon uses the AWS SDK to upload trace data to X\-Ray, and it needs AWS credentials with permission to do that\.
 
@@ -117,9 +117,9 @@ The IAM role or user that the daemon's credentials belong to must have permissio
 + To use the daemon on Elastic Beanstalk, add the managed policy to the Elastic Beanstalk default instance profile role\.
 + To run the daemon locally, create an IAM user and save its access keys on your computer\.
 
-For more information, see [Identity and Access Management for AWS X\-Ray](security-iam.md)\.
+For more information, see [Identity and access management for AWS X\-Ray](security-iam.md)\.
 
-## X\-Ray Daemon Logs<a name="xray-daemon-logging"></a>
+## X\-Ray daemon logs<a name="xray-daemon-logging"></a>
 
 The daemon outputs information about its current configuration and segments that it sends to AWS X\-Ray\.
 
@@ -131,6 +131,6 @@ The daemon outputs information about its current configuration and segments that
 2016-11-24T06:07:09Z [Info] Successfully sent batch of 1 segments (0.006 seconds)
 ```
 
-By default, the daemon outputs logs to STDOUT\. If you run the daemon in the background, use the `--log-file` command line option or a configuration file to set the log file path\. You can also set the log level and disable log rotation\. See [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md) for instructions\.
+By default, the daemon outputs logs to STDOUT\. If you run the daemon in the background, use the `--log-file` command line option or a configuration file to set the log file path\. You can also set the log level and disable log rotation\. See [Configuring the AWS X\-Ray daemon](xray-daemon-configuration.md) for instructions\.
 
-On Elastic Beanstalk, the platform sets the location of the daemon logs\. See [Running the X\-Ray Daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md) for details\.
+On Elastic Beanstalk, the platform sets the location of the daemon logs\. See [Running the X\-Ray daemon on AWS Elastic Beanstalk](xray-daemon-beanstalk.md) for details\.

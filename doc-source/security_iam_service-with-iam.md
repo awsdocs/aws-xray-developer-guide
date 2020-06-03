@@ -1,4 +1,4 @@
-# How AWS X\-Ray Works with IAM<a name="security_iam_service-with-iam"></a>
+# How AWS X\-Ray works with IAM<a name="security_iam_service-with-iam"></a>
 
 Before you use IAM to manage access to X\-Ray, you should understand what IAM features are available to use with X\-Ray\. To get a high\-level view of how X\-Ray and other AWS services work with IAM, see [AWS Services That Work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide*\.
 
@@ -13,14 +13,14 @@ To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM r
 The read and write policies do not include permission to configure [encryption key settings](xray-console-encryption.md) and sampling rules\. Use `AWSXrayFullAccess` to access these settings, or add [configuration APIs](xray-api-configuration.md) in a custom policy\. For encryption and decryption with a customer managed key that you create, you also need [permission to use the key](#xray-permissions-encryption)\.
 
 **Topics**
-+ [X\-Ray Identity\-Based Policies](#security_iam_service-with-iam-id-based-policies)
-+ [X\-Ray Resource\-Based Policies](#security_iam_service-with-iam-resource-based-policies)
-+ [Authorization Based on X\-Ray Tags](#security_iam_service-with-iam-tags)
-+ [Running Your Application Locally](#xray-permissions-local)
-+ [Running Your Application in AWS](#xray-permissions-aws)
-+ [User Permissions for Encryption](#xray-permissions-encryption)
++ [X\-Ray identity\-based policies](#security_iam_service-with-iam-id-based-policies)
++ [X\-Ray resource\-based policies](#security_iam_service-with-iam-resource-based-policies)
++ [Authorization based on X\-Ray tags](#security_iam_service-with-iam-tags)
++ [Running your application locally](#xray-permissions-local)
++ [Running your application in AWS](#xray-permissions-aws)
++ [User permissions for encryption](#xray-permissions-encryption)
 
-## X\-Ray Identity\-Based Policies<a name="security_iam_service-with-iam-id-based-policies"></a>
+## X\-Ray identity\-based policies<a name="security_iam_service-with-iam-id-based-policies"></a>
 
 With IAM identity\-based policies, you can specify allowed or denied actions and resources as well as the conditions under which actions are allowed or denied\. X\-Ray supports specific actions, resources, and condition keys\. To learn about all of the elements that you use in a JSON policy, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html) in the *IAM User Guide*\.
 
@@ -108,23 +108,23 @@ The ARN of a sampling rule is defined by its name\. Unlike group ARNs, sampling 
 
 To see a list of X\-Ray resource types and their ARNs, see [Resources Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awskeymanagementservice.html#awskeymanagementservice-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsx-ray.html)\.
 
-### Condition Keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
+### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
 X\-Ray does not provide any service\-specific condition keys, but it does support using some global condition keys\. To see all AWS global condition keys, see [AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
 
 ### Examples<a name="security_iam_service-with-iam-id-based-policies-examples"></a>
 
-To view examples of X\-Ray identity\-based policies, see [AWS X\-Ray Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)\.
+To view examples of X\-Ray identity\-based policies, see [AWS X\-Ray identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
-## X\-Ray Resource\-Based Policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
+## X\-Ray resource\-based policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
 X\-Ray does not support resource\-based policies\.
 
-## Authorization Based on X\-Ray Tags<a name="security_iam_service-with-iam-tags"></a>
+## Authorization based on X\-Ray tags<a name="security_iam_service-with-iam-tags"></a>
 
 X\-Ray does not support tagging resources or controlling access based on tags\.
 
-## Running Your Application Locally<a name="xray-permissions-local"></a>
+## Running your application locally<a name="xray-permissions-local"></a>
 
 Your instrumented application sends trace data to the X\-Ray daemon\. The daemon buffers segment documents and uploads them to the X\-Ray service in batches\. The daemon needs write permissions to upload trace data and telemetry to the X\-Ray service\.
 
@@ -140,7 +140,7 @@ aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 If you already configured credentials for use with the AWS SDK or AWS CLI, the daemon can use those\. If multiple profiles are available, the daemon uses the default profile\.
 
-## Running Your Application in AWS<a name="xray-permissions-aws"></a>
+## Running your application in AWS<a name="xray-permissions-aws"></a>
 
 When you run your application on AWS, use a role to grant permission to the Amazon EC2 instance or Lambda function that runs the daemon\.
 + **Amazon Elastic Compute Cloud \(Amazon EC2\)** – Create an IAM role and attach it to the EC2 instance as an [instance profile](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)\.
@@ -170,7 +170,7 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 
 1. Choose **Create Role**\.
 
-## User Permissions for Encryption<a name="xray-permissions-encryption"></a>
+## User permissions for encryption<a name="xray-permissions-encryption"></a>
 
 X\-Ray encrypts all trace data and by default, and you can [configure it to use a key that you manage](xray-console-encryption.md)\. If you choose a AWS Key Management Service customer managed customer master key \(CMK\), you need to ensure that the key's access policy lets you grant permission to X\-Ray to use it to encrypt\. Other users in your account also need access to the key to view encrypted trace data in the X\-Ray console\.
 

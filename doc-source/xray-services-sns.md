@@ -3,7 +3,7 @@
 AWS X\-Ray integrates with Amazon Simple Notification Service \(Amazon SNS\) to trace messages that are passed through Amazon SNS\. If an Amazon SNS publisher traces its client with the X\-Ray SDK, subscribers can retrieve the [tracing header](xray-concepts.md#xray-concepts-tracingheader) and continue to propagate the original trace from the publisher with the same trace ID\. This continuity enables users to trace, analyze, and debug throughout downstream services\. 
 
 Amazon SNS trace context propagation currently supports the following subscribers:
-+ **HTTP/HTTPS** – For HTTP/HTTPS subscribers, you can use the X\-Ray SDK to trace the incoming message request\. For more information and examples in Java, see [Tracing Incoming Requests with the X\-Ray SDK for Java](xray-sdk-java-filters.md)\.
++ **HTTP/HTTPS** – For HTTP/HTTPS subscribers, you can use the X\-Ray SDK to trace the incoming message request\. For more information and examples in Java, see [Tracing incoming requests with the X\-Ray SDK for Java](xray-sdk-java-filters.md)\.
 + **AWS Lambda** – For Lambda subscribers with active tracing enabled, Lambda records a segment with details about the function invocation, and sends it to the publisher's trace\. For more information, see [AWS Lambda and AWS X\-Ray](xray-services-lambda.md)\.
 
 Use the following instructions to learn how to create a basic context between X\-Ray and Amazon SNS using a Lambda subscriber\. You will create two Lambda functions and an Amazon SNS topic\. Then, in the X\-Ray console, you can view the trace ID propagated throughout their interactions\.
@@ -13,7 +13,7 @@ Use the following instructions to learn how to create a basic context between X\
 + The Bash shell\. For Linux and macOS, this is included by default\. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 + [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
-## Creating a Lambda Subscriber Function<a name="xray-services-sns-tutorial-subscriber"></a>
+## Creating a Lambda subscriber function<a name="xray-services-sns-tutorial-subscriber"></a>
 
 In the following steps, the sample Lambda function *MessageSubscriber* is implemented in Node\.js and is subscribed as an endpoint to an Amazon SNS topic\. The *MessageSubscriber* function creates a `custom process_message` subsegment with the [https://docs.aws.amazon.com/xray-sdk-for-nodejs/latest/reference/](https://docs.aws.amazon.com/xray-sdk-for-nodejs/latest/reference/) command\. The function writes a simple message as an annotation to the subsegment\.
 
@@ -78,7 +78,7 @@ In the following steps, the sample Lambda function *MessageSubscriber* is implem
 
 1. Choose **Save**\.
 
-## Creating an Amazon SNS Topic<a name="xray-services-sns-tutorial-snstopic"></a>
+## Creating an Amazon SNS topic<a name="xray-services-sns-tutorial-snstopic"></a>
 
 When Amazon SNS receives requests, it propagates the trace header to its endpoint subscriber\. In the following steps, you create a topic and then set the endpoint as the Lambda function you created earlier\.
 
@@ -98,7 +98,7 @@ When Amazon SNS receives requests, it propagates the trace header to its endpoin
 
 1. Choose **Create subscription**\.
 
-## Creating a Lambda Publisher Function<a name="xray-services-sns-tutorial-publisher"></a>
+## Creating a Lambda publisher function<a name="xray-services-sns-tutorial-publisher"></a>
 
 In the following steps, the sample Lambda function *MessagePublisher* is implemented in Node\.js\. The function sends a message to the Amazon SNS topic you created earlier\. The function uses the AWS SDK for JavaScript to send notifications from Amazon SNS, and the X\-Ray SDK for Node\.js to instrument the AWS SDK client\.
 
@@ -184,9 +184,9 @@ In the following steps, the sample Lambda function *MessagePublisher* is impleme
 
 1. Choose **Save**\.
 
-## Testing and Validating Context Propagation<a name="xray-services-sns-tutorial-test"></a>
+## Testing and validating context propagation<a name="xray-services-sns-tutorial-test"></a>
 
- Both publisher and subscriber functions enable Lambda active tracing when sending traces\. The publisher function uses the X\-Ray SDK to capture the `SendMessage` SQS API call\. Then, Amazon SNS propagates the trace header to the subscriber\. Finally, the subscriber picks up the trace header and continues the trace\. Follow the trace ID in the following steps\.
+ Both publisher and subscriber functions enable Lambda active tracing when sending traces\. The publisher function uses the X\-Ray SDK to capture the `publish` SNS API call\. Then, Amazon SNS propagates the trace header to the subscriber\. Finally, the subscriber picks up the trace header and continues the trace\. Follow the trace ID in the following steps\.
 
 **To create a publisher function and enable X\-Ray**
 

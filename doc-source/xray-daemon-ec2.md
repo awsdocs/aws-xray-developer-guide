@@ -1,23 +1,23 @@
-# Running the X\-Ray Daemon on Amazon EC2<a name="xray-daemon-ec2"></a>
+# Running the X\-Ray daemon on Amazon EC2<a name="xray-daemon-ec2"></a>
 
 You can run the X\-Ray daemon on the following operating systems on Amazon EC2:
 + Amazon Linux
 + Ubuntu
 + Windows Server \(2012 R2 and newer\)
 
-Use an instance profile to grant the daemon permission to upload trace data to X\-Ray\. For more information, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
+Use an instance profile to grant the daemon permission to upload trace data to X\-Ray\. For more information, see [Giving the daemon permission to send data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
 Use a user data script to run the daemon automatically when you launch the instance\.
 
-**Example User Data Script \- Linux**  
+**Example User data script \- Linux**  
 
 ```
 #!/bin/bash
-curl https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm -o /home/ec2-user/xray.rpm
+curl https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-3.x.rpm -o /home/ec2-user/xray.rpm
 yum install -y /home/ec2-user/xray.rpm
 ```
 
-**Example User Data Script \- Windows Server**  
+**Example User data script \- Windows server**  
 
 ```
 <powershell>

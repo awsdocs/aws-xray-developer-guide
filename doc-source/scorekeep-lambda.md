@@ -1,4 +1,4 @@
-# Instrumenting AWS Lambda Functions<a name="scorekeep-lambda"></a>
+# Instrumenting AWS Lambda functions<a name="scorekeep-lambda"></a>
 
 Scorekeep uses two AWS Lambda functions\. The first is a Node\.js function from the `lambda` branch that generates random names for new users\. When a user creates a session without entering a name, the application calls a function named `random-name` with the AWS SDK for Java\. The X\-Ray SDK for Java records information about the call to Lambda in a subsegment like any other call made with an instrumented AWS SDK client\.
 
@@ -10,10 +10,10 @@ The second function, `scorekeep-worker`, is a Python function that runs independ
 Scorekeep includes AWS CloudFormation templates and scripts to create both functions\. Because you need to bundle the X\-Ray SDK with the function code, the templates create the functions without any code\. When you deploy Scorekeep, a configuration file included in the `.ebextensions` folder creates a source bundle that includes the SDK, and updates the function code and configuration with the AWS Command Line Interface\.
 
 **Topics**
-+ [Random Name](#scorekeep-lambda-randomname)
++ [Random name](#scorekeep-lambda-randomname)
 + [Worker](#scorekeep-lambda-worker)
 
-## Random Name<a name="scorekeep-lambda-randomname"></a>
+## Random name<a name="scorekeep-lambda-randomname"></a>
 
 Scorekeep calls the random name function when a user starts a game session without signing in or specifying a user name\. When Lambda processes the call to `random-name`, it reads the [tracing header](xray-concepts.md#xray-concepts-tracingheader), which contains the trace ID and sampling decision written by the X\-Ray SDK for Java\.
 
@@ -21,11 +21,11 @@ For each sampled request, Lambda runs the X\-Ray daemon and writes two segments\
 
 Lambda passes the function segment to the X\-Ray SDK through the function context\. When you instrument a Lambda function, you don't use the SDK to [create a segment for incoming requests](xray-sdk-nodejs-middleware.md)\. Lambda provides the segment, and you use the SDK to instrument clients and write subsegments\.
 
-![\[Service map showing how Scorekeep calls a Lambda function to get random names for new users\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
+![\[Service map showing how scorekeep calls a Lambda function to get random names for new users\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
 
 The `random-name` function is implemented in Node\.js\. It uses the SDK for JavaScript in Node\.js to send notifications with Amazon SNS, and the X\-Ray SDK for Node\.js to instrument the AWS SDK client\. To write annotations, the function creates a custom subsegment with `AWSXRay.captureFunc`, and writes annotations in the instrumented function\. In Lambda, you can't write annotations directly to the function segment, only to a subsegment that you create\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/_lambda/random-name/index.js](https://github.com/awslabs/eb-java-scorekeep/tree/xray/_lambda/random-name/index.js) \-\- Random Name Lambda Function**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/function/index.js](https://github.com/awslabs/eb-java-scorekeep/tree/xray/function/index.js) \-\- Random name Lambda function**  
 
 ```
 var AWSXRay = require('aws-xray-sdk-core');
@@ -78,13 +78,13 @@ The worker pulls the game record and documents from other tables that the game r
 
 Sessions, and states are stored as references as well\. This keeps the entries in the game table from being too large, but requires additional calls to get all of the information about the game\. The worker dereferences all of these entries and constructs a complete record of the game as a single document in Amazon S3\. When you want to do analytics on the data, you can run queries on it directly in Amazon S3 with Amazon Athena without running read\-heavy data migrations to get your data out of DynamoDB\.
 
-![\[Service map showing how the Scorekeep worker function uses Amazon SQS, Amazon S3, and the Scorekeep API.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambdaworker-node.png)
+![\[Service map showing how the scorekeep worker function uses Amazon SQS, Amazon S3, and the scorekeep API.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambdaworker-node.png)
 
 The worker function has active tracing enabled in its configuration in AWS Lambda\. Unlike the random name function, the worker does not receive a request from an instrumented application, so AWS Lambda doesn't receive a tracing header\. With active tracing, Lambda creates the trace ID and makes sampling decisions\.
 
 The X\-Ray SDK for Python is just a few lines at the top of the function that import the SDK and run its `patch_all` function to patch the AWS SDK for Python \(Boto\) and HTTclients that it uses to call Amazon SQS and Amazon S3\. When the worker calls the Scorekeep API, the SDK adds the [tracing header](xray-concepts.md#xray-concepts-tracingheader) to the request to trace calls through the API\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray-worker/_lambda/scorekeep-worker/scorekeep-worker.py](https://github.com/awslabs/eb-java-scorekeep/tree/xray-worker/_lambda/scorekeep-worker/scorekeep-worker.py) \-\- Worker Lambda Function**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray-worker/_lambda/scorekeep-worker/scorekeep-worker.py](https://github.com/awslabs/eb-java-scorekeep/tree/xray-worker/_lambda/scorekeep-worker/scorekeep-worker.py) \-\- Worker Lambda function**  
 
 ```
 import os

@@ -1,10 +1,10 @@
-# Tracing AWS SDK Calls with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-sdkclients"></a>
+# Tracing AWS SDK calls with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-sdkclients"></a>
 
 When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for \.NET tracks the calls downstream in [subsegments](xray-sdk-dotnet-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
 You can instrument all of your AWS SDK for \.NET clients by calling `RegisterXRayForAllServices` before you create them\.
 
-**Example SampleController\.cs \- DynamoDB Client Instrumentation**  
+**Example SampleController\.cs \- DynamoDB client instrumentation**  
 
 ```
 using Amazon;
@@ -36,7 +36,7 @@ For all services, you can see the name of the API called in the X\-Ray console\.
 
 For example, when you make a call with an instrumented DynamoDB client, the SDK adds the table name to the segment for calls that target a table\. In the console, each table appears as a separate node in the service map, with a generic DynamoDB node for calls that don't target a table\.
 
-**Example Subsegment for a Call to DynamoDB to Save an Item**  
+**Example Subsegment for a call to DynamoDB to save an item**  
 
 ```
 {

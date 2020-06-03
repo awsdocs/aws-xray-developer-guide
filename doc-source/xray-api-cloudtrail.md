@@ -1,4 +1,4 @@
-# Logging X\-Ray API Calls with AWS CloudTrail<a name="xray-api-cloudtrail"></a>
+# Logging X\-Ray API calls with AWS CloudTrail<a name="xray-api-cloudtrail"></a>
 
 AWS X\-Ray integrates with AWS CloudTrail to record API actions made by a user, a role, or an AWS service in X\-Ray\. You can use CloudTrail to monitor X\-Ray API requests in real time and store logs in Amazon S3, Amazon CloudWatch Logs, and Amazon CloudWatch Events\. X\-Ray supports logging the following actions as events in CloudTrail log files:
 

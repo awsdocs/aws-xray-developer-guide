@@ -14,7 +14,7 @@ If your Lambda function runs on a schedule, or is invoked by a service that is n
 
 1. Choose **Configuration**\.
 
-1. Under **Debugging and error handling**, choose **Enable active tracing**\.
+1. Under **AWS X\-Ray**, enable **Active tracing**\.
 
 On runtimes with a corresponding X\-Ray SDK, Lambda also runs the X\-Ray daemon\.
 

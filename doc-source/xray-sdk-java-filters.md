@@ -1,4 +1,4 @@
-# Tracing Incoming Requests with the X\-Ray SDK for Java<a name="xray-sdk-java-filters"></a>
+# Tracing incoming requests with the X\-Ray SDK for Java<a name="xray-sdk-java-filters"></a>
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
@@ -23,11 +23,11 @@ The message handler creates a segment for each incoming request with an `http` b
 + **Content length** — The `content-length` from the response\.
 
 **Topics**
-+ [Adding a Tracing Filter to your Application \(Tomcat\)](#xray-sdk-java-filters-tomcat)
-+ [Adding a Tracing Filter to your Application \(Spring\)](#xray-sdk-java-filters-spring)
-+ [Configuring a Segment Naming Strategy](#xray-sdk-java-filters-naming)
++ [Adding a tracing filter to your application \(Tomcat\)](#xray-sdk-java-filters-tomcat)
++ [Adding a tracing filter to your application \(spring\)](#xray-sdk-java-filters-spring)
++ [Configuring a segment naming strategy](#xray-sdk-java-filters-naming)
 
-## Adding a Tracing Filter to your Application \(Tomcat\)<a name="xray-sdk-java-filters-tomcat"></a>
+## Adding a tracing filter to your application \(Tomcat\)<a name="xray-sdk-java-filters-tomcat"></a>
 
 For Tomcat, add a `<filter>` to your project's `web.xml` file\. Use the `fixedName` parameter to specify a [service name](#xray-sdk-java-filters-naming) to apply to segments created for incoming requests\.
 
@@ -48,11 +48,11 @@ For Tomcat, add a `<filter>` to your project's `web.xml` file\. Use the `fixedNa
 </filter-mapping>
 ```
 
-## Adding a Tracing Filter to your Application \(Spring\)<a name="xray-sdk-java-filters-spring"></a>
+## Adding a tracing filter to your application \(spring\)<a name="xray-sdk-java-filters-spring"></a>
 
 For Spring, add a `Filter` to your `WebConfig` class\. Pass the segment name to the [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html) constructor as a string\.
 
-**Example src/main/java/myapp/WebConfig\.java \- Spring**  
+**Example src/main/java/myapp/WebConfig\.java \- spring**  
 
 ```
 package myapp;
@@ -71,7 +71,7 @@ public class WebConfig {
 }
 ```
 
-## Configuring a Segment Naming Strategy<a name="xray-sdk-java-filters-naming"></a>
+## Configuring a segment naming strategy<a name="xray-sdk-java-filters-naming"></a>
 
 AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
@@ -88,7 +88,7 @@ You can override the default service name that you define in code with the `AWS_
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically in Tomcat, use the `dynamicNamingRecognizedHosts` and `dynamicNamingFallbackName` to define the pattern and default name, respectively\.
 
-**Example WEB\-INF/web\.xml \- Servlet Filter with Dynamic Naming**  
+**Example WEB\-INF/web\.xml \- servlet filter with dynamic naming**  
 
 ```
 <filter>
@@ -111,7 +111,7 @@ A dynamic naming strategy defines a pattern that hostnames should match, and a d
 
 For Spring, create a [DynamicSegmentNamingStrategy](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/strategy/DynamicSegmentNamingStrategy.html) and pass it to the `AWSXRayServletFilter` constructor\.
 
-**Example src/main/java/myapp/WebConfig\.java \- Servlet Filter with Dynamic Naming**  
+**Example src/main/java/myapp/WebConfig\.java \- servlet filter with dynamic naming**  
 
 ```
 package myapp;

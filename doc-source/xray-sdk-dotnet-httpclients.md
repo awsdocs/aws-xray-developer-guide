@@ -1,4 +1,4 @@
-# Tracing Calls to Downstream HTTP Web Services with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-httpclients"></a>
+# Tracing calls to downstream HTTP web services with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-httpclients"></a>
 
 When your application makes calls to microservices or public HTTP APIs, you can use the X\-Ray SDK for \.NET's `GetResponseTraced` extension method for `System.Net.HttpWebRequest` to instrument those calls and add the API to the service graph as a downstream service\.
 
@@ -40,7 +40,7 @@ private void MakeHttpRequest()
 
 When you instrument a call to a downstream web API, the X\-Ray SDK for \.NET records a subsegment with information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the API\.
 
-**Example Subsegment for a Downstream HTTP Call**  
+**Example Subsegment for a downstream HTTP call**  
 
 ```
 {
@@ -62,7 +62,7 @@ When you instrument a call to a downstream web API, the X\-Ray SDK for \.NET rec
 }
 ```
 
-**Example Inferred Segment for a Downstream HTTP Call**  
+**Example Inferred segment for a downstream HTTP call**  
 
 ```
 {

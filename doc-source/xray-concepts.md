@@ -1,18 +1,18 @@
-# AWS X\-Ray Concepts<a name="xray-concepts"></a>
+# AWS X\-Ray concepts<a name="xray-concepts"></a>
 
 AWS X\-Ray receives data from services as *segments*\. X\-Ray then groups segments that have a common request into *traces*\. X\-Ray processes the traces to generate a *service graph* that provides a visual representation of your application\.
 
 **Topics**
 + [Segments](#xray-concepts-segments)
 + [Subsegments](#xray-concepts-subsegments)
-+ [Service Graph](#xray-concepts-servicegraph)
++ [Service graph](#xray-concepts-servicegraph)
 + [Traces](#xray-concepts-traces)
 + [Sampling](#xray-concepts-sampling)
-+ [Tracing Header](#xray-concepts-tracingheader)
-+ [Filter Expressions](#xray-concepts-filterexpressions)
++ [Tracing header](#xray-concepts-tracingheader)
++ [Filter expressions](#xray-concepts-filterexpressions)
 + [Groups](#xray-concepts-groups)
-+ [Annotations and Metadata](#xray-concepts-annotations)
-+ [Errors, Faults, and Exceptions](#xray-concepts-errors)
++ [Annotations and metadata](#xray-concepts-annotations)
++ [Errors, faults, and exceptions](#xray-concepts-errors)
 
 ## Segments<a name="xray-concepts-segments"></a>
 
@@ -23,14 +23,14 @@ The compute resources running your application logic send data about their work 
 + **The work done** – start and end times, subsegments
 + **Issues that occur** – [errors, faults and exceptions](#xray-concepts-errors), including automatic capture of exception stacks\.
 
-![\[Segment data for Scorekeep\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-overview.png)
+![\[Segment data for scorekeep\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-segment-overview.png)
 
 The X\-Ray SDK gathers information from request and response headers, the code in your application, and metadata about the AWS resources on which it runs\. You choose the data to collect by modifying your application configuration or code to instrument incoming requests, downstream requests, and AWS SDK clients\.
 
 **Forwarded Requests**  
 If a load balancer or other intermediary forwards a request to your application, X\-Ray takes the client IP from the `X-Forwarded-For` header in the request instead of from the source IP in the IP packet\. The client IP that is recorded for a forwarded request can be forged, so it should not be trusted\.
 
-You can use the X\-Ray SDK to record additional information such as [annotations and metadata\.](#xray-concepts-annotations) For details about the structure and information that is recorded in segments and subsegments, see [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)\. Segment documents can be up to 64 kB in size\.
+You can use the X\-Ray SDK to record additional information such as [annotations and metadata\.](#xray-concepts-annotations) For details about the structure and information that is recorded in segments and subsegments, see [AWS X\-Ray segment documents](xray-api-segmentdocuments.md)\. Segment documents can be up to 64 kB in size\.
 
 ## Subsegments<a name="xray-concepts-subsegments"></a>
 
@@ -52,7 +52,7 @@ When you call another instrumented service with an instrumented application, the
 
 Both viewpoints are useful, as the downstream service records precisely when it started and ended work on the request, and the upstream service records the round trip latency, including time that the request spent traveling between the two services\.
 
-## Service Graph<a name="xray-concepts-servicegraph"></a>
+## Service graph<a name="xray-concepts-servicegraph"></a>
 
 X\-Ray uses the data that your application sends to generate a **service graph**\. Each AWS resource that sends data to X\-Ray appears as a service in the graph\. **Edges** connect the services that work together to serve requests\. Edges connect clients to your application, and your application to the downstream services and resources that it uses\.
 
@@ -87,9 +87,9 @@ To avoid incurring service charges when you are getting started, the default sam
 
 For example, you might want to disable sampling and trace all requests for calls that modify state or handle user accounts or transactions\. For high\-volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
 
-For more information, see [Configuring Sampling Rules in the AWS X\-Ray Console](xray-console-sampling.md)\.
+For more information, see [Configuring sampling rules in the X\-Ray console](xray-console-sampling.md)\.
 
-## Tracing Header<a name="xray-concepts-tracingheader"></a>
+## Tracing header<a name="xray-concepts-tracingheader"></a>
 
 All requests are traced, up to a configurable minimum\. After reaching that minimum, a percentage of requests are traced to avoid unnecessary cost\. The sampling decision and trace ID are added to HTTP requests in **tracing headers** named `X-Amzn-Trace-Id`\. The first X\-Ray\-integrated service that the request hits adds a tracing header, which is read by the X\-Ray SDK and included in the response\.
 
@@ -110,7 +110,7 @@ The tracing header can also contain a parent segment ID if the request originate
 X-Amzn-Trace-Id: Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1
 ```
 
-## Filter Expressions<a name="xray-concepts-filterexpressions"></a>
+## Filter expressions<a name="xray-concepts-filterexpressions"></a>
 
 Even with sampling, a complex application generates a lot of data\. The AWS X\-Ray console provides an easy\-to\-navigate view of the service graph\. It shows health and performance information that helps you identify issues and opportunities for optimization in your application\. For advanced tracing, you can drill down to traces for individual requests, or use **filter expressions** to find traces related to specific paths or users\.
 
@@ -127,7 +127,7 @@ Updating a group's filter expression doesn't change data that's already recorded
 **Note**  
 Groups are billed by the number of retrieved traces that match the filter expression\. For more information, see [AWS X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\. 
 
-## Annotations and Metadata<a name="xray-concepts-annotations"></a>
+## Annotations and metadata<a name="xray-concepts-annotations"></a>
 
 When you instrument your application, the X\-Ray SDK records information about incoming and outgoing requests, the AWS resources used, and the application itself\. You can add other information to the segment document as annotations and metadata\. Annotations and metadata are aggregated at the trace level, and can be added to any segment or subsegment\.
 
@@ -141,7 +141,7 @@ X\-Ray indexes up to 50 annotations per trace\.
 
 ![\[Annotations and metadata are viewable in the segment or subsegment details in the X-Ray console\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-PUTrules-customsubsegment-metadata.png)
 
-## Errors, Faults, and Exceptions<a name="xray-concepts-errors"></a>
+## Errors, faults, and exceptions<a name="xray-concepts-errors"></a>
 
 X\-Ray tracks errors that occur in your application code, and errors that are returned by downstream services\. Errors are categorized as follows\.
 + **`Error`** – Client errors \(400 series errors\)

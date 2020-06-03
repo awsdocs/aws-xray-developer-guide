@@ -1,10 +1,13 @@
-# Tracing Calls to Downstream HTTP Web Services Using the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-httpclients"></a>
+# Tracing calls to downstream HTTP web services using the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-httpclients"></a>
 
 When your application makes calls to microservices or public HTTP APIs, you can use the X\-Ray SDK for Node\.js client to instrument those calls and add the API to the service graph as a downstream service\.
 
 Pass your `http` or `https` client to the X\-Ray SDK for Node\.js `captureHTTPs` method to trace outgoing calls\.
 
-**Example app\.js \- HTTP Client**  
+**Note**  
+Calls using third\-party HTTP request libraries, such as Axios or Superagent, are supported through the [`captureHTTPsGlobal()` API](https://docs.aws.amazon.com/xray-sdk-for-nodejs/latest/reference/module-http_p.html) and will still be traced when they use the native `http` module\.
+
+**Example app\.js \- HTTP client**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -13,7 +16,7 @@ var http = AWSXRay.captureHTTPs(require('http'));
 
 To enable tracing on all HTTP clients, call `captureHTTPsGlobal` before you load `http`\.
 
-**Example app\.js \- HTTP Client \(Global\)**  
+**Example app\.js \- HTTP client \(global\)**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -23,7 +26,7 @@ var http = require('http');
 
 When you instrument a call to a downstream web API, the X\-Ray SDK for Node\.js records a subsegment that contains information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the remote API\.
 
-**Example Subsegment for a Downstream HTTP Call**  
+**Example Subsegment for a downstream HTTP call**  
 
 ```
 {
@@ -45,7 +48,7 @@ When you instrument a call to a downstream web API, the X\-Ray SDK for Node\.js 
 }
 ```
 
-**Example Inferred Segment for a Downstream HTTP Call**  
+**Example Inferred segment for a downstream HTTP call**  
 
 ```
 {

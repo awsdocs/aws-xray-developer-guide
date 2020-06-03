@@ -1,4 +1,4 @@
-# AWS X\-Ray Segment Documents<a name="xray-api-segmentdocuments"></a>
+# AWS X\-Ray segment documents<a name="xray-api-segmentdocuments"></a>
 
 A **trace segment** is a JSON representation of a request that your application serves\. A trace segment records information about the original request, information about the work that your application does locally, and **subsegments** with information about downstream calls that your application makes to AWS resources, HTTP APIs, and SQL databases\.
 
@@ -8,25 +8,25 @@ X\-Ray compiles and processes segment documents to generate queryable **trace su
 
 X\-Ray provides a **JSON schema** for segment documents\. You can download the schema here: [xray\-segmentdocument\-schema\-v1\.0\.0](samples/xray-segmentdocument-schema-v1.0.0.zip)\. The fields and objects listed in the schema are described in more detail in the following sections\.
 
-A subset of segment fields are indexed by X\-Ray for use with filter expressions\. For example, if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users in the X\-Ray console or by using the `GetTraceSummaries` API\. For more information, see [Searching for Traces in the AWS X\-Ray Console with Filter Expressions](xray-console-filters.md)\.
+A subset of segment fields are indexed by X\-Ray for use with filter expressions\. For example, if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users in the X\-Ray console or by using the `GetTraceSummaries` API\. For more information, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\.
 
-When you instrument your application with the X\-Ray SDK, the SDK generates segment documents for you\. Instead of sending segment documents directly to X\-Ray, the SDK transmits them over a local UDP port to the [X\-Ray daemon](xray-daemon.md)\. For more information, see [Sending Segment Documents to the X\-Ray Daemon](xray-api-sendingdata.md#xray-api-daemon)\.
+When you instrument your application with the X\-Ray SDK, the SDK generates segment documents for you\. Instead of sending segment documents directly to X\-Ray, the SDK transmits them over a local UDP port to the [X\-Ray daemon](xray-daemon.md)\. For more information, see [Sending segment documents to the X\-Ray daemon](xray-api-sendingdata.md#xray-api-daemon)\.
 
 **Topics**
-+ [Segment Fields](#api-segmentdocuments-fields)
++ [Segment fields](#api-segmentdocuments-fields)
 + [Subsegments](#api-segmentdocuments-subsegments)
-+ [HTTP Request Data](#api-segmentdocuments-http)
++ [HTTP request data](#api-segmentdocuments-http)
 + [Annotations](#api-segmentdocuments-annotations)
 + [Metadata](#api-segmentdocuments-metadata)
-+ [AWS Resource Data](#api-segmentdocuments-aws)
-+ [Errors and Exceptions](#api-segmentdocuments-errors)
-+ [SQL Queries](#api-segmentdocuments-sql)
++ [AWS resource data](#api-segmentdocuments-aws)
++ [Errors and exceptions](#api-segmentdocuments-errors)
++ [SQL queries](#api-segmentdocuments-sql)
 
-## Segment Fields<a name="api-segmentdocuments-fields"></a>
+## Segment fields<a name="api-segmentdocuments-fields"></a>
 
 A segment records tracing information about a request that your application serves\. At a minimum, a segment records the name, ID, start time, trace ID, and end time of the request\.
 
-**Example Minimal Complete Segment**  
+**Example Minimal complete segment**  
 
 ```
 {
@@ -79,7 +79,7 @@ The following fields are optional for segments\.
   + `AWS::ElasticBeanstalk::Environment` – An Elastic Beanstalk environment\.
 
   When multiple values are applicable to your application, use the one that is most specific\. For example, a Multicontainer Docker Elastic Beanstalk environment runs your application on an Amazon ECS container, which in turn runs on an Amazon EC2 instance\. In this case you would set the origin to `AWS::ElasticBeanstalk::Environment` as the environment is the parent of the other two resources\.
-+ `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the [tracing header](xray-concepts.md#xray-concepts-tracingheader) for downstream HTTP calls\.
++ `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the [tracing header](xray-concepts.md#xray-concepts-tracingheader) for downstream HTTP calls\. In the case of nested subsguments, a subsegment can have a segment or a subsegment as its parent\. 
 + `http` – [`http`](#api-segmentdocuments-http) objects with information about the original HTTP request\.
 + `aws` – [`aws`](#api-segmentdocuments-aws) object with information about the AWS resource on which your application served the request\.
 + `error`, `throttle`, `fault`, and `cause` – [error](#api-segmentdocuments-errors) fields that indicate an error occurred and that include information about the exception that caused the error\.
@@ -95,7 +95,7 @@ A subsegment records a downstream call from the point of view of the service tha
 
 A subsegment can be embedded in a full segment document or sent independently\. Send subsegments separately to asynchronously trace downstream calls for long\-running requests, or to avoid exceeding the maximum segment document size\.
 
-**Example Segment with Embedded Subsegment**  
+**Example Segment with embedded subsegment**  
 An independent subsegment has a `type` of `subsegment` and a `parent_id` that identifies the parent segment\.  
 
 ```
@@ -142,7 +142,7 @@ An independent subsegment has a `type` of `subsegment` and a `parent_id` that id
 
 For long\-running requests, you can send an in\-progress segment to notify X\-Ray that the request was received, and then send subsegments separately to trace them before completing the original request\.
 
-**Example In\-Progress Segment**  
+**Example In\-progress segment**  
 
 ```
 {
@@ -154,7 +154,7 @@ For long\-running requests, you can send an in\-progress segment to notify X\-Ra
 }
 ```
 
-**Example Independent Subsegment**  
+**Example Independent subsegment**  
 An independent subsegment has a `type` of `subsegment`, a `trace_id`, and a `parent_id` that identifies the parent segment\.  
 
 ```
@@ -206,7 +206,7 @@ Values are strings up to 250 characters unless noted otherwise\.
 
     For example, 10:00AM December 1st, 2016 PST in epoch time is `1480615200` seconds, or `58406520` in hexadecimal digits\.
   + A 96\-bit identifier for the trace, globally unique, in **24 hexadecimal digits**\.
-+ `parent_id` – Segment ID of the subsegment's parent segment\. Required only if sending a subsegment separately\.
++ `parent_id` – Segment ID of the subsegment's parent segment\. Required only if sending a subsegment separately\. In the case of nested subsegments, a subsegment can have a segment or a subsegment as its parent\.
 + `type` – `subsegment`\. Required only if sending a subsegment separately\.
 
 The following fields are optional for subsegments\.
@@ -221,7 +221,7 @@ The following fields are optional for subsegments\.
 + `subsegments` – **array** of [`subsegment`](#api-segmentdocuments-subsegments) objects\.
 + `precursor_ids` – **array** of subsegment IDs that identifies subsegments with the same parent that completed prior to this subsegment\.
 
-## HTTP Request Data<a name="api-segmentdocuments-http"></a>
+## HTTP request data<a name="api-segmentdocuments-http"></a>
 
 Use an HTTP block to record details about an HTTP request that your application served \(in a segment\) or that your application made to a downstream HTTP API \(in a subsegment\)\. Most of the fields in this object map to information found in an HTTP request and response\.
 
@@ -241,7 +241,7 @@ All fields are optional\.
 
 When you instrument a call to a downstream web api, record a subsegment with information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the remote API\.
 
-**Example Segment for HTTP Call Served by an Application Running on Amazon EC2**  
+**Example Segment for HTTP call served by an application running on Amazon EC2**  
 
 ```
 {
@@ -274,7 +274,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
   }
 ```
 
-**Example Subsegment for a Downstream HTTP Call**  
+**Example Subsegment for a downstream HTTP call**  
 
 ```
 {
@@ -296,7 +296,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
 }
 ```
 
-**Example Inferred Segment for a Downstream HTTP Call**  
+**Example Inferred segment for a downstream HTTP call**  
 
 ```
 {
@@ -324,7 +324,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
 
 Segments and subsegments can include an `annotations` object containing one or more fields that X\-Ray indexes for use with filter expressions\. Fields can have string, number, or Boolean values \(no objects or arrays\)\. X\-Ray indexes up to 50 annotations per trace\.
 
-**Example Segment for HTTP Call with Annotations**  
+**Example Segment for HTTP call with annotations**  
 
 ```
 {
@@ -369,7 +369,7 @@ Keys must be alphanumeric in order to work with filters\. Underscore is allowed\
 
 Segments and subsegments can include a `metadata` object containing one or more fields with values of any type, including objects and arrays\. X\-Ray does not index metadata, and values can be any size, as long as the segment document doesn't exceed the maximum size \(64 kB\)\. You can view metadata in the full segment document returned by the [https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html](https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html) API\. Field keys \(`debug` in the following example\) starting with `AWS.` are reserved for use by AWS\-provided SDKs and clients\.
 
-**Example Custom Subsegment with Metadata**  
+**Example Custom subsegment with metadata**  
 
 ```
 {
@@ -408,7 +408,7 @@ Segments and subsegments can include a `metadata` object containing one or more 
 }
 ```
 
-## AWS Resource Data<a name="api-segmentdocuments-aws"></a>
+## AWS resource data<a name="api-segmentdocuments-aws"></a>
 
 For segments, the `aws` object contains information about the resource on which your application is running\. Multiple fields can apply to a single resource\. For example, an application running in a multicontainer Docker environment on Elastic Beanstalk could have information about the Amazon EC2 instance, the Amazon ECS container running on the instance, and the Elastic Beanstalk environment itself\.
 
@@ -421,7 +421,7 @@ All fields are optional\.
 + `ec2` – Information about an EC2 instance\.
   + `instance_id` – The instance ID of the EC2 instance\.
   + `availability_zone` – The Availability Zone in which the instance is running\.  
-**Example AWS Block with Plugins**  
+**Example AWS block with plugins**  
 
   ```
   "aws": {
@@ -456,7 +456,7 @@ All fields are optional\.
 + `queue_url` – For operations on an Amazon SQS queue, the queue's URL\.
 + `table_name` – For operations on a DynamoDB table, the name of the table\.
 
-**Example Subsegment for a Call to DynamoDB to Save an Item**  
+**Example Subsegment for a call to DynamoDB to save an item**  
 
 ```
 {
@@ -479,7 +479,7 @@ All fields are optional\.
 }
 ```
 
-## Errors and Exceptions<a name="api-segmentdocuments-errors"></a>
+## Errors and exceptions<a name="api-segmentdocuments-errors"></a>
 
 When an error occurs, you can record details about the error and exceptions that it generated\. Record errors in segments when your application returns an error to the user, and in subsegments when a downstream call returns an error\.
 
@@ -522,7 +522,7 @@ All fields are optional\.
 + `line` – The line in the file\.
 + `label` – The function or method name\.
 
-## SQL Queries<a name="api-segmentdocuments-sql"></a>
+## SQL queries<a name="api-segmentdocuments-sql"></a>
 
 You can create subsegments for queries that your application makes to an SQL database\.
 

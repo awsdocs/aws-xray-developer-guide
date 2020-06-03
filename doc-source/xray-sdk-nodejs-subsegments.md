@@ -1,10 +1,12 @@
-# Generating Custom Subsegments with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-subsegments"></a>
+# Generating custom subsegments with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-subsegments"></a>
 
 Subsegments extend a trace's [segment](xray-concepts.md#xray-concepts-segments) with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
+## Custom Express subsegments<a name="xray-sdk-nodejs-subsegments-express"></a>
+
 To create a custom subsegment for a function that makes calls to downstream services, use the `captureAsyncFunc` function\.
 
-**Example app\.js \- Custom Subsegments Express**  
+**Example app\.js \- custom subsegments Express**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -53,7 +55,7 @@ For synchronous functions, you can use the `captureFunc` function, which closes 
 
 When you create a subsegment within a segment or another subsegment, the X\-Ray SDK for Node\.js generates an ID for it and records the start time and end time\.
 
-**Example Subsegment with Metadata**  
+**Example Subsegment with metadata**  
 
 ```
 "subsegments": [{
@@ -66,4 +68,18 @@ When you create a subsegment within a segment or another subsegment, the X\-Ray 
       "test": "Metadata string from UserModel.saveUser"
     }
   },
+```
+
+## Custom Lambda subsegments<a name="xray-sdk-nodejs-subsegments-lambda"></a>
+
+The SDK is configured to automatically create a placeholder facade segment when the it detects it's running in Lambda\. To create a basic subsegement, which will create a single `AWS::Lambda::Function` node on the X\-Ray service map, call and repurpose the facade segment\. If you manually create a new segment with a new ID \(while sharing the trace ID, parent ID and the sampling decision\) you will be able to send a new segment\.
+
+**Example app\.js \- manual custom subsegments**  
+
+```
+const segment = AWSXRay.getSegment(); //returns the facade segment
+const subsegment = segment.addNewSubsegment('subseg');
+...
+subsegment.close();
+//the segment is closed by the SDK automatically
 ```

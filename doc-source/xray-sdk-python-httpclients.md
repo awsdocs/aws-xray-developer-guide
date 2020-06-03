@@ -1,4 +1,4 @@
-# Tracing Calls to Downstream HTTP Web Services Using the X\-Ray SDK for Python<a name="xray-sdk-python-httpclients"></a>
+# Tracing calls to downstream HTTP web services using the X\-Ray SDK for Python<a name="xray-sdk-python-httpclients"></a>
 
 When your application makes calls to microservices or public HTTP APIs, you can use the X\-Ray SDK for Python to instrument those calls and add the API to the service graph as a downstream service\.
 
@@ -6,7 +6,7 @@ To instrument HTTP clients, [patch the library](xray-sdk-python-patching.md) tha
 
 If you use `aiohttp` 3's client API, you also need to configure the `ClientSession`'s with an instance of the tracing configuration provided by the SDK\.
 
-**Example [`aiohttp` 3 Client API](https://github.com/aws/aws-xray-sdk-python#trace-aiohttp-client-requests)**  
+**Example [`aiohttp` 3 client API](https://github.com/aws/aws-xray-sdk-python#trace-aiohttp-client-requests)**  
 
 ```
 from aws_xray_sdk.ext.aiohttp.client import aws_xray_trace_config
@@ -20,7 +20,7 @@ async def foo():
 
 When you instrument a call to a downstream web API, the X\-Ray SDK for Python records a subsegment that contains information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the remote API\.
 
-**Example Subsegment for a Downstream HTTP Call**  
+**Example Subsegment for a downstream HTTP call**  
 
 ```
 {
@@ -42,7 +42,7 @@ When you instrument a call to a downstream web API, the X\-Ray SDK for Python re
 }
 ```
 
-**Example Inferred Segment for a Downstream HTTP Call**  
+**Example Inferred segment for a downstream HTTP call**  
 
 ```
 {

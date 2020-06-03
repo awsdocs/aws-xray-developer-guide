@@ -1,4 +1,4 @@
-# Patching Libraries to Instrument Downstream Calls<a name="xray-sdk-python-patching"></a>
+# Patching libraries to instrument downstream calls<a name="xray-sdk-python-patching"></a>
 
 To instrument downstream calls, use the X\-Ray SDK for Python to patch the libraries that your application uses\. The X\-Ray SDK for Python can patch the following libraries\.
 
@@ -10,8 +10,10 @@ To instrument downstream calls, use the X\-Ray SDK for Python to patch the libra
 + `[httplib](https://docs.python.org/2/library/httplib.html)`, [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html) – Instrument low\-level HTTP clients and the higher level libraries that use them\.
 + `[sqlite3](https://docs.python.org/3/library/sqlite3.html)` – Instrument SQLite clients\.
 + `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)` – Instrument MySQL clients\.
-+ `[pymysql](https://pypi.org/project/PyMySQL/)` - Instrument PyMySQL based clients for MySQL & MariaDB\.
-+ `[psycopg2](https://pypi.org/project/psycopg2/)` - Instrument Psycopg2 based clients for PostgreSQL\.
++ `[pg8000](https://pypi.org/project/pg8000/)` – Instrument Pure\-Python PostgreSQL interface\.
++ `[psycopg2](https://pypi.org/project/psycopg2/)` – Instrument PostgreSQL database adapter\.
++ `[pymongo](https://pypi.org/project/pymongo/)` – Instrument MongoDB clients\.
++ `[pymysql](https://pypi.org/project/PyMySQL/)` – Instrument PyMySQL based clients for MySQL and MariaDB\.
 
 When you use a patched library, the X\-Ray SDK for Python creates a subsegment for the call and records information from the request and response\. A segment must be available for the SDK to create the subsegment, either from the SDK middleware or from AWS Lambda\.
 
@@ -20,7 +22,7 @@ If you use SQLAlchemy ORM, you can instrument your SQL queries by importing the 
 
 To patch all available libraries, use the `patch_all` function in `aws_xray_sdk.core`\. Some libraries, such as `httplib` and `urllib`, may need to enable double patching by calling `patch_all(double_patch=True)`\.
 
-**Example main\.py – patch all supported libraries**  
+**Example main\.py – Patch all supported libraries**  
 
 ```
 import boto3
@@ -36,7 +38,7 @@ patch_all()
 
 To patch a single library, call `patch` with a tuple of the library name\. In order to achieve this, you will need to provide a single element list\.
 
-**Example main\.py – patch specific libraries**  
+**Example main\.py – Patch specific libraries**  
 
 ```
 import boto3
@@ -56,14 +58,14 @@ In some cases, the key that you use to patch a library does not match the librar
 `httplib` – `[httplib](https://docs.python.org/2/library/httplib.html)` and [https://docs.python.org/3/library/http.client.html](https://docs.python.org/3/library/http.client.html)
 `mysql` – `[mysql\-connector\-python](https://pypi.python.org/pypi/mysql-connector-python)`
 
-## Tracing Context for Asynchronous Work<a name="xray-sdk-python-patching-async"></a>
+## Tracing context for asynchronous work<a name="xray-sdk-python-patching-async"></a>
 
 For `asyncio` integrated libraries, or to [create subsegments for asynchronous functions](xray-sdk-python-subsegments.md), you must also configure the X\-Ray SDK for Python with an async context\. Import the `AsyncContext` class and pass an instance of it to the X\-Ray recorder\.
 
 **Note**  
 Web framework support libraries, such as AIOHTTP, are not handled through the `aws_xray_sdk.core.patcher` module\. They will not appear in the `patcher` catalog of supported libraries\.
 
-**Example main\.py – patch aioboto3**  
+**Example main\.py – Patch aioboto3**  
 
 ```
 import asyncio

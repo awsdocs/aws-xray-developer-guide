@@ -1,14 +1,14 @@
-# Getting Data from AWS X\-Ray<a name="xray-api-gettingdata"></a>
+# Getting data from AWS X\-Ray<a name="xray-api-gettingdata"></a>
 
 AWS X\-Ray processes the trace data that you send to it to generate full traces, trace summaries, and service graphs in JSON\. You can retrieve the generated data directly from the API with the AWS CLI\.
 
 **Topics**
-+ [Retrieving the Service Graph](#xray-api-servicegraph)
-+ [Retrieving the Service Graph by Group](#xray-api-servicegraphgroup)
-+ [Retrieving Traces](#xray-api-traces)
-+ [Retrieving and Refining Root Cause Analytics](#xray-api-analytics)
++ [Retrieving the service graph](#xray-api-servicegraph)
++ [Retrieving the service graph by group](#xray-api-servicegraphgroup)
++ [Retrieving traces](#xray-api-traces)
++ [Retrieving and refining root cause analytics](#xray-api-analytics)
 
-## Retrieving the Service Graph<a name="xray-api-servicegraph"></a>
+## Retrieving the service graph<a name="xray-api-servicegraph"></a>
 
 You can use the [https://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html](https://docs.aws.amazon.com/xray/latest/api/API_GetServiceGraph.html) API to retrieve the JSON service graph\. The API requires a start time and end time, which you can calculate from a Linux terminal with the `date` command\.
 
@@ -304,7 +304,7 @@ The following example shows a service graph with 4 nodes, including a client nod
 }
 ```
 
-## Retrieving the Service Graph by Group<a name="xray-api-servicegraphgroup"></a>
+## Retrieving the service graph by group<a name="xray-api-servicegraphgroup"></a>
 
 To call for a service graph based on the contents of a group, include a `groupName` or `groupARN`\. The following example shows a service graph call to a group named Example1\.
 
@@ -314,7 +314,7 @@ To call for a service graph based on the contents of a group, include a `groupNa
 aws xray get-service-graph --group-name "Example1"
 ```
 
-## Retrieving Traces<a name="xray-api-traces"></a>
+## Retrieving traces<a name="xray-api-traces"></a>
 
 You can use the [https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) API to get a list of trace summaries\. Trace summaries include information that you can use to identify traces that you want to download in full, including annotations, request and response information, and IDs\.
 
@@ -453,11 +453,11 @@ TRACEIDS=$(aws xray get-trace-summaries --start-time $(($EPOCH-120)) --end-time 
 aws xray batch-get-traces --trace-ids $TRACEIDS --query 'Traces[*]'
 ```
 
-## Retrieving and Refining Root Cause Analytics<a name="xray-api-analytics"></a>
+## Retrieving and refining root cause analytics<a name="xray-api-analytics"></a>
 
 Upon generating a trace summary with the [GetTraceSummaries API](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) , partial trace summaries can be reused in their JSON format to create a refined filter expression based upon root causes\. See the examples below for a walkthrough of the refinement steps\. 
 
-**Example Example GetTraceSummaries output \- Response Time Root Cause Section**  
+**Example Example GetTraceSummaries output \- response time root cause section**  
 
 ```
 {
@@ -501,7 +501,7 @@ Upon generating a trace summary with the [GetTraceSummaries API](https://docs.aw
 
 By editing and making omissions to the above output, this JSON can become a filter for matched root cause entities\. For every field present in the JSON, any candidate match must be exact, or the trace will not be returned\. Removed fields become wildcard values, a format which is compatible with the filter expression query structure\. 
 
-**Example Reformatted Response Time Root Cause**  
+**Example Reformatted response time root cause**  
 
 ```
 {
@@ -531,7 +531,7 @@ By editing and making omissions to the above output, this JSON can become a filt
 
 This JSON is then used as part of a filter expression through a call to `rootcause.json = #[{}]`\. Refer to the [Filter Expressions](xray-console-filters.md) chapter for more details about querying with filter expressions\.
 
-**Example Example JSON Filter**  
+**Example Example JSON filter**  
 
 ```
 rootcause.json = #[{ "Services": [ { "Name": "GetWeatherData", "EntityPath": [{ "Name": "GetWeatherData" }, { "Name": "get_temperature" } ] }, { "Name": "GetTemperature", "EntityPath": [ { "Name": "GetTemperature" } ] } ] }]

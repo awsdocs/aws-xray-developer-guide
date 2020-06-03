@@ -1,4 +1,4 @@
-# Tracing Incoming Requests with the X\-Ray SDK for Ruby Middleware<a name="xray-sdk-ruby-middleware"></a>
+# Tracing incoming requests with the X\-Ray SDK for Ruby middleware<a name="xray-sdk-ruby-middleware"></a>
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
@@ -19,7 +19,7 @@ The middleware creates a segment for each incoming request with an `http` block 
 + **User agent** — The `user-agent` from the request\.
 + **Content length** — The `content-length` from the response\.
 
-## Using the Rails Middleware<a name="xray-sdk-ruby-middleware-rails"></a>
+## Using the rails middleware<a name="xray-sdk-ruby-middleware-rails"></a>
 
 To use the middleware, update your gemfile to include the required [railtie](http://api.rubyonrails.org/classes/Rails/Railtie.html)\.
 
@@ -39,7 +39,7 @@ Rails.application.config.xray = {
 }
 ```
 
-## Instrumenting Code Manually<a name="xray-sdk-ruby-middleware-manual"></a>
+## Instrumenting code manually<a name="xray-sdk-ruby-middleware-manual"></a>
 
 If you don't use Rails, create segments manually\. You can create a segment for each incoming request, or create segments around patched HTTP or AWS SDK clients to provide context for the recorder to add subsegments\.
 
@@ -67,7 +67,7 @@ XRay.recorder.end_subsegment
 XRay.recorder.end_segment
 ```
 
-## Configuring a Segment Naming Strategy<a name="xray-sdk-ruby-middleware-naming"></a>
+## Configuring a segment naming strategy<a name="xray-sdk-ruby-middleware-naming"></a>
 
 AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
@@ -81,7 +81,7 @@ To use the same name for all request segments, specify the name of your applicat
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request doesn't match the pattern\. To name segments dynamically, specify a naming pattern in the config hash\.
 
-**Example main\.rb – dynamic naming**  
+**Example main\.rb – Dynamic naming**  
 
 ```
 config = {

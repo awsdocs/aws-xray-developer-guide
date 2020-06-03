@@ -1,4 +1,4 @@
-# AWS X\-Ray Use Cases and Requirements<a name="xray-usage"></a>
+# AWS X\-Ray use cases and requirements<a name="xray-usage"></a>
 
 You can use the X\-Ray SDK and AWS service integration to instrument requests to your applications that are running locally or on AWS compute services such as Amazon EC2, Elastic Beanstalk, Amazon ECS and AWS Lambda\.
 
@@ -13,11 +13,11 @@ Other AWS services make it easier to instrument your application's components by
 Many instrumentation scenarios require only configuration changes\. For example, you can instrument all incoming HTTP requests and downstream calls to AWS services that your Java application makes\. To do this, you add the X\-Ray SDK for Java's filter to your servlet configuration, and take the AWS SDK for Java Instrumentor submodule as a build dependency\. For advanced instrumentation, you can modify your application code to customize and annotate the data that the SDK sends to X\-Ray\.
 
 **Topics**
-+ [Supported Languages and Frameworks](#xray-usage-languages)
-+ [Supported AWS Services](#xray-usage-services)
-+ [Code and Configuration Changes](#xray-usage-codechanges)
++ [Supported languages and frameworks](#xray-usage-languages)
++ [Supported AWS services](#xray-usage-services)
++ [Code and configuration changes](#xray-usage-codechanges)
 
-## Supported Languages and Frameworks<a name="xray-usage-languages"></a>
+## Supported languages and frameworks<a name="xray-usage-languages"></a>
 
 AWS X\-Ray provides tools and integration to support a variety of languages, frameworks, and platforms\.
 
@@ -81,7 +81,7 @@ In any Ruby application, you can use the X\-Ray SDK for Ruby classes to instrume
 
 If the X\-Ray SDK isn't available for your language or platform, you can generate trace data manually and send it to the X\-Ray daemon, or directly to [the X\-Ray API](xray-api.md)\.
 
-## Supported AWS Services<a name="xray-usage-services"></a>
+## Supported AWS services<a name="xray-usage-services"></a>
 
 Several AWS services provide **X\-Ray integration**\. [Integrated services](xray-services.md) offer varying levels of integration that can include sampling and adding headers to incoming requests, running the X\-Ray daemon, and automatically sending trace data to X\-Ray\.
 + **Active instrumentation** – Samples and instruments incoming requests\.
@@ -103,7 +103,7 @@ The following services provide X\-Ray integration:
 + **Amazon Simple Notification Service** – Passive instrumentation\. If an Amazon SNS publisher traces its client with the X\-Ray SDK, subscribers can retrieve the tracing header and continue to propagate the original trace from the publisher with the same trace ID\. [Learn more](xray-services-sns.md)\.
 + **Amazon Simple Queue Service** – Passive instrumentation\. If a service traces requests by using the X\-Ray SDK, Amazon SQS can send the tracing header and continue to propagate the original trace from the sender to the consumer with a consistent trace ID\. [Learn more](xray-services-sqs.md)\.
 
-## Code and Configuration Changes<a name="xray-usage-codechanges"></a>
+## Code and configuration changes<a name="xray-usage-codechanges"></a>
 
 A large amount of tracing data can be generated without any functional changes to your code\. Detailed tracing of front\-end and downstream calls requires only minimal changes to build and deploy\-time configuration\.
 

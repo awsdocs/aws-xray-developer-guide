@@ -1,4 +1,4 @@
-# Instrumenting Incoming HTTP Requests with the X\-Ray SDK for Go<a name="xray-sdk-go-handler"></a>
+# Instrumenting incoming HTTP requests with the X\-Ray SDK for Go<a name="xray-sdk-go-handler"></a>
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
@@ -38,7 +38,7 @@ The handler creates a segment for each incoming request with an `http` block tha
 + **User agent** — The `user-agent` from the request\.
 + **Content length** — The `content-length` from the response\.
 
-## Configuring a Segment Naming Strategy<a name="xray-sdk-go-segments-naming"></a>
+## Configuring a segment naming strategy<a name="xray-sdk-go-segments-naming"></a>
 
 AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 

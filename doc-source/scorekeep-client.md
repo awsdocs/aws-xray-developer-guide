@@ -1,4 +1,4 @@
-# Instrumenting a Web App Client<a name="scorekeep-client"></a>
+# Instrumenting a web app client<a name="scorekeep-client"></a>
 
 In the [https://github.com/awslabs/eb-java-scorekeep/tree/xray-cognito](https://github.com/awslabs/eb-java-scorekeep/tree/xray-cognito) branch, Scorekeep uses Amazon Cognito to enable users to create an account and sign in with it to retrieve their user information from an Amazon Cognito user pool\. When a user signs in, Scorekeep uses an Amazon Cognito identity pool to get temporary AWS credentials for use with the AWS SDK for JavaScript\.
 
@@ -61,7 +61,7 @@ Most of the work is done in a service class named `xray`\. This service class pr
 
 These methods are called in header and `transformResponse` functions in the resource services that the web app uses to call the Scorekeep API\. To include the client segment in the same trace as the segment that the API generates, the web app must include the trace ID and segment ID in a [tracing header](xray-concepts.md#xray-concepts-tracingheader) \(`X-Amzn-Trace-Id`\) that the X\-Ray SDK can read\. When the instrumented Java application receives a request with this header, the X\-Ray SDK for Java uses the same trace ID and makes the segment from the web app client the parent of its segment\. 
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/public/app/services.js](https://github.com/awslabs/eb-java-scorekeep/tree/xray/public/app/services.js) – Recording segments for Angular resource calls and writing tracing headers**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/public/app/services.js](https://github.com/awslabs/eb-java-scorekeep/tree/xray/public/app/services.js) – Recording segments for angular resource calls and writing tracing headers**  
 
 ```
 var module = angular.module('scorekeep');

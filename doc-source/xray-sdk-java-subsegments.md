@@ -1,10 +1,10 @@
-# Generating Custom Subsegments with the X\-Ray SDK for Java<a name="xray-sdk-java-subsegments"></a>
+# Generating custom subsegments with the X\-Ray SDK for Java<a name="xray-sdk-java-subsegments"></a>
 
 Subsegments extend a trace's [segment](xray-concepts.md#xray-concepts-segments) with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
 To manage subsegments, use the `beginSubsegment` and `endSubsegment` methods\.
 
-**Example GameModel\.java \- Custom Subsegment**  
+**Example GameModel\.java \- custom subsegment**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -36,7 +36,7 @@ If the code in your subsegment throws checked exceptions, wrap it in a `try` blo
 
 For code that doesn't throw checked exceptions, you can pass the code to `AWSXRay.CreateSubsegment` as a Lambda function\.
 
-**Example Subsegment Lambda Function**  
+**Example Subsegment Lambda function**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -48,7 +48,7 @@ AWSXRay.createSubsegment("getMovies", (subsegment) -> {
 
 When you create a subsegment within a segment or another subsegment, the X\-Ray SDK for Java generates an ID for it and records the start time and end time\.
 
-**Example Subsegment with Metadata**  
+**Example Subsegment with metadata**  
 
 ```
 "subsegments": [{

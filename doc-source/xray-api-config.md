@@ -1,4 +1,4 @@
-# Tracking X\-Ray Encryption Configuration Changes with AWS Config<a name="xray-api-config"></a>
+# Tracking X\-Ray encryption configuration changes with AWS Config<a name="xray-api-config"></a>
 
 AWS X\-Ray integrates with AWS Config to record configuration changes made to your X\-Ray encryption resources\. You can use AWS Config to inventory X\-Ray encryption resources, audit the X\-Ray configuration history, and send notifications based on resource changes\.
 
@@ -7,7 +7,7 @@ AWS Config supports logging the following X\-Ray encryption resource changes as 
 
 Use the following instructions to learn how to create a basic connection between X\-Ray and AWS Config\. 
 
-## Creating a Lambda Function Trigger<a name="LambdaFunctionTrigger"></a>
+## Creating a Lambda function trigger<a name="LambdaFunctionTrigger"></a>
 
 You must have the ARN of a custom AWS Lambda function before you can generate a custom AWS Config rule\. Follow these instructions to create a basic function with Node\.js that returns a compliant or non\-compliant value back to AWS Config based on the state of the `XrayEncryptionConfig` resource\.
 
@@ -62,7 +62,7 @@ You must have the ARN of a custom AWS Lambda function before you can generate a 
         }
    ```
 
-## Creating a Custom AWS Config Rule for X\-Ray<a name="ConfigRule"></a>
+## Creating a custom AWS Config rule for x\-ray<a name="ConfigRule"></a>
 
 When the Lambda function is created, note the function's ARN, and go to the AWS Config console to create your custom rule\. 
 
@@ -86,7 +86,7 @@ The AWS Config console begins to evaluate the rule's compliance immediately\. Th
 
 Now that this rule is compliant, AWS Config can begin to compile an audit history\. AWS Config records resource changes in the form of a timeline\. For each change in the timeline of events, AWS Config generates a table in a from/to format to show what changed in the JSON representation of the encryption key\. The two field changes associated with EncryptionConfig are `Configuration.type` and `Configuration.keyID`\.
 
-## Example Results<a name="Examples"></a>
+## Example results<a name="Examples"></a>
 
 Following is an example of an AWS Config timeline showing changes made at specific dates and times\.
 
@@ -96,6 +96,6 @@ Following is an example of an AWS Config change entry\. The from/to format illus
 
 ![\[X-Ray encryption configuration change entry\]](http://docs.aws.amazon.com/xray/latest/devguide/images/ConfigChanges.png)
 
-## Amazon SNS Notifications<a name="SNSNotifs"></a>
+## Amazon SNS notifications<a name="SNSNotifs"></a>
 
 To be notified of configuration changes, set AWS Config to publish Amazon SNS notifications\. For more information, see [Monitoring AWS Config Resource Changes by Email](https://docs.aws.amazon.com/config/latest/developerguide/monitoring-resource-changes-by-email.html)\.

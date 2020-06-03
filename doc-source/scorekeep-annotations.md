@@ -1,8 +1,8 @@
-# Recording Annotations, Metadata, and User IDs<a name="scorekeep-annotations"></a>
+# Recording annotations, metadata, and user IDs<a name="scorekeep-annotations"></a>
 
 In the game model class, the application records `Game` objects in a [metadata](xray-sdk-java-segment.md#xray-sdk-java-segment-metadata) block each time it saves a game in DynamoDB\. Separately, the application records game IDs in [annotations](xray-sdk-java-segment.md#xray-sdk-java-segment-annotations) for use with [filter expressions](xray-console-filters.md)\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and Metadata**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and metadata**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);

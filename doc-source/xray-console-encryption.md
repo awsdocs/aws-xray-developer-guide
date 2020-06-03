@@ -1,4 +1,4 @@
-# Data Protection in AWS X\-Ray<a name="xray-console-encryption"></a>
+# Data protection in AWS X\-Ray<a name="xray-console-encryption"></a>
 
 AWS X\-Ray always encrypts traces and related data at rest\. When you need to audit and disable encryption keys for compliance or internal requirements, you can configure X\-Ray to use an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to encrypt data\.
 
@@ -13,7 +13,7 @@ AWS KMS charges when X\-Ray uses a CMK to encrypt or decrypt trace data\.
 **Customer managed CMK** – Pay for key storage and use\.
 See [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing/) for details\.
 
-You must have user\-level access to a customer managed CMK to configure X\-Ray to use it, and to then view encrypted traces\. See [User Permissions for Encryption](security_iam_service-with-iam.md#xray-permissions-encryption) for more information\.
+You must have user\-level access to a customer managed CMK to configure X\-Ray to use it, and to then view encrypted traces\. See [User permissions for encryption](security_iam_service-with-iam.md#xray-permissions-encryption) for more information\.
 
 **To configure X\-Ray to use a CMK for encryption**
 
@@ -34,4 +34,4 @@ X\-Ray does not support asymmetric CMKs\.
 
 If X\-Ray is unable to access your encryption key, it stops storing data\. This can happen if your user loses access to the CMK, or if you disable a key that's currently in use\. When this happens, X\-Ray shows a notification in the navigation bar\.
 
-To configure encryption settings with the X\-Ray API, see [Configuring  Sampling, Groups, and Encryption Settings with the AWS X\-Ray API](xray-api-configuration.md)\.
+To configure encryption settings with the X\-Ray API, see [Configuring  sampling, groups, and encryption settings with the AWS X\-Ray API](xray-api-configuration.md)\.

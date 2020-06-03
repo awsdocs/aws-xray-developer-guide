@@ -1,12 +1,12 @@
-# Running the X\-Ray Daemon Locally<a name="xray-daemon-local"></a>
+# Running the X\-Ray daemon locally<a name="xray-daemon-local"></a>
 
 You can run the AWS X\-Ray daemon locally on Linux, MacOS, Windows, or in a Docker container\. Run the daemon to relay trace data to X\-Ray when you are developing and testing your instrumented application\. Download and extract the daemon by using the instructions [here](xray-daemon.md#xray-daemon-downloading)\.
 
-When running locally, the daemon can read credentials from an AWS SDK credentials file \(`.aws/credentials` in your user directory\) or from environment variables\. For more information, see [Giving the Daemon Permission to Send Data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
+When running locally, the daemon can read credentials from an AWS SDK credentials file \(`.aws/credentials` in your user directory\) or from environment variables\. For more information, see [Giving the daemon permission to send data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
-The daemon listens for UDP data on port 2000\. You can change the port and other options by using a configuration file and command line options\. For more information, see [Configuring the AWS X\-Ray Daemon](xray-daemon-configuration.md)\.
+The daemon listens for UDP data on port 2000\. You can change the port and other options by using a configuration file and command line options\. For more information, see [Configuring the AWS X\-Ray daemon](xray-daemon-configuration.md)\.
 
-## Running the X\-Ray Daemon on Linux<a name="xray-daemon-local-linux"></a>
+## Running the X\-Ray daemon on Linux<a name="xray-daemon-local-linux"></a>
 
 You can run the daemon executable from the command line\. Use the `-o` option to run in local mode, and `-n` to set the region\.
 
@@ -26,7 +26,7 @@ Terminate a daemon process running in the background with `pkill`\.
 ~$ pkill xray
 ```
 
-## Running the X\-Ray Daemon in a Docker Container<a name="xray-daemon-local-docker"></a>
+## Running the X\-Ray daemon in a Docker container<a name="xray-daemon-local-docker"></a>
 
 To run the daemon locally in a Docker container, save the following text to a file named `Dockerfile`\. Download the complete [example image](https://hub.docker.com/r/amazon/aws-xray-daemon/) on Docker Hub\.
 
@@ -35,7 +35,7 @@ To run the daemon locally in a Docker container, save the following text to a fi
 ```
 FROM amazonlinux
 RUN yum install -y unzip
-RUN curl -o daemon.zip https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip
+RUN curl -o daemon.zip https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip
 RUN unzip daemon.zip && cp xray /usr/bin/xray
 ENTRYPOINT ["/usr/bin/xray", "-t", "0.0.0.0:2000", "-b", "0.0.0.0:2000"]
 EXPOSE 2000/udp
@@ -77,9 +77,9 @@ $ docker stop xray-daemon
 $ docker rm xray-daemon
 ```
 
-The Scorekeep sample application shows how to use the X\-Ray daemon in a local Docker container\. See [Instrumenting Amazon ECS Applications](scorekeep-ecs.md) for details\.
+The Scorekeep sample application shows how to use the X\-Ray daemon in a local Docker container\. See [Instrumenting Amazon ECS applications](scorekeep-ecs.md) for details\.
 
-## Running the X\-Ray Daemon on Windows<a name="xray-daemon-local-windows"></a>
+## Running the X\-Ray daemon on Windows<a name="xray-daemon-local-windows"></a>
 
 You can run the daemon executable from the command line\. Use the `-o` option to run in local mode, and `-n` to set the region\.
 
@@ -89,7 +89,7 @@ You can run the daemon executable from the command line\. Use the `-o` option to
 
 Use a PowerShell script to create and run a service for the daemon\.
 
-**Example PowerShell Script \- Windows**  
+**Example PowerShell script \- Windows**  
 
 ```
 if ( Get-Service "AWSXRayDaemon" -ErrorAction SilentlyContinue ){
@@ -116,7 +116,7 @@ sc.exe create AWSXRayDaemon binPath= "$daemonPath -f $daemonLogPath"
 sc.exe start AWSXRayDaemon
 ```
 
-## Running the X\-Ray Daemon on OS X<a name="xray-daemon-local-osx"></a>
+## Running the X\-Ray daemon on OS X<a name="xray-daemon-local-osx"></a>
 
 You can run the daemon executable from the command line\. Use the `-o` option to run in local mode, and `-n` to set the region\.
 

@@ -13,7 +13,7 @@ You must verify that your AWS CLI is configured to the same Region that your Sco
 
 Scripts included to test the sample application uses `cURL` to send traffic to the API and `jq` to parse the output\. You can download the `jq` executable from [stedolan\.github\.io](https://stedolan.github.io/jq/), and the `curl` executable from [https://curl.haxx.se/download.html](https://curl.haxx.se/download.html)\. Most Linux and OS X installations include cURL\.
 
-## Generate Trace Data<a name="xray-api-tutorial-generatedata"></a>
+## Generate trace data<a name="xray-api-tutorial-generatedata"></a>
 
 The web app continues to generate traffic to the API every few seconds while the game is in\-progress, but only generates one type of request\. Use the `test-api.sh` script to run end to end scenarios and generate more diverse trace data while you test the API\.
 

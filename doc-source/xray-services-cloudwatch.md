@@ -1,4 +1,4 @@
-# Monitoring Endpoints and APIs with CloudWatch<a name="xray-services-cloudwatch"></a>
+# Monitoring endpoints and APIs with CloudWatch<a name="xray-services-cloudwatch"></a>
 
 AWS X\-Ray integrates with Amazon CloudWatch to support CloudWatch ServiceLens and CloudWatch Synthetics in monitoring the health of your applications\. By correlating metrics, logs, and traces, ServiceLens provides an end\-to\-end view of your services to help you quickly pinpoint performance bottlenecks and identify impacted users\. To learn more about ServiceLens, see [Using ServiceLens to Monitor the Health of Your Applications](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html)\.
 
@@ -9,4 +9,4 @@ You can customize canaries to check for availability, latency, transactions, bro
  To get started with Synthetics, enable X\-Ray for your APIs, endpoints, and web apps, for example [your APIs running on API Gateway](xray-services-apigateway.md)\. Then create a canary and observe the Synthetics node in your service graph\. To learn more about setting up Synthetics tests, see [Using Synthetics to Create and Manage Canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html)\.
 
 **Topics**
-+ [Debugging CloudWatch Synthetics Canaries Using X\-Ray](xray-services-cloudwatch-synthetics.md)
++ [Debugging CloudWatch synthetics canaries using X\-Ray](xray-services-cloudwatch-synthetics.md)

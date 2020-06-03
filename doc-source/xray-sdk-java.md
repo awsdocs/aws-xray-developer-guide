@@ -55,7 +55,7 @@ These dependencies are declared in the SDK's `pom.xml` file and are included aut
 
 If you use a library that is included in the X\-Ray SDK for Java, you must use the included version\. For example, if you already depend on Jackson at runtime and include JAR files in your deployment for that dependency, you must remove those JAR files because the SDK JAR includes its own versions of Jackson libraries\. 
 
-## Dependency Management<a name="xray-sdk-java-dependencies"></a>
+## Dependency management<a name="xray-sdk-java-dependencies"></a>
 
 The X\-Ray SDK for Java is available from Maven:
 + **Group** – `com.amazonaws`

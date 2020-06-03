@@ -1,4 +1,4 @@
-# Add Annotations and Metadata to Segments with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment"></a>
+# Add annotations and metadata to segments with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment"></a>
 
 You can record additional information about requests, the environment, or your application with annotations and metadata\. You can add annotations and metadata to the segments that the X\-Ray SDK creates, or to custom subsegments that you create\.
 
@@ -9,11 +9,11 @@ You can record additional information about requests, the environment, or your a
 In addition to annotations and metadata, you can also [record user ID strings](#xray-sdk-nodejs-segment-userid) on segments\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
 
 **Topics**
-+ [Recording Annotations with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-annotations)
-+ [Recording Metadata with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-metadata)
-+ [Recording User IDs with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-userid)
++ [Recording annotations with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-annotations)
++ [Recording metadata with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-metadata)
++ [Recording user IDs with the X\-Ray SDK for Node\.js](#xray-sdk-nodejs-segment-userid)
 
-## Recording Annotations with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-annotations"></a>
+## Recording annotations with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-annotations"></a>
 
 Use annotations to record information on segments or subsegments that you want indexed for search\.
 
@@ -42,7 +42,7 @@ The SDK records annotations as key\-value pairs in an `annotations` object in th
 
 To find traces that have annotations with specific values, use the `annotations.key` keyword in a [filter expression](xray-console-filters.md)\.
 
-**Example app\.js \- Annotations**  
+**Example app\.js \- annotations**  
 
 ```
 var AWS = require('aws-sdk');
@@ -68,7 +68,7 @@ app.post('/signup', function(req, res) {
 ...
 ```
 
-## Recording Metadata with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-metadata"></a>
+## Recording metadata with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-metadata"></a>
 
 Use metadata to record information on segments or subsegments that you don't need indexed for search\. Metadata values can be strings, numbers, Booleans, or any other object that can be serialized into a JSON object or array\.
 
@@ -98,7 +98,7 @@ Use metadata to record information on segments or subsegments that you don't nee
 
 If you don't specify a namespace, the SDK uses `default`\. Calling `addMetadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 
-## Recording User IDs with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-userid"></a>
+## Recording user IDs with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-segment-userid"></a>
 
 Record user IDs on request segments to identify the user who sent the request\. This operation isn’t compatible with AWS Lambda functions because segments in Lambda environments are immutable\. The `setUser` call can be applied only to segments, not subsegments\.
 
@@ -122,7 +122,7 @@ Record user IDs on request segments to identify the user who sent the request\. 
 
 You can call `setUser` to record the user ID as soon as your express application starts processing a request\. If you will use the segment only to set the user ID, you can chain the calls in a single line\.
 
-**Example app\.js \- User ID**  
+**Example app\.js \- user ID**  
 
 ```
 var AWS = require('aws-sdk');

@@ -1,10 +1,10 @@
-# Using Instrumented Clients in Worker Threads<a name="scorekeep-workerthreads"></a>
+# Using instrumented clients in worker threads<a name="scorekeep-workerthreads"></a>
 
 Scorekeep uses a worker thread to publish a notification to Amazon SNS when a user wins a game\. Publishing the notification takes longer than the rest of the request operations combined, and doesn't affect the client or user\. Therefore, performing the task asynchronously is a good way to improve response time\.
 
 However, the X\-Ray SDK for Java doesn't know which segment was active when the thread is created\. As a result, when you try to use the instrumented AWS SDK for Java client within the thread, it throws a `SegmentNotFoundException`, crashing the thread\.
 
-**Example web\-1\.error\.log**  
+**Example Web\-1\.error\.log**  
 
 ```
 Exception in thread "Thread-2" com.amazonaws.xray.exceptions.SegmentNotFoundException: Failed to begin subsegment named 'AmazonSNS': segment cannot be found.
@@ -39,4 +39,4 @@ Because the request is now resolved before the call to Amazon SNS, the applicati
 
 ![\[\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-workerthread.png)
 
-See [Passing Segment Context between Threads in a Multithreaded Application](xray-sdk-java-multithreading.md) for more information about multithreading\.
+See [Passing segment context between threads in a multithreaded application](xray-sdk-java-multithreading.md) for more information about multithreading\.

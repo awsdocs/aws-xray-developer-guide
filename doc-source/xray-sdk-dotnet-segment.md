@@ -1,4 +1,4 @@
-# Add Annotations and Metadata to Segments with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-segment"></a>
+# Add annotations and metadata to segments with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-segment"></a>
 
 You can record additional information about requests, the environment, or your application with annotations and metadata\. You can add annotations and metadata to the segments that the X\-Ray SDK creates, or to custom subsegments that you create\.
 
@@ -7,10 +7,10 @@ You can record additional information about requests, the environment, or your a
 **Metadata** are key\-value pairs that can have values of any type, including objects and lists, but are not indexed for use with filter expressions\. Use metadata to record additional data that you want stored in the trace but don't need to use with search\.
 
 **Topics**
-+ [Recording Annotations with the X\-Ray SDK for \.NET](#xray-sdk-dotnet-segment-annotations)
-+ [Recording Metadata with the X\-Ray SDK for \.NET](#xray-sdk-dotnet-segment-metadata)
++ [Recording annotations with the X\-Ray SDK for \.NET](#xray-sdk-dotnet-segment-annotations)
++ [Recording metadata with the X\-Ray SDK for \.NET](#xray-sdk-dotnet-segment-metadata)
 
-## Recording Annotations with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-segment-annotations"></a>
+## Recording annotations with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-segment-annotations"></a>
 
 Use annotations to record information on segments or subsegments that you want indexed for search\.
 
@@ -39,7 +39,7 @@ The SDK records annotations as key\-value pairs in an `annotations` object in th
 
 To find traces that have annotations with specific values, use the `annotations.key` keyword in a [filter expression](xray-console-filters.md)\.
 
-## Recording Metadata with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-segment-metadata"></a>
+## Recording metadata with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-segment-metadata"></a>
 
 Use metadata to record information on segments or subsegments that you don't need indexed for search\. Metadata values can be Strings, Numbers, Booleans, or any other Object that can be serialized into a JSON object or array\.
 

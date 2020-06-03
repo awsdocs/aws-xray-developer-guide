@@ -1,13 +1,13 @@
-# Configuring Sampling, Groups, and Encryption Settings with the AWS X\-Ray API<a name="xray-api-configuration"></a>
+# Configuring sampling, groups, and encryption settings with the AWS X\-Ray API<a name="xray-api-configuration"></a>
 
 AWS X\-Ray provides APIs for configuring [sampling rules](xray-console-sampling.md), group rules, and [encryption settings](xray-console-encryption.md)\.
 
 **Topics**
-+ [Encryption Settings](#xray-api-configuration-encryption)
-+ [Sampling Rules](#xray-api-configuration-sampling)
++ [Encryption settings](#xray-api-configuration-encryption)
++ [Sampling rules](#xray-api-configuration-sampling)
 + [Groups](#xray-api-configuration-groups)
 
-## Encryption Settings<a name="xray-api-configuration-encryption"></a>
+## Encryption settings<a name="xray-api-configuration-encryption"></a>
 
 Use [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html) to specify an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to use for encryption\. 
 
@@ -52,7 +52,7 @@ $ aws xray put-encryption-config --type NONE
 }
 ```
 
-## Sampling Rules<a name="xray-api-configuration-sampling"></a>
+## Sampling rules<a name="xray-api-configuration-sampling"></a>
 
 You can manage the [sampling rules](xray-console-sampling.md) in your account with the X\-Ray API\.
 
@@ -246,7 +246,7 @@ $ aws xray delete-sampling-rule --rule-name polling-scorekeep
 
 ## Groups<a name="xray-api-configuration-groups"></a>
 
-You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting Data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\.
+You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\.
 
 Create a group with `CreateGroup`\.
 

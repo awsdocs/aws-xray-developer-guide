@@ -1,10 +1,10 @@
-# Tracing AWS SDK Calls with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-awssdkclients"></a>
+# Tracing AWS SDK calls with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-awssdkclients"></a>
 
 When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Node\.js tracks the calls downstream in [subsegments](xray-sdk-nodejs-subsegments.md)\. Traced AWS services, and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
 You can instrument all AWS SDK clients by wrapping your `aws-sdk` require statement in a call to `AWSXRay.captureAWS`\.
 
-**Example app\.js \- AWS SDK Instrumentation**  
+**Example app\.js \- AWS SDK instrumentation**  
 
 ```
 var AWS = AWSXRay.captureAWS(require('aws-sdk'));
@@ -12,7 +12,7 @@ var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
 To instrument individual clients, wrap your AWS SDK client in a call to `AWSXRay.captureAWSClient`\. For example, to instrument an `AmazonDynamoDB` client:
 
-**Example app\.js \- DynamoDB Client Instrumentation**  
+**Example app\.js \- DynamoDB client instrumentation**  
 
 ```
     var AWSXRay = require('aws-xray-sdk');
@@ -20,11 +20,14 @@ To instrument individual clients, wrap your AWS SDK client in a call to `AWSXRay
     var ddb = AWSXRay.captureAWSClient(new AWS.DynamoDB());
 ```
 
+**Warning**  
+Do not use both `captureAWS` and `captureAWSClient` together\. This will lead to duplicate subsegments\.
+
 For all services, you can see the name of the API called in the X\-Ray console\. For a subset of services, the X\-Ray SDK adds information to the segment to provide more granularity in the service map\.
 
 For example, when you make a call with an instrumented DynamoDB client, the SDK adds the table name to the segment for calls that target a table\. In the console, each table appears as a separate node in the service map, with a generic DynamoDB node for calls that don't target a table\.
 
-**Example Subsegment for a Call to DynamoDB to Save an Item**  
+**Example Subsegment for a call to DynamoDB to save an item**  
 
 ```
 {

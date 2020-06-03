@@ -1,12 +1,12 @@
-# Tracing SQL Queries with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-sqlqueries"></a>
+# Tracing SQL queries with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-sqlqueries"></a>
 
 The X\-Ray SDK for \.NET provides a wrapper class for `System.Data.SqlClient.SqlCommand`, named `TraceableSqlCommand`, that you can use in place of `SqlCommand`\. You can initialize an SQL command with the `TraceableSqlCommand` class\.
 
-## Tracing SQL Queries with Synchronous and Asynchronous Methods<a name="xray-sdk-dotnot-sqlqueries-trace"></a>
+## Tracing SQL queries with synchronous and asynchronous methods<a name="xray-sdk-dotnot-sqlqueries-trace"></a>
 
 The following examples show how to use the `TraceableSqlCommand` to automatically trace SQL Server queries synchronously and asynchronously\.
 
-**Example `Controller.cs` \- SQL Client Instrumentation \(Synchronous\)**  
+**Example `Controller.cs` \- SQL client instrumentation \(synchronous\)**  
 
 ```
 using Amazon;
@@ -28,7 +28,7 @@ private void QuerySql(int id)
 
 You can execute the query asynchronously by using the `ExecuteReaderAsync` method\.
 
-**Example `Controller.cs` \- SQL Client Instrumentation \(Asynchronous\)**  
+**Example `Controller.cs` \- SQL client instrumentation \(asynchronous\)**  
 
 ```
 using Amazon;
@@ -46,7 +46,7 @@ private void QuerySql(int id)
 }
 ```
 
-## Collecting SQL Queries Made to SQL Server<a name="xray-sdk-dotnot-sqlqueries-collect"></a>
+## Collecting SQL queries made to SQL Server<a name="xray-sdk-dotnot-sqlqueries-collect"></a>
 
 You can enable the capture of `SqlCommand.CommandText` as part of the subsegment created by your SQL query\. `SqlCommand.CommandText` appears as the field `sanitized_query` in the subsegment JSON\. By default, this feature is disabled for security\. 
 
@@ -57,7 +57,7 @@ You can enable the collection of SQL queries in two ways:
 + Set the `CollectSqlQueries` property to `true` in the global configuration for your application\.
 + Set the `collectSqlQueries` parameter in the `TraceableSqlCommand` instance to `true` to collect calls within the instance\.
 
-### Enable the Global CollectSqlQueries Property<a name="xray-sdk-dotnot-sqlqueries-collect-global"></a>
+### Enable the global CollectSqlQueries property<a name="xray-sdk-dotnot-sqlqueries-collect-global"></a>
 
 The following examples show how to enable the `CollectSqlQueries` property for \.NET and \.NET Core\.
 
@@ -66,7 +66,7 @@ The following examples show how to enable the `CollectSqlQueries` property for \
 
 To set the `CollectSqlQueries` property to `true` in the global configuration of your application in \.NET, modify the `appsettings` of your `App.config` or `Web.config` file, as shown\.
 
-**Example `App.config` or `Web.config` – Enable SQL Query Collection Globally**  
+**Example `App.config` Or `Web.config` – Enable SQL Query collection globally**  
 
 ```
 <configuration>
@@ -81,7 +81,7 @@ To set the `CollectSqlQueries` property to `true` in the global configuration of
 
 To set the `CollectSqlQueries` property to `true` in the global configuration of your application in \.NET Core, modify your `appsettings.json` file under the X\-Ray key, as shown\.
 
-**Example `appsettings.json` – Enable SQL Query Collection Globally**  
+**Example `appsettings.json` – Enable SQL Query collection globally**  
 
 ```
 {
@@ -93,14 +93,14 @@ To set the `CollectSqlQueries` property to `true` in the global configuration of
 
 ------
 
-### Enable the collectSqlQueries Parameter<a name="xray-sdk-dotnot-sqlqueries-collect-instance"></a>
+### Enable the collectSqlQueries parameter<a name="xray-sdk-dotnot-sqlqueries-collect-instance"></a>
 
 You can set the `collectSqlQueries` parameter in the `TraceableSqlCommand` instance to `true` to collect the SQL query text for SQL Server queries made using that instance\. Setting the parameter to `false` disables the `CollectSqlQuery` feature for the `TraceableSqlCommand` instance\. 
 
 **Note**  
  The value of `collectSqlQueries` in the `TraceableSqlCommand` instance overrides the value set in the global configuration of the `CollectSqlQueries` property\.
 
-**Example Example `Controller.cs` – Enable SQL Query Collection for the Instance**  
+**Example Example `Controller.cs` – Enable SQL Query collection for the instance**  
 
 ```
 using Amazon;

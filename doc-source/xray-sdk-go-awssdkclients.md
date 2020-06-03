@@ -1,4 +1,4 @@
-# Tracing AWS SDK Calls with the X\-Ray SDK for Go<a name="xray-sdk-go-awssdkclients"></a>
+# Tracing AWS SDK calls with the X\-Ray SDK for Go<a name="xray-sdk-go-awssdkclients"></a>
 
 When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Go tracks the calls downstream in [subsegments](xray-sdk-go-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
@@ -29,7 +29,7 @@ For all services, you can see the name of the API called in the X\-Ray console\.
 
 For example, when you make a call with an instrumented DynamoDB client, the SDK adds the table name to the segment for calls that target a table\. In the console, each table appears as a separate node in the service map, with a generic DynamoDB node for calls that don't target a table\.
 
-**Example Subsegment for a Call to DynamoDB to Save an Item**  
+**Example Subsegment for a call to DynamoDB to save an item**  
 
 ```
 {

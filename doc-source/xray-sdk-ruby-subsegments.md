@@ -1,4 +1,4 @@
-# Generating Custom Subsegments with the X\-Ray SDK<a name="xray-sdk-ruby-subsegments"></a>
+# Generating custom subsegments with the X\-Ray SDK<a name="xray-sdk-ruby-subsegments"></a>
 
 Subsegments extend a trace's [segment](xray-concepts.md#xray-concepts-segments) with details about work done in order to serve a request\. Each time you make a call with an instrumented client, the X\-Ray SDK records the information generated in a subsegment\. You can create additional subsegments to group other subsegments, to measure the performance of a section of code, or to record annotations and metadata\.
 
@@ -23,7 +23,7 @@ end
 
 When you create a subsegment within a segment or another subsegment, the X\-Ray SDK generates an ID for it and records the start time and end time\.
 
-**Example Subsegment with Metadata**  
+**Example Subsegment with metadata**  
 
 ```
 "subsegments": [{

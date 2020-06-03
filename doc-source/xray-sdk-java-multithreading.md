@@ -1,4 +1,4 @@
-# Passing Segment Context between Threads in a Multithreaded Application<a name="xray-sdk-java-multithreading"></a>
+# Passing segment context between threads in a multithreaded application<a name="xray-sdk-java-multithreading"></a>
 
 When you create a new thread in your application, the `AWSXRayRecorder` doesn't maintain a reference to the current segment or subsegment [Entity](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/entities/Entity.html)\. If you use an instrumented client in the new thread, the SDK tries to write to a segment that doesn't exist, causing a [SegmentNotFoundException](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/exceptions/SegmentNotFoundException.html)\.
 
@@ -10,4 +10,4 @@ If you use multiple threads to handle incoming requests, you can pass the curren
 
 To pass trace context between threads, call [GetTraceEntity](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#getTraceEntity--) on the global recorder to get a reference to the current entity \(segment or subsegment\)\. Pass the entity to the new thread, and then call [SetTraceEntity](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRayRecorder.html#setTraceEntity-com.amazonaws.xray.entities.Entity-) to configure the global recorder to use it to record trace data within the thread\.
 
-See [Using Instrumented Clients in Worker Threads](scorekeep-workerthreads.md) for an example\.
+See [Using instrumented clients in worker threads](scorekeep-workerthreads.md) for an example\.

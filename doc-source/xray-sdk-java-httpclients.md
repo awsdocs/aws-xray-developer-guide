@@ -1,4 +1,4 @@
-# Tracing Calls to Downstream HTTP Web Services with the X\-Ray SDK for Java<a name="xray-sdk-java-httpclients"></a>
+# Tracing calls to downstream HTTP web services with the X\-Ray SDK for Java<a name="xray-sdk-java-httpclients"></a>
 
 When your application makes calls to microservices or public HTTP APIs, you can use the X\-Ray SDK for Java's version of `HttpClient` to instrument those calls and add the API to the service graph as a downstream service\.
 
@@ -41,7 +41,7 @@ import [com\.amazonaws\.xray\.proxies\.apache\.http\.HttpClientBuilder](https://
 
 When you instrument a call to a downstream web api, the X\-Ray SDK for Java records a subsegment with information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the remote API\.
 
-**Example Subsegment for a Downstream HTTP Call**  
+**Example Subsegment for a downstream HTTP call**  
 
 ```
 {
@@ -63,7 +63,7 @@ When you instrument a call to a downstream web api, the X\-Ray SDK for Java reco
 }
 ```
 
-**Example Inferred Segment for a Downstream HTTP Call**  
+**Example Inferred segment for a downstream HTTP call**  
 
 ```
 {

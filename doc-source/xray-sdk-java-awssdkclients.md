@@ -1,4 +1,4 @@
-# Tracing AWS SDK Calls with the X\-Ray SDK for Java<a name="xray-sdk-java-awssdkclients"></a>
+# Tracing AWS SDK calls with the X\-Ray SDK for Java<a name="xray-sdk-java-awssdkclients"></a>
 
 When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Java tracks the calls downstream in [subsegments](xray-sdk-java-subsegments.md)\. Traced AWS services and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
@@ -8,7 +8,7 @@ To instrument individual clients, remove the `aws-sdk-instrumentor` submodule fr
 
 For example, to instrument an `AmazonDynamoDB` client, pass a tracing handler to `AmazonDynamoDBClientBuilder`\.
 
-**Example MyModel\.java \- DynamoDB Client**  
+**Example MyModel\.java \- DynamoDB client**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -27,7 +27,7 @@ For all services, you can see the name of the API called in the X\-Ray console\.
 
 For example, when you make a call with an instrumented DynamoDB client, the SDK adds the table name to the segment for calls that target a table\. In the console, each table appears as a separate node in the service map, with a generic DynamoDB node for calls that don't target a table\.
 
-**Example Subsegment for a Call to DynamoDB to Save an Item**  
+**Example Subsegment for a call to DynamoDB to save an item**  
 
 ```
 {

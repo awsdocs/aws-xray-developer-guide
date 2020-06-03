@@ -3,13 +3,13 @@
 You can specify the configuration for for X\-Ray SDK for Go through environment variables, by calling `Configure` with a `Config` object, or by assuming default values\. Environment variables take precedence over `Config` values, which take precedence over any default value\.
 
 **Topics**
-+ [Service Plugins](#xray-sdk-go-configuration-plugins)
-+ [Sampling Rules](#xray-sdk-go-configuration-sampling)
++ [Service plugins](#xray-sdk-go-configuration-plugins)
++ [Sampling rules](#xray-sdk-go-configuration-sampling)
 + [Logging](#xray-sdk-go-configuration-logging)
-+ [Environment Variables](#xray-sdk-go-configuration-envvars)
-+ [Using Configure](#xray-sdk-go-configuration-configure)
++ [Environment variables](#xray-sdk-go-configuration-envvars)
++ [Using configure](#xray-sdk-go-configuration-configure)
 
-## Service Plugins<a name="xray-sdk-go-configuration-plugins"></a>
+## Service plugins<a name="xray-sdk-go-configuration-plugins"></a>
 
 Use `plugins` to record information about the service hosting your application\.
 
@@ -23,9 +23,34 @@ Use `plugins` to record information about the service hosting your application\.
 To use a plugin, import one of the following packages\.
 
 ```
-_ "github.com/aws/aws-xray-sdk-go/plugins/ec2"
-_ "github.com/aws/aws-xray-sdk-go/plugins/ecs"
-_ "github.com/aws/aws-xray-sdk-go/plugins/beanstalk"
+"github.com/aws/aws-xray-sdk-go/awsplugins/ec2"
+"github.com/aws/aws-xray-sdk-go/awsplugins/ecs"
+"github.com/aws/aws-xray-sdk-go/awsplugins/beanstalk"
+```
+
+Each plugin has an explicit `Init()` function call that loads the plugin\.
+
+**Example ec2\.Init\(\)**  
+
+```
+import (
+	"os"
+
+	"github.com/aws/aws-xray-sdk-go/awsplugins/ec2"
+	"github.com/aws/aws-xray-sdk-go/xray"
+	)
+
+	func init() {
+		// conditionally load plugin
+		if os.Getenv("ENVIRONMENT") == "production" {
+		ec2.Init()
+	}
+
+	xray.Configure(xray.Config{
+		ServiceVersion: "1.2.3",
+
+	})
+}
 ```
 
 The SDK also uses plugin settings to set the `origin` field on the segment\. This indicates the type of AWS resource that runs your application\. The resource type appears under your application's name in the service map\. For example, `AWS::ElasticBeanstalk::Environment`\.
@@ -34,7 +59,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
-## Sampling Rules<a name="xray-sdk-go-configuration-sampling"></a>
+## Sampling rules<a name="xray-sdk-go-configuration-sampling"></a>
 
 The SDK uses the sampling rules you define in the X\-Ray console to determine which requests to record\. The default rule traces the first request each second, and five percent of any additional requests across all services sending traces to X\-Ray\. [Create additional rules in the X\-Ray console](xray-console-sampling.md) to customize the amount of data recorded for each of your applications\.
 
@@ -75,7 +100,7 @@ On AWS Lambda, you cannot modify the sampling rate\. If your function is called 
 
 To provide backup rules, point to the local sampling JSON file by using `NewCentralizedStrategyWithFilePath`\.
 
-**Example main\.go – local sampling rule**  
+**Example main\.go – Local sampling rule**  
 
 ```
 s, _ := sampling.NewCentralizedStrategyWithFilePath("sampling.json") // path to local sampling json
@@ -84,7 +109,7 @@ xray.Configure(xray.Config{SamplingStrategy: s})
 
 To use only local rules, point to the local sampling JSON file by using `NewLocalizedStrategyFromFilePath`\.
 
-**Example main\.go – disable sampling**  
+**Example main\.go – Disable sampling**  
 
 ```
 s, _ := sampling.NewLocalizedStrategyFromFilePath("sampling.json") // path to local sampling json
@@ -93,37 +118,42 @@ xray.Configure(xray.Config{SamplingStrategy: s})
 
 ## Logging<a name="xray-sdk-go-configuration-logging"></a>
 
-You can change the log level and format with `xray.Configure`\.
+**Note**  
+The `xray.Config{}` fields `LogLevel` and `LogFormat` are deprecated starting with version 1\.0\.0\-rc\.10\.
 
-**Example main\.go**  
+X\-Ray uses the following interface for logging\. The default logger writes to `stdout` at `LogLevelInfo` and above\.
 
 ```
-func main() {
-  http.Handle("/", xray.Handler(xray.NewFixedSegmentNamer("MyApp"), http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
-    xray.Configure(xray.Config{
-        LogLevel: "warn",
-        LogFormat: "[%Level] [%Time] %Msg%n"
-    })
-
-    w.Write([]byte("Hello!"))
-  })))
-
-  http.ListenAndServe(":8000", nil)
+type Logger interface {
+	Log(level LogLevel, msg fmt.Stringer)
 }
+
+const (
+	LogLevelDebug LogLevel = iota + 1
+	LogLevelInfo
+	LogLevelWarn
+	LogLevelError
+)
 ```
 
-See [Using Configure](#xray-sdk-go-configuration-configure) for more information\.
+**Example write to `io.Writer`**  
 
-## Environment Variables<a name="xray-sdk-go-configuration-envvars"></a>
+```
+xray.SetLogger(xraylog.NewDefaultLogger(os.Stderr, xraylog.LogLevelError))
+```
+
+## Environment variables<a name="xray-sdk-go-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Go\. The SDK supports the following variables\.
 + `AWS_XRAY_TRACING_NAME` – Set the service name that the SDK uses for segments\.
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
++ `AWS_XRAY_CONTEXT_MISSING` – Set the value to determine how the SDK handles missing context errors\. Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in the startup code when no request is open, or in code that spawns a new thread\. 
+  + `RUNTIME_ERROR` – By default, the SDK is set to throw a runtime exception\.
+  + `LOG_ERROR` – Set to log an error and continue\.
 
 Environment variables override equivalent values set in code\.
 
-## Using Configure<a name="xray-sdk-go-configuration-configure"></a>
+## Using configure<a name="xray-sdk-go-configuration-configure"></a>
 
 You can also configure the X\-Ray SDK for Go using the `Configure` method\. `Configure` takes one argument, a `Config` object, with the following, optional fields\.
 
@@ -141,9 +171,3 @@ This `StreamingStrategy` object specifies whether to stream a segment when **Req
 
 ExceptionFormattingStrategy  
 This `ExceptionFormattingStrategy` object specifies how you want to handle various exceptions\. If not specified, X\-Ray uses a `DefaultExceptionFormattingStrategy` with an `XrayError` of type `error`, the error message, and stack trace\.
-
-LogLevel  
-This string specifies the default logging level for your application\. You can set this to "trace", "debug", "info", "warn" or "error"\. If not specified, X\-Ray uses "info"\.
-
-LogFormat  
-This string specifies the format of the log messages\. If not specified, X\-Ray uses "%Date\(2006\-01\-02T15:04:05Z07:00\) \[%Level\] %Msg%n"\.

@@ -30,17 +30,17 @@ For reference documentation about the SDK's classes and methods, see the [AWS X\
 ## Requirements<a name="xray-sdk-nodejs-requirements"></a>
 
 The X\-Ray SDK for Node\.js requires Node\.js and the following libraries:
-+ `cls` – 0\.1\.5
-+ `continuation-local-storage` – 3\.2\.0
++ `atomic-batcher` – 1\.0\.2
++ `cls-hooked` – 4\.2\.2
 + `pkginfo` – 0\.4\.0
-+ `underscore` – 1\.8\.3
++ `semver` – 5\.3\.0
 
 The SDK pulls these libraries in when you install it with NPM\.
 
 To trace AWS SDK clients, the X\-Ray SDK for Node\.js requires a minimum version of the AWS SDK for JavaScript in Node\.js\.
 + `aws-sdk` – 2\.7\.15
 
-## Dependency Management<a name="xray-sdk-nodejs-dependencies"></a>
+## Dependency management<a name="xray-sdk-nodejs-dependencies"></a>
 
 The X\-Ray SDK for Node\.js is available from NPM\.
 + **Package** – [https://www.npmjs.com/package/aws-xray-sdk](https://www.npmjs.com/package/aws-xray-sdk)
@@ -49,29 +49,29 @@ For local development, install the SDK in your project directory with npm\.
 
 ```
 ~/nodejs-xray$ npm install aws-xray-sdk
-nodejs-xray@0.0.0 ~/nodejs-xray
-└─┬ aws-xray-sdk@2.4.0
-  ├─┬ continuation-local-storage@3.2.0
-  │ ├─┬ async-listener@0.6.3
-  │ │ └── shimmer@1.0.0
-  │ └── emitter-listener@1.0.1
-  ├── moment@2.17.1
-  ├── pkginfo@0.4.0
-  ├── semver@5.3.0
-  ├── underscore@1.8.3
-  └─┬ winston@2.3.1
-    ├── async@1.0.0
-    ├── colors@1.0.3
-    ├── cycle@1.0.3
-    ├── eyes@0.1.8
-    ├── isstream@0.1.2
-    └── stack-trace@0.0.9
+aws-xray-sdk@3.0.0
+├─┬ aws-xray-sdk-core@3.0.0
+│ ├── atomic-batcher@1.0.2
+│ ├─┬ cls-hooked@4.2.2
+│ │ ├─┬ async-hook-jl@1.7.6
+│ │ │ └── stack-chain@1.3.7
+│ │ ├── emitter-listener@1.1.2
+│ │ └── shimmer@1.2.1
+│ ├── pkginfo@0.4.1 
+│ └── semver@5.7.1
+├── aws-xray-sdk-express@3.0.0
+├── aws-xray-sdk-mysql@3.0.0
+└── aws-xray-sdk-postgres@3.0.0
 ```
 
 Use the `--save` option to save the SDK as a dependency in your application's `package.json`\.
 
 ```
 ~/nodejs-xray$ npm install aws-xray-sdk --save
-nodejs-xray@0.0.0 ~/nodejs-xray
-└── aws-xray-sdk@2.4.0
+aws-xray-sdk@3.0.0
 ```
+
+## Node\.js samples<a name="xray-sdk-nodejs-sample"></a>
+
+Work with the AWS X\-Ray SDK for Node\.js to get an end\-to\-end view of requests as they travel through your Node\.js applications\. 
++ [Node\.js sample application](https://github.com/aws-samples/aws-xray-sdk-node-sample) on GitHub\.

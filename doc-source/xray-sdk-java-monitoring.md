@@ -1,4 +1,4 @@
-# AWS X\-Ray Metrics for the X\-Ray SDK for Java<a name="xray-sdk-java-monitoring"></a>
+# AWS X\-Ray metrics for the X\-Ray SDK for Java<a name="xray-sdk-java-monitoring"></a>
 
 This topic describes the AWS X\-Ray namespace, metrics, and dimensions\. You can use the X\-Ray SDK for Java to publish unsampled Amazon CloudWatch metrics from your collected X\-Ray segments\. These metrics are derived from the segment’s start and end time, and the error, fault, and throttled status flags\. Use these trace metrics to expose retries and dependency issues within subsegments\. 
 
@@ -8,12 +8,12 @@ Metrics are uniquely defined by a name, a namespace, and one or more dimensions\
 
 For more information about CloudWatch, see the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
 
-## X\-Ray CloudWatch Metrics<a name="xray-sdk-java-monitoring-metrics"></a>
+## X\-Ray CloudWatch metrics<a name="xray-sdk-java-monitoring-metrics"></a>
 
 The `ServiceMetrics/SDK` namespace includes the following metrics\.
 
 
-| Metric | Statistics Available | Description | Units | 
+| Metric | Statistics available | Description | Units | 
 | --- | --- | --- | --- | 
 |  `Latency`  |  Average, Minimum, Maximum, Count  |  The difference between the start and end time\. Average, minimum, and maximum all describe operational latency\. Count describes call count\.  |  Milliseconds  | 
 |  `ErrorRate`  |  Average, Sum  |  The rate of requests that failed with a `4xx Client Error` status code, resulting in an error\.  |  Percent  | 
@@ -21,7 +21,7 @@ The `ServiceMetrics/SDK` namespace includes the following metrics\.
 |  `ThrottleRate`  |  Average, Sum  |  The rate of throttled traces that return a `419` status code\. This is a subset of the `ErrorRate` metric\.   |  Percent  | 
 |  `OkRate`  |  Average, Sum  |  The rate of traced requests resulting in an `OK` status code\.   |  Percent  | 
 
-## X\-Ray CloudWatch Dimensions<a name="xray-sdk-java-monitoring-dimensions"></a>
+## X\-Ray CloudWatch dimensions<a name="xray-sdk-java-monitoring-dimensions"></a>
 
 Use the dimensions in the following table to refine the metrics returned for your X\-Ray instrumented Java applications\.
 
@@ -31,7 +31,7 @@ Use the dimensions in the following table to refine the metrics returned for you
 |  `ServiceType`  |  The type of the service, for example, `AWS::EC2::Instance` or `NONE`, if not known\.  | 
 |  `ServiceName`  |  The canonical name for the service\.  | 
 
-## Enable X\-Ray CloudWatch Metrics<a name="xray-sdk-java-monitoring-enable"></a>
+## Enable X\-Ray CloudWatch metrics<a name="xray-sdk-java-monitoring-enable"></a>
 
 Use the following procedure to enable trace metrics in your instrumented Java application\.
 
@@ -73,12 +73,12 @@ Use the following procedure to enable trace metrics in your instrumented Java ap
    +  To configure Amazon EKS, see [Deploying the CloudWatch Agent and the X\-Ray Daemon on Amazon EKS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy_servicelens_CloudWatch_agent_deploy_EKS.html)\.
 
 1. Configure the SDK to communicate with the CloudWatch agent\. By default, the SDK communicates with the CloudWatch agent on the address `127.0.0.1`\. You can configure alternate addresses by setting the environment variable or Java property to `address:port`\.  
-**Example Environment Variable**  
+**Example Environment variable**  
 
    ```
    AWS_XRAY_METRICS_DAEMON_ADDRESS=address:port
    ```  
-**Example Java Property**  
+**Example Java property**  
 
    ```
    com.amazonaws.xray.metrics.daemonAddress=address:port

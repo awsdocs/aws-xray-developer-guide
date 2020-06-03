@@ -1,4 +1,4 @@
-# Patching Libraries to Instrument Downstream Calls<a name="xray-sdk-ruby-patching"></a>
+# Patching libraries to instrument downstream calls<a name="xray-sdk-ruby-patching"></a>
 
 To instrument downstream calls, use the X\-Ray SDK for Ruby to patch the libraries that your application uses\. The X\-Ray SDK for Ruby can patch the following libraries\.
 
@@ -10,7 +10,7 @@ When you use a patched library, the X\-Ray SDK for Ruby creates a subsegment for
 
 To patch libraries, specify them in the configuration object that you pass to the X\-Ray recorder\.
 
-**Example main\.rb – patch libraries**  
+**Example main\.rb – Patch libraries**  
 
 ```
 require 'aws-xray-sdk'

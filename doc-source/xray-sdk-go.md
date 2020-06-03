@@ -35,7 +35,7 @@ The SDK depends on the following libraries at compile and runtime:
 
 These dependencies are declared in the SDK's `README.md` file\.
 
-## Reference Documentation<a name="xray-sdk-go-reference"></a>
+## Reference documentation<a name="xray-sdk-go-reference"></a>
 
 Once you have downloaded the SDK, build and host the documentation locally to view it in a web browser\.
 

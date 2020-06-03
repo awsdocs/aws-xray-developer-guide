@@ -3,13 +3,13 @@
 You can configure the X\-Ray SDK for Node\.js with plugins to include information about the service that your application runs on, modify the default sampling behavior, or add sampling rules that apply to requests to specific paths\.
 
 **Topics**
-+ [Service Plugins](#xray-sdk-nodejs-configuration-plugins)
-+ [Sampling Rules](#xray-sdk-nodejs-configuration-sampling)
++ [Service plugins](#xray-sdk-nodejs-configuration-plugins)
++ [Sampling rules](#xray-sdk-nodejs-configuration-sampling)
 + [Logging](#xray-sdk-nodejs-configuration-logging)
-+ [X\-Ray Daemon Address](#xray-sdk-nodejs-configuration-daemon)
-+ [Environment Variables](#xray-sdk-nodejs-configuration-envvars)
++ [X\-Ray daemon address](#xray-sdk-nodejs-configuration-daemon)
++ [Environment variables](#xray-sdk-nodejs-configuration-envvars)
 
-## Service Plugins<a name="xray-sdk-nodejs-configuration-plugins"></a>
+## Service plugins<a name="xray-sdk-nodejs-configuration-plugins"></a>
 
 Use `plugins` to record information about the service hosting your application\.
 
@@ -20,7 +20,7 @@ Use `plugins` to record information about the service hosting your application\.
 
 To use a plugin, configure the X\-Ray SDK for Node\.js client by using the `config` method\.
 
-**Example app\.js \- Plugins**  
+**Example app\.js \- plugins**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -33,7 +33,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
-## Sampling Rules<a name="xray-sdk-nodejs-configuration-sampling"></a>
+## Sampling rules<a name="xray-sdk-nodejs-configuration-sampling"></a>
 
 The SDK uses the sampling rules you define in the X\-Ray console to determine which requests to record\. The default rule traces the first request each second, and five percent of any additional requests across all services sending traces to X\-Ray\. [Create additional rules in the X\-Ray console](xray-console-sampling.md) to customize the amount of data recorded for each of your applications\.
 
@@ -74,7 +74,7 @@ On AWS Lambda, you cannot modify the sampling rate\. If your function is called 
 
 To configure backup rules, tell the X\-Ray SDK for Node\.js to load sampling rules from a file with `setSamplingRules`\.
 
-**Example app\.js \- Sampling rules from a file**  
+**Example app\.js \- sampling rules from a file**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -83,7 +83,7 @@ AWSXRay.middleware.setSamplingRules('sampling-rules.json');
 
 You can also define your rules in code and pass them to `setSamplingRules` as an object\.
 
-**Example app\.js \- Sampling rules from an object**  
+**Example app\.js \- sampling rules from an object**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -106,20 +106,30 @@ AWSXRay.middleware.disableCentralizedSampling()
 
  To log output from the SDK, call `AWSXRay.setLogger(logger)`, where `logger` is an object that provides standard logging methods \(`warn`, `info`, etc\.\)\.
 
-**Example app\.js \- Logging with Winston**  
+**Example app\.js \- logging**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
-var logger = require('winston');
+
+// Create your own logger, or instantiate one using a library.
+var logger = {
+  error: (message, meta) => { /* logging code */ },
+  warn: (message, meta) => { /* logging code */ },
+  info: (message, meta) => { /* logging code */ },
+  debug: (message, meta) => { /* logging code */ }
+}
+
 AWSXRay.setLogger(logger);
 AWSXRay.config([AWSXRay.plugins.EC2Plugin]);
 ```
 
 Call `setLogger` before you run other configuration methods to ensure that you capture output from those operations\.
 
-To configure the SDK to output logs to the console without using a logging library, use the `AWS_XRAY_DEBUG_MODE` [environment variable](#xray-sdk-nodejs-configuration-envvars)\.
+For a list of valid log level values, view the details in the [Environment variables](#xray-sdk-nodejs-configuration-envvars) section\.
 
-## X\-Ray Daemon Address<a name="xray-sdk-nodejs-configuration-daemon"></a>
+To configure the SDK to output logs to the console without using a logging library, use the `AWS_XRAY_DEBUG_MODE` environment variable\.
+
+## X\-Ray daemon address<a name="xray-sdk-nodejs-configuration-daemon"></a>
 
 If the X\-Ray daemon listens on a port or host other than `127.0.0.1:2000`, you can configure the X\-Ray SDK for Node\.js to send trace data to a different address\.
 
@@ -129,7 +139,7 @@ AWSXRay.setDaemonAddress('host:port');
 
 You can specify the host by name or by IPv4 address\.
 
-**Example app\.js \- Daemon address**  
+**Example app\.js \- daemon address**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -138,7 +148,7 @@ AWSXRay.setDaemonAddress('daemonhost:8082');
 
 If you configured the daemon to listen on different ports for TCP and UDP, you can specify both in the daemon address setting\.
 
-**Example app\.js \- Daemon address on separate ports**  
+**Example app\.js \- daemon address on separate ports**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -147,15 +157,9 @@ AWSXRay.setDaemonAddress('tcp:daemonhost:8082 udp:daemonhost:8083');
 
 You can also set the daemon address by using the `AWS_XRAY_DAEMON_ADDRESS` [environment variable](#xray-sdk-nodejs-configuration-envvars)\.
 
-## Environment Variables<a name="xray-sdk-nodejs-configuration-envvars"></a>
+## Environment variables<a name="xray-sdk-nodejs-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Node\.js\. The SDK supports the following variables\.
-+ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the segment name that you [set on the Express middleware](xray-sdk-nodejs-middleware.md)\.
-+ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK uses `127.0.0.1:2000` for both trace data \(UDP\) and sampling \(TCP\)\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
-
-**Format**
-  + **Same port** – `address:port`
-  + **Different ports** – `tcp:address:port udp:address:port`
 + `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
@@ -163,4 +167,11 @@ You can use environment variables to configure the X\-Ray SDK for Node\.js\. The
   + `LOG_ERROR` – Log an error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
++ `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK uses `127.0.0.1:2000` for both trace data \(UDP\) and sampling \(TCP\)\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
+
+**Format**
+  + **Same port** – `address:port`
+  + **Different ports** – `tcp:address:port udp:address:port`
 + `AWS_XRAY_DEBUG_MODE` – Set to `TRUE` to configure the SDK to output logs to the console, instead of [configuring a logger](#xray-sdk-nodejs-configuration-logging)\.
++ `AWS_XRAY_LOG_LEVEL ` – Set a log level for the logger\. Valid values are `debug`, `info`, `warn`, `error`, and `silent`\. This value is ignored when AWS\_XRAY\_DEBUG\_MODE is set to `TRUE`\.
++ `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the segment name that you [set on the Express middleware](xray-sdk-nodejs-middleware.md)\.

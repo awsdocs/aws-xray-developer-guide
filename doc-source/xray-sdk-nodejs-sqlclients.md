@@ -1,4 +1,4 @@
-# Tracing SQL Queries with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-sqlclients"></a>
+# Tracing SQL queries with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-sqlclients"></a>
 
 Instrument SQL database queries by wrapping your SQL client in the corresponding X\-Ray SDK for Node\.js client method\.
 +  **PostgreSQL** – `AWSXRay.capturePostgres()` 
@@ -19,11 +19,11 @@ Instrument SQL database queries by wrapping your SQL client in the corresponding
 
 When you use an instrumented client to make SQL queries, the X\-Ray SDK for Node\.js records information about the connection and query in a subsegment\.
 
-## Including Additional Data in SQL Subsegments<a name="xray-sdk-nodejs-sqlclients-additional"></a>
+## Including additional data in SQL subsegments<a name="xray-sdk-nodejs-sqlclients-additional"></a>
 
 You can add additional information to subsegments generated for SQL queries, as long as it's mapped to a whitelisted SQL field\. For example, to record the sanitized SQL query string in a subsegment, you can add it directly to the subsegment's SQL object\.
 
-**Example Assign SQL to Sugsegment**  
+**Example Assign SQL to sugsegment**  
 
 ```
     const queryString = 'SELECT * FROM MyTable';

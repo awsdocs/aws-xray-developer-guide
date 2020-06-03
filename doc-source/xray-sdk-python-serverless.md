@@ -1,4 +1,4 @@
-# Instrumenting Web Frameworks Deployed to Serverless Environments<a name="xray-sdk-python-serverless"></a>
+# Instrumenting web frameworks deployed to serverless environments<a name="xray-sdk-python-serverless"></a>
 
 The AWS X\-Ray SDK for Python supports instrumenting web frameworks deployed in serverless applications\. Serverless is the native architecture of the cloud that enables you to shift more of your operational responsibilities to AWS, increasing your agility and innovation\.
 
@@ -19,7 +19,7 @@ This tutorial develops an example serverless application that is deployed to Lam
 + [Pip](https://pypi.org/project/pip/)
 + [Virtualenv](https://virtualenv.pypa.io/en/latest/)
 
-## Step 1: Create an Environment<a name="xray-sdk-python-serverless-environment"></a>
+## Step 1: Create an environment<a name="xray-sdk-python-serverless-environment"></a>
 
 In this step, you create a virtual environment using `virtualenv` to host an application\.
 
@@ -75,7 +75,7 @@ In this step, you create a virtual environment using `virtualenv` to host an app
        return 'Hello, World: %s' % resp.url
    ```
 
-## Step 2: Create and Deploy a Zappa Environment<a name="xray-sdk-python-serverless-zappa"></a>
+## Step 2: Create and deploy a zappa environment<a name="xray-sdk-python-serverless-zappa"></a>
 
 In this step you will use Zappa to automatically configure an API Gateway endpoint and then deploy to Lambda\.
 
@@ -143,7 +143,7 @@ In this step you will use Zappa to automatically configure an API Gateway endpoi
    Deployment complete!: https://**********.execute-api.us-west-2.amazonaws.com/dev
    ```
 
-## Step 3: Enable X\-Ray Tracing for API Gateway<a name="xray-sdk-python-serverless-xray"></a>
+## Step 3: Enable X\-Ray tracing for API Gateway<a name="xray-sdk-python-serverless-xray"></a>
 
 In this step you will interact with the API Gateway console to enable X\-Ray tracing\.
 
@@ -165,7 +165,7 @@ In this step you will interact with the API Gateway console to enable X\-Ray tra
    "Hello, World: https://aws.amazon.com/"
    ```
 
-## Step 4: View the Created Trace<a name="xray-sdk-python-serverless-trace"></a>
+## Step 4: View the created trace<a name="xray-sdk-python-serverless-trace"></a>
 
 In this step you will interact with the X\-Ray console to view the trace created by the example application\. For a more detailed walkthrough on trace analysis, see [Viewing the Service Map](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html#xray-console-servicemap)\.
 
@@ -181,7 +181,7 @@ In this step you will interact with the X\-Ray console to view the trace created
 
 ![\[Service graph view.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/serverless-serviceView.png)
 
-## Step 5: Clean Up<a name="xray-sdk-python-serverless-cleanup"></a>
+## Step 5: Clean up<a name="xray-sdk-python-serverless-cleanup"></a>
 
 Always terminate resources you are no longer using to avoid the accumulation of unexpected costs\. As this tutorial demonstrates, tools such as Zappa streamline serverless redeployment\.
 
@@ -191,6 +191,6 @@ To remove your application from Lambda, API Gateway, and Amazon S3, run the foll
 zappa undeploy dev
 ```
 
-## Next Steps<a name="xray-sdk-python-serverless-next"></a>
+## Next steps<a name="xray-sdk-python-serverless-next"></a>
 
 Add more features to your application by adding AWS clients and instrumenting them with X\-Ray\. Learn more about serverless computing options through AWS at [Serverless](https://aws.amazon.com/serverless/)\.

@@ -1,4 +1,4 @@
-# Using Sampling Rules with the X\-Ray API<a name="xray-api-sampling"></a>
+# Using sampling rules with the X\-Ray API<a name="xray-api-sampling"></a>
 
 The AWS X\-Ray SDK uses the X\-Ray API to get sampling rules, report sampling results, and get quotas\. You can use these APIs to get a better understanding of how sampling rules work, or to implement sampling in a language that the X\-Ray SDK doesn't support\.
 
@@ -69,7 +69,7 @@ $ aws xray get-sampling-rules
 }
 ```
 
-The output includes the default rule and custom rules\. See [Sampling Rules](xray-api-configuration.md#xray-api-configuration-sampling) if you haven't yet created sampling rules\.
+The output includes the default rule and custom rules\. See [Sampling rules](xray-api-configuration.md#xray-api-configuration-sampling) if you haven't yet created sampling rules\.
 
 Evaluate rules against incoming requests in ascending order of priority\. When a rule matches, use the fixed rate and reservoir size to make a sampling decision\. Record sampled requests and ignore \(for tracing purposes\) unsampled requests\. Stop evaluating rules when a sampling decision is made\.
 

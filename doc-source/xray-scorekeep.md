@@ -1,4 +1,4 @@
-# AWS X\-Ray Sample Application<a name="xray-scorekeep"></a>
+# AWS X\-Ray sample application<a name="xray-scorekeep"></a>
 
 The AWS X\-Ray [eb\-java\-scorekeep](https://github.com/awslabs/eb-java-scorekeep/tree/xray) sample app, available on GitHub, shows the use of the AWS X\-Ray SDK to instrument incoming HTTP calls, DynamoDB SDK clients, and HTTP clients\. The sample app uses AWS Elastic Beanstalk features to create DynamoDB tables, compile Java code on instance, and run the X\-Ray daemon without any additional configuration\.
 
@@ -29,15 +29,15 @@ With all features enabled, Scorekeep's service map looks like this:
 For instructions on using the sample application with X\-Ray, see the [getting started tutorial](xray-gettingstarted.md)\. In addition to the basic use of the X\-Ray SDK for Java discussed in the tutorial, the sample also shows how to use the following features\.
 
 **Topics**
-+ [Manually Instrumenting AWS SDK Clients](scorekeep-sdkclients.md)
-+ [Creating Additional Subsegments](scorekeep-subsegments.md)
-+ [Recording Annotations, Metadata, and User IDs](scorekeep-annotations.md)
-+ [Instrumenting Outgoing HTTP Calls](scorekeep-httpclient.md)
-+ [Instrumenting Calls to a PostgreSQL Database](scorekeep-postgresql.md)
-+ [Instrumenting AWS Lambda Functions](scorekeep-lambda.md)
-+ [Instrumenting Amazon ECS Applications](scorekeep-ecs.md)
-+ [Instrumenting Startup Code](scorekeep-startup.md)
-+ [Instrumenting Scripts](scorekeep-scripts.md)
-+ [Instrumenting a Web App Client](scorekeep-client.md)
-+ [Using Instrumented Clients in Worker Threads](scorekeep-workerthreads.md)
-+ [Deep Linking to the X\-Ray Console](scorekeep-deeplinks.md)
++ [Manually instrumenting AWS SDK clients](scorekeep-sdkclients.md)
++ [Creating additional subsegments](scorekeep-subsegments.md)
++ [Recording annotations, metadata, and user IDs](scorekeep-annotations.md)
++ [Instrumenting outgoing HTTP calls](scorekeep-httpclient.md)
++ [Instrumenting calls to a PostgreSQL database](scorekeep-postgresql.md)
++ [Instrumenting AWS Lambda functions](scorekeep-lambda.md)
++ [Instrumenting Amazon ECS applications](scorekeep-ecs.md)
++ [Instrumenting startup code](scorekeep-startup.md)
++ [Instrumenting scripts](scorekeep-scripts.md)
++ [Instrumenting a web app client](scorekeep-client.md)
++ [Using instrumented clients in worker threads](scorekeep-workerthreads.md)
++ [Deep linking to the X\-Ray console](scorekeep-deeplinks.md)

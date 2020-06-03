@@ -33,15 +33,15 @@ The same package supports both \.NET and \.NET Core, but the classes that are us
 
 ## Requirements<a name="xray-sdk-requirements"></a>
 
-The X\-Ray SDK for \.NET requires the \.NET framework and AWS SDK for \.NET\.
+The X\-Ray SDK for \.NET requires the \.NET Framework 4\.5 or later and AWS SDK for \.NET\.
 
 For \.NET Core applications and functions, the SDK requires \.NET Core 2\.0 or later\.
 
-## Adding the X\-Ray SDK for \.NET to Your Application<a name="xray-sdk-dotnet-dependencies"></a>
+## Adding the X\-Ray SDK for \.NET to your application<a name="xray-sdk-dotnet-dependencies"></a>
 
 Use NuGet to add the X\-Ray SDK for \.NET to your application\.
 
-**To install the X\-Ray SDK for \.NET with NuGet Package Manager in Visual Studio**
+**To install the X\-Ray SDK for \.NET with NuGet package manager in Visual Studio**
 
 1. Choose **Tools**, **NuGet Package Manager**, **Manage NuGet Packages for Solution**\.
 

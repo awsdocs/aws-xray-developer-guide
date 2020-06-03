@@ -1,4 +1,4 @@
-# Instrumenting Startup Code<a name="scorekeep-startup"></a>
+# Instrumenting startup code<a name="scorekeep-startup"></a>
 
 The X\-Ray SDK for Java automatically creates segments for incoming requests\. As long as a request is in scope, you can use instrumented clients and record subsegments without issue\. If you try to use an instrumented client in startup code, though, you'll get a [SegmentNotFoundException](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/exceptions/SegmentNotFoundException.html)\.
 

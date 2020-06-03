@@ -1,4 +1,4 @@
-# Tracing Incoming Requests with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-middleware"></a>
+# Tracing incoming requests with the X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs-middleware"></a>
 
 You can use the X\-Ray SDK for Node\.js to trace incoming HTTP requests that your Express and Restify applications serve on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
@@ -23,11 +23,11 @@ The message handler creates a segment for each incoming request with an `http` b
 + **Content length** — The `content-length` from the response\.
 
 **Topics**
-+ [Tracing Incoming Requests with Express](#xray-sdk-nodejs-middleware-express)
-+ [Tracing Incoming Requests with Restify](#xray-sdk-nodejs-middleware-restify)
-+ [Configuring a Segment Naming Strategy](#xray-sdk-nodejs-middleware-naming)
++ [Tracing incoming requests with Express](#xray-sdk-nodejs-middleware-express)
++ [Tracing incoming requests with restify](#xray-sdk-nodejs-middleware-restify)
++ [Configuring a segment naming strategy](#xray-sdk-nodejs-middleware-naming)
 
-## Tracing Incoming Requests with Express<a name="xray-sdk-nodejs-middleware-express"></a>
+## Tracing incoming requests with Express<a name="xray-sdk-nodejs-middleware-express"></a>
 
 To use the Express middleware, initialize the SDK client and use the middleware returned by the `express.openSegment` function before you define your routes\.
 
@@ -48,11 +48,11 @@ app.use(AWSXRay.express.closeSegment());
 
 After you define your routes, use the output of `express.closeSegment` as shown to handle any errors returned by the X\-Ray SDK for Node\.js\.
 
-## Tracing Incoming Requests with Restify<a name="xray-sdk-nodejs-middleware-restify"></a>
+## Tracing incoming requests with restify<a name="xray-sdk-nodejs-middleware-restify"></a>
 
 To use the Restify middleware, initialize the SDK client and run `enable`\. Pass it your Restify server and segment name\.
 
-**Example app\.js \- Restify**  
+**Example app\.js \- restify**  
 
 ```
 var AWSXRay = require('aws-xray-sdk');
@@ -67,7 +67,7 @@ server.get('/', function (req, res) {
 });
 ```
 
-## Configuring a Segment Naming Strategy<a name="xray-sdk-nodejs-middleware-naming"></a>
+## Configuring a segment naming strategy<a name="xray-sdk-nodejs-middleware-naming"></a>
 
 AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
@@ -84,7 +84,7 @@ You can override the default service name that you define in code with the `AWS_
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request does not match the pattern\. To name segments dynamically, use `AWSXRay.middleware.enableDynamicNaming`\.
 
-**Example app\.js \- Dynamic Segment Names**  
+**Example app\.js \- dynamic segment names**  
 If the hostname in the request matches the pattern `*.example.com`, use the hostname\. Otherwise, use `MyApp`\.  
 
 ```

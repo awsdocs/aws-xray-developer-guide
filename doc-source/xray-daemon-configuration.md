@@ -1,4 +1,4 @@
-# Configuring the AWS X\-Ray Daemon<a name="xray-daemon-configuration"></a>
+# Configuring the AWS X\-Ray daemon<a name="xray-daemon-configuration"></a>
 
 You can use command line options or a configuration file to customize the X\-Ray daemon's behavior\. Most options are available using both methods, but some are only available in configuration files and some only at the command line\.
 
@@ -19,17 +19,17 @@ The rest of the command line options let you configure logging, listen on a diff
 You can pass a configuration file to the daemon to access advanced configuration options and do things like limit the number of concurrent calls to X\-Ray, disable log rotation, and send traffic to a proxy\.
 
 **Topics**
-+ [Supported Environment Variables](#xray-daemon-configuration-variables)
-+ [Using Command Line Options](#xray-daemon-configuration-commandline)
-+ [Using a Configuration File](#xray-daemon-configuration-configfile)
++ [Supported environment variables](#xray-daemon-configuration-variables)
++ [Using command line options](#xray-daemon-configuration-commandline)
++ [Using a configuration file](#xray-daemon-configuration-configfile)
 
-## Supported Environment Variables<a name="xray-daemon-configuration-variables"></a>
+## Supported environment variables<a name="xray-daemon-configuration-variables"></a>
 
 The X\-Ray daemon supports the following environment variables:
 + `AWS_REGION` – Specifies the [AWS Region](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration-region) of the X\-Ray service endpoint\. 
 + `HTTPS_PROXY` – Specifies a proxy address for the daemon to upload segments through\. This can be either the DNS domain names or IP addresses and port numbers used by your proxy servers\.
 
-## Using Command Line Options<a name="xray-daemon-configuration-commandline"></a>
+## Using command line options<a name="xray-daemon-configuration-commandline"></a>
 
 Pass these options to the daemon when you run it locally or with a user data script\.
 
@@ -84,7 +84,7 @@ Pass these options to the daemon when you run it locally or with a user data scr
 + `-v`, `--version` – Show AWS X\-Ray daemon version\.
 + `-h`, `--help` – Show the help screen\.
 
-## Using a Configuration File<a name="xray-daemon-configuration-configfile"></a>
+## Using a configuration file<a name="xray-daemon-configuration-configfile"></a>
 
 You can also use a YAML format file to configure the daemon\. Pass the configuration file to the daemon by using the `-c` option\.
 
@@ -111,7 +111,7 @@ You can also use a YAML format file to configure the daemon\. Pass the configura
 + `NoVerifySSL` – Disable TLS certificate verification\.
 + `Version` – Daemon configuration file format version\.
 
-**Example xray\-daemon\.yaml**  
+**Example Xray\-daemon\.yaml**  
 This configuration file changes the daemon's listening port to 3000, turns off checks for instance metadata, sets a role to use for uploading segments, and changes region and logging options\.  
 
 ```

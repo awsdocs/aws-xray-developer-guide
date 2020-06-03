@@ -19,8 +19,8 @@ See [the AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/refer
 
 **Topics**
 + [Using the AWS X\-Ray API with the AWS CLI](xray-api-tutorial.md)
-+ [Sending Trace Data to AWS X\-Ray](xray-api-sendingdata.md)
-+ [Getting Data from AWS X\-Ray](xray-api-gettingdata.md)
-+ [Configuring Sampling, Groups, and Encryption Settings with the AWS X\-Ray API](xray-api-configuration.md)
-+ [Using Sampling Rules with the X\-Ray API](xray-api-sampling.md)
-+ [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)
++ [Sending trace data to AWS X\-Ray](xray-api-sendingdata.md)
++ [Getting data from AWS X\-Ray](xray-api-gettingdata.md)
++ [Configuring sampling, groups, and encryption settings with the AWS X\-Ray API](xray-api-configuration.md)
++ [Using sampling rules with the X\-Ray API](xray-api-sampling.md)
++ [AWS X\-Ray segment documents](xray-api-segmentdocuments.md)

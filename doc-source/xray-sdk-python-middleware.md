@@ -1,6 +1,13 @@
-# Tracing Incoming Requests with the X\-Ray SDK for Python Middleware<a name="xray-sdk-python-middleware"></a>
+# Tracing incoming requests with the X\-Ray SDK for Python middleware<a name="xray-sdk-python-middleware"></a>
 
-If you use Django or Flask, use the [Django middleware](#xray-sdk-python-adding-middleware-django) or [Flask middleware](#xray-sdk-python-adding-middleware-flask) to instrument incoming HTTP requests\. When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
+When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
+
+When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
+
+The X\-Ray SDK for Python supports the following middleware to instrument incoming HTTP requests: 
++ Django
++ Flask
++ Bottle
 
 **Note**  
 For AWS Lambda functions, Lambda creates a segment for each sampled request\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
@@ -25,12 +32,13 @@ The middleware creates a segment for each incoming request with an `http` block 
 + **Content length** — The `content-length` from the response\.
 
 **Topics**
-+ [Adding the Middleware to Your Application \(Django\)](#xray-sdk-python-adding-middleware-django)
-+ [Adding the Middleware to Your Application \(Flask\)](#xray-sdk-python-adding-middleware-flask)
-+ [Instrumenting Python Code Manually](#xray-sdk-python-middleware-manual)
-+ [Configuring a Segment Naming Strategy](#xray-sdk-python-middleware-naming)
++ [Adding the middleware to your application \(Django\)](#xray-sdk-python-adding-middleware-django)
++ [Adding the middleware to your application \(flask\)](#xray-sdk-python-adding-middleware-flask)
++ [Adding the middleware to your application \(Bottle\)](#xray-sdk-python-adding-middleware-bottle)
++ [Instrumenting Python code manually](#xray-sdk-python-middleware-manual)
++ [Configuring a segment naming strategy](#xray-sdk-python-middleware-naming)
 
-## Adding the Middleware to Your Application \(Django\)<a name="xray-sdk-python-adding-middleware-django"></a>
+## Adding the middleware to your application \(Django\)<a name="xray-sdk-python-adding-middleware-django"></a>
 
 Add the middleware to the `MIDDLEWARE` list in your `settings.py` file\. The X\-Ray middleware should be the first line in your `settings.py` file to ensure that requests that fail in other middleware are recorded\.
 
@@ -51,7 +59,7 @@ MIDDLEWARE = [
 
 Configure a segment name in your [`settings.py` file](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django)\.
 
-**Example settings\.py – segment name**  
+**Example settings\.py – Segment name**  
 
 ```
 XRAY_RECORDER = {,
@@ -62,7 +70,7 @@ XRAY_RECORDER = {,
 
 This tells the X\-Ray recorder to trace requests served by your Django application with the default sampling rate\. You can [configure the recorder your Django settings file](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django) to apply custom sampling rules or change other settings\.
 
-## Adding the Middleware to Your Application \(Flask\)<a name="xray-sdk-python-adding-middleware-flask"></a>
+## Adding the middleware to your application \(flask\)<a name="xray-sdk-python-adding-middleware-flask"></a>
 
 To instrument your Flask application, first configure a segment name on the `xray_recorder`\. Then, use the `XRayMiddleware` function to patch your Flask application in code\.
 
@@ -80,11 +88,29 @@ XRayMiddleware(app, xray_recorder)
 
 This tells the X\-Ray recorder to trace requests served by your Flask application with the default sampling rate\. You can [configure the recorder in code](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-code) to apply custom sampling rules or change other settings\.
 
-## Instrumenting Python Code Manually<a name="xray-sdk-python-middleware-manual"></a>
+## Adding the middleware to your application \(Bottle\)<a name="xray-sdk-python-adding-middleware-bottle"></a>
+
+To instrument your Bottle application, first configure a segment name on the `xray_recorder`\. Then, use the `XRayMiddleware` function to patch your Bottle application in code\.
+
+**Example app\.py**  
+
+```
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.bottle.middleware import XRayMiddleware
+ 
+app = Bottle()
+ 
+xray_recorder.configure(service='fallback_name', dynamic_naming='My application')
+app.install(XRayMiddleware(xray_recorder))
+```
+
+This tells the X\-Ray recorder to trace requests served by your Bottle application with the default sampling rate\. You can [configure the recorder in code](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-code) to apply custom sampling rules or change other settings\.
+
+## Instrumenting Python code manually<a name="xray-sdk-python-middleware-manual"></a>
 
 If you don't use Django or Flask, you can create segments manually\. You can create a segment for each incoming request, or create segments around patched HTTP or AWS SDK clients to provide context for the recorder to add subsegments\.
 
-**Example main\.py – manual instrumentation**  
+**Example main\.py – Manual instrumentation**  
 
 ```
 from aws_xray_sdk.core import xray_recorder
@@ -103,7 +129,7 @@ xray_recorder.end_subsegment()
 xray_recorder.end_segment()
 ```
 
-## Configuring a Segment Naming Strategy<a name="xray-sdk-python-middleware-naming"></a>
+## Configuring a segment naming strategy<a name="xray-sdk-python-middleware-naming"></a>
 
 AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 
@@ -117,7 +143,7 @@ To use the same name for all request segments, specify the name of your applicat
 
 A dynamic naming strategy defines a pattern that hostnames should match, and a default name to use if the hostname in the HTTP request doesn't match the pattern\. To name segments dynamically in Django, add the `DYNAMIC_NAMING` setting to your [settings\.py](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django) file\.
 
-**Example settings\.py – dynamic naming**  
+**Example settings\.py – Dynamic naming**  
 
 ```
 XRAY_RECORDER = {
@@ -130,7 +156,7 @@ XRAY_RECORDER = {
 
 You can use '\*' in the pattern to match any string, or '?' to match any single character\. For Flask, [configure the recorder in code](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-code)\.
 
-**Example main\.py – segment name**  
+**Example main\.py – Segment name**  
 
 ```
 from aws_xray_sdk.core import xray_recorder

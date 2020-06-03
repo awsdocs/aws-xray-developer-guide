@@ -3,13 +3,14 @@
 The X\-Ray SDK for Java includes a class named `AWSXRay` that provides the global recorder\. This is a `TracingHandler` that you can use to instrument your code\. You can configure the global recorder to customize the `AWSXRayServletFilter` that creates segments for incoming HTTP calls\.
 
 **Topics**
-+ [Service Plugins](#xray-sdk-java-configuration-plugins)
-+ [Sampling Rules](#xray-sdk-java-configuration-sampling)
++ [Service plugins](#xray-sdk-java-configuration-plugins)
++ [Sampling rules](#xray-sdk-java-configuration-sampling)
 + [Logging](#xray-sdk-java-configuration-logging)
-+ [Environment Variables](#xray-sdk-java-configuration-envvars)
-+ [System Properties](#xray-sdk-java-configuration-sysprops)
++ [Segment listeners](#xray-sdk-java-configuration-listeners)
++ [Environment variables](#xray-sdk-java-configuration-envvars)
++ [System properties](#xray-sdk-java-configuration-sysprops)
 
-## Service Plugins<a name="xray-sdk-java-configuration-plugins"></a>
+## Service plugins<a name="xray-sdk-java-configuration-plugins"></a>
 
 Use `plugins` to record information about the service hosting your application\.
 
@@ -23,7 +24,7 @@ Use `plugins` to record information about the service hosting your application\.
 
 To use a plugin, call `withPlugin` on your `AWSXRayRecorderBuilder`\.
 
-**Example src/main/java/scorekeep/WebConfig\.java \- Recorder**  
+**Example src/main/java/scorekeep/WebConfig\.java \- recorder**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -52,7 +53,7 @@ The SDK also uses plugin settings to set the `origin` field on the segment\. Thi
 
 When you use multiple plugins, the SDK uses the following resolution order to determine the origin: ElasticBeanstalk > EKS > ECS > EC2\.
 
-## Sampling Rules<a name="xray-sdk-java-configuration-sampling"></a>
+## Sampling rules<a name="xray-sdk-java-configuration-sampling"></a>
 
 The SDK uses the sampling rules you define in the X\-Ray console to determine which requests to record\. The default rule traces the first request each second, and five percent of any additional requests across all services sending traces to X\-Ray\. [Create additional rules in the X\-Ray console](xray-console-sampling.md) to customize the amount of data recorded for each of your applications\.
 
@@ -93,7 +94,7 @@ On AWS Lambda, you cannot modify the sampling rate\. If your function is called 
 
 To provide backup rules in Spring, configure the global recorder with a `CentralizedSamplingStrategy` in a configuration class\.
 
-**Example src/main/java/myapp/WebConfig\.java \- Recorder Configuration**  
+**Example src/main/java/myapp/WebConfig\.java \- recorder configuration**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -174,9 +175,16 @@ logging.level.com.amazonaws.xray = DEBUG
 
 Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-java-subsegments.md)\.
 
-### Trace ID Injection Into Logs<a name="xray-sdk-java-configuration-logging-id-injection"></a>
+### Trace ID injection into logs<a name="xray-sdk-java-configuration-logging-id-injection"></a>
 
-To expose the current trace ID to your log statements, you can inject the ID into the mapped diagnostic context \(MDC\)\. Using the `SegmentListener` interface, methods are called from the X\-Ray recorder during segment lifecycle events\. When a segment begins, the trace ID is injected into the MDC with the key `AWS-XRAY-TRACE-ID`\. When that segment ends, the key is removed from the MDC\. This exposes the trace ID to the logging library in use\.
+To expose the current fully qualified trace ID to your log statements, you can inject the ID into the mapped diagnostic context \(MDC\)\. Using the `SegmentListener` interface, methods are called from the X\-Ray recorder during segment lifecycle events\. When a segment or subsegment begins, the qualified trace ID is injected into the MDC with the key `AWS-XRAY-TRACE-ID`\. When that segment ends, the key is removed from the MDC\. This exposes the trace ID to the logging library in use\. When a subsegment ends, its parent ID is injected into the MDC\.
+
+**Example fully qualified trace ID**  
+The fully qualified ID is represented as `TraceID@EntityID`  
+
+```
+1-5df42873-011e96598b447dfca814c156@541b3365be3dafc3
+```
 
 This feature works with Java applications instrumented with the AWS X\-Ray SDK for Java, and supports the following logging configurations:
 + SLF4J front\-end API with Logback backend
@@ -198,12 +206,17 @@ See the following tabs for the needs of each front end and each backend\.
    </dependency>
    ```
 
-1. Include the `withSegmentListener` method when building the `AWSXRayRecorder`\. This adds a `SegmentListener` class, which automatically injects new trace IDs into the SLF4J MDC\.  
+1. Include the `withSegmentListener` method when building the `AWSXRayRecorder`\. This adds a `SegmentListener` class, which automatically injects new trace IDs into the SLF4J MDC\.
+
+   The `SegmentListener` takes an optional string as a parameter to configure the log statement prefix\. The prefix can be configured in the following ways:
+   + **None** – Uses the default `AWS-XRAY-TRACE-ID` prefix\.
+   + **Empty** – Uses an empty string \(e\.g\. `""`\)\.
+   + **Custom** – Uses a custom prefix as defined in the string\.  
 **Example `AWSXRayRecorderBuilder` statement**  
 
    ```
    AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder
-           .standard().withSegmentListener(new SLF4JSegmentListener());
+           .standard().withSegmentListener(new SLF4JSegmentListener("CUSTOM-PREFIX"));
    ```
 
 ------
@@ -219,12 +232,17 @@ See the following tabs for the needs of each front end and each backend\.
    </dependency>
    ```
 
-1. Include the `withSegmentListener` method when building the `AWSXRayRecorder`\. This will add a `SegmentListener` class, which automatically injects new trace IDs into the SLF4J MDC\.  
+1. Include the `withSegmentListener` method when building the `AWSXRayRecorder`\. This will add a `SegmentListener` class, which automatically injects new fully qualified trace IDs into the SLF4J MDC\.
+
+   The `SegmentListener` takes an optional string as a parameter to configure the log statement prefix\. The prefix can be configured in the following ways:
+   + **None** – Uses the default `AWS-XRAY-TRACE-ID` prefix\.
+   + **Empty** – Uses an empty string \(e\.g\. `""`\) and removes the prefix\.
+   + **Custom** – Uses the custom prefix defined in the string\.  
 **Example `AWSXRayRecorderBuilder` statement**  
 
    ```
    AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder
-           .standard().withSegmentListener(new Log4JSegmentListener());
+           .standard().withSegmentListener(new Log4JSegmentListener("CUSTOM-PREFIX"));
    ```
 
 ------
@@ -252,7 +270,7 @@ To insert the trace ID into your log events, you must modify the logger's `Patte
 **Trace ID Injection Example**  
 The following shows a `PatternLayout` string modified to include the trace ID\. The trace ID is printed after the thread name \(`%t`\) and before the log level \(`%-5p`\)\.
 
-**Example `PatternLayout` with ID injection**  
+**Example `PatternLayout` With ID injection**  
 
 ```
 %d{HH:mm:ss.SSS} [%t] %X{AWS-XRAY-TRACE-ID} %-5p %m%n
@@ -260,15 +278,55 @@ The following shows a `PatternLayout` string modified to include the trace ID\. 
 
 AWS X\-Ray automatically prints the key and the trace ID in the log statement for easy parsing\. The following shows a log statement using the modified `PatternLayout`\.
 
-**Example log statement with ID injection**  
+**Example Log statement with ID injection**  
 
 ```
-2019-09-10 18:58:30.844 [nio-5000-exec-4]  AWS-XRAY-TRACE-ID: 1-5d77f256-19f12e4eaa02e3f76c78f46a WARN 1 - Your logging message here
+2019-09-10 18:58:30.844 [nio-5000-exec-4]  AWS-XRAY-TRACE-ID: 1-5d77f256-19f12e4eaa02e3f76c78f46a@1ce7df03252d99e1 WARN 1 - Your logging message here
 ```
 
  The logging message itself is housed in the pattern `%m` and is set when calling the logger\.
 
-## Environment Variables<a name="xray-sdk-java-configuration-envvars"></a>
+## Segment listeners<a name="xray-sdk-java-configuration-listeners"></a>
+
+Segement listeners are an interface to intercept lifecycle events such as the beginning and ending of segments produced by the `AWSXRayRecorder`\. Implementation of a segment listener event function might be to add the same annotation to all subsegments when they are created with [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#onBeginSubsegment-com.amazonaws.xray.entities.Subsegment-](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#onBeginSubsegment-com.amazonaws.xray.entities.Subsegment-), log a message after each segment is sent to the daemon using [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#afterEndSegment-com.amazonaws.xray.entities.Segment-](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#afterEndSegment-com.amazonaws.xray.entities.Segment-), or to record queries sent by the SQL interceptors using [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#beforeEndSubsegment-com.amazonaws.xray.entities.Subsegment-](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#beforeEndSubsegment-com.amazonaws.xray.entities.Subsegment-) to verify if the subsegment represents an SQL query, adding additional metadata if so\.
+
+To see the full list of `SegmentListener` functions, visit the documentation for the [AWS X\-Ray Recorder SDK for Java API](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html)\.
+
+The following example shows how to add a consistent annotation to all subsegments on creation with [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#onBeginSubsegment-com.amazonaws.xray.entities.Subsegment-](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#onBeginSubsegment-com.amazonaws.xray.entities.Subsegment-) and to print a log message at the end of each segment with [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#afterEndSegment-com.amazonaws.xray.entities.Segment-](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/listeners/SegmentListener.html#afterEndSegment-com.amazonaws.xray.entities.Segment-)\. 
+
+**Example MySegmentListener\.java**  
+
+```
+import com.amazonaws.xray.entities.Segment;
+import com.amazonaws.xray.entities.Subsegment;
+import com.amazonaws.xray.listeners.SegmentListener;
+
+public class MySegmentListener implements SegmentListener {
+    .....
+    
+    @Override
+    public void onBeginSubsegment(Subsegment subsegment) {
+        subsegment.putAnnotation("annotationKey", "annotationValue");
+    }
+    
+    @Override
+    public void afterEndSegment(Segment segment) {
+        // Be mindful not to mutate the segment
+        logger.info("Segment with ID " + segment.getId());
+    }
+}
+```
+
+This custom segment listener is then referenced when building the `AWSXRayRecorder`\.
+
+**Example AWSXRayRecorderBuilder statement**  
+
+```
+AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder
+        .standard().withSegmentListener(new MySegmentListener());
+```
+
+## Environment variables<a name="xray-sdk-java-configuration-envvars"></a>
 
 You can use environment variables to configure the X\-Ray SDK for Java\. The SDK supports the following variables\.
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-java-filters.md#xray-sdk-java-filters-naming)\.
@@ -287,7 +345,7 @@ You can use environment variables to configure the X\-Ray SDK for Java\. The SDK
 
 Environment variables override equivalent [system properties](#xray-sdk-java-configuration-sysprops) and values set in code\.
 
-## System Properties<a name="xray-sdk-java-configuration-sysprops"></a>
+## System properties<a name="xray-sdk-java-configuration-sysprops"></a>
 
 You can use system properties as a JVM\-specific alternative to [environment variables](#xray-sdk-java-configuration-envvars)\. The SDK supports the following properties:
 + `com.amazonaws.xray.strategy.tracingName` – Equivalent to `AWS_XRAY_TRACING_NAME`\.

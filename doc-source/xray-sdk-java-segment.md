@@ -1,4 +1,4 @@
-# Add Annotations and Metadata to Segments with the X\-Ray SDK for Java<a name="xray-sdk-java-segment"></a>
+# Add annotations and metadata to segments with the X\-Ray SDK for Java<a name="xray-sdk-java-segment"></a>
 
 You can record additional information about requests, the environment, or your application with annotations and metadata\. You can add annotations and metadata to the segments that the X\-Ray SDK creates, or to custom subsegments that you create\.
 
@@ -9,11 +9,11 @@ You can record additional information about requests, the environment, or your a
 In addition to annotations and metadata, you can also [record user ID strings](#xray-sdk-java-segment-userid) on segments\. User IDs are recorded in a separate field on segments and are indexed for use with search\.
 
 **Topics**
-+ [Recording Annotations with the X\-Ray SDK for Java](#xray-sdk-java-segment-annotations)
-+ [Recording Metadata with the X\-Ray SDK for Java](#xray-sdk-java-segment-metadata)
-+ [Recording User IDs with the X\-Ray SDK for Java](#xray-sdk-java-segment-userid)
++ [Recording annotations with the X\-Ray SDK for Java](#xray-sdk-java-segment-annotations)
++ [Recording metadata with the X\-Ray SDK for Java](#xray-sdk-java-segment-metadata)
++ [Recording user IDs with the X\-Ray SDK for Java](#xray-sdk-java-segment-userid)
 
-## Recording Annotations with the X\-Ray SDK for Java<a name="xray-sdk-java-segment-annotations"></a>
+## Recording annotations with the X\-Ray SDK for Java<a name="xray-sdk-java-segment-annotations"></a>
 
 Use annotations to record information on segments or subsegments that you want indexed for search\.
 
@@ -52,7 +52,7 @@ The SDK records annotations as key\-value pairs in an `annotations` object in th
 
 To find traces that have annotations with specific values, use the `annotations.key` keyword in a [filter expression](xray-console-filters.md)\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and Metadata**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and metadata**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -81,7 +81,7 @@ import [com\.amazonaws\.xray\.entities\.Subsegment](https://docs.aws.amazon.com/
   }
 ```
 
-## Recording Metadata with the X\-Ray SDK for Java<a name="xray-sdk-java-segment-metadata"></a>
+## Recording metadata with the X\-Ray SDK for Java<a name="xray-sdk-java-segment-metadata"></a>
 
 Use metadata to record information on segments or subsegments that you don't need indexed for search\. Metadata values can be strings, numbers, Booleans, or any object that can be serialized into a JSON object or array\.
 
@@ -121,7 +121,7 @@ Use metadata to record information on segments or subsegments that you don't nee
 
 If you don't specify a namespace, the SDK uses `default`\. Calling `putMetadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and Metadata**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/GameModel.java) – Annotations and metadata**  
 
 ```
 import [com\.amazonaws\.xray\.AWSXRay](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/AWSXRay.html);
@@ -150,7 +150,7 @@ import [com\.amazonaws\.xray\.entities\.Subsegment](https://docs.aws.amazon.com/
   }
 ```
 
-## Recording User IDs with the X\-Ray SDK for Java<a name="xray-sdk-java-segment-userid"></a>
+## Recording user IDs with the X\-Ray SDK for Java<a name="xray-sdk-java-segment-userid"></a>
 
 Record user IDs on request segments to identify the user who sent the request\.
 

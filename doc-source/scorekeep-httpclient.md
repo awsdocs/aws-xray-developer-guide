@@ -1,8 +1,8 @@
-# Instrumenting Outgoing HTTP Calls<a name="scorekeep-httpclient"></a>
+# Instrumenting outgoing HTTP calls<a name="scorekeep-httpclient"></a>
 
 The user factory class shows how the application uses the X\-Ray SDK for Java's version of `HTTPClientBuilder` to instrument outgoing HTTP calls\.
 
-**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserFactory.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserFactory.java) – HTTPClient Instrumentation**  
+**Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserFactory.java](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/UserFactory.java) – HTTPClient instrumentation**  
 
 ```
 import [com\.amazonaws\.xray\.proxies\.apache\.http\.HttpClientBuilder](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/proxies/apache/http/HttpClientBuilder.html);

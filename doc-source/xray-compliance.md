@@ -1,4 +1,4 @@
-# Compliance Validation for AWS X\-Ray<a name="xray-compliance"></a>
+# Compliance validation for AWS X\-Ray<a name="xray-compliance"></a>
 
 Third\-party auditors assess the security and compliance of AWS X\-Ray as part of multiple AWS compliance programs\. These include SOC, PCI, HIPAA, and others\.
 

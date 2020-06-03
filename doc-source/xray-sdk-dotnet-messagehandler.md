@@ -1,4 +1,4 @@
-# Instrumenting Incoming HTTP Requests with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-messagehandler"></a>
+# Instrumenting incoming HTTP requests with the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-messagehandler"></a>
 
 You can use the X\-Ray SDK to trace incoming HTTP requests that your application serves on an EC2 instance in Amazon EC2, AWS Elastic Beanstalk, or Amazon ECS\.
 
@@ -21,15 +21,15 @@ The message handler creates a segment for each incoming request with an `http` b
 + **Content length** — The `content-length` from the response\.
 
 **Topics**
-+ [Instrumenting Incoming Requests \(\.NET\)](#xray-sdk-dotnet-messagehandler-globalasax)
-+ [Instrumenting Incoming Requests \(\.NET Core\)](#xray-sdk-dotnet-messagehandler-startupcs)
-+ [Configuring a Segment Naming Strategy](#xray-sdk-dotnet-messagehandler-naming)
++ [Instrumenting incoming requests \(\.NET\)](#xray-sdk-dotnet-messagehandler-globalasax)
++ [Instrumenting incoming requests \(\.NET Core\)](#xray-sdk-dotnet-messagehandler-startupcs)
++ [Configuring a segment naming strategy](#xray-sdk-dotnet-messagehandler-naming)
 
-## Instrumenting Incoming Requests \(\.NET\)<a name="xray-sdk-dotnet-messagehandler-globalasax"></a>
+## Instrumenting incoming requests \(\.NET\)<a name="xray-sdk-dotnet-messagehandler-globalasax"></a>
 
 To instrument requests served by your application, call `RegisterXRay` in the `Init` method of your `global.asax` file\.
 
-**Example global\.asax \- Message Handler**  
+**Example global\.asax \- message handler**  
 
 ```
 using System.Web.Http;
@@ -48,7 +48,7 @@ namespace SampleEBWebApplication
 }
 ```
 
-## Instrumenting Incoming Requests \(\.NET Core\)<a name="xray-sdk-dotnet-messagehandler-startupcs"></a>
+## Instrumenting incoming requests \(\.NET Core\)<a name="xray-sdk-dotnet-messagehandler-startupcs"></a>
 
 To instrument requests served by your application, call the `UseExceptionHandler`, `UseXRay`, and `UseStaticFiles` methods in the `Configure` method of your `Startup` class\.
 
@@ -74,7 +74,7 @@ The `UseXRay` method can also take a [configuration object](xray-sdk-dotnet-conf
 app.UseXRay("MyApp", configuration);
 ```
 
-## Configuring a Segment Naming Strategy<a name="xray-sdk-dotnet-messagehandler-naming"></a>
+## Configuring a segment naming strategy<a name="xray-sdk-dotnet-messagehandler-naming"></a>
 
 AWS X\-Ray uses a *service name* to identify your application and distinguish it from the other applications, databases, external APIs, and AWS resources that your application uses\. When the X\-Ray SDK generates segments for incoming requests, it records your application's service name in the segment's [name field](xray-api-segmentdocuments.md#api-segmentdocuments-fields)\.
 

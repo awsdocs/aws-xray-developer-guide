@@ -1,4 +1,4 @@
-# Sending Trace Data to AWS X\-Ray<a name="xray-api-sendingdata"></a>
+# Sending trace data to AWS X\-Ray<a name="xray-api-sendingdata"></a>
 
 You can send trace data to X\-Ray in the form of segment documents\. A segment document is a JSON formatted string that contains information about the work that your application does in service of a request\. Your application can record data about the work that it does itself in segments, or work that uses downstream services and resources in subsegments\.
 
@@ -51,14 +51,14 @@ A subsegment has a `type` of `subsegment` and a `parent_id` that identifies the 
 }
 ```
 
-For more information on the fields and values that you can include in segments and subsegments, see [AWS X\-Ray Segment Documents](xray-api-segmentdocuments.md)\.
+For more information on the fields and values that you can include in segments and subsegments, see [AWS X\-Ray segment documents](xray-api-segmentdocuments.md)\.
 
 **Topics**
-+ [Generating Trace IDs](#xray-api-traceids)
++ [Generating trace IDs](#xray-api-traceids)
 + [Using PutTraceSegments](#xray-api-segments)
-+ [Sending Segment Documents to the X\-Ray Daemon](#xray-api-daemon)
++ [Sending segment documents to the X\-Ray daemon](#xray-api-daemon)
 
-## Generating Trace IDs<a name="xray-api-traceids"></a>
+## Generating trace IDs<a name="xray-api-traceids"></a>
 
 To send data to X\-Ray, you need to generate a unique trace ID for each request\. Trace IDs must meet the following requirements\.
 
@@ -135,12 +135,12 @@ You can pass multiple segment documents at the same time, separated by spaces\.
 $ aws xray put-trace-segments --trace-segment-documents "$DOC1" "$DOC2"
 ```
 
-## Sending Segment Documents to the X\-Ray Daemon<a name="xray-api-daemon"></a>
+## Sending segment documents to the X\-Ray daemon<a name="xray-api-daemon"></a>
 
 Instead of sending segment documents to the X\-Ray API, you can send segments and subsegments to the X\-Ray daemon, which will buffer them and upload to the X\-Ray API in batches\. The X\-Ray SDK sends segment documents to the daemon to avoid making calls to AWS directly\.
 
 **Note**  
-See [Running the X\-Ray Daemon Locally](xray-daemon-local.md) for instructions on running the daemon\.
+See [Running the X\-Ray daemon locally](xray-daemon-local.md) for instructions on running the daemon\.
 
 Send the segment in JSON over UDP port 2000, prepended by the daemon header, `{"format": "json", "version": 1}\n`
 
