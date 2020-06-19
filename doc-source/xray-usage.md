@@ -57,7 +57,7 @@ In any Node\.js application, you can use the X\-Ray SDK for Node\.js classes to 
 
 On AWS Lambda, you can use the Lambda X\-Ray integration to instrument incoming requests\. Add the X\-Ray SDK for Node\.js to your function for full instrumentation\.
 
-See [The X\-Ray SDK for Node\.js](xray-sdk-nodejs.md) for more information\.
+See [AWS X\-Ray SDK for Node\.js](xray-sdk-nodejs.md) for more information\.
 + **Express or Restify** – [Use the X\-Ray SDK for Node\.js middleware](xray-sdk-nodejs-middleware.md) to instrument incoming requests\.
 + **Node\.js on AWS Lambda** – Enable X\-Ray on your Lambda function to instrument incoming requests\. Add the X\-Ray SDK for Node\.js to instrument AWS SDK, HTTP, and SQL clients
 + **Other frameworks** – Manually create a segment for each incoming request\.

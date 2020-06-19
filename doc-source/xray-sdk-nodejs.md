@@ -1,4 +1,4 @@
-# The X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs"></a>
+# AWS X\-Ray SDK for Node\.js<a name="xray-sdk-nodejs"></a>
 
 The X\-Ray SDK for Node\.js is a library for Express web applications and Node\.js Lambda functions that provides classes and methods for generating and sending trace data to the X\-Ray daemon\. Trace data includes information about incoming HTTP requests served by the application, and calls that the application makes to downstream services using the AWS SDK or HTTP clients\.
 

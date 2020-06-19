@@ -93,7 +93,7 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS X-Ray metrics for the X-Ray SDK for Java](xray-sdk-java-monitoring.md)
    + [Passing segment context between threads in a multithreaded application](xray-sdk-java-multithreading.md)
    + [AOP with spring and the X-Ray SDK for Java](xray-sdk-java-aop-spring.md)
-+ [The X-Ray SDK for Node.js](xray-sdk-nodejs.md)
++ [AWS X-Ray SDK for Node.js](xray-sdk-nodejs.md)
    + [Configuring the X-Ray SDK for Node.js](xray-sdk-nodejs-configuration.md)
    + [Tracing incoming requests with the X-Ray SDK for Node.js](xray-sdk-nodejs-middleware.md)
    + [Tracing AWS SDK calls with the X-Ray SDK for Node.js](xray-sdk-nodejs-awssdkclients.md)

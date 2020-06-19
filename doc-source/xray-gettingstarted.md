@@ -422,7 +422,7 @@ Learn more about X\-Ray in the next chapter, [AWS X\-Ray concepts](xray-concepts
 
 To instrument your own app, learn more about the X\-Ray SDK for Java or one of the other X\-Ray SDKs:
 + **X\-Ray SDK for Java** – [AWS X\-Ray SDK for Java](xray-sdk-java.md)
-+ **X\-Ray SDK for Node\.js** – [The X\-Ray SDK for Node\.js](xray-sdk-nodejs.md)
++ **X\-Ray SDK for Node\.js** – [AWS X\-Ray SDK for Node\.js](xray-sdk-nodejs.md)
 + **X\-Ray SDK for \.NET** – [AWS X\-Ray SDK for \.NET](xray-sdk-dotnet.md)
 
 To run the X\-Ray daemon locally or on AWS, see [AWS X\-Ray daemon](xray-daemon.md)\.
