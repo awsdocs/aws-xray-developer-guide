@@ -2,8 +2,6 @@
 
 When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
-When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
-
 The X\-Ray SDK for Python supports the following middleware to instrument incoming HTTP requests: 
 + Django
 + Flask
