@@ -79,7 +79,7 @@ The following fields are optional for segments\.
   + `AWS::ElasticBeanstalk::Environment` – An Elastic Beanstalk environment\.
 
   When multiple values are applicable to your application, use the one that is most specific\. For example, a Multicontainer Docker Elastic Beanstalk environment runs your application on an Amazon ECS container, which in turn runs on an Amazon EC2 instance\. In this case you would set the origin to `AWS::ElasticBeanstalk::Environment` as the environment is the parent of the other two resources\.
-+ `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the [tracing header](xray-concepts.md#xray-concepts-tracingheader) for downstream HTTP calls\. In the case of nested subsguments, a subsegment can have a segment or a subsegment as its parent\. 
++ `parent_id` – A subsegment ID you specify if the request originated from an instrumented application\. The X\-Ray SDK adds the parent subsegment ID to the [tracing header](xray-concepts.md#xray-concepts-tracingheader) for downstream HTTP calls\. In the case of nested subsegments, a subsegment can have a segment or a subsegment as its parent\. 
 + `http` – [`http`](#api-segmentdocuments-http) objects with information about the original HTTP request\.
 + `aws` – [`aws`](#api-segmentdocuments-aws) object with information about the AWS resource on which your application served the request\.
 + `error`, `throttle`, `fault`, and `cause` – [error](#api-segmentdocuments-errors) fields that indicate an error occurred and that include information about the exception that caused the error\.
