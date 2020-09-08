@@ -27,7 +27,7 @@ You can pass a configuration file to the daemon to access advanced configuration
 
 The X\-Ray daemon supports the following environment variables:
 + `AWS_REGION` – Specifies the [AWS Region](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration-region) of the X\-Ray service endpoint\. 
-+ `HTTPS_PROXY` – Specifies a proxy address for the daemon to upload segments through\. This can be either the DNS domain names or IP addresses and port numbers used by your proxy servers\.
++ `HTTPS_PROXY` – Specifies a proxy address for the daemon to upload segments through\. This can be either the DNS domain names or IP addresses and port numbers used by your proxy servers\. Must be specified in URL format with protocol the proxy uses, such as `https://10.0.0.42:4443` or `http://10.0.0.42:8080`\.
 
 ## Using command line options<a name="xray-daemon-configuration-commandline"></a>
 
@@ -79,7 +79,10 @@ Pass these options to the daemon when you run it locally or with a user data scr
   --role-arn "arn:aws:iam::123456789012:role/xray-cross-account"
   ```
 + `-a`, `--resource-arn` – Amazon Resource Name \(ARN\) of the AWS resource running the daemon\.
-+ `-p`, `--proxy-address` – Upload segments to AWS X\-Ray through a proxy\.
++ `-p`, `--proxy-address` – Upload segments to AWS X\-Ray through a proxy\. The protocol of the proxy server must be specified\.
+  ```
+  --proxy-address https://10.0.0.42:8888
+  ```
 + `-n`, `--region` – Send segments to X\-Ray service in a specific region\.
 + `-v`, `--version` – Show AWS X\-Ray daemon version\.
 + `-h`, `--help` – Show the help screen\.
