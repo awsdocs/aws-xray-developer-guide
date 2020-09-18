@@ -2,8 +2,6 @@
 
 When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
 
-When you add the middleware to your application and configure a segment name, the X\-Ray SDK for Python creates a segment for each sampled request\. This segment includes timing, method, and disposition of the HTTP request\. Additional instrumentation creates subsegments on this segment\.
-
 The X\-Ray SDK for Python supports the following middleware to instrument incoming HTTP requests: 
 + Django
 + Flask
@@ -12,7 +10,7 @@ The X\-Ray SDK for Python supports the following middleware to instrument incomi
 **Note**  
 For AWS Lambda functions, Lambda creates a segment for each sampled request\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
-See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for a example Python function instrumented in Lambda\.
+See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for an example Python function instrumented in Lambda\.
 
 For scripts or Python applications on other frameworks, you can [create segments manually](#xray-sdk-python-middleware-manual)\.
 
