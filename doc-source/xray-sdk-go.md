@@ -28,7 +28,7 @@ When you have a lot of instrumented clients in your code, a single request segme
 
 ## Requirements<a name="xray-sdk-go-requirements"></a>
 
-The X\-Ray SDK for Go requires Go 1\.7 or later\.
+The X\-Ray SDK for Go requires Go 1\.9 or later\.
 
 The SDK depends on the following libraries at compile and runtime:
 + AWS SDK for Go version 1\.10\.0 or newer
