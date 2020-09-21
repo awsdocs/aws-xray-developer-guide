@@ -100,7 +100,7 @@ You can set the `collectSqlQueries` parameter in the `TraceableSqlCommand` insta
 **Note**  
  The value of `collectSqlQueries` in the `TraceableSqlCommand` instance overrides the value set in the global configuration of the `CollectSqlQueries` property\.
 
-**Example Example `Controller.cs` – Enable SQL Query collection for the instance**  
+**Example `Controller.cs` – Enable SQL Query collection for the instance**  
 
 ```
 using Amazon;

@@ -127,6 +127,8 @@ Updating a group's filter expression doesn't change data that's already recorded
 **Note**  
 Groups are billed by the number of retrieved traces that match the filter expression\. For more information, see [AWS X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\. 
 
+For more information about groups, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+
 ## Annotations and metadata<a name="xray-concepts-annotations"></a>
 
 When you instrument your application, the X\-Ray SDK records information about incoming and outgoing requests, the AWS resources used, and the application itself\. You can add other information to the segment document as annotations and metadata\. Annotations and metadata are aggregated at the trace level, and can be added to any segment or subsegment\.

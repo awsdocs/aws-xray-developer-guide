@@ -38,6 +38,8 @@ You can create and modify groups by using the dropdown menu to the left of the f
 **Note**  
 If the service encounters an error in qualifying a group, that group is no longer included in processing incoming traces and an error metric is recorded\.
 
+For more information about groups, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+
 ## Filter expression syntax<a name="console-filters-syntax"></a>
 
 Filter expressions can contain a *keyword*, a unary or binary *operator*, and a *value* for comparison\.
@@ -240,7 +242,20 @@ rootcause.fault.exception { last and message = "Access Denied for account_id: 12
 Use complex keywords to find requests based on service name, edge name, or annotation value\. For services and edges, you can specify an additional filter expression that applies to the service or edge\. For annotations, you can filter on the value of an annotation with a specific key using Boolean, number, or string operators\.
 
 **Complex keywords**
++ `annotation.key` – Value of an annotation with field *key*\. The value of an annotation can be a Boolean, number, or string, so you can use any of the comparison operators of those types\. You can't use this keyword in combination with the `service` or `edge` keyword\.
++ `edge(source, destination) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
++ `group.name / group.arn` – The value of a group's filter expression, referenced by group name or group ARN\.
++ `json` – JSON root cause object\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for steps to create JSON entities programmatically\.
 + `service(name) {filter}` – Service with name *name*\. Optional curly braces can contain a filter expression that applies to segments created by the service\.
+
+Use the service keyword to find traces for requests that hit a certain node on your service map\.
+
+Complex keyword operators find segments where the specified key has been set, or not set\.
+
+**Complex keyword operators**
++ none – The expression is true if the keyword is set\. If the keyword is of boolean type, it will evaluate to the boolean value\.
++ `!` – The expression is true if the keyword is not set\. If the keyword is of boolean type, it will evaluate to the boolean value\.
++ `=`,`!=` – Compare the value of the keyword\.
 + `edge(source, destination) {filter}` – Connection between services *source* and *destination*\. Optional curly braces can contain a filter expression that applies to segments on this connection\.
 + `annotation.key` – Value of an annotation with field *key*\. The value of an annotation can be a Boolean, number, or string, so you can use any of the comparison operators of those types\. You can't use this keyword in combination with the `service` or `edge` keyword\.
 + `json` – JSON root cause object\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for steps to create JSON entities programmatically\.
@@ -281,7 +296,14 @@ Request where the URL begins with `http://api.example.com/` and contains `/v2/` 
 http.url BEGINSWITH "http://api.example.com/" AND http.url CONTAINS "/v2/" AND !service("api.example.com")
 ```
 
-For annotations, use the comparison operators that correspond to the type of value\.
+**Example – service and response time filter**  
+Find traces where `http url` is set and response time is greater than 2 seconds\.  
+
+```
+http.url AND responseTime > 2
+```
+
+For annotations, you can call all traces where `annotation.key` is set, or use the comparison operators that correspond to the type of value\.
 
 **Example – annotation with string value**  
 Requests with an annotation named `gameid` with string value `"817DL6VO"`\.  
@@ -290,11 +312,32 @@ Requests with an annotation named `gameid` with string value `"817DL6VO"`\.
 annotation.gameid = "817DL6VO"
 ```
 
+**Example – annotation is set**  
+Requests with an annotation named `age` set\.  
+
+```
+annotation.age
+```
+
+**Example – annotation is not set**  
+Requests without an annotation named `age` set\.  
+
+```
+!annotation.age
+```
+
 **Example – annotation with number value**  
 Requests with annotation age with numerical value greater than 29\.  
 
 ```
 annotation.age > 29
+```
+
+**Example – group with user**  
+Requests where traces meet the `high_response_time` group filter \(e\.g\. `responseTime > 3`\), and the user is named Alice\.  
+
+```
+group.name = "high_response_time" AND user = "alice"
 ```
 
 **Example – JSON with root cause entity**  

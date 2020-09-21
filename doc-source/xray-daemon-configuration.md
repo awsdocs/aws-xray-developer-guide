@@ -79,7 +79,11 @@ Pass these options to the daemon when you run it locally or with a user data scr
   --role-arn "arn:aws:iam::123456789012:role/xray-cross-account"
   ```
 + `-a`, `--resource-arn` – Amazon Resource Name \(ARN\) of the AWS resource running the daemon\.
-+ `-p`, `--proxy-address` – Upload segments to AWS X\-Ray through a proxy\.
++ `-p`, `--proxy-address` – Upload segments to AWS X\-Ray through a proxy\. The proxy server's protocol must be specified\.
+
+  ```
+  --proxy-address "http://192.0.2.0:3000"
+  ```
 + `-n`, `--region` – Send segments to X\-Ray service in a specific region\.
 + `-v`, `--version` – Show AWS X\-Ray daemon version\.
 + `-h`, `--help` – Show the help screen\.

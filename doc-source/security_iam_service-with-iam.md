@@ -118,11 +118,13 @@ To view examples of X\-Ray identity\-based policies, see [AWS X\-Ray identity\-b
 
 ## X\-Ray resource\-based policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
-X\-Ray does not support resource\-based policies\.
+X\-Ray does not support resource\-based policies, but it does support resource\-level policies\.
 
 ## Authorization based on X\-Ray tags<a name="security_iam_service-with-iam-tags"></a>
 
-X\-Ray does not support tagging resources or controlling access based on tags\.
+You can attach tags to X\-Ray groups or sampling rules, or pass tags in a request to X\-Ray\. To control access based on tags, you provide tag information in the [condition element](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) of a policy using the `xray:ResourceTag/key-name`, `aws:RequestTag/key-name`, or `aws:TagKeys` condition keys\. For more information about tagging X\-Ray resources, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
+
+To view an example identity\-based policy for limiting access to a resource based on the tags on that resource, see [Managing access to X\-Ray groups and sampling rules based on tags](security_iam_id-based-policy-examples.md#security_iam_id-based-policy-examples-manage-sampling-tags)\.
 
 ## Running your application locally<a name="xray-permissions-local"></a>
 

@@ -8,6 +8,7 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 + [Policy best practices](#security_iam_service-with-iam-policy-best-practices)
 + [Using the X\-Ray console](#security_iam_id-based-policy-examples-console)
 + [Allow users to view their own permissions](#security_iam_id-based-policy-examples-view-own-permissions)
++ [Managing access to X\-Ray groups and sampling rules based on tags](#security_iam_id-based-policy-examples-manage-sampling-tags)
 + [IAM managed policies for X\-Ray](#xray-permissions-managedpolicies)
 + [Specifying a resource within an IAM policy](#xray-permissions-resources)
 
@@ -45,7 +46,7 @@ This example shows how you might create a policy that allows IAM users to view t
             "Action": [
                 "iam:GetUserPolicy",
                 "iam:ListGroupsForUser",
-                  "iam:ListAttachedUserPolicies",
+                "iam:ListAttachedUserPolicies",
                 "iam:ListUserPolicies",
                 "iam:GetUser"
             ],
@@ -70,9 +71,149 @@ This example shows how you might create a policy that allows IAM users to view t
 }
 ```
 
+## Managing access to X\-Ray groups and sampling rules based on tags<a name="security_iam_id-based-policy-examples-manage-sampling-tags"></a>
+
+You can use conditions in your identity\-based policy to control access to X\-Ray groups and sampling rules based on tags\. The following example policy could be used to deny an IAM user role the permissions to create, delete, or update groups with the tags `stage:prod` or `stage:preprod`\. For more information about tagging X\-Ray sampling rules and groups, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
+
+To deny a user access to create, update, or delete a group with a tag `stage:prod` or `stage:preprod`, assign the user a role with a policy similar to the following\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAllXRay",
+            "Effect": "Allow",
+            "Action": "xray:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenyCreateGroupWithStage",
+            "Effect": "Deny",
+            "Action": [
+                "xray:CreateGroup"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestTag/stage": [
+                        "preprod",
+                        "prod"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyUpdateGroupWithStage",
+            "Effect": "Deny",
+            "Action": [
+                "xray:UpdateGroup",
+                "xray:DeleteGroup"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/stage": [
+                        "preprod",
+                        "prod"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
+To deny the creation of a sampling rule, use `aws:RequestTag` to indicate tags that cannot be passed as part of a creation request\. To deny the update or deletion of a sampling rule, use `aws:ResourceTag` to deny actions based on the tags on those resources\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAllXRay",
+            "Effect": "Allow",
+            "Action": "xray:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenyCreateSamplingRuleWithStage",
+            "Effect": "Deny",
+            "Action": "xray:CreateSamplingRule",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestTag/stage": [
+                        "preprod",
+                        "prod"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyUpdateSamplingRuleWithStage",
+            "Effect": "Deny",
+            "Action": [
+                "xray:UpdateSamplingRule",
+                "xray:DeleteSamplingRule"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/stage": [
+                        "preprod",
+                        "prod"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
+You can attach these policies \(or combine them into a single policy, then attach the policy\) to the IAM users in your account\. For the user to make changes to a group or sampling rule, the group or sampling rule must not be tagged `stage=prepod` or `stage=prod`\. The condition tag key `Stage` matches both `Stage` and `stage` because condition key names are not case\-sensitive\. For more information about the condition block, see [IAM JSON Policy Elements: Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
+
+A user with a role that has the following policy attached cannot add the tag `role:admin` to resources, and cannot remove tags from a resource that has `role:admin` associated with it\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAllXRay",
+            "Effect": "Allow",
+            "Action": "xray:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenyRequestTagAdmin",
+            "Effect": "Deny",
+            "Action": "xray:TagResource",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestTag/role": "admin"
+                }
+            }
+        },
+        {
+            "Sid": "DenyResourceTagAdmin",
+            "Effect": "Deny",
+            "Action": "xray:UntagResource",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/role": "admin"
+                }
+            }
+        }
+    ]
+}
+```
+
 ## IAM managed policies for X\-Ray<a name="xray-permissions-managedpolicies"></a>
 
-To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides [managed policies](#xray-permissions-managedpolicies) for read only, write only, and administrator use cases\.
+To make granting permissions easy, IAM supports **managed policies** for each service\. A service can update these managed policies with new permissions when it releases new APIs\. AWS X\-Ray provides managed policies for read only, write only, and administrator use cases\.
 + `AWSXrayReadOnlyAccess` – Read permissions for using the X\-Ray console, AWS CLI, or AWS SDK to get trace data and service maps from the X\-Ray API\. Includes permission to view sampling rules\.
 
   ```

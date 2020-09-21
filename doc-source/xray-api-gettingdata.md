@@ -457,7 +457,7 @@ aws xray batch-get-traces --trace-ids $TRACEIDS --query 'Traces[*]'
 
 Upon generating a trace summary with the [GetTraceSummaries API](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html) , partial trace summaries can be reused in their JSON format to create a refined filter expression based upon root causes\. See the examples below for a walkthrough of the refinement steps\. 
 
-**Example Example GetTraceSummaries output \- response time root cause section**  
+**Example GetTraceSummaries output \- response time root cause section**  
 
 ```
 {
@@ -531,7 +531,7 @@ By editing and making omissions to the above output, this JSON can become a filt
 
 This JSON is then used as part of a filter expression through a call to `rootcause.json = #[{}]`\. Refer to the [Filter Expressions](xray-console-filters.md) chapter for more details about querying with filter expressions\.
 
-**Example Example JSON filter**  
+**Example JSON filter**  
 
 ```
 rootcause.json = #[{ "Services": [ { "Name": "GetWeatherData", "EntityPath": [{ "Name": "GetWeatherData" }, { "Name": "get_temperature" } ] }, { "Name": "GetTemperature", "EntityPath": [ { "Name": "GetTemperature" } ] } ] }]

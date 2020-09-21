@@ -1,4 +1,4 @@
-# AOP with spring and the X\-Ray SDK for Java<a name="xray-sdk-java-aop-spring"></a>
+# AOP with Spring and the X\-Ray SDK for Java<a name="xray-sdk-java-aop-spring"></a>
 
 This topic describes how to use the X\-Ray SDK and the Spring Framework to instrument your application without changing its core logic\. This means that there is now a non\-invasive way to instrument your applications running remotely in AWS\.
 
@@ -12,7 +12,7 @@ You must perform three tasks to enable this feature\.
 
 1. [Activate X\-Ray in your application](#xray-sdk-java-aop-activate-xray)
 
-## Configuring spring<a name="xray-sdk-java-aop-spring-configuration"></a>
+## Configuring Spring<a name="xray-sdk-java-aop-spring-configuration"></a>
 
 You can use Maven or Gradle to configure Spring to use AOP to instrument your application\.
 
@@ -36,10 +36,10 @@ compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.4.0'
 
 Your classes must either be annotated with the `@XRayEnabled` annotation, or implement the `XRayTraced` interface\. This tells the AOP system to wrap the functions of the affected class for X\-Ray instrumentation\.
 
-## Activating x\-ray in your application<a name="xray-sdk-java-aop-activate-xray"></a>
+## Activating X\-Ray in your application<a name="xray-sdk-java-aop-activate-xray"></a>
 
 To activate X\-Ray tracing in your application, your code must extend the abstract class `AbstractXRayInterceptor` by overriding the following methods\.
-+ `generateMetadata`—This function allows customization of the metadata attached to the current function’s trace\. By default, the class name of the executing function is recorded in the metadata\. You can add more data if you need additional insights\.
++ `generateMetadata`—This function allows customization of the metadata attached to the current function’s trace\. By default, the class name of the executing function is recorded in the metadata\. You can add more data if you need additional information\.
 + `xrayEnabledClasses`—This function is empty, and should remain so\. It serves as the host for a pointcut instructing the interceptor about which methods to wrap\. Define the pointcut by specifying which of the classes that are annotated with `@XRayEnabled` to trace\. The following pointcut statement tells the interceptor to wrap all controller beans annotated with the `@XRayEnabled` annotation\.
 
   ```

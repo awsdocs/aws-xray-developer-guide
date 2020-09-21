@@ -54,7 +54,7 @@ $ aws xray put-encryption-config --type NONE
 
 ## Sampling rules<a name="xray-api-configuration-sampling"></a>
 
-You can manage the [sampling rules](xray-console-sampling.md) in your account with the X\-Ray API\.
+You can manage the [sampling rules](xray-console-sampling.md) in your account with the X\-Ray API\. For more information about adding and managing tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
 
 Get all sampling rules with [https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html](https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)\.
 
@@ -99,10 +99,10 @@ The default rule applies to all requests that don't match another rule\. It is t
 }
 ```
 
-The following example uses the previous file as input to change the default rule to one percent with no reservoir\.
+The following example uses the previous file as input to change the default rule to one percent with no reservoir\. Tags are optional\. If you choose to add tags, a tag key is required, and tag values are optional\. To remove existing tags from a sampling rule, use [UntagResource](https://docs.aws.amazon.com/xray/latest/api/API_UntagResource.html)
 
 ```
-$ aws xray update-sampling-rule --cli-input-json file://1000-default.json
+$ aws xray update-sampling-rule --cli-input-json file://1000-default.json --tags [{"Key": "key_name","Value": "value"},{"Key": "key_name","Value": "value"}]
 {
     "SamplingRuleRecords": [
         {
@@ -170,8 +170,10 @@ The second rule also applies to Scorekeep, but it has a higher priority and is m
 }
 ```
 
+Tags are optional\. If you choose to add tags, a tag key is required, and tag values are optional\.
+
 ```
-$ aws xray create-sampling-rule --cli-input-json file://5000-polling-scorekeep.json
+$ aws xray create-sampling-rule --cli-input-json file://5000-polling-scorekeep.json --tags [{"Key": "key_name","Value": "value"},{"Key": "key_name","Value": "value"}]
 {
     "SamplingRuleRecord": {
         "SamplingRule": {
@@ -246,12 +248,12 @@ $ aws xray delete-sampling-rule --rule-name polling-scorekeep
 
 ## Groups<a name="xray-api-configuration-groups"></a>
 
-You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\.
+You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\. For more information about groups, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\. For more information about adding and managing tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
 
-Create a group with `CreateGroup`\.
+Create a group with `CreateGroup`\. Tags are optional\. If you choose to add tags, a tag key is required, and tag values are optional\.
 
 ```
-$ aws xray create-group --group-name "TestGroup" --filter-expression "service(\"example.com\") {fault}"
+$ aws xray create-group --group-name "TestGroup" --filter-expression "service(\"example.com\") {fault}" --tags [{"Key": "key_name","Value": "value"},{"Key": "key_name","Value": "value"}]
 {
     "GroupName": "TestGroup",
     "GroupARN": "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID",
@@ -280,10 +282,10 @@ $ aws xray get-groups
 }
 ```
 
-Update a group with `UpdateGroup`\.
+Update a group with `UpdateGroup`\. Tags are optional\. If you choose to add tags, a tag key is required, and tag values are optional\. To remove existing tags from a group, use [UntagResource](https://docs.aws.amazon.com/xray/latest/api/API_UntagResource.html)\.
 
 ```
-$ aws xray update-group --group-name "TestGroup" --group-arn "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID" --filter-expression "service(\"example.com\") {fault OR error}"
+$ aws xray update-group --group-name "TestGroup" --group-arn "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID" --filter-expression "service(\"example.com\") {fault OR error}" --tags [{"Key": "Stage","Value": "Prod"},{"Key": "Department","Value": "QA"}]
 {
     "GroupName": "TestGroup",
     "GroupARN": "arn:aws:xray:us-east-2:123456789012:group/TestGroup/UniqueID",

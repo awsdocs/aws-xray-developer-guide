@@ -29,6 +29,7 @@ With all features enabled, Scorekeep's service map looks like this:
 For instructions on using the sample application with X\-Ray, see the [getting started tutorial](xray-gettingstarted.md)\. In addition to the basic use of the X\-Ray SDK for Java discussed in the tutorial, the sample also shows how to use the following features\.
 
 **Topics**
++ [Getting started with AWS X\-Ray through the AWS CLI](scorekeep-ubuntu.md)
 + [Manually instrumenting AWS SDK clients](scorekeep-sdkclients.md)
 + [Creating additional subsegments](scorekeep-subsegments.md)
 + [Recording annotations, metadata, and user IDs](scorekeep-annotations.md)

@@ -10,7 +10,7 @@ The X\-Ray SDK for Python supports the following middleware to instrument incomi
 **Note**  
 For AWS Lambda functions, Lambda creates a segment for each sampled request\. See [AWS Lambda and AWS X\-Ray](xray-services-lambda.md) for more information\.
 
-See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for an example Python function instrumented in Lambda\.
+See [Worker](scorekeep-lambda.md#scorekeep-lambda-worker) for a example Python function instrumented in Lambda\.
 
 For scripts or Python applications on other frameworks, you can [create segments manually](#xray-sdk-python-middleware-manual)\.
 
