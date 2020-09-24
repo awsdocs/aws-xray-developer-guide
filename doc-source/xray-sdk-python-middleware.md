@@ -60,7 +60,7 @@ Configure a segment name in your [`settings.py` file](xray-sdk-python-configurat
 **Example settings\.py – Segment name**  
 
 ```
-XRAY_RECORDER = {,
+XRAY_RECORDER = {
     'AWS_XRAY_TRACING_NAME': 'My application',
     'PLUGINS': ('EC2Plugin'),
 }
