@@ -55,6 +55,22 @@ MIDDLEWARE = [
 ]
 ```
 
+Add the X\-Ray SDK Django app to the `INSTALLED_APPS` list in your `settings.py` file\. This will allow the X\-Ray recorder to be configured during your app's startup.
+
+**Example settings\.py \- X\-Ray SDK Django App**  
+
+```
+INSTALLED_APPS = [
+    'aws_xray_sdk.ext.django',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
+
 Configure a segment name in your [`settings.py` file](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django)\.
 
 **Example settings\.py – Segment name**  
