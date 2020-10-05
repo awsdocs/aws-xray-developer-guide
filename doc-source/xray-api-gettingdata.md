@@ -443,7 +443,7 @@ The full trace includes a document for each segment, compiled from all of the se
 
 X\-Ray also creates *inferred segments* for downstream calls to services that don't send segments themselves\. For example, when you call DynamoDB with an instrumented client, the X\-Ray SDK records a subsegment with details about the call from its point of view\. However, DynamoDB doesn't send a corresponding segment\. X\-Ray uses the information in the subsegment to create an inferred segment to represent the DynamoDB resource in the service map, and adds it to the trace document\.
 
-To get multiple traces from the API, you need a list of trace IDs, which you can extract from the output of `get-trace-summaries` with an [AWS CLI query](https://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html#controlling-output-filter)\. Redirect the list to the intput of `batch-get-traces` to get full traces for a specific time period\.
+To get multiple traces from the API, you need a list of trace IDs, which you can extract from the output of `get-trace-summaries` with an [AWS CLI query](https://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html#controlling-output-filter)\. Redirect the list to the input of `batch-get-traces` to get full traces for a specific time period\.
 
 **Example Script to get full traces for a one minute period**  
 

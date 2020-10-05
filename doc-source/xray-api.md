@@ -1,6 +1,6 @@
 # AWS X\-Ray API<a name="xray-api"></a>
 
-The X\-Ray API provides access to all X\-Ray functionality through the AWS SDK, AWS Command Line Interface, or directly over HTTPS\. The [X\-Ray API Reference](https://docs.aws.amazon.com//xray/latest/api/Welcome.html) documents input parameters each API action, and the fields and data types that they return\.
+The X\-Ray API provides access to all X\-Ray functionality through the AWS SDK, AWS Command Line Interface, or directly over HTTPS\. The [X\-Ray API Reference](https://docs.aws.amazon.com//xray/latest/api/Welcome.html) documents input parameters for each API action, and the fields and data types that they return\.
 
 You can use the AWS SDK to develop programs that use the X\-Ray API\. The X\-Ray console and X\-Ray daemon both use the AWS SDK to communicate with X\-Ray\. The AWS SDK for each language has a reference document for classes and methods that map to X\-Ray API actions and types\.
 

@@ -17,4 +17,5 @@ The X\-Ray SDKs include plugins for additional integration with AWS services\. F
 + [Elastic Load Balancing and AWS X\-Ray](xray-services-elb.md)
 + [AWS Lambda and AWS X\-Ray](xray-services-lambda.md)
 + [Amazon SNS and AWS X\-Ray](xray-services-sns.md)
++ [AWS Step Functions and AWS X\-Ray](xray-services-stepfunctions.md)
 + [Amazon SQS and AWS X\-Ray](xray-services-sqs.md)

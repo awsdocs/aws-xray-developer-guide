@@ -16,7 +16,7 @@ You can use the AWS X\-Ray console to configure sampling rules for your services
 You can configure sampling for the following use cases:
 + **API Gateway Entrypoint** – API Gateway supports sampling and active tracing\. To enable active tracing on an API stage, see [Amazon API Gateway active tracing support for AWS X\-Ray](xray-services-apigateway.md)\.
 + **AWS AppSync** – AWS AppSync supports sampling and active tracing\. To enable active tracing on AWS AppSync requests, see [Tracing with AWS X\-Ray](https://docs.aws.amazon.com/appsync/latest/devguide/x-ray-tracing.html)\.
-+ **Instrument X\-Ray SDK on compute platforms** – When using compute platforms such as Amazon EC2, Amazon ECS, or AWS Elastic Beanstalk, sampling is supported when the application has been instrumented with the lastest X\-Ray SDK\.
++ **Instrument X\-Ray SDK on compute platforms** – When using compute platforms such as Amazon EC2, Amazon ECS, or AWS Elastic Beanstalk, sampling is supported when the application has been instrumented with the latest X\-Ray SDK\.
 
 ## Customizing sampling rules<a name="xray-console-custom"></a>
 

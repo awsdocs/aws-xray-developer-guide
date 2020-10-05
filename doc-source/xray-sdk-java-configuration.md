@@ -109,7 +109,7 @@ public class WebConfig {
   static {
   AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withPlugin(new EC2Plugin());
 
-  URL ruleFile = WebConfig.class.getResource("file://sampling-rules.json");
+  URL ruleFile = WebConfig.class.getResource("/sampling-rules.json");
   builder.withSamplingStrategy(new CentralizedSamplingStrategy(ruleFile));
 
   AWSXRay.setGlobalRecorder(builder.build());

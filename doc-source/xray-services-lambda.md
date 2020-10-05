@@ -10,9 +10,11 @@ If your Lambda function runs on a schedule, or is invoked by a service that is n
 
 1. Open the [AWS Lambda console](https://console.aws.amazon.com/lambda)\.
 
+1. Select **Functions** from the left navigation bar\.
+
 1. Choose your function\.
 
-1. Choose **Configuration**\.
+1. Select **Edit** in the Monitoring tools card\.
 
 1. Under **AWS X\-Ray**, enable **Active tracing**\.
 

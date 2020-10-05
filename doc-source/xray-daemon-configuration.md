@@ -113,7 +113,7 @@ You can also use a YAML format file to configure the daemon\. Pass the configura
 + `ProxyAddress` – Upload segments to AWS X\-Ray through a proxy\.
 + `Endpoint` – Change the X\-Ray service endpoint to which the daemon sends segment documents\.
 + `NoVerifySSL` – Disable TLS certificate verification\.
-+ `Version` – Daemon configuration file format version\.
++ `Version` – Daemon configuration file format version\. The file format version is a **required** field\.
 
 **Example Xray\-daemon\.yaml**  
 This configuration file changes the daemon's listening port to 3000, turns off checks for instance metadata, sets a role to use for uploading segments, and changes region and logging options\.  

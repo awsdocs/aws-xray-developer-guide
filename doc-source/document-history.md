@@ -1,11 +1,14 @@
 # Document History for AWS X\-Ray<a name="document-history"></a>
 
-The following table describes the important changes to the documentation for AWS X\-Ray \. For notification about updates to this documentation, you can subscribe to an RSS feed\.
+The following table describes the important changes to the documentation for AWS X\-Ray\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 
-**Latest documentation update**: September 3, 2020
+**Latest documentation update**: October 1, 2020
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Added Downloadable Daemons](#document-history) | AWS X\-Ray introduces support daemon for Linux ARM64\. For more information, see [AWS X\-Ray daemonbrazil ws ](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html) | October 1, 2020 | 
+| [Added functionality](#document-history) | AWS X\-Ray now supports active integration with Amazon CloudWatch Synthetics\. This allows you to see details about a Synthetics canary client node such as response time and status\. You can also do analysis in the Analytics console based on information from a Synthetics canary client node\. For more information, see [ Debugging CloudWatch synthetics canaries using X\-Ray ](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-cloudwatch-synthetics.html)\. | September 24, 2020 | 
+| [Added functionality](#document-history) | AWS X\-Ray now supports tracing end\-to\-end workflows for AWS Step Functions\. You can visualize the components of your state machine, identify performance bottlenecks, and troubleshoot requests that resulted in an error\. For more information, see [AWS Step Functions and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-stepfunctions.html)\. | September 14, 2020 | 
 | [Added functionality](#document-history) | AWS X\-Ray introduces insights to continuously analyze trace data in your account to identify emergent issues in your applications\. Insights records incidents and track incident impact until resolution\. For more information, see [ Using insights in the AWS X\-Ray console](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-insights.html) | September 3, 2020 | 
 | [Added functionality](#document-history) | AWS X\-Ray introduces the Java auto\-instrumentation agent, enabling customers to collect trace data without having to modify existing Java\-based application\. You can now trace Java web and servlet based applications with minimal configuration change and no code change\. For more information, see [AWS X\-Ray auto\-instrumentation agent for Java](https://docs.aws.amazon.com/xray/latest/devguide/aws-x-ray-auto-instrumentation-agent-for-java.html)\. | September 3, 2020 | 
 | [Added functionality](#document-history) | AWS X\-Ray has added a new **Groups** page to the X\-Ray console to help ease the creation and management of groups of traces\. For more information, see [Configuring groups in the X\-Ray console](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-groups.html)\. | August 24, 2020 | 

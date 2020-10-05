@@ -55,9 +55,9 @@ MIDDLEWARE = [
 ]
 ```
 
-Add the X\-Ray SDK Django app to the `INSTALLED_APPS` list in your `settings.py` file\. This will allow the X\-Ray recorder to be configured during your app's startup.
+Add the X\-Ray SDK Django app to the `INSTALLED_APPS` list in your `settings.py` file\. This will allow the X\-Ray recorder to be configured during your app's startup\.
 
-**Example settings\.py \- X\-Ray SDK Django App**  
+**Example settings\.py \- X\-Ray SDK for Python Django app**  
 
 ```
 INSTALLED_APPS = [

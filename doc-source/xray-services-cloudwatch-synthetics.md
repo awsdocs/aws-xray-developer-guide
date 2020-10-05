@@ -17,7 +17,7 @@ Canaries follow the same routes and perform the same actions and behaviors as yo
 
 To learn more about setting up Synthetics tests, see [Using Synthetics to Create and Manage Canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html)\.
 
-![\[Example canary node in x-ray service map.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-show-canary.png)
+![\[Example canary node in x-ray service map.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-show-canary-active.png)
 
 The following examples show common use cases for debugging issues that your Synthetics canaries raise\. Each example demonstrates a key strategy for debugging using either the service map or the X\-Ray Analytics console\.
 
@@ -36,13 +36,15 @@ For more information about how to read and interact with the X\-Ray Analytics co
 
 ## View canaries with increased error reporting in the service map<a name="xray-services-cloudwatch-synthetics-workflows-which-canary"></a>
 
-To see which canaries have an increase in errors, faults, throttling rates, or slow response times within your X\-Ray service map, you can highlight Synthetics canary client nodes using the `Client::Synthetic` [filter](xray-console-filters.md)\. Clicking a Synthetics canary node displays the response time distribution of the entire request\. 
+ To see which canaries have an increase in errors, faults, throttling rates, or slow response times within your X\-Ray service map, you can highlight Synthetics canary client nodes using the `Client::Synthetic` [filter](xray-console-filters.md)\. Clicking a node displays the response time distribution of the entire request\. Clicking an edge between two nodes shows details about the requests that traveled that connection\. You can also view "remote" inferred nodes for related downstream services in your service map\. 
 
-![\[Example canary node in x-ray service map with edge details.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-edgedetail.png)
+When you click the Synthetics node, there is a **View in Synthetics** button on side panel which redirects you to the Synthetics console where you can check the canary details\.
+
+![\[Example canary node in x-ray service map with service details.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-servicedetail.png)
 
 ## Use trace maps for individual traces to view each request in detail<a name="xray-services-cloudwatch-synthetics-workflows-trace-map"></a>
 
-To determine which service results in the most latency or is causing an error, invoke the trace map by selecting the trace in the service map\. Individual trace maps display the end\-to\-end path of a single request\. Use this to understand the services invoked, and visualize the upstream and downstream services\. 
+To determine which service results in the most latency or is causing an error, invoke the trace map by selecting the trace in the service map\. Individual trace maps display the end\-to\-end path of a single request\. Use this to understand the services invoked, and visualize the upstream and downstream services\.
 
 ![\[Example canary node in x-ray trace map.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-tracemap.png)
 
@@ -52,7 +54,7 @@ Once you receive a CloudWatch alarm for failures in a Synthetics canary, use the
 
 The following example shows that the Synthetics test for API “XXX” running on API Gateway is failing due to a throughput capacity exception from the Amazon DynamoDB table\.
 
-![\[Example canary node in x-ray service map.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-select.png)
+![\[Example canary node in x-ray service map.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-active-select.png)
 
 ![\[Example canary node root cause.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-rootcause.png)
 
@@ -78,7 +80,7 @@ Pinpoint the time a change occured to correlate that change to an increase in is
 
 ## Use groups to focus on synthetics tests<a name="xray-services-cloudwatch-synthetics-groups"></a>
 
-To focus on a certain set of workflows, such as a Synthetics tests for application “www” running on AWS Elastic Beanstalk\. You can create an X\-Ray group using a filter expression\.
+ You can create an X\-Ray group using a filter expression to focus on a certain set of workflows, such as a Synthetics tests for application “www” running on AWS Elastic Beanstalk\. Use the [complex keywords](xray-console-filters.md#console-filters-complex) `service()` and `edge()` to filter through services and edges\.
 
 **Example Group filter expression**  
 
@@ -86,4 +88,4 @@ To focus on a certain set of workflows, such as a Synthetics tests for applicati
 "edge(id(name: "www", type: "client::Synthetics"), id(name: "www", type: "AWS::ElasticBeanstalk::Environment"))" 
 ```
 
-![\[Example nodes for Elastic Beanstalk www.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-www.png)
+![\[Example nodes for Elastic Beanstalk www.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/synthetics-canary-active-www.png)
