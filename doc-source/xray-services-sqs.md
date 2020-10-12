@@ -63,3 +63,28 @@ if (!messages.isEmpty()) {
     }
 }
 ```
+
+If the consumer application is processing a single message and propagating that context to a single segment, the above mentioned approach is recommended. For batch processing of more than one message, either `AWSXRay.addParentTraces(List<TraceHeader> parentTraces)` or `AWSXRay.beginSegment(String name, List<TraceHeader> parentTraces)` can be used to propagate many-to-one trace context to the current segment or to a new segment respectively.
+
+**Example : Retrieve the trace header batch and propagate to current segment** 
+
+```
+// Receive the message from the queue, specifying the "AWSTraceHeader"
+ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest()
+        .withQueueUrl(QUEUE_URL)
+        .withMaxNumberOfMessages(10)
+        .withAttributeNames("AWSTraceHeader");
+List<Message> messages = sqs.receiveMessage(receiveMessageRequest).getMessages();
+
+if (!messages.isEmpty()) {
+    List<TraveHeader> traceHeaders = new ArrayList<TraceHeader>();
+    for(Message msg: messages){
+        // Retrieve the trace header from the AWSTraceHeader message system attribute
+        String traceHeaderStr = message.getAttributes().get("AWSTraceHeader");
+        if (traceHeaderStr != null) {
+            traceHeaders.add(TraceHeader.fromString(traceHeaderStr));
+    }
+
+    AWSXRay.addParentTraces(traceHeaders);
+}
+```
