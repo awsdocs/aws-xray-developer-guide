@@ -24,7 +24,7 @@ $ docker pull amazon/aws-xray-daemon
               "containerPort": 2000,
               "protocol": "udp"
           }
-       ],
+       ]
     }
 ```
 
@@ -83,7 +83,7 @@ In your task definition, the configuration depends on the networking mode that y
               "containerPort": 2000,
               "protocol": "udp"
           }
-       ],
+       ]
     },
     {
       "name": "scorekeep-api",
