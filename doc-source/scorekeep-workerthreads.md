@@ -14,7 +14,7 @@ Exception in thread "Thread-2" com.amazonaws.xray.exceptions.SegmentNotFoundExce
 ...
 ```
 
-To fix this, the application uses `GetTraceEntity` to get a reference to the segment in the main thread, and `SetTraceEntity` to pass the segment back to the recorder in the worker thread\.
+To fix this, the application uses `GetTraceEntity` to get a reference to the segment in the main thread, and `Entity.run()` to safely run the worker thread code with access to the segment's context\.
 
 **Example [https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/MoveFactory.java#L70](https://github.com/awslabs/eb-java-scorekeep/tree/xray/src/main/java/scorekeep/MoveFactory.java#L70) – Passing trace context to a worker thread**  
 
@@ -28,10 +28,11 @@ import [com\.amazonaws\.xray\.entities\.Subsegment](https://docs.aws.amazon.com/
       Entity segment = recorder.getTraceEntity();
       Thread comm = new Thread() {
         public void run() {
-          recorder.setTraceEntity(segment);
-          Subsegment subsegment = AWSXRay.beginSubsegment("## Send notification");
-          Sns.sendNotification("Scorekeep game completed", "Winner: " + userId);
-          AWSXRay.endSubsegment();
+          segment.run(() -> {
+            Subsegment subsegment = AWSXRay.beginSubsegment("## Send notification");
+            Sns.sendNotification("Scorekeep game completed", "Winner: " + userId);
+            AWSXRay.endSubsegment();
+          }
         }
 ```
 
