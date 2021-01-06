@@ -88,7 +88,7 @@ The following table describes valid values for each property\. Property names ar
 
 ### Manual instrumentation<a name="XRayAutoInstrumentationAgent-ManualInstrumentation"></a>
 
-If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\.
+If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\. Note that the SDK's custom servlet filters mentioned in [tracing incoming requests](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-filters.html) are not compatible with the X-Ray agent.
 
 **Note**  
 You must use the latest version of the X\-Ray SDK to perform manual instrumentation while also using the agent\. 
@@ -100,7 +100,7 @@ If you are working in a Maven project, add the following dependencies to your `p
   <dependency> 
     <groupId>com.amazonaws</groupId> 
     <artifactId>aws-xray-recorder-sdk-core</artifactId> 
-    <version>2.7.1</version> 
+    <version>2.8.0</version> 
   </dependency> 
   </dependencies>
 ```
@@ -108,10 +108,10 @@ If you are working in a Maven project, add the following dependencies to your `p
 If you are working in a Gradle project, add the following dependencies to your `build.gradle` file\.
 
 ```
-implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.7.1' 
+implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.8.0' 
 ```
 
-You can add [ custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
+You can add [custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
 
 ## Troubleshooting<a name="XRayAutoInstrumentationAgent-Troubleshooting"></a>
 
