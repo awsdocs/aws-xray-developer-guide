@@ -62,3 +62,27 @@ When you create a subsegment within a segment or another subsegment, the X\-Ray 
     }
   },
 ```
+
+For asynchronous and multi-threaded programming, you must manually pass the subsegment to the `endSubsegment()` method to ensure it is closed correctly because the X-Ray context may be modified during async execution. If an asynchronous subsegment is closed after its parent segment is closed, this method will automatically stream the entire segment to the X-Ray daemon.
+
+**Example App.java Asynchronous Subsegment**
+
+```
+@GetMapping("/api")
+public ResponseEntity<?> api() {
+    CompletableFuture.runAsync(() -> {
+        Subsegment subsegment = AWSXRay.beginSubsegment("Async Work");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            subsegment.addException(e);
+            throw e;
+        } finally {
+            AWSXRay.endSubsegment(subsegment);
+        }
+    });
+    return ResponseEntity.ok().build();
+}
+```
+
+In this example, a segment will be created for the `api` method in this Spring app and ended when the method returns. The segment will not be streamed until its child subsegment `Async Work` is manually ended when the completeable future finishes.
