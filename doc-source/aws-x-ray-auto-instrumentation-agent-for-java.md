@@ -2,7 +2,7 @@
 
 The AWS X\-Ray auto\-instrumentation agent for Java is a tracing solution that instruments your Java web applications with minimal development effort\. The agent enables tracing automatically for servlet\-based applications and all of the agent's downstream requests made with supported frameworks and libraries\. This includes downstream Apache HTTP requests, AWS SDK requests, and SQL queries made using a JDBC driver\. The agent automatically propagates X\-Ray context, including all active segments and sub\-segments, across threads\. All of the configurations and versatility of the X\-Ray SDK are still available with the Java agent, and suitable defaults were chosen to ensure the agent works out\-of\-box\.
 
-The X\-Ray agent solution is best suited for servlet\-based, request\-response Java web application servers\. If your application uses an asynchronous framework, like Spring WebFlux, or is not well\-modeled as a request\-response service, you might want to consider manual instrumentation with the SDK instead\. 
+The X\-Ray agent solution is best suited for servlet\-based, request\-response Java web application servers\. If your application uses an asynchronous framework, or is not well\-modeled as a request\-response service, you might want to consider manual instrumentation with the SDK instead\. 
 
 The X\-Ray agent is built using the Distributed Systems Comprehension Toolkit, or DiSCo\. DiSCo is an open\-source framework for building Java agents that can be used in distributed systems\. While it is not necessary to understand DiSCo to use the X\-Ray agent, you can learn more about the project by visiting its [homepage on GitHub](https://github.com/awslabs/disco)\. The X\-Ray agent is also fully open sourced\. To view the source code, make contributions, or raise issues about the agent, visit its [repository on GitHub](https://github.com/aws/aws-xray-java-agent)\.
 
@@ -28,7 +28,7 @@ To get started with the X\-Ray auto\-instrumentation Java agent in your own appl
        └── disco-java-agent-web-plugin.jar
    ```
 
-1. Modify the JVM arguments of your application to include the following, which enables the agent\. The process to modify JVM arguments varies depending on the tools and frameworks you use to launch your Java server, so consult the documentation of your server framework for specific guidance\.
+1. Modify the JVM arguments of your application to include the following, which enables the agent\. Ensure the `-javaagent` argument is placed *before* the `-jar` argument if applicable. The process to modify JVM arguments varies depending on the tools and frameworks you use to launch your Java server, so consult the documentation of your server framework for specific guidance\.
 
    ```
    -javaagent:/<path-to-disco>/disco-java-agent.jar=pluginPath=/<path-to-disco>/disco-plugins
@@ -88,7 +88,7 @@ The following table describes valid values for each property\. Property names ar
 
 ### Manual instrumentation<a name="XRayAutoInstrumentationAgent-ManualInstrumentation"></a>
 
-If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\.
+If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\. Note that the SDK's custom servlet filters mentioned in [tracing incoming requests](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-filters.html) are not compatible with the X-Ray agent.
 
 **Note**  
 You must use the latest version of the X\-Ray SDK to perform manual instrumentation while also using the agent\. 
@@ -100,7 +100,7 @@ If you are working in a Maven project, add the following dependencies to your `p
   <dependency> 
     <groupId>com.amazonaws</groupId> 
     <artifactId>aws-xray-recorder-sdk-core</artifactId> 
-    <version>2.7.1</version> 
+    <version>2.8.0</version> 
   </dependency> 
   </dependencies>
 ```
@@ -108,10 +108,10 @@ If you are working in a Maven project, add the following dependencies to your `p
 If you are working in a Gradle project, add the following dependencies to your `build.gradle` file\.
 
 ```
-implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.7.1' 
+implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.8.0' 
 ```
 
-You can add [ custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
+You can add [custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
 
 ## Troubleshooting<a name="XRayAutoInstrumentationAgent-Troubleshooting"></a>
 
