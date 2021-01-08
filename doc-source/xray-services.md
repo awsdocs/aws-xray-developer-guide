@@ -19,3 +19,4 @@ The X\-Ray SDKs include plugins for additional integration with AWS services\. F
 + [Amazon SNS and AWS X\-Ray](xray-services-sns.md)
 + [AWS Step Functions and AWS X\-Ray](xray-services-stepfunctions.md)
 + [Amazon SQS and AWS X\-Ray](xray-services-sqs.md)
++ [Amazon S3 and AWS X\-Ray](xray-services-s3.md)

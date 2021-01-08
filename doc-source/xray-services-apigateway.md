@@ -2,6 +2,9 @@
 
 You can use X\-Ray to trace and analyze user requests as they travel through your Amazon API Gateway APIs to the underlying services\. API Gateway supports X\-Ray tracing for all API Gateway endpoint types: Regional, edge\-optimized, and private\. You can use X\-Ray with Amazon API Gateway in all AWS Regions where X\-Ray is available\. For more information, see [Trace API Gateway API Execution with AWS X\-Ray](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html) in the Amazon API Gateway Developer Guide\.
 
+**Note**  
+X\-Ray only supports tracing for REST APIs through API Gateway\.
+
 Amazon API Gateway provides [active tracing](xray-usage.md#xray-usage-services) support for AWS X\-Ray\. Enable active tracing on your API stages to sample incoming requests and send traces to X\-Ray\.
 
 **To enable active tracing on an API stage**

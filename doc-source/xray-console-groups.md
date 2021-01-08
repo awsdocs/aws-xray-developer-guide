@@ -21,6 +21,8 @@ Groups are billed by the number of retrieved traces that match the filter expres
 + [Delete a group](#xray-console-group-delete)
 + [View group metrics in Amazon CloudWatch](#xray-console-group-cloudwatch)
 
+
+
 ## Create a group in the X\-Ray console<a name="xray-console-group-create-console"></a>
 
 1. Sign in to the AWS Management Console and open the X\-Ray console at [https://console\.aws\.amazon\.com/xray/home](https://console.aws.amazon.com/xray/home)\.

@@ -16,7 +16,7 @@ To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_
 ```
 {
       "name": "envoy",
-      "image": "840364872350.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.12.5.0-prod",
+      "image": "840364872350.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.15.1.0-prod",
       "essential": true,
       "environment": [
         {

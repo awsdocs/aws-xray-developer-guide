@@ -28,7 +28,7 @@ import [com\.amazonaws\.xray\.entities\.Subsegment](https://docs.aws.amazon.com/
       Entity segment = recorder.getTraceEntity();
       Thread comm = new Thread() {
         public void run() {
-          segment.run(() -> {
+         segment.run(() -> {
             Subsegment subsegment = AWSXRay.beginSubsegment("## Send notification");
             Sns.sendNotification("Scorekeep game completed", "Winner: " + userId);
             AWSXRay.endSubsegment();

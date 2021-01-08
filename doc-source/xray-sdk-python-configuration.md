@@ -33,7 +33,8 @@ xray_recorder.configure(plugins=plugins)
 patch_all()
 ```
 
-**Note**: Since `plugins` are passed in as a tuple, be sure to include a trailing `,` when specifying a single plugin. For example, `plugins = ('EC2Plugin',)`
+**Note**  
+Since `plugins` are passed in as a tuple, be sure to include a trailing `,` when specifying a single plugin\. For example, `plugins = ('EC2Plugin',)` 
 
 You can also use [environment variables](#xray-sdk-python-configuration-envvars), which take precedence over values set in code, to configure the recorder\.
 

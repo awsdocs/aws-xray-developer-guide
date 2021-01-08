@@ -28,7 +28,7 @@ To get started with the X\-Ray auto\-instrumentation Java agent in your own appl
        └── disco-java-agent-web-plugin.jar
    ```
 
-1. Modify the JVM arguments of your application to include the following, which enables the agent\. Ensure the `-javaagent` argument is placed *before* the `-jar` argument if applicable. The process to modify JVM arguments varies depending on the tools and frameworks you use to launch your Java server, so consult the documentation of your server framework for specific guidance\.
+1. Modify the JVM arguments of your application to include the following, which enables the agent\. Ensure the `-javaagent` argument is placed *before* the `-jar` argument if applicable\. The process to modify JVM arguments varies depending on the tools and frameworks you use to launch your Java server, so consult the documentation of your server framework for specific guidance\.
 
    ```
    -javaagent:/<path-to-disco>/disco-java-agent.jar=pluginPath=/<path-to-disco>/disco-plugins
@@ -88,7 +88,7 @@ The following table describes valid values for each property\. Property names ar
 
 ### Manual instrumentation<a name="XRayAutoInstrumentationAgent-ManualInstrumentation"></a>
 
-If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\. Note that the SDK's custom servlet filters mentioned in [tracing incoming requests](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-filters.html) are not compatible with the X-Ray agent.
+If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\. Note that the SDK's custom servlet filters mentioned in [Tracing Incoming Requests](xray-sdk-java-filters.md) are not compatible with the X\-Ray agent\. 
 
 **Note**  
 You must use the latest version of the X\-Ray SDK to perform manual instrumentation while also using the agent\. 
@@ -111,7 +111,7 @@ If you are working in a Gradle project, add the following dependencies to your `
 implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.8.0' 
 ```
 
-You can add [custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
+You can add [ custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
 
 ## Troubleshooting<a name="XRayAutoInstrumentationAgent-Troubleshooting"></a>
 

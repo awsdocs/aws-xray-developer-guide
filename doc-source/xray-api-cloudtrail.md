@@ -10,6 +10,10 @@ AWS X\-Ray integrates with AWS CloudTrail to record API actions made by a user, 
 + [https://docs.aws.amazon.com/xray/latest/api/API_DeleteGroup.html](https://docs.aws.amazon.com/xray/latest/api/API_DeleteGroup.html)
 + [https://docs.aws.amazon.com/xray/latest/api/API_GetGroup.html](https://docs.aws.amazon.com/xray/latest/api/API_GetGroup.html)
 + [https://docs.aws.amazon.com/xray/latest/api/API_GetGroups.html](https://docs.aws.amazon.com/xray/latest/api/API_GetGroups.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetInsight.html](https://docs.aws.amazon.com/xray/latest/api/API_GetInsight.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetInsightEvents.html](https://docs.aws.amazon.com/xray/latest/api/API_GetInsightEvents.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetInsightImpactGraph.html](https://docs.aws.amazon.com/xray/latest/api/API_GetInsightImpactGraph.html)
++ [https://docs.aws.amazon.com/xray/latest/api/API_GetInsightSummaries.html](https://docs.aws.amazon.com/xray/latest/api/API_GetInsightSummaries.html)
 
 **To create a trail**
 
