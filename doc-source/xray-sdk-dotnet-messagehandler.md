@@ -50,7 +50,7 @@ namespace SampleEBWebApplication
 
 ## Instrumenting incoming requests \(\.NET Core\)<a name="xray-sdk-dotnet-messagehandler-startupcs"></a>
 
-To instrument requests served by your application, call `UseXRay` method before any other middleware in the `Configure` method of your `Startup` class\.
+To instrument requests served by your application, call `UseXRay` method before any other middleware in the `Configure` method of your `Startup` class as ideally X-Ray middleware should be the first middleware to process the request and last middleware to process the response in the pipeline\.
 
 **Note**
 
@@ -66,9 +66,8 @@ using Microsoft.AspNetCore.Builder;
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   {
     app.UseXRay("MyApp");
-    app.UseExceptionHandler("/Error");
-    app.UseStaticFiles();
-    app.UseMVC();
+	// rest of the middlewares
+	...
   }
 ```
 
@@ -81,8 +80,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   {
     app.UseExceptionHandler("/Error");
     app.UseXRay("MyApp");
-    app.UseStaticFiles();
-    app.UseMVC();
+    // rest of the middlewares
+	...
   }
 ```
 
