@@ -53,6 +53,7 @@ namespace SampleEBWebApplication
 To instrument requests served by your application, call `UseXRay` method before any other middleware in the `Configure` method of your `Startup` class\.
 
 **Note**
+
 For .NET Core 2.0, if you have `UseExceptionHandler` method in the application, make sure to call `UseXRay` after `UseExceptionHandler` method so as to record exceptions\.
 
 **Example Startup\.cs**  
