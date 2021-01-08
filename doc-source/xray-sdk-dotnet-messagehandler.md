@@ -66,8 +66,8 @@ using Microsoft.AspNetCore.Builder;
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   {
     app.UseXRay("MyApp");
-	// rest of the middlewares
-	...
+    // rest of the middlewares
+    ...
   }
 ```
 
@@ -81,7 +81,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     app.UseExceptionHandler("/Error");
     app.UseXRay("MyApp");
     // rest of the middlewares
-	...
+    ...
   }
 ```
 
