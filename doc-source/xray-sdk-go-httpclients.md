@@ -9,3 +9,11 @@ Client creates a shallow copy of the provided http client, defaulting to `http.D
 ```
 myClient := xray.Client(http-client)
 ```
+
+**Example main\.go – Trace downstream HTTP call with ctxhttp library**
+
+Below example provides tracing outgoing http call with ctxhttp library using `xray.Client`. `ctx` can be passed from upstream call. 
+
+```
+resp, err := ctxhttp.Get(ctx, xray.Client(nil), url)
+```
