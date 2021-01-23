@@ -50,9 +50,28 @@ namespace SampleEBWebApplication
 
 ## Instrumenting incoming requests \(\.NET Core\)<a name="xray-sdk-dotnet-messagehandler-startupcs"></a>
 
-To instrument requests served by your application, call the `UseExceptionHandler`, `UseXRay`, and `UseStaticFiles` methods in the `Configure` method of your `Startup` class\.
+To instrument requests served by your application, call `UseXRay` method before any other middleware in the `Configure` method of your `Startup` class as ideally X-Ray middleware should be the first middleware to process the request and last middleware to process the response in the pipeline\.
+
+**Note**
+
+For .NET Core 2.0, if you have `UseExceptionHandler` method in the application, make sure to call `UseXRay` after `UseExceptionHandler` method so as to record exceptions\.
 
 **Example Startup\.cs**  
+
+****.NET Core 2.1 and above****
+
+```
+using Microsoft.AspNetCore.Builder;
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+  {
+    app.UseXRay("MyApp");
+    // rest of the middlewares
+    ...
+  }
+```
+
+****.NET Core 2.0****
 
 ```
 using Microsoft.AspNetCore.Builder;
@@ -61,12 +80,10 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   {
     app.UseExceptionHandler("/Error");
     app.UseXRay("MyApp");
-    app.UseStaticFiles();
-    app.UseMVC();
+    // rest of the middlewares
+    ...
   }
 ```
-
-Always call `UseXRay` after `UseExceptionHandler` to record exceptions\. If you use other middleware, enable it after you call `UseXRay`\.
 
 The `UseXRay` method can also take a [configuration object](xray-sdk-dotnet-configuration.md) as a second argument\.
 
