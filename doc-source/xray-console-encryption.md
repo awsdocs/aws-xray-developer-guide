@@ -13,6 +13,9 @@ AWS KMS charges when X\-Ray uses a CMK to encrypt or decrypt trace data\.
 **Customer managed CMK** – Pay for key storage and use\.
 See [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing/) for details\.
 
+**Note**  
+ X\-Ray insights notifications sends events to Amazon EventBridge, which does not currently support customer managed CMKs\. For more information, see [Data Protection in Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/data-protection.html)\. 
+
 You must have user\-level access to a customer managed CMK to configure X\-Ray to use it, and to then view encrypted traces\. See [User permissions for encryption](security_iam_service-with-iam.md#xray-permissions-encryption) for more information\.
 
 **To configure X\-Ray to use a CMK for encryption**

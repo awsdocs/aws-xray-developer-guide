@@ -27,15 +27,9 @@ Groups are billed by the number of retrieved traces that match the filter expres
 
 1. Sign in to the AWS Management Console and open the X\-Ray console at [https://console\.aws\.amazon\.com/xray/home](https://console.aws.amazon.com/xray/home)\.
 
-1. Open the **Create group** page from the **Groups** page in the left navigation pane, or from the group menu on one of the following pages\.
-   + **Service map**
-   + **Traces**
-   + **Analytics**
+1. Open the **Create group** page from the **Groups** page in the left navigation pane, or from the group menu on one of the following pages: **Service map**, **Traces**, and **Analytics**\.
 
-1. Choose **Create group** on the group menu, or on the **Groups** page\.
-
-1. On the **Create group** page, enter a name for the group\. A group name can have a maximum of 32 characters, and contain alphanumeric characters and dashes\. Group names are case sensitive\.  
-![\[Create group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-create.png)
+1. On the **Create group** page, enter a name for the group\. A group name can have a maximum of 32 characters, and contain alphanumeric characters and dashes\. Group names are case sensitive\.
 
 1. Enter a filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
 
@@ -43,9 +37,11 @@ Groups are billed by the number of retrieved traces that match the filter expres
    fault = true AND http.url CONTAINS "example/game" AND responsetime >= 5
    ```
 
-1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.
+1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.  
+![\[Insights check boxes on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-insights.png)
 
-1. In **Tags**, enter a tag key, and optionally, a tag value\. As you add a tag, a new line appears for you to enter another tag\. Tag keys must be unique\. To delete a tag, choose **X** at the end of the tag's row\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
+1. In **Tags**, enter a tag key, and optionally, a tag value\. As you add a tag, a new line appears for you to enter another tag\. Tag keys must be unique\. To delete a tag, choose **X** at the end of the tag's row\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.  
+![\[Tag fields on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-tags.png)
 
 1. Choose **Create group**\.
 
@@ -53,7 +49,7 @@ Groups are billed by the number of retrieved traces that match the filter expres
 
 1. Sign in to the AWS Management Console and open the X\-Ray console at [https://console\.aws\.amazon\.com/xray/home](https://console.aws.amazon.com/xray/home)\.
 
-1. Open one of the following pages from the navigation pane\.
+1. Open one of the following pages from the navigation pane:
    + **Service map**
    + **Traces**
    + **Analytics**
@@ -79,8 +75,7 @@ Groups are billed by the number of retrieved traces that match the filter expres
    1. On the group menu on one of the following pages, point to a group, and then choose **Edit**\.
       + **Service map**
       + **Traces**
-      + **Analytics**  
-![\[Edit group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-edit.png)
+      + **Analytics**
 
 1. Although you can't rename a group, you can update the filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`, where the request URL address contains `example/game`, and response time for requests was greater than or equal to five seconds\.
 
@@ -88,9 +83,11 @@ Groups are billed by the number of retrieved traces that match the filter expres
    fault = true AND http.url CONTAINS "example/game" AND responsetime >= 5
    ```
 
-1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.
+1. In **Insights**, enable or disable insights and insights notifications for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.  
+![\[Insights check boxes on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-insights.png)
 
-1. In **Tags**, edit tag keys and values\. Tag keys must be unique\. Tag values are optional; you can delete values if you want\. To delete a tag, choose **X** at the end of the tag's row\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
+1. In **Tags**, edit tag keys and values\. Tag keys must be unique\. Tag values are optional; you can delete values, if you want\. To delete a tag, choose **X** at the end of the tag's row\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.  
+![\[Tag fields on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-tags.png)
 
 1. When you're finished updating the filter expression, choose **Update group**\.
 
