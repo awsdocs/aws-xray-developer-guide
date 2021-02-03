@@ -2,7 +2,7 @@
 
 The open source version of the AWS X-Ray Developer Guide
 
-NOTE: The default branch for this repo has changed to `main`: https://github.com/awsdocs/aws-xray-developer-guide/tree/main
+NOTE: The default branch for this repo has changed to `main`: https://github.com/awsdocs/aws-xray-developer-guide/tree/main. 
 If you have cloned the previous default branch, please update your local repo to use the `main` branch.
 
 ## License Summary
