@@ -42,7 +42,7 @@ option_settings:
 Elastic Beanstalk passes a configuration file to the daemon and outputs logs to a standard location\.
 
 **On Windows Server Platforms**
-+ **Configuration file** – `C:\Progam Files\Amazon\XRay\cfg.yaml`
++ **Configuration file** – `C:\Program Files\Amazon\XRay\cfg.yaml`
 + **Logs** – `c:\Program Files\Amazon\XRay\logs\xray-service.log`
 
 **On Linux Platforms**

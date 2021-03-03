@@ -7,11 +7,14 @@ The X\-Ray daemon is an open source project\. You can follow the project and sub
 
 On AWS Lambda and AWS Elastic Beanstalk, use those services' integration with X\-Ray to run the daemon\. Lambda runs the daemon automatically any time a function is invoked for a sampled request\. On Elastic Beanstalk, [use the `XRayEnabled` configuration option](xray-daemon-beanstalk.md) to run the daemon on the instances in your environment\.
 
-To run the X\-Ray daemon locally, on\-premises, or on other AWS services, [download it from Amazon S3](#xray-daemon-downloading), [run it](#xray-daemon-running), and then [give it permission](#xray-daemon-permissions) to upload segment documents to X\-Ray\.
+To run the X\-Ray daemon locally, on\-premises, or on other AWS services, download it, [run it](#xray-daemon-running), and then [give it permission](#xray-daemon-permissions) to upload segment documents to X\-Ray\.
 
 ## Downloading the daemon<a name="xray-daemon-downloading"></a>
 
-You can download the daemon from Amazon S3 to run it locally, or to install it on an Amazon EC2 instance on launch\.
+You can download the daemon from Amazon S3, Docker Hub, or Amazon ECR and then run it locally, or install it on an Amazon EC2 instance on launch\.
+
+------
+#### [ Amazon S3 ]
 
 **X\-Ray daemon installers and executables**
 + **Linux \(executable\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-3.x.zip.sig)\)
@@ -27,6 +30,38 @@ You can download the daemon from Amazon S3 to run it locally, or to install it o
 These links always point to the latest release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
+
+------
+#### [ Amazon ECR ]
+
+ As of version 3\.2\.0 the daemon can be found on [Amazon ECR](https://gallery.ecr.aws/xray/aws-xray-daemon)\. Before pulling an image you should [authenticate your docker client](https://docs.aws.amazon.com/AmazonECR/latest/public/public-registries.html#public-registry-auth) to the Amazon ECR public registry\. 
+
+ Run the following command to authenticate to the public ECR registry using `get-login-password` \(AWS CLI\): 
+
+```
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+```
+
+Pull latest released version tag bu running the following command:
+
+```
+docker pull public.ecr.aws/xray/aws-xray-daemon:latest
+```
+
+Prior or alpha releases can be downloaded by replacing `latest` with `alpha` or a specific version number\. It is not recommended to use a daemon image with an alpha tag in a production environment\.
+
+------
+#### [ Docker Hub ]
+
+The daemon can be found on [Docker Hub](https://hub.docker.com/r/amazon/aws-xray-daemon)\. To download the latest released version, run the following command:
+
+```
+docker pull amazon/aws-xray-daemon:latest
+```
+
+Prior releases of the daemon can be released by replacing `latest` with the desired version\.
+
+------
 
 ## Verifying the daemon archive's signature<a name="xray-daemon-signature"></a>
 
