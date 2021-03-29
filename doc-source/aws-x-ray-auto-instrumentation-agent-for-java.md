@@ -86,6 +86,10 @@ The following table describes valid values for each property\. Property names ar
 |  collectSqlQueries  |  Boolean  |  True, False  |  Records SQL query strings in SQL subsegments on a best\-effort basis\.  |  N/A  |  N/A  |  FALSE  | 
 |  contextPropagation  |  Boolean  |  True, False  |  Automatically propagates X\-Ray context between threads if true\. Otherwise uses Thread Local to store context and manual propagation across threads is required\.  |  N/A  |  N/A  |  TRUE  | 
 
+### Logging configuration<a name="XRayAutoInstrumentationAgent-Logging"></a>
+
+The X-Ray agent's log level can be configured in the same way as the X-Ray SDK for Java. See [X-Ray SDK for Java Configuration](xray-sdk-java-configuration.md#xray-sdk-java-configuration-logging).
+
 ### Manual instrumentation<a name="XRayAutoInstrumentationAgent-ManualInstrumentation"></a>
 
 If you’d like to perform manual instrumentation in addition to the agent’s auto\-instrumentation, add the X\-Ray SDK as a dependency to your project\. Note that the SDK's custom servlet filters mentioned in [Tracing Incoming Requests](xray-sdk-java-filters.md) are not compatible with the X\-Ray agent\. 
