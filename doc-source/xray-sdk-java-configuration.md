@@ -164,7 +164,7 @@ builder.withSamplingStrategy(new LocalizedSamplingStrategy(ruleFile));
 
 ## Logging<a name="xray-sdk-java-configuration-logging"></a>
 
-By default, the SDK outputs `SEVERE`\-level and `ERROR`\-level messages to your application logs\. You can enable debug\-level logging on the SDK to output more detailed logs to your application log file\.
+By default, the SDK outputs `ERROR`\-level messages to your application logs\. You can enable debug\-level logging on the SDK to output more detailed logs to your application log file\. Valid log levels are `DEBUG`, `INFO`, `WARN`, `ERROR`, and `FATAL`. `FATAL` log level silences all log messages because the SDK does not log at fatal level.
 
 **Example application\.properties**  
 Set the logging level with the `logging.level.com.amazonaws.xray` property\.  
