@@ -1,6 +1,6 @@
 # AWS X\-Ray auto\-instrumentation agent for Java<a name="aws-x-ray-auto-instrumentation-agent-for-java"></a>
 
-The AWS X\-Ray auto\-instrumentation agent for Java is a tracing solution that instruments your Java web applications with minimal development effort\. The agent enables tracing automatically for servlet\-based applications and all of the agent's downstream requests made with supported frameworks and libraries\. This includes downstream Apache HTTP requests, AWS SDK requests, and SQL queries made using a JDBC driver\. The agent automatically propagates X\-Ray context, including all active segments and sub\-segments, across threads\. All of the configurations and versatility of the X\-Ray SDK are still available with the Java agent, and suitable defaults were chosen to ensure the agent works out\-of\-box\.
+The AWS X\-Ray auto\-instrumentation agent for Java is a tracing solution that instruments your Java web applications with minimal development effort\. The agent enables tracing for servlet\-based applications and all of the agent's downstream requests made with supported frameworks and libraries\. This includes downstream Apache HTTP requests, AWS SDK requests, and SQL queries made using a JDBC driver\. The agent propagates X\-Ray context, including all active segments and sub\-segments, across threads\. All of the configurations and versatility of the X\-Ray SDK are still available with the Java agent, and suitable defaults were chosen to ensure the agent works with minimal effort\.
 
 The X\-Ray agent solution is best suited for servlet\-based, request\-response Java web application servers\. If your application uses an asynchronous framework, or is not well\-modeled as a request\-response service, you might want to consider manual instrumentation with the SDK instead\. 
 
@@ -65,7 +65,7 @@ An example configuration file is shown next\.
 
 ### Configuration specification<a name="XRayAutoInstrumentationAgent-ConfigSpecs"></a>
 
-The following table describes valid values for each property\. Property names are case sensitive, but their keys are not\. For properties that can be overridden by environment variables and system properties, the order of priority is always environment variable, then system property, and then configuration file\. See the [X\-Ray Docs](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-configuration.html#xray-sdk-java-configuration-envvars) for information about properties that you can override\. All fields are optional\.
+The following table describes valid values for each property\. Property names are case sensitive, but their keys are not\. For properties that can be overridden by environment variables and system properties, the order of priority is always environment variable, then system property, and then configuration file\. See the [Environment Variables](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-configuration.html#xray-sdk-java-configuration-envvars) for information about properties that you can override\. All fields are optional\.
 
 
 |  Property name  |  Type  |  Valid values  |  Description  |  Environment variable  |  System property  |  Default  | 
@@ -77,7 +77,7 @@ The following table describes valid values for each property\. Property names ar
 |  samplingStrategy  |  String  |  CENTRAL, LOCAL, NONE, ALL  |  The sampling strategy used by the agent\. ALL captures all requests, NONE captures no requests\. See [sampling rules](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-configuration.html#xray-sdk-java-configuration-sampling)\.  |  N/A  |  N/A  |  CENTRAL  | 
 |  traceIdInjectionPrefix  |  String  |  Any string  |  Includes the provided prefix before injected trace IDs in logs\.  |  N/A  |  N/A  |  None \(empty string\)  | 
 |  samplingRulesManifest  |  String  |  An absolute file path  |  The path to a custom sampling rules file to be used as the source of sampling rules for the local sampling strategy, or the fallback rules for the central strategy\.  |  N/A  |  N/A  |   [DefaultSamplingRules\.json](https://github.com/aws/aws-xray-sdk-java/blob/master/aws-xray-recorder-sdk-core/src/main/resources/com/amazonaws/xray/strategy/sampling/DefaultSamplingRules.json)   | 
-|   `awsServiceHandlerManifest`   |  String  |  An absolute file path  |  The path to a custom parameter allow list, which captures additional information from AWS SDK clients\.  |  N/A  |  N/A  |   [DefaultOperationParameterWhitelist\.json](https://github.com/aws/aws-xray-sdk-java/blob/master/aws-xray-recorder-sdk-aws-sdk-v2/src/main/resources/com/amazonaws/xray/interceptors/DefaultOperationParameterWhitelist.json)   | 
+|   awsServiceHandlerManifest   |  String  |  An absolute file path  |  The path to a custom parameter allow list, which captures additional information from AWS SDK clients\.  |  N/A  |  N/A  |   [DefaultOperationParameterWhitelist\.json](https://github.com/aws/aws-xray-sdk-java/blob/master/aws-xray-recorder-sdk-aws-sdk-v2/src/main/resources/com/amazonaws/xray/interceptors/DefaultOperationParameterWhitelist.json)   | 
 |  awsSdkVersion  |  Integer  |  1, 2  |  Version of the [AWS SDK for Java](https://docs.aws.amazon.com/sdk-for-java/index.html) you’re using\. Ignored if `awsServiceHandlerManifest` is not also set\.  |  N/A  |  N/A  |  2  | 
 |  maxStackTraceLength  |  Integer  |  Non\-negative integers  |  The maximum lines of a stack trace to record in a trace\.  |  N/A  |  N/A  |  50  | 
 |  streamingThreshold  |  Integer  |  Non\-negative integers  |  After at least this many subsegments are closed, they are streamed to the daemon out\-of\-band to avoid chunks being too large\.  |  N/A  |  N/A  |  100  | 
@@ -88,7 +88,7 @@ The following table describes valid values for each property\. Property names ar
 
 ### Logging configuration<a name="XRayAutoInstrumentationAgent-Logging"></a>
 
-The X-Ray agent's log level can be configured in the same way as the X-Ray SDK for Java. See [X-Ray SDK for Java Configuration](xray-sdk-java-configuration.md#xray-sdk-java-configuration-logging).
+The X\-Ray agent's log level can be configured in the same way as the X\-Ray SDK for Java\. See [Logging](xray-sdk-java-configuration.md#xray-sdk-java-configuration-logging) for more information on configuring logging with the AWS X\-Ray SDK for Java\. 
 
 ### Manual instrumentation<a name="XRayAutoInstrumentationAgent-ManualInstrumentation"></a>
 
@@ -133,7 +133,7 @@ This message is logged at INFO level when your application starts, before it sta
 
  **In your application logs, do you see several error messages saying something like "Suppressing AWS X\-Ray context missing exception"?** 
 
-These errors occur because the agent is trying to instrument downstream requests, like AWS SDK requests or SQL queries, but the agent was unable to automatically create a segment\. If you see many of these errors, the agent might not be the best tool for your use case and you might want to consider manual instrumentation with the X\-Ray SDK instead\. Alternatively, you can enable X\-Ray SDK [debug logs](https://docs.aws.amazon.com/xray/latest/devguide/ray-sdk-java-configuration.html#xray-sdk-java-configuration-logging) to see the stack trace of where the context\-missing exceptions are occurring\. You can wrap these portions of your code with custom segments, which should resolve these errors\. For an example of wrapping downstream requests with custom segments, see the sample code in [instrumenting startup code](https://docs.aws.amazon.com/xray/latest/devguide/scorekeep-startup.html)\.
+These errors occur because the agent is trying to instrument downstream requests, like AWS SDK requests or SQL queries, but the agent was unable to automatically create a segment\. If you see many of these errors, the agent might not be the best tool for your use case and you might want to consider manual instrumentation with the X\-Ray SDK instead\. Alternatively, you can enable X\-Ray SDK [debug logs](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-configuration.html#xray-sdk-java-configuration-logging) to see the stack trace of where the context\-missing exceptions are occurring\. You can wrap these portions of your code with custom segments, which should resolve these errors\. For an example of wrapping downstream requests with custom segments, see the sample code in [instrumenting startup code](https://docs.aws.amazon.com/xray/latest/devguide/scorekeep-startup.html)\.
 
 ### Problem: Some of the segments I expect do not appear on the X\-Ray console<a name="-problem-some-but-not-all-the-segments-im-expecting-appear-on-the-x-ray-console"></a>
 

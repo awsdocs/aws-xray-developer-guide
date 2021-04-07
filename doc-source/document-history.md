@@ -2,11 +2,13 @@
 
 The following table describes the important changes to the documentation for AWS X\-Ray\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 
-**Latest documentation update**: October 15, 2020
+**Latest documentation update**: March 2, 2021
 
 | Change | Description | Date | 
 | --- |--- |--- |
-| [Add functionality](#document-history) | AWS X\-Ray now supports insights related notifications to Amazon EventBridge\. This allows you to take automatic actions on insights using EventBridge\. For more information, see [Insights Notifications](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-insights.html#xray-console-insight-notifications)\. | October 15, 2020 | 
+| [Added functionality](#document-history) | AWS X\-Ray now integrates with Amazon EventBridge to trace events that are passed through EventBridge\. This provides users with a more complete view of their system\. For more information, see [Amazon EventBridge and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-eventbridge.html)\. | March 2, 2021 | 
+| [Added daemon to ECR](#document-history) | The daemon can now be downloaded from Amazon ECR\. For more information, see [Downloading the daemon](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html#xray-daemon-downloading)\. | March 1, 2021 | 
+| [Added functionality](#document-history) | AWS X\-Ray now supports insights related notifications to Amazon EventBridge\. This allows you to take automatic actions on insights using EventBridge\. For more information, see [Insights Notifications](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-insights.html#xray-console-insight-notifications)\. | October 15, 2020 | 
 | [Added Downloadable Daemons](#document-history) | AWS X\-Ray introduces support daemon for Linux ARM64\. For more information, see [AWS X\-Ray daemonbrazil ws ](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html) | October 1, 2020 | 
 | [Added functionality](#document-history) | AWS X\-Ray now supports active integration with Amazon CloudWatch Synthetics\. This allows you to see details about a Synthetics canary client node such as response time and status\. You can also do analysis in the Analytics console based on information from a Synthetics canary client node\. For more information, see [ Debugging CloudWatch synthetics canaries using X\-Ray ](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-cloudwatch-synthetics.html)\. | September 24, 2020 | 
 | [Added functionality](#document-history) | AWS X\-Ray now supports tracing end\-to\-end workflows for AWS Step Functions\. You can visualize the components of your state machine, identify performance bottlenecks, and troubleshoot requests that resulted in an error\. For more information, see [AWS Step Functions and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-stepfunctions.html)\. | September 14, 2020 | 

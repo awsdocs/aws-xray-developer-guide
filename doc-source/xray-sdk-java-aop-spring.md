@@ -2,11 +2,11 @@
 
 This topic describes how to use the X\-Ray SDK and the Spring Framework to instrument your application without changing its core logic\. This means that there is now a non\-invasive way to instrument your applications running remotely in AWS\.
 
-You must perform three tasks to enable this feature\.
-
 **To enable AOP in spring**
 
 1. [Configure Spring](#xray-sdk-java-aop-spring-configuration)
+
+1. [Add a tracing filter to your application](#xray-sdk-java-aop-filters-spring)
 
 1. [Annotate your code or implement an interface](#xray-sdk-java-aop-annotate-or-implement)
 
@@ -30,6 +30,29 @@ For Gradle, add the following dependency in your `build.gradle` file\.
 
 ```
 compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.4.0'
+```
+
+## Adding a tracing filter to your application<a name="xray-sdk-java-aop-filters-spring"></a>
+
+Add a `Filter` to your `WebConfig` class\. Pass the segment name to the [ `AWSXRayServletFilter`](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html) constructor as a string\. For more information about tracing filters and instrumenting incoming requests, see [Tracing incoming requests with the X\-Ray SDK for Java](xray-sdk-java-filters.md)\.
+
+**Example src/main/java/myapp/WebConfig\.java \- spring**  
+
+```
+package myapp;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
+import javax.servlet.Filter;
+import [com\.amazonaws\.xray\.javax\.servlet\.AWSXRayServletFilter](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html);
+
+@Configuration
+public class WebConfig {
+
+  @Bean
+  public Filter TracingFilter() {
+    return new AWSXRayServletFilter("Scorekeep");
+  }
+}
 ```
 
 ## Annotating your code or implementing an interface<a name="xray-sdk-java-aop-annotate-or-implement"></a>
