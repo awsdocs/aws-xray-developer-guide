@@ -126,7 +126,7 @@ public class WebConfig {
 
   @Bean
   public Filter TracingFilter() {
-    return new AWSXRayServletFilter(SegmentNamingStrategy().dynamic("MyApp", "*.example.com"));
+    return new AWSXRayServletFilter(SegmentNamingStrategy.dynamic("MyApp", "*.example.com"));
   }
 }
 ```
