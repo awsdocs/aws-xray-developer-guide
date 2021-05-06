@@ -60,7 +60,7 @@ If you use a library that is included in the X\-Ray SDK for Java, you must use t
 The X\-Ray SDK for Java is available from Maven:
 + **Group** – `com.amazonaws`
 + **Artifact** – `aws-xray-recorder-sdk-bom`
-+ **Version** – `2.4.0`
++ **Version** – `2.9.0`
 
 If you use Maven to build your application, add the SDK as a dependency in your `pom.xml` file\.
 
@@ -126,7 +126,7 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom('com.amazonaws:aws-java-sdk-bom:1.11.39')
-        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.4.0')
+        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.9.0')
     }
 }
 ```
