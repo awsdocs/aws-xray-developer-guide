@@ -49,27 +49,32 @@ For local development, install the SDK in your project directory with npm\.
 
 ```
 ~/nodejs-xray$ npm install aws-xray-sdk
-aws-xray-sdk@3.0.0
-├─┬ aws-xray-sdk-core@3.0.0
-│ ├── atomic-batcher@1.0.2
-│ ├─┬ cls-hooked@4.2.2
-│ │ ├─┬ async-hook-jl@1.7.6
-│ │ │ └── stack-chain@1.3.7
-│ │ ├── emitter-listener@1.1.2
-│ │ └── shimmer@1.2.1
-│ ├── pkginfo@0.4.1 
-│ └── semver@5.7.1
-├── aws-xray-sdk-express@3.0.0
-├── aws-xray-sdk-mysql@3.0.0
-└── aws-xray-sdk-postgres@3.0.0
+aws-xray-sdk@3.3.3
+  ├─┬ aws-xray-sdk-core@3.3.3
+  │ ├── @aws-sdk/service-error-classification@3.15.0
+  │ ├── @aws-sdk/types@3.15.0
+  │ ├─┬ @types/cls-hooked@4.3.3
+  │ │ └── @types/node@15.3.0
+  │ ├── atomic-batcher@1.0.2
+  │ ├─┬ cls-hooked@4.2.2
+  │ │ ├─┬ async-hook-jl@1.7.6
+  │ │ │ └── stack-chain@1.3.7
+  │ │ └─┬ emitter-listener@1.1.2
+  │ │   └── shimmer@1.2.1
+  │ └── semver@5.7.1
+  ├── aws-xray-sdk-express@3.3.3
+  ├── aws-xray-sdk-mysql@3.3.3
+  └── aws-xray-sdk-postgres@3.3.3
 ```
 
 Use the `--save` option to save the SDK as a dependency in your application's `package.json`\.
 
 ```
 ~/nodejs-xray$ npm install aws-xray-sdk --save
-aws-xray-sdk@3.0.0
+aws-xray-sdk@3.3.3
 ```
+
+If your application has any dependencies whose versions conflict with the X-Ray SDK's dependencies, both versions will be installed to ensure compatibility. For more details, see the [official NPM documentation for dependency resolution](http://npm.github.io/how-npm-works-docs/npm3/how-npm3-works.html).
 
 ## Node\.js samples<a name="xray-sdk-nodejs-sample"></a>
 
