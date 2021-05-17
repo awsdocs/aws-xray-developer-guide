@@ -45,6 +45,75 @@ Use NuGet to add the X\-Ray SDK for \.NET to your application\.
 
 1. Choose **Tools**, **NuGet Package Manager**, **Manage NuGet Packages for Solution**\.
 
-1. Search for **AWSXRayRecorder**\.
+2. Search for **AWSXRayRecorder**\.
 
-1. Choose the package, and then choose **Install**\.
+3. Choose the package, and then choose **Install**\.
+
+## Dependency management
+
+The X\-Ray SDK for \.NET is available from [Nuget](https://www.nuget.org/packages/AWSXRayRecorder/). Install the SDK using the package manager
+
+```powershell
+Install-Package AWSXRayRecorder -Version 2.10.1
+```
+
+The `AWSXRayRecorder v2.10.1` nuget package has the following dependencies:
+
+##### .Net Framework 4.5
+
+```
+AWSXRayRecorder (2.10.1)
+|
+|-- AWSXRayRecorder.Core (>= 2.10.1)
+|   |-- AWSSDK.Core (>= 3.3.25.1)
+|      
+|-- AWSXRayRecorder.Handlers.AspNet (>= 2.7.3)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|
+|-- AWSXRayRecorder.Handlers.AwsSdk (>= 2.8.3)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|
+|-- AWSXRayRecorder.Handlers.EntityFramework (>= 1.1.1)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|   |-- EntityFramework (>= 6.2.0)
+|
+|-- AWSXRayRecorder.Handlers.SqlServer (>= 2.7.3)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|
+|-- AWSXRayRecorder.Handlers.System.Net (>= 2.7.3)
+    |-- AWSXRayRecorder.Core (>= 2.10.1)
+```
+
+##### .Net Standard 2.0
+
+```
+AWSXRayRecorder (2.10.1)
+|
+|-- AWSXRayRecorder.Core (>= 2.10.1)
+|   |-- AWSSDK.Core (>= 3.3.25.1)
+|   |-- Microsoft.AspNetCore.Http (>= 2.0.0)
+|   |-- Microsoft.Extensions.Configuration (>= 2.0.0)
+|   |-- System.Net.Http (>= 4.3.4)
+|      
+|-- AWSXRayRecorder.Handlers.AspNetCore (>= 2.7.3)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|   |-- Microsoft.AspNetCore.Http.Extensions (>= 2.0.0)
+|   |-- Microsoft.AspNetCore.Mvc.Abstractions (>= 2.0.0)
+|
+|-- AWSXRayRecorder.Handlers.AwsSdk (>= 2.8.3)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|
+|-- AWSXRayRecorder.Handlers.EntityFramework (>= 1.1.1)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|   |-- Microsoft.EntityFrameworkCore.Relational (>= 3.1.0)
+|
+|-- AWSXRayRecorder.Handlers.SqlServer (>= 2.7.3)
+|   |-- AWSXRayRecorder.Core (>= 2.10.1)
+|   |-- System.Data.SqlClient (>= 4.4.0)
+|
+|-- AWSXRayRecorder.Handlers.System.Net (>= 2.7.3)
+    |-- AWSXRayRecorder.Core (>= 2.10.1)
+```
+
+For more details about dependency management, refer to Microsoft's documentation about [Nuget dependency](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/dependencies) and [Nuget dependency resolution](https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution).
+
