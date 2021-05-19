@@ -22,14 +22,14 @@ If you use Maven to build your application, add the following dependency in your
 <dependency> 
      <groupId>com.amazonaws</groupId> 
      <artifactId>aws-xray-recorder-sdk-spring</artifactId> 
-     <version>2.4.0</version> 
+     <version>2.9.0</version> 
 </dependency>
 ```
 
 For Gradle, add the following dependency in your `build.gradle` file\.
 
 ```
-compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.4.0'
+compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.9.0'
 ```
 
 ## Adding a tracing filter to your application<a name="xray-sdk-java-aop-filters-spring"></a>

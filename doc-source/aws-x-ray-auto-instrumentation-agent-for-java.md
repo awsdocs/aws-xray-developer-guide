@@ -88,7 +88,7 @@ The following table describes valid values for each property\. Property names ar
 
 ### Logging configuration<a name="XRayAutoInstrumentationAgent-Logging"></a>
 
-The X\-Ray agent's log level can be configured in the same way as the X\-Ray SDK for Java\. See [Logging](xray-sdk-java-configuration.md#xray-sdk-java-configuration-logging) for more information on configuring logging with the AWS X\-Ray SDK for Java\. 
+The X\-Ray agent's log level can be configured in the same way as the X\-Ray SDK for Java\. See [Logging](xray-sdk-java-configuration.md#xray-sdk-java-configuration-logging) for more information on configuring logging with the X\-Ray SDK for Java\. 
 
 ### Manual instrumentation<a name="XRayAutoInstrumentationAgent-ManualInstrumentation"></a>
 

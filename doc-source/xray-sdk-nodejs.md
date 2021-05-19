@@ -74,7 +74,7 @@ Use the `--save` option to save the SDK as a dependency in your application's `p
 aws-xray-sdk@3.3.3
 ```
 
-If your application has any dependencies whose versions conflict with the X-Ray SDK's dependencies, both versions will be installed to ensure compatibility. For more details, see the [official NPM documentation for dependency resolution](http://npm.github.io/how-npm-works-docs/npm3/how-npm3-works.html).
+ If your application has any dependencies whose versions conflict with the X\-Ray SDK's dependencies, both versions will be installed to ensure compatibility\. For more details, see the [official NPM documentation for dependency resolution](http://npm.github.io/how-npm-works-docs/npm3/how-npm3-works.html)\. 
 
 ## Node\.js samples<a name="xray-sdk-nodejs-sample"></a>
 

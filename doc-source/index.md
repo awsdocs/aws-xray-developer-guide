@@ -1,7 +1,7 @@
 # AWS X-Ray Developer Guide
 
 -----
-*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -133,6 +133,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Creating additional subsegments](xray-sdk-dotnet-subsegments.md)
    + [Add annotations and metadata to segments with the X-Ray SDK for .NET](xray-sdk-dotnet-segment.md)
 + [AWS X-Ray with the AWS Distro for OpenTelemetry](xray-open-telemetry.md)
++ [Creating X-Ray resources with AWS CloudFormation](creating-resources-with-cloudformation.md)
 + [Tagging X-Ray sampling rules and groups](xray-tagging.md)
 + [Troubleshooting AWS X-Ray](xray-troubleshooting.md)
 + [Document History for AWS X-Ray](document-history.md)

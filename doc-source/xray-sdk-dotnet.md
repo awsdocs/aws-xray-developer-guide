@@ -45,21 +45,21 @@ Use NuGet to add the X\-Ray SDK for \.NET to your application\.
 
 1. Choose **Tools**, **NuGet Package Manager**, **Manage NuGet Packages for Solution**\.
 
-2. Search for **AWSXRayRecorder**\.
+1. Search for **AWSXRayRecorder**\.
 
-3. Choose the package, and then choose **Install**\.
+1. Choose the package, and then choose **Install**\.
 
-## Dependency management
+## Dependency management<a name="xray-sdk-dotnet-dependencies"></a>
 
-The X\-Ray SDK for \.NET is available from [Nuget](https://www.nuget.org/packages/AWSXRayRecorder/). Install the SDK using the package manager
+The X\-Ray SDK for \.NET is available from [Nuget](https://www.nuget.org/packages/AWSXRayRecorder/)\. Install the SDK using the package manager:
 
-```powershell
+```
 Install-Package AWSXRayRecorder -Version 2.10.1
 ```
 
 The `AWSXRayRecorder v2.10.1` nuget package has the following dependencies:
 
-##### .Net Framework 4.5
+**Example \.NET Framework 4\.5**  
 
 ```
 AWSXRayRecorder (2.10.1)
@@ -84,7 +84,7 @@ AWSXRayRecorder (2.10.1)
     |-- AWSXRayRecorder.Core (>= 2.10.1)
 ```
 
-##### .Net Standard 2.0
+**Example \.NET Framework 2\.0**  
 
 ```
 AWSXRayRecorder (2.10.1)
@@ -115,5 +115,4 @@ AWSXRayRecorder (2.10.1)
     |-- AWSXRayRecorder.Core (>= 2.10.1)
 ```
 
-For more details about dependency management, refer to Microsoft's documentation about [Nuget dependency](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/dependencies) and [Nuget dependency resolution](https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution).
-
+For more details about dependency management, refer to Microsoft's documentation about [Nuget dependency](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/dependencies) and [Nuget dependency resolution](https://docs.microsoft.com/en-us/nuget/concepts/dependency-resolution)\.

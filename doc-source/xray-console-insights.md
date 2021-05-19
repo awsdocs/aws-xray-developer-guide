@@ -1,8 +1,10 @@
 # Using insights in the AWS X\-Ray console<a name="xray-console-insights"></a>
 
-AWS X\-Ray continuously analyzes trace data in your account to identify emergent issues in your applications\. When fault rates exceed the expected range, it creates an *insight* that records the incident and tracks its impact until it's resolved\. You can use insights to identify user impact for ongoing issues or to analyze transient issues that occurred in the past\.
+AWS X\-Ray continuously analyzes trace data in your account to identify emergent issues in your applications\. When fault rates exceed the expected range, it creates an *insight* that records the issue and tracks its impact until it's resolved\. With insights, you can:
++ Identify where in your application issues are occurring, the root cause of the issue, and associated impact\. The impact analysis provided by insights enables you to derive the severity and priority of an issue\.
++ Receive notifications as the issue changes over time\. Insights notifications can be integrated with your monitoring and alerting solution using Amazon EventBridge\. This integration enables you to send automated e\-mails or alerts based on the severity of the issue\.
 
-The X\-Ray console also identifies nodes with ongoing incidents in the service map\. To see a summary of the insight, choose the affected node\.
+The X\-Ray console identifies nodes with ongoing incidents in the service map\. To see a summary of the insight, choose the affected node\. You can also view and filter insights by choosing **Insights** from the navigation pane on the left\.
 
 ![\[Service map node with insight summary.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-insights-servicemap.png)
 
@@ -100,7 +102,7 @@ You can enable insights notifications for any insights enabled group from the **
 The overview page for an insight attempts to answer three key questions: 
 + What is the underlying issue?
 + What is the root cause?
-+ What is the client impact?
++ What is the impact?
 
 The **Anomalous services** section shows a timeline for each service that illustrates the change in fault rates during the incident\. The timeline shows the number of traces with faults overlayed on a solid band that indicates the expected number of faults based on the amount of traffic recorded\. The duration of the insight is visualized by the *Incident window*\. The incident window begins when X\-Ray observes the metric becoming anomalous and persists while the insight is active\.
 
@@ -122,9 +124,23 @@ This example shows an increase in traces with a fault at the root node during th
 
 Choosing **Analyze insight** opens the X\-Ray Analytics console in a window where you can dive deep into the set of traces causing the insight\. For more information, see [Interacting with the AWS X\-Ray Analytics console](xray-console-analytics.md)\. 
 
+**Understanding impact**
+
+AWS X\-Ray measures the impact caused by an ongoing issue as part of generating insights and notifications\. The impact is measured in two ways:
++ Impact to the X\-Ray [Group](xray-console-groups.md)\.
++ Impact on the root cause service\.
+
+This impact is determined by the percentage of request that are failing or causing an error within a given time period\. This impact analysis allows you to derive the severity and priority of the issue based on your particular scenario\. This impact is available as part of the console experience as well as insights notifications\.
+
+**Deduplication**
+
+AWS X\-Ray insights de\-duplicates issues across multiple micro\-services\. It uses anomaly detection to determine the service which is the root cause service of an issue, determines if other related services are exhibiting anomalous behavior due to the same root cause, and records the result as a single insight\.
+
 ## Review an insight's progress<a name="xray-console-insights-inspect"></a>
 
-X\-Ray reevaluates insights periodically until they are resolved, and records each notable intermediate change as an event\. You can review incident events in the **Impact Timeline** on the **Inspect** page\. By default the timeline displays the most impacted service until you choose a different service\.
+X\-Ray reevaluates insights periodically until they are resolved, and records each notable intermediate change as a [notification](#xray-console-insight-notifications) which can be sent as an Amazon EventBridge event\. This enables you to build processes and workflows to determine how the issue has changed over time, and take appropriate actions such as sending an e\-mail or integrating with an alerting system using EventBridge\.
+
+You can review incident events in the **Impact Timeline** on the **Inspect** page\. By default the timeline displays the most impacted service until you choose a different service\.
 
 ![\[Inspect page with impact timeline.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-insights-inspect.png)<a name="impact-analysis"></a>
 

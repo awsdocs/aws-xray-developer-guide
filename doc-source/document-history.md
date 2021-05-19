@@ -6,6 +6,7 @@ The following table describes the important changes to the documentation for AWS
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Added functionality](#document-history) | AWS X\-Ray now integrates with AWS CloudFormation, enabling you to provision and configure X\-Ray resources\. For more information, see [Creating X\-Ray resources with CloudFormation](https://docs.aws.amazon.com/xray/latest/devguide/creating-resources-with-cloudformation.html)\. | May 6, 2021 | 
 | [Added functionality](#document-history) | AWS X\-Ray now integrates with Amazon EventBridge to trace events that are passed through EventBridge\. This provides users with a more complete view of their system\. For more information, see [Amazon EventBridge and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-eventbridge.html)\. | March 2, 2021 | 
 | [Added daemon to ECR](#document-history) | The daemon can now be downloaded from Amazon ECR\. For more information, see [Downloading the daemon](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html#xray-daemon-downloading)\. | March 1, 2021 | 
 | [Added functionality](#document-history) | AWS X\-Ray now supports insights related notifications to Amazon EventBridge\. This allows you to take automatic actions on insights using EventBridge\. For more information, see [Insights Notifications](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-insights.html#xray-console-insight-notifications)\. | October 15, 2020 | 

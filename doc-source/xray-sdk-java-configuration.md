@@ -202,7 +202,7 @@ See the following tabs for the needs of each front end and each backend\.
    <dependency>
        <groupId>com.amazonaws</groupId>
        <artifactId>aws-xray-recorder-sdk-slf4j</artifactId>
-       <version>2.4.0</version>
+       <version>2.9.0</version>
    </dependency>
    ```
 
@@ -228,7 +228,7 @@ See the following tabs for the needs of each front end and each backend\.
    <dependency>
        <groupId>com.amazonaws</groupId>
        <artifactId>aws-xray-recorder-sdk-log4j</artifactId>
-       <version>2.4.0</version>
+       <version>2.9.0</version>
    </dependency>
    ```
 

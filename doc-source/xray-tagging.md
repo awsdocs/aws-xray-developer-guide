@@ -2,9 +2,7 @@
 
 Tags are words or phrases that you can use to identify and organize your AWS resources\. You can add multiple tags to each resource\. Each tag includes a key and an optional value that you define\. For example, a tag key might be **domain**, and the tag value might be **example\.com**\. You can search and filter your resources based on tags that you add\. For more information about ways to use tags, see [Tagging AWS resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the *AWS General Reference*\.
 
-The following are examples of how tags can be useful in X\-Ray:
-+ Use tags to track billing information in different categories\. When you apply tags to X\-Ray groups and sampling rules, and activate the tags, AWS generates a cost allocation report as a comma\-separated values \(CSV\) file with your usage and costs aggregated by active tags\. You can apply tags that represent business categories \(such as cost centers, application names, or owners\) to organize your costs across multiple services\. For more information about using tags for cost allocation, see [Use Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
-+ Use tags to enforce tag\-based permissions on CloudFront distributions\. For more information, see [Controlling Access to AWS Resources Using Resource Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)\.
+You can use tags to enforce tag\-based permissions on CloudFront distributions\. For more information, see [Controlling Access to AWS Resources Using Resource Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)\.
 
 **Note**  
 [Tag Editor](https://docs.aws.amazon.com/ARG/latest/userguide/tag-editor.html) and [AWS Resource Groups](https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html) do not currently support X\-Ray resources\. You add and manage tags by using the AWS X\-Ray console or API\.

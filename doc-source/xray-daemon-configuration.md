@@ -105,7 +105,7 @@ You can also use a YAML format file to configure the daemon\. Pass the configura
   + `TCPAddress` – Listen for [calls to the X\-Ray service](xray-api-sampling.md) on a different TCP port\.
 + `Logging` – Configure logging behavior\.
   + `LogRotation` – Set to `false` to disable log rotation\.
-  + `LogLevel` – Change the log level, from most verbose to least: `dev`, `debug`, `info`, `warn`, `error`\. The default is `prod`, which is equivalent to `info`\.
+  + `LogLevel` – Change the log level, from most verbose to least: `dev`, `debug`, `info`, `warn`, `error`, `prod`\. The default is `prod`, which is equivalent to `info`\.
   + `LogPath` – Output logs to the specified file path\.
 + `LocalMode` – Set to `true` to skip checking for EC2 instance metadata\.
 + `ResourceARN` – Amazon Resource Name \(ARN\) of the AWS resource running the daemon\.

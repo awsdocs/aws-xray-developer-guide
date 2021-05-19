@@ -31,6 +31,10 @@ These links always point to the latest release of the daemon\. To download a spe
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
 
+```
+https://s3.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xray-daemon-3.x.rpm
+```
+
 ------
 #### [ Amazon ECR ]
 
@@ -73,6 +77,11 @@ You can use the public key to verify that the daemon's ZIP archive is original a
 
 1. Download the public key\.
 
+   ```
+   $ BUCKETURL=https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
+   $ wget $BUCKETURL/xray-daemon/aws-xray.gpg
+   ```
+
 1. Import the public key into your keyring\.
 
    ```
@@ -88,6 +97,12 @@ Use the imported key to verify the signature of the daemon's ZIP archive\.
 **To verify an archive's signature**
 
 1. Download the archive and signature file\.
+
+   ```
+   $ BUCKETURL=https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
+   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip
+   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip.sig
+   ```
 
 1. Run `gpg --verify` to verify the signature\.
 
