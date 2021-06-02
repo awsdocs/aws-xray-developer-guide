@@ -59,7 +59,7 @@ Install-Package AWSXRayRecorder -Version 2.10.1
 
 The `AWSXRayRecorder v2.10.1` nuget package has the following dependencies:
 
-**Example \.NET Framework 4\.5**  
+### NET Framework 4\.5<a name="xray-sdk-dotnet-dependencies-4.5"></a>
 
 ```
 AWSXRayRecorder (2.10.1)
@@ -84,7 +84,7 @@ AWSXRayRecorder (2.10.1)
     |-- AWSXRayRecorder.Core (>= 2.10.1)
 ```
 
-**Example \.NET Framework 2\.0**  
+### NET Framework 2\.0<a name="xray-sdk-dotnet-dependencies-2.0"></a>
 
 ```
 AWSXRayRecorder (2.10.1)

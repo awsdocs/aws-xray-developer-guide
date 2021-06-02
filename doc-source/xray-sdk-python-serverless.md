@@ -193,4 +193,4 @@ zappa undeploy dev
 
 ## Next steps<a name="xray-sdk-python-serverless-next"></a>
 
-Add more features to your application by adding AWS clients and instrumenting them with X\-Ray\. Learn more about serverless computing options through AWS at [Serverless](https://aws.amazon.com/serverless/)\.
+Add more features to your application by adding AWS clients and instrumenting them with X\-Ray\. Learn more about serverless computing options at [Serverless on AWS](http://aws.amazon.com/serverless)\.

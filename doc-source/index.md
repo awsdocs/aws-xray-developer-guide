@@ -28,6 +28,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Compliance validation for AWS X-Ray](xray-compliance.md)
    + [Resilience in AWS X-Ray](disaster-recovery-resiliency.md)
    + [Infrastructure security in AWS X-Ray](infrastructure-security.md)
+   + [Using AWS X-Ray with VPC endpoints](xray-security-vpc-endpoint.md)
 + [AWS X-Ray console](xray-console.md)
    + [Using filter expressions to search for traces in the console](xray-console-filters.md)
    + [Deep linking](xray-console-deeplinks.md)

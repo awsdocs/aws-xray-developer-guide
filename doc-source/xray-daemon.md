@@ -27,7 +27,7 @@ You can download the daemon from Amazon S3, Docker Hub, or Amazon ECR and then r
 + **Windows \(executable\)** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-process-3.x.zip.sig)\)
 + **Windows \(service\) ** – [https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip) \([sig](https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-windows-service-3.x.zip.sig)\)
 
-These links always point to the latest release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
+These links always point to the latest 3\.x release of the daemon\. To download a specific release, replace `3.x` with the version number\. For example, `2.1.0`\.
 
 X\-Ray assets are replicated to buckets in every supported region\. To use the bucket closest to you or your AWS resources, replace the region in the above links with your region\.
 
@@ -46,24 +46,24 @@ https://s3.us-west-2.amazonaws.com/aws-xray-assets.us-west-2/xray-daemon/aws-xra
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 ```
 
-Pull latest released version tag bu running the following command:
+Pull the latest released 3\.x version tag by running the following command:
 
 ```
-docker pull public.ecr.aws/xray/aws-xray-daemon:latest
+docker pull public.ecr.aws/xray/aws-xray-daemon:3.x
 ```
 
-Prior or alpha releases can be downloaded by replacing `latest` with `alpha` or a specific version number\. It is not recommended to use a daemon image with an alpha tag in a production environment\.
+Prior or alpha releases can be downloaded by replacing `3.x` with `alpha` or a specific version number\. It is not recommended to use a daemon image with an alpha tag in a production environment\.
 
 ------
 #### [ Docker Hub ]
 
-The daemon can be found on [Docker Hub](https://hub.docker.com/r/amazon/aws-xray-daemon)\. To download the latest released version, run the following command:
+The daemon can be found on [Docker Hub](https://hub.docker.com/r/amazon/aws-xray-daemon)\. To download the latest released 3\.x version, run the following command:
 
 ```
-docker pull amazon/aws-xray-daemon:latest
+docker pull amazon/aws-xray-daemon:3.x
 ```
 
-Prior releases of the daemon can be released by replacing `latest` with the desired version\.
+Prior releases of the daemon can be released by replacing `3.x` with the desired version\.
 
 ------
 
