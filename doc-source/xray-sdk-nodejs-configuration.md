@@ -104,7 +104,9 @@ AWSXRay.middleware.disableCentralizedSampling()
 
 ## Logging<a name="xray-sdk-nodejs-configuration-logging"></a>
 
- To log output from the SDK, call `AWSXRay.setLogger(logger)`, where `logger` is an object that provides standard logging methods \(`warn`, `info`, etc\.\)\.
+By default the SDK will log error messages to the console using the standard methods on the console object\. The log level of the built-in logger can be set by using either the `AWS_XRAY_DEBUG_MODE` or `AWS_XRAY_LOG_LEVEL` environment variables\. For a list of valid log level values, view the details in the [Environment variables](#xray-sdk-nodejs-configuration-envvars) section\.
+
+If you wish to provide a different format or destination for the logs then you can provide the SDK with your own implementation of the logger interface as shown below. Any object that implements this interface can be used. This means that many logging libraries, e.g. Winston, could be used and passed to the SDK directly.
 
 **Example app\.js \- logging**  
 
@@ -124,10 +126,6 @@ AWSXRay.config([AWSXRay.plugins.EC2Plugin]);
 ```
 
 Call `setLogger` before you run other configuration methods to ensure that you capture output from those operations\.
-
-For a list of valid log level values, view the details in the [Environment variables](#xray-sdk-nodejs-configuration-envvars) section\.
-
-To configure the SDK to output logs to the console without using a logging library, use the `AWS_XRAY_DEBUG_MODE` environment variable\.
 
 ## X\-Ray daemon address<a name="xray-sdk-nodejs-configuration-daemon"></a>
 
@@ -172,6 +170,6 @@ You can use environment variables to configure the X\-Ray SDK for Node\.js\. The
 **Format**
   + **Same port** – `address:port`
   + **Different ports** – `tcp:address:port udp:address:port`
-+ `AWS_XRAY_DEBUG_MODE` – Set to `TRUE` to configure the SDK to output logs to the console, instead of [configuring a logger](#xray-sdk-nodejs-configuration-logging)\.
-+ `AWS_XRAY_LOG_LEVEL ` – Set a log level for the logger\. Valid values are `debug`, `info`, `warn`, `error`, and `silent`\. This value is ignored when AWS\_XRAY\_DEBUG\_MODE is set to `TRUE`\.
++ `AWS_XRAY_DEBUG_MODE` – Set to `TRUE` to configure the SDK to output logs to the console at `debug` level\.
++ `AWS_XRAY_LOG_LEVEL ` – Set a log level for the default logger\. Valid values are `debug`, `info`, `warn`, `error` (default), and `silent`\. This value is ignored when AWS\_XRAY\_DEBUG\_MODE is set to `TRUE`\.
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the segment name that you [set on the Express middleware](xray-sdk-nodejs-middleware.md)\.
