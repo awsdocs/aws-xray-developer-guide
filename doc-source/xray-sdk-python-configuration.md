@@ -108,16 +108,16 @@ xray_recorder.configure(sampling=False)
 
 ## Logging<a name="xray-sdk-python-configuration-logging"></a>
 
-The SDK uses Python’s built\-in `logging` module\. Get a reference to the logger for the `aws_xray_sdk` class and call `setLevel` on it to configure the different log level for the library and the rest of your application\.
+The SDK uses Python’s built\-in `logging` module with a default `WARNING` log level\. Get a reference to the logger for the `aws_xray_sdk` class and call `setLevel` on it to configure the different log level for the library and the rest of your application\.
 
 **Example app\.py – Logging**  
 
 ```
 logging.basicConfig(level='WARNING')
-logging.getLogger('aws_xray_sdk').setLevel(logging.DEBUG)
+logging.getLogger('aws_xray_sdk').setLevel(logging.ERROR)
 ```
 
-Use debug logs to identify issues, such as unclosed subsegments, when you [generate subsegments manually](xray-sdk-python-subsegments.md)\.
+For more information, see [Python's user guide for logging](https://docs.python.org/3/library/logging.html#module-logging)\.
 
 ## Recorder configuration in code<a name="xray-sdk-python-middleware-configuration-code"></a>
 
