@@ -43,11 +43,12 @@ If you are instrumenting a \.NET Core web application, you can also pass the con
 For more information on the \.NET Core configuration API, see [Configure an ASP\.NET Core App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration) on docs\.microsoft\.com\.
 
 **Topics**
-+ [Plugins](#xray-sdk-dotnet-configuration-plugins)
-+ [Sampling rules](#xray-sdk-dotnet-configuration-sampling)
-+ [Logging \(\.NET\)](#xray-sdk-dotnet-configuration-logging)
-+ [Logging \(\.NET Core\)](#xray-sdk-dotnet-configuration-corelogging)
-+ [Environment variables](#xray-sdk-dotnet-configuration-envvars)
+- [Configuring the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-configuration"></a>](#configuring-the-x-ray-sdk-for-net)
+  - [Plugins<a name="xray-sdk-dotnet-configuration-plugins"></a>](#plugins)
+  - [Sampling rules<a name="xray-sdk-dotnet-configuration-sampling"></a>](#sampling-rules)
+  - [Logging \(\.NET\)<a name="xray-sdk-dotnet-configuration-logging"></a>](#logging-net)
+  - [Logging \(\.NET Core\)<a name="xray-sdk-dotnet-configuration-corelogging"></a>](#logging-net-core)
+  - [Environment variables<a name="xray-sdk-dotnet-configuration-envvars"></a>](#environment-variables)
 
 ## Plugins<a name="xray-sdk-dotnet-configuration-plugins"></a>
 
@@ -146,14 +147,14 @@ To use only local rules, build the recorder with a `LocalizedSamplingStrategy`\.
 **Example \.NET global\.asax – Local sampling rules**  
 
 ```
-var recorder = new AWSXRayRecorderBuilder().WithSamplingStrategy(new LocalizedSamplingStrategy(samplingrules.json)).Build();
-AWSXRayRecorder.InitializeInstance(recorder);
+var recorder = new AWSXRayRecorderBuilder().WithSamplingStrategy(new LocalizedSamplingStrategy("samplingrules.json")).Build();
+AWSXRayRecorder.InitializeInstance(recorder: recorder);
 ```
 
 **Example \.NET Core Program\.cs – Local sampling rules**  
 
 ```
-var recorder = new AWSXRayRecorderBuilder().WithSamplingStrategy(new LocalizedSamplingStrategy(sampling-rules.json)).Build();
+var recorder = new AWSXRayRecorderBuilder().WithSamplingStrategy(new LocalizedSamplingStrategy("sampling-rules.json")).Build();
 AWSXRayRecorder.InitializeInstance(configuration,recorder);
 ```
 
