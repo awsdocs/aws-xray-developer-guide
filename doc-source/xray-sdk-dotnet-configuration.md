@@ -43,12 +43,11 @@ If you are instrumenting a \.NET Core web application, you can also pass the con
 For more information on the \.NET Core configuration API, see [Configure an ASP\.NET Core App](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration) on docs\.microsoft\.com\.
 
 **Topics**
-- [Configuring the X\-Ray SDK for \.NET<a name="xray-sdk-dotnet-configuration"></a>](#configuring-the-x-ray-sdk-for-net)
-  - [Plugins<a name="xray-sdk-dotnet-configuration-plugins"></a>](#plugins)
-  - [Sampling rules<a name="xray-sdk-dotnet-configuration-sampling"></a>](#sampling-rules)
-  - [Logging \(\.NET\)<a name="xray-sdk-dotnet-configuration-logging"></a>](#logging-net)
-  - [Logging \(\.NET Core\)<a name="xray-sdk-dotnet-configuration-corelogging"></a>](#logging-net-core)
-  - [Environment variables<a name="xray-sdk-dotnet-configuration-envvars"></a>](#environment-variables)
++ [Plugins](#xray-sdk-dotnet-configuration-plugins)
++ [Sampling rules](#xray-sdk-dotnet-configuration-sampling)
++ [Logging \(\.NET\)](#xray-sdk-dotnet-configuration-logging)
++ [Logging \(\.NET Core\)](#xray-sdk-dotnet-configuration-corelogging)
++ [Environment variables](#xray-sdk-dotnet-configuration-envvars)
 
 ## Plugins<a name="xray-sdk-dotnet-configuration-plugins"></a>
 
@@ -160,7 +159,7 @@ AWSXRayRecorder.InitializeInstance(configuration,recorder);
 
 ## Logging \(\.NET\)<a name="xray-sdk-dotnet-configuration-logging"></a>
 
-The X\-Ray SDK for \.NET uses the same logging mechanism as the [AWS SDK for .NET](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-other.html#config-setting-awslogging). If you already configured your application to log AWS SDK for \.NET output, the same configuration applies to output from the X\-Ray SDK for \.NET\.
+The X\-Ray SDK for \.NET uses the same logging mechanism as the [AWS SDK for \.NET](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-other.html#config-setting-awslogging)\. If you already configured your application to log AWS SDK for \.NET output, the same configuration applies to output from the X\-Ray SDK for \.NET\.
 
 To configure logging, add a configuration section named `aws` to your `App.config` file or `Web.config` file\.
 
@@ -182,7 +181,7 @@ For more information, see [Configuring Your AWS SDK for \.NET Application](https
 
 ## Logging \(\.NET Core\)<a name="xray-sdk-dotnet-configuration-corelogging"></a>
 
-The X\-Ray SDK for \.NET uses the same logging mechanism as the [AWS SDK for .NET](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-other.html#config-setting-awslogging). To configure logging for .NET Core application, pass the logging option to the `AWSXRayRecorder.RegisterLogger` method.
+The X\-Ray SDK for \.NET uses the same logging options as the [AWS SDK for \.NET](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-other.html#config-setting-awslogging)\. To configure logging for \.NET Core applications, pass the logging option to the `AWSXRayRecorder.RegisterLogger` method\.
 
 For example, to use log4net, create a configuration file that defines the logger, the output format, and the file location\.
 

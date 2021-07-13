@@ -84,7 +84,7 @@ $ aws xray get-sampling-targets --sampling-statistics-documents '[
     {
         "RuleName": "base-scorekeep",
         "ClientID": "ABCDEF1234567890ABCDEF10",
-        "Timestamp": "2018-07-07T00:20:06,
+        "Timestamp": "2018-07-07T00:20:06",
         "RequestCount": 110,
         "SampledCount": 20,
         "BorrowCount": 10
