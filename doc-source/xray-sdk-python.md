@@ -37,7 +37,7 @@ Next, use the X\-Ray SDK for Python to instrument downstream calls by [patching 
 
 Whenever your application makes calls to AWS, an SQL database, or other HTTP services, the SDK records information about the call in a subsegment\. AWS services and the resources that you access within the services appear as downstream nodes on the service map to help you identify errors and throttling issues on individual connections\.
 
-Once you get going with the SDK, customize its behavior by [configuring the recorder and middleware](xray-sdk-python-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
+After you start using the SDK, customize its behavior by [configuring the recorder and middleware](xray-sdk-python-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
 
 Record additional information about requests and the work that your application does in [annotations and metadata](xray-sdk-python-segment.md)\. Annotations are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md), so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
 

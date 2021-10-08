@@ -32,6 +32,26 @@ For Gradle, add the following dependency in your `build.gradle` file\.
 compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.9.0'
 ```
 
+## Configuring Spring Boot<a name="xray-sdk-java-aop-spring-boot-configuration"></a>
+
+In addition to the Spring dependency described in the previous section, if you’re using Spring Boot, add the following dependency if it’s not already on your classpath\. 
+
+Maven:
+
+```
+<dependency> 
+     <groupId>org.springframework.boot</groupId> 
+     <artifactId>spring-boot-starter-aop</artifactId> 
+     <version>2.5.2</version> 
+</dependency>
+```
+
+Gradle:
+
+```
+compile 'org.springframework.boot:spring-boot-starter-aop:2.5.2'
+```
+
 ## Adding a tracing filter to your application<a name="xray-sdk-java-aop-filters-spring"></a>
 
 Add a `Filter` to your `WebConfig` class\. Pass the segment name to the [ `AWSXRayServletFilter`](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html) constructor as a string\. For more information about tracing filters and instrumenting incoming requests, see [Tracing incoming requests with the X\-Ray SDK for Java](xray-sdk-java-filters.md)\.

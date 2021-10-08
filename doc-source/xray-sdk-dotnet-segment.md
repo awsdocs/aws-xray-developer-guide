@@ -56,15 +56,15 @@ Use metadata to record information on segments or subsegments that you don't nee
 1. Call `AddMetadata` with a String namespace, String key, and an Object value\.
 
    ```
-   segment.AddMetadata("my namespace", "my key", "my value");
+   recorder.AddMetadata("my namespace", "my key", "my value");
    ```
 
    or
 
-   Call `putMetadata` with just a key and value\.
+   Call `AddMetadata` with just a key and value\.
 
    ```
-   segment.AddMetadata("my key", "my value");
+   recorder.AddMetadata("my key", "my value");
    ```
 
 If you don't specify a namespace, the SDK uses `default`\. Calling `AddMetadata` twice with the same key overwrites previously recorded values on the same segment or subsegment\.

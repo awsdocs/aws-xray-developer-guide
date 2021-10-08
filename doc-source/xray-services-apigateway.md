@@ -5,7 +5,7 @@ You can use X\-Ray to trace and analyze user requests as they travel through you
 **Note**  
 X\-Ray only supports tracing for REST APIs through API Gateway\.
 
-Amazon API Gateway provides [active tracing](xray-usage.md#xray-usage-services) support for AWS X\-Ray\. Enable active tracing on your API stages to sample incoming requests and send traces to X\-Ray\.
+Amazon API Gateway provides [active tracing](xray-services.md) support for AWS X\-Ray\. Enable active tracing on your API stages to sample incoming requests and send traces to X\-Ray\.
 
 **To enable active tracing on an API stage**
 
@@ -15,11 +15,11 @@ Amazon API Gateway provides [active tracing](xray-usage.md#xray-usage-services) 
 
 1. Choose a stage\.
 
-1. On the **Logs/Tracing** tab, choose **Enable X\-Ray Tracing**\.
+1. On the **Logs/Tracing** tab, choose **Enable X\-Ray Tracing** and then choose **Save Changes**\.
 
 1. Choose **Resources** in the left side navigation panel\.
 
-1. To redeploy the API with the new settings, choose **Actions**, **Deploy API**\.
+1. To redeploy the API with the new settings, choose the **Actions** dropdown, and then choose **Deploy API**\.
 
 API Gateway uses sampling rules that you define in the X\-Ray console to determine which requests to record\. You can create rules that only apply to APIs, or that apply only to requests that contain certain headers\. API Gateway records headers in attributes on the segment, along with details about the stage and request\. For more information, see [Configuring sampling rules in the X\-Ray console](xray-console-sampling.md)\.
 

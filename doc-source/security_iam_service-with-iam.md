@@ -118,7 +118,7 @@ The following is an example of an identity\-based permissions policy for a `Crea
 **Note**  
 The ARN of a sampling rule is defined by its name\. Unlike group ARNs, sampling rules have no uniquely generated ID\.
 
-To see a list of X\-Ray resource types and their ARNs, see [Resources Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awskeymanagementservice.html#awskeymanagementservice-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsx-ray.html)\.
+To see a list of X\-Ray resource types and their ARNs, see [Resources Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsx-ray.html#awsx-ray-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by AWS X\-Ray](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsx-ray.html)\.
 
 ### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
@@ -174,9 +174,8 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 
 1. For **Role Type**, choose **Amazon EC2**\.
 
-1. Attach managed policies to give your application access to AWS services\.
+1. Attach the following managed policy to give your application access to AWS services:
    + **AWSXRayDaemonWriteAccess** – Gives the X\-Ray daemon permission to upload trace data\.
-   + **AmazonS3ReadOnlyAccess** \(Amazon EC2 only\) – Gives the instance permission to download the X\-Ray daemon from Amazon S3\.
 
    If your application uses the AWS SDK to access other services, add policies that grant access to those services\.
 
@@ -186,9 +185,9 @@ When you run your application on AWS, use a role to grant permission to the Amaz
 
 ## User permissions for encryption<a name="xray-permissions-encryption"></a>
 
-X\-Ray encrypts all trace data and by default, and you can [configure it to use a key that you manage](xray-console-encryption.md)\. If you choose a AWS Key Management Service customer managed customer master key \(CMK\), you need to ensure that the key's access policy lets you grant permission to X\-Ray to use it to encrypt\. Other users in your account also need access to the key to view encrypted trace data in the X\-Ray console\.
+X\-Ray encrypts all trace data and by default, and you can [configure it to use a key that you manage](xray-console-encryption.md)\. If you choose a AWS Key Management Service customer managed key, you need to ensure that the key's access policy lets you grant permission to X\-Ray to use it to encrypt\. Other users in your account also need access to the key to view encrypted trace data in the X\-Ray console\.
 
-For a customer managed CMK, configure your key with an access policy that allows the following actions:
+For a customer managed key, configure your key with an access policy that allows the following actions:
 + User who configures the key in X\-Ray has permission to call `kms:CreateGrant` and `kms:DescribeKey`\.
 + Users who can access encrypted trace data have permission to call `kms:Decrypt`\.
 

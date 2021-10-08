@@ -318,7 +318,7 @@ To update your policies, first you identify the ARNs of your Amazon S3 and Dynam
 
 1. Open the [Resources page of the AWS Config console](https://console.aws.amazon.com/config/home#/resources)\.
 
-1. Under **Resource type**, filter by **AWS S3 Bucket** to find the ARN of the Amazon S3 bucket that your application uses\.
+1. Under **Resource type**, filter by **Amazon S3 Bucket** to find the ARN of the Amazon S3 bucket that your application uses\.
 
 1. Choose the **Resource identifier** that's attached to `elasticbeanstalk`\.
 

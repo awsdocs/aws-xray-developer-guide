@@ -17,7 +17,7 @@ On Lambda, the X\-Ray SDK is optional\. If you don't use it in your function, yo
 
 Next, [wrap your client with a call to the `AWS` function](xray-sdk-go-awssdkclients.md)\. This step ensures that X\-Ray instruments calls to any client methods\. You can also [instrument calls to SQL databases](xray-sdk-go-sqlclients.md)\.
 
-Once you get going with the SDK, customize its behavior by [configuring the recorder and middleware](xray-sdk-go-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
+After you start using the SDK, customize its behavior by [configuring the recorder and middleware](xray-sdk-go-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
 
 Record additional information about requests and the work that your application does in [annotations and metadata](xray-sdk-go-segment.md)\. Annotations are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md), so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
 

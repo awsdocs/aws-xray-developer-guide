@@ -11,12 +11,15 @@ Use the following instructions to learn how to enable X\-Ray tracing through App
 
 To configure the Envoy proxy to send data to X\-Ray, set the `ENABLE_ENVOY_XRAY_TRACING` [environment variable](https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html#envoy-config) in its container definition\.
 
+**Note**  
+The App Mesh version of Envoy does not currently send traces based on configured [sampling rules](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-sampling.html)\. Instead, it uses a fixed sampling rate of 5% for Envoy version 1\.16\.3 or newer, or a 50% sampling rate for Envoy versions prior to 1\.16\.3\. 
+
 **Example Envoy container definition for Amazon ECS**  
 
 ```
 {
       "name": "envoy",
-      "image": "840364872350.dkr.ecr.us-west-2.amazonaws.com/aws-appmesh-envoy:v1.15.1.0-prod",
+      "image": "public.ecr.aws/appmesh/aws-appmesh-envoy:envoy-version",
       "essential": true,
       "environment": [
         {

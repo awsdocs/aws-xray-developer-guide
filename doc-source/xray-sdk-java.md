@@ -2,10 +2,9 @@
 
 The X\-Ray SDK for Java is a set of libraries for Java web applications that provide classes and methods for generating and sending trace data to the X\-Ray daemon\. Trace data includes information about incoming HTTP requests served by the application, and calls that the application makes to downstream services using the AWS SDK, HTTP clients, or an SQL database connector\. You can also create segments manually and add debug information in annotations and metadata\.
 
-**Note**  
 The X\-Ray SDK for Java is an open source project\. You can follow the project and submit issues and pull requests on GitHub: [github\.com/aws/aws\-xray\-sdk\-java](https://github.com/aws/aws-xray-sdk-java)
 
-Start by [adding `AWSXRayServletFilter` as a servlet filter](xray-sdk-java-filters.md) to trace incoming requests\. A servlet filter creates a [segment](xray-concepts.md#xray-concepts-segments)\. While the segment is open you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
+Start by [adding `AWSXRayServletFilter` as a servlet filter](xray-sdk-java-filters.md) to trace incoming requests\. A servlet filter creates a [segment](xray-concepts.md#xray-concepts-segments)\. While the segment is open, you can use the SDK client's methods to add information to the segment and create subsegments to trace downstream calls\. The SDK also automatically records exceptions that your application throws while the segment is open\.
 
 Starting in release 1\.3, you can instrument your application using [aspect\-oriented programming \(AOP\) in Spring](xray-sdk-java-aop-spring.md)\. What this means is that you can instrument your application, while it is running on AWS, without adding any code to your application's runtime\.
 
@@ -15,7 +14,7 @@ If you don't want to instrument all downstream calls to AWS services, you can le
 
 Other X\-Ray SDK for Java submodules provide instrumentation for downstream calls to HTTP web APIs and SQL databases\. You can [use the X\-Ray SDK for Java versions of `HTTPClient` and `HTTPClientBuilder`](xray-sdk-java-httpclients.md) in the Apache HTTP submodule to instrument Apache HTTP clients\. To instrument SQL queries, [add the SDK's interceptor to your data source](xray-sdk-java-sqlclients.md)\.
 
-Once you get going with the SDK, customize its behavior by [configuring the recorder and servlet filter](xray-sdk-java-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
+After you start using the SDK, customize its behavior by [configuring the recorder and servlet filter](xray-sdk-java-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
 
 Record additional information about requests and the work that your application does in [annotations and metadata](xray-sdk-java-segment.md)\. Annotations are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md), so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
 

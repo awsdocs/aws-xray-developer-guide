@@ -38,7 +38,7 @@ Since `plugins` are passed in as a tuple, be sure to include a trailing `,` when
 
 You can also use [environment variables](#xray-sdk-python-configuration-envvars), which take precedence over values set in code, to configure the recorder\.
 
-Configure plugins before [patching libraries](#xray-sdk-python-configuration) to record downstream calls\.
+Configure plugins before [patching libraries](xray-sdk-python-patching.md) to record downstream calls\.
 
 The SDK also uses plugin settings to set the `origin` field on the segment\. This indicates the type of AWS resource that runs your application\. The resource type appears under your application's name in the service map\. For example, `AWS::ElasticBeanstalk::Environment`\.
 

@@ -16,7 +16,7 @@ Next, use the X\-Ray SDK for \.NET to [instrument your AWS SDK for \.NET clients
 
 The X\-Ray SDK for \.NET also provides instrumentation for downstream calls to [HTTP web APIs](xray-sdk-dotnet-httpclients.md) and [SQL databases](xray-sdk-dotnet-sqlqueries.md)\. The `GetResponseTraced` extension method for `System.Net.HttpWebRequest` traces outgoing HTTP calls\. You can use the X\-Ray SDK for \.NET's version of `SqlCommand` to instrument SQL queries\.
 
-Once you get going with the SDK, customize its behavior by [configuring the recorder and message handler](xray-sdk-dotnet-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
+After you start using the SDK, customize its behavior by [configuring the recorder and message handler](xray-sdk-dotnet-configuration.md)\. You can add plugins to record data about the compute resources running your application, customize sampling behavior by defining sampling rules, and set the log level to see more or less information from the SDK in your application logs\.
 
 Record additional information about requests and the work that your application does in [annotations and metadata](xray-sdk-dotnet-segment.md)\. Annotations are simple key\-value pairs that are indexed for use with [filter expressions](xray-console-filters.md), so that you can search for traces that contain specific data\. Metadata entries are less restrictive and can record entire objects and arrays — anything that can be serialized into JSON\.
 

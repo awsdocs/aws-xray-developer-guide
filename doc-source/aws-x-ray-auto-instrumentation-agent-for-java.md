@@ -1,20 +1,20 @@
 # AWS X\-Ray auto\-instrumentation agent for Java<a name="aws-x-ray-auto-instrumentation-agent-for-java"></a>
 
-The AWS X\-Ray auto\-instrumentation agent for Java is a tracing solution that instruments your Java web applications with minimal development effort\. The agent enables tracing for servlet\-based applications and all of the agent's downstream requests made with supported frameworks and libraries\. This includes downstream Apache HTTP requests, AWS SDK requests, and SQL queries made using a JDBC driver\. The agent propagates X\-Ray context, including all active segments and sub\-segments, across threads\. All of the configurations and versatility of the X\-Ray SDK are still available with the Java agent, and suitable defaults were chosen to ensure the agent works with minimal effort\.
+The AWS X\-Ray auto\-instrumentation agent for Java is a tracing solution that instruments your Java web applications with minimal development effort\. The agent enables tracing for servlet\-based applications and all of the agent's downstream requests made with supported frameworks and libraries\. This includes downstream Apache HTTP requests, AWS SDK requests, and SQL queries made using a JDBC driver\. The agent propagates X\-Ray context, including all active segments and subsegments, across threads\. All of the configurations and versatility of the X\-Ray SDK are still available with the Java agent\. Suitable defaults were chosen to ensure that the agent works with minimal effort\.
 
-The X\-Ray agent solution is best suited for servlet\-based, request\-response Java web application servers\. If your application uses an asynchronous framework, or is not well\-modeled as a request\-response service, you might want to consider manual instrumentation with the SDK instead\. 
+The X\-Ray agent solution is best suited for servlet\-based, request\-response Java web application servers\. If your application uses an asynchronous framework, or is not well modeled as a request\-response service, you might want to consider manual instrumentation with the SDK instead\. 
 
-The X\-Ray agent is built using the Distributed Systems Comprehension Toolkit, or DiSCo\. DiSCo is an open\-source framework for building Java agents that can be used in distributed systems\. While it is not necessary to understand DiSCo to use the X\-Ray agent, you can learn more about the project by visiting its [homepage on GitHub](https://github.com/awslabs/disco)\. The X\-Ray agent is also fully open sourced\. To view the source code, make contributions, or raise issues about the agent, visit its [repository on GitHub](https://github.com/aws/aws-xray-java-agent)\.
+The X\-Ray agent is built using the Distributed Systems Comprehension toolkit, or DiSCo\. DiSCo is an open source framework for building Java agents that can be used in distributed systems\. While it is not necessary to understand DiSCo to use the X\-Ray agent, you can learn more about the project by visiting its [homepage on GitHub](https://github.com/awslabs/disco)\. The X\-Ray agent is also fully open\-sourced\. To view the source code, make contributions, or raise issues about the agent, visit its [repository on GitHub](https://github.com/aws/aws-xray-java-agent)\.
 
 ## Sample application<a name="XRayAutoInstrumentationAgent-SampleApp"></a>
 
-The [eb\-java\-scorekeep](https://github.com/aws-samples/eb-java-scorekeep/tree/xray-agent) sample application was adapted to be instrumented with the X\-Ray agent\. This branch contains no servlet filter or recorder configuration, as these functions are done by the agent\. To run the application locally or using AWS resources, follow the steps in the sample application's readme file\. The instructions for using the sample app to generate X\-Ray traces are in the [sample app’s tutorial](xray-scorekeep.md)\.
+The [eb\-java\-scorekeep](https://github.com/aws-samples/eb-java-scorekeep/tree/xray-agent) sample application is adapted to be instrumented with the X\-Ray agent\. This branch contains no servlet filter or recorder configuration, as these functions are done by the agent\. To run the application locally or using AWS resources, follow the steps in the sample application's readme file\. The instructions for using the sample app to generate X\-Ray traces are in the [sample app’s tutorial](xray-scorekeep.md)\.
 
 ## Getting started<a name="XRayAutoInstrumentationAgent-GettingStarted"></a>
 
 To get started with the X\-Ray auto\-instrumentation Java agent in your own application, follow these steps\.
 
-1. Run the X\-Ray daemon in your environment\. For more information see [X\-Ray daemon](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html)\.
+1. Run the X\-Ray daemon in your environment\. For more information, see [X\-Ray daemon](https://docs.aws.amazon.com/xray/latest/devguide/xray-daemon.html)\.
 
 1. Download the [latest distribution of the agent](https://github.com/aws/aws-xray-java-agent/releases/latest/download/xray-agent.zip)\. Unzip the archive and note its location in your file system\. Its contents should look like the following\.
 
@@ -28,13 +28,13 @@ To get started with the X\-Ray auto\-instrumentation Java agent in your own appl
        └── disco-java-agent-web-plugin.jar
    ```
 
-1. Modify the JVM arguments of your application to include the following, which enables the agent\. Ensure the `-javaagent` argument is placed *before* the `-jar` argument if applicable\. The process to modify JVM arguments varies depending on the tools and frameworks you use to launch your Java server, so consult the documentation of your server framework for specific guidance\.
+1. Modify the JVM arguments of your application to include the following, which enables the agent\. Ensure the `-javaagent` argument is placed *before* the `-jar` argument if applicable\. The process to modify JVM arguments varies depending on the tools and frameworks you use to launch your Java server\. Consult the documentation of your server framework for specific guidance\.
 
    ```
    -javaagent:/<path-to-disco>/disco-java-agent.jar=pluginPath=/<path-to-disco>/disco-plugins
    ```
 
-1. To specify the name of your application as it will appear on the X\-Ray console, set the `AWS_XRAY_TRACING_NAME` environment variable or the `com.amazonaws.xray.strategy.tracingName` system property\. If no name is provided, a default name is used\.
+1. To specify how the name of your application appears on the X\-Ray console, set the `AWS_XRAY_TRACING_NAME` environment variable or the `com.amazonaws.xray.strategy.tracingName` system property\. If no name is provided, a default name is used\.
 
 1. Restart your server or container\. Incoming requests and their downstream calls are now traced\. If you don’t see the expected results, see [Troubleshooting](#XRayAutoInstrumentationAgent-Troubleshooting)\.
 
@@ -84,7 +84,7 @@ The following table describes valid values for each property\. Property names ar
 |  traceIdInjection  |  Boolean  |  True, False  |  Enables X\-Ray trace ID injection into logs if the dependencies and configuration described in [logging config](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-configuration.html#xray-sdk-java-configuration-logging) are also added\. Otherwise, does nothing\.  |  N/A  |  N/A  |  TRUE  | 
 |  pluginsEnabled  |  Boolean  |  True, False  |  Enables plugins that record metadata about the AWS environments you’re operating in\. See [plugins](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java-configuration.html#xray-sdk-java-configuration-plugins)\.  |  N/A  |  N/A  |  TRUE  | 
 |  collectSqlQueries  |  Boolean  |  True, False  |  Records SQL query strings in SQL subsegments on a best\-effort basis\.  |  N/A  |  N/A  |  FALSE  | 
-|  contextPropagation  |  Boolean  |  True, False  |  Automatically propagates X\-Ray context between threads if true\. Otherwise uses Thread Local to store context and manual propagation across threads is required\.  |  N/A  |  N/A  |  TRUE  | 
+|  contextPropagation  |  Boolean  |  True, False  |  Automatically propagates X\-Ray context between threads if true\. Otherwise, uses Thread Local to store context and manual propagation across threads is required\.  |  N/A  |  N/A  |  TRUE  | 
 
 ### Logging configuration<a name="XRayAutoInstrumentationAgent-Logging"></a>
 
@@ -115,11 +115,11 @@ If you are working in a Gradle project, add the following dependencies to your `
 implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.9.0' 
 ```
 
-You can add [ custom subsegments](xray-sdk-java-subsegments.md) as well as [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
+You can add [ custom subsegments](xray-sdk-java-subsegments.md) in addition to [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
 
 ## Troubleshooting<a name="XRayAutoInstrumentationAgent-Troubleshooting"></a>
 
-Since the agent offers fully automatic instrumentation, it can be difficult to identify the root cause of a problem when you are experiencing issues\. If the X\-Ray agent is not working as expected for you, review the following problems and solutions\. The X\-Ray agent and SDK use Jakarta Commons Logging \(JCL\), so in order to see the logging output you’ll need to ensure that a bridge connecting JCL to your logging backend is on the classpath, for example `log4j-jcl` or `jcl-over-slf4j`\.
+Since the agent offers fully automatic instrumentation, it can be difficult to identify the root cause of a problem when you are experiencing issues\. If the X\-Ray agent is not working as expected for you, review the following problems and solutions\. The X\-Ray agent and SDK use Jakarta Commons Logging \(JCL\)\. To see the logging output, ensure that a bridge connecting JCL to your logging backend is on the classpath, as in the following example: `log4j-jcl` or `jcl-over-slf4j`\.
 
 ### Problem: I’ve enabled the Java agent on my application but don’t see anything on the X\-Ray console<a name="-problem-ive-enabled-the-java-agent-on-my-application-but-dont-see-anything-on-the-x-ray-console"></a>
 
@@ -129,7 +129,7 @@ If not, see the [X\-Ray daemon documentation](https://docs.aws.amazon.com/xray/l
 
  **In your application logs, do you see a message like "Initializing the X\-Ray agent recorder"?** 
 
-This message is logged at INFO level when your application starts, before it starts taking requests, if you have correctly added the agent to your application\. If this message is not there, then the Java agent is not running with your Java process\. Make sure you’ve followed all the setup steps correctly with no typos\.
+If you have correctly added the agent to your application, this message is logged at INFO level when your application starts, before it starts taking requests\. If this message is not there, then the Java agent is not running with your Java process\. Make sure you’ve followed all the setup steps correctly with no typos\.
 
  **In your application logs, do you see several error messages saying something like "Suppressing AWS X\-Ray context missing exception"?** 
 
