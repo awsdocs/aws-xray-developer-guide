@@ -1,6 +1,6 @@
 # Configuring the X\-Ray SDK for Go<a name="xray-sdk-go-configuration"></a>
 
-You can specify the configuration for for X\-Ray SDK for Go through environment variables, by calling `Configure` with a `Config` object, or by assuming default values\. Environment variables take precedence over `Config` values, which take precedence over any default value\.
+You can specify the configuration for X\-Ray SDK for Go through environment variables, by calling `Configure` with a `Config` object, or by assuming default values\. Environment variables take precedence over `Config` values, which take precedence over any default value\.
 
 **Topics**
 + [Service plugins](#xray-sdk-go-configuration-plugins)
