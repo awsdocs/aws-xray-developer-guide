@@ -38,18 +38,17 @@ import (
 
 	"github.com/aws/aws-xray-sdk-go/awsplugins/ec2"
 	"github.com/aws/aws-xray-sdk-go/xray"
-	)
+)
 
-	func init() {
-		// conditionally load plugin
-		if os.Getenv("ENVIRONMENT") == "production" {
-		ec2.Init()
-	}
+func init() {
+  // conditionally load plugin
+  if os.Getenv("ENVIRONMENT") == "production" {
+    ec2.Init()
+  }
 
-	xray.Configure(xray.Config{
-		ServiceVersion: "1.2.3",
-
-	})
+  xray.Configure(xray.Config{
+    ServiceVersion: "1.2.3",
+  })
 }
 ```
 
