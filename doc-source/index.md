@@ -69,6 +69,7 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS AppSync and AWS X-Ray](xray-services-appsync.md)
    + [Logging X-Ray API calls with AWS CloudTrail](xray-api-cloudtrail.md)
    + [Monitoring endpoints and APIs with CloudWatch](xray-services-cloudwatch.md)
+      + [CloudWatch RUM and AWS X-Ray](xray-services-RUM.md)
       + [Debugging CloudWatch synthetics canaries using X-Ray](xray-services-cloudwatch-synthetics.md)
    + [Tracking X-Ray encryption configuration changes with AWS Config](xray-api-config.md)
    + [Amazon Elastic Compute Cloud and AWS X-Ray](xray-services-ec2.md)
