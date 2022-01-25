@@ -4,7 +4,7 @@ AWS X\-Ray integrates with Amazon S3 to trace upstream requests to update your a
 
 You can use the X\-Ray service map to view the connections between Amazon S3 and other services that your application uses\. You can also use the console to view metrics such as average latency and failure rates\. For more information about the X\-Ray console, see [AWS X\-Ray console](xray-console.md)\.
 
-Amazon S3 supports the *default http header* instrumentation\. The X\-Ray SDK automatically populates the trace header as an HTTP header when you call Amazon S3 through the AWS SDK\. The default trace header is carried by `X-Amzn-Trace-Id`\. To learn more about tracing headers, see [Tracing header](xray-concepts.md#xray-concepts-tracingheader) on the concept page\. Amazon S3 trace context propagation supports the following subscribers: Lambda, SQS, and SNS\.
+Amazon S3 supports the *default http header* instrumentation\. The X\-Ray SDK automatically populates the trace header as an HTTP header when you call Amazon S3 through the AWS SDK\. The default trace header is carried by `X-Amzn-Trace-Id`\. To learn more about tracing headers, see [Tracing header](xray-concepts.md#xray-concepts-tracingheader) on the concept page\. Amazon S3 trace context propagation supports the following subscribers: Lambda, SQS, and SNS\. Because SQS and SNS are do not emit segment data themselves, they may not appear in your trace or service map when triggered by S3, even though they will propagate the trace context.
 
 ## Configure Amazon S3 event notifications<a name="xray-services-s3-notification"></a>
 
