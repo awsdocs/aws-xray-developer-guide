@@ -82,7 +82,7 @@ import binascii
 
 START_TIME = time.time()
 HEX=hex(int(START_TIME))[2:]
-TRACE_ID="1-{}-{}".format(HEX, binascii.hexlify(os.urandom(12)))
+TRACE_ID="1-{}-{}".format(HEX, binascii.hexlify(os.urandom(12)).decode('utf-8'))
 ```
 
 **Bash**
