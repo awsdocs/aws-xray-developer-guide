@@ -81,22 +81,24 @@ Your classes must either be annotated with the `@XRayEnabled` annotation, or imp
 
 ## Activating X\-Ray in your application<a name="xray-sdk-java-aop-activate-xray"></a>
 
-To activate X\-Ray tracing in your application, your code must extend the abstract class `AbstractXRayInterceptor` by overriding the following methods\.
+To activate X\-Ray tracing in your application, your code must extend the abstract class `BaseAbstractXRayInterceptor` by overriding the following methods\.
 + `generateMetadata`—This function allows customization of the metadata attached to the current function’s trace\. By default, the class name of the executing function is recorded in the metadata\. You can add more data if you need additional information\.
 + `xrayEnabledClasses`—This function is empty, and should remain so\. It serves as the host for a pointcut instructing the interceptor about which methods to wrap\. Define the pointcut by specifying which of the classes that are annotated with `@XRayEnabled` to trace\. The following pointcut statement tells the interceptor to wrap all controller beans annotated with the `@XRayEnabled` annotation\.
 
   ```
   @Pointcut(“@within(com.amazonaws.xray.spring.aop.XRayEnabled) && bean(*Controller)”)
   ```
+  
+If your project is using Spring Data JPA, consider extending from `AbstractXRayInterceptor` instead of `BaseAbstractXRayInterceptor`.
 
 ## Example<a name="xray-sdk-java-aop-example"></a>
 
-The following code extends the abstract class `AbstractXRayInterceptor`\.
+The following code extends the abstract class `BaseAbstractXRayInterceptor`\.
 
 ```
 @Aspect
 @Component
-public class XRayInspector extends AbstractXRayInterceptor {    
+public class XRayInspector extends BaseAbstractXRayInterceptor {    
     @Override    
     protected Map<String, Map<String, Object>> generateMetadata(ProceedingJoinPoint proceedingJoinPoint, Subsegment subsegment) throws Exception {      
         return super.generateMetadata(proceedingJoinPoint, subsegment);    
