@@ -60,7 +60,7 @@ Deploy the sample application to your Elastic Beanstalk environment\. The sample
 
 **To deploy the source code**
 
-1. Download the sample app: [eb\-java\-scorekeep\-xray\-gettingstarted\-v1\.3\.zip](https://github.com/awslabs/eb-java-scorekeep/releases/download/xray-gs-v1.3/eb-java-scorekeep-xray-gettingstarted-v1.3.zip)
+1. Download the sample app: [eb\-java\-scorekeep\-xray\-gettingstarted\-v2\.zip](https://github.com/aws-samples/eb-java-scorekeep/releases/download/xray-gs-v2/eb-java-scorekeep-xray-gettingstarted-v2.zip)
 
 1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk)\.
 
