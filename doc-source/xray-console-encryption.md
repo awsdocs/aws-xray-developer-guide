@@ -18,9 +18,12 @@ See [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing/) fo
 
 You must have user\-level access to a customer managed key to configure X\-Ray to use it, and to then view encrypted traces\. See [User permissions for encryption](security_iam_service-with-iam.md#xray-permissions-encryption) for more information\.
 
-**To configure X\-Ray to use a KMS key for encryption**
+------
+#### [ X\-Ray console ]
 
-1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#/service-map)\.
+**To configure X\-Ray to use a KMS key for encryption using the X\-Ray console**
+
+1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#)\.
 
 1. Choose **Encryption**\.
 
@@ -30,10 +33,35 @@ You must have user\-level access to a customer managed key to configure X\-Ray t
    + **aws/xray** – Use the AWS managed key\.
    + *key alias* – Use a customer managed key in your account\.
    + **Manually enter a key ARN** – Use a customer managed key in a different account\. Enter the full Amazon Resource Name \(ARN\) of the key in the field that appears\.
-**Note**  
-X\-Ray does not support asymmetric KMS keys\.
 
 1. Choose **Apply**\.
+
+------
+#### [ CloudWatch console ]
+
+**To configure X\-Ray to use a KMS key for encryption using the CloudWatch console**
+
+1. Sign in to the AWS Management Console and open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+
+1. Choose **Settings** in the left navigation pane\.
+
+1. Choose **View settings** under **Encryption** within the **X\-Ray traces** section\.
+
+1. Choose **Edit** in the **Encryption configuration** section\.
+
+1. Choose **Use a KMS key**\.
+
+1. Choose a key from the dropdown menu:
+   + **aws/xray** – Use the AWS managed key\.
+   + *key alias* – Use a customer managed key in your account\.
+   + **Manually enter a key ARN** – Use a customer managed key in a different account\. Enter the full Amazon Resource Name \(ARN\) of the key in the field that appears\.
+
+1. Choose **Update encryption**\.
+
+------
+
+**Note**  
+X\-Ray does not support asymmetric KMS keys\.
 
 If X\-Ray is unable to access your encryption key, it stops storing data\. This can happen if your user loses access to the KMS key, or if you disable a key that's currently in use\. When this happens, X\-Ray shows a notification in the navigation bar\.
 

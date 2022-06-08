@@ -9,7 +9,7 @@ Elastic Beanstalk platforms provide a configuration option that you can set to r
 
 The version included on Elastic Beanstalk platforms might not be the latest version\. See the [Supported Platforms topic](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) to find out the version of the daemon that is available for your platform configuration\.
 
-Elastic Beanstalk does not provide the X\-Ray daemon on the Multicontainer Docker \(Amazon ECS\) platform\. The Scorekeep sample application shows how to use the X\-Ray daemon on Amazon ECS with Elastic Beanstalk\. See [Instrumenting Amazon ECS applications](scorekeep-ecs.md) for details\.
+Elastic Beanstalk does not provide the X\-Ray daemon on the Multicontainer Docker \(Amazon ECS\) platform\.
 
 ## Using the Elastic Beanstalk X\-Ray integration to run the X\-Ray daemon<a name="xray-daemon-beanstalk-option"></a>
 

@@ -14,6 +14,6 @@ Instead of sending trace data directly to X\-Ray, each client SDK sends JSON seg
 
 X\-Ray uses trace data from the AWS resources that power your cloud applications to generate a detailed *service graph*\. The service graph shows the client, your front\-end service, and backend services that your front\-end service calls to process requests and persist data\. Use the service graph to identify bottlenecks, latency spikes, and other issues to solve to improve the performance of your applications\.
 
-![\[Service graph shows the client, front-end service, and backend services that your front-end service calls to process requests and persist data\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-after-github.png)
+![\[Service graph shows the client, front-end service, and backend services that your front-end service calls to process requests and persist data\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-before-2021.png)
 
 See the [getting started tutorial](xray-gettingstarted.md) to start using X\-Ray with an instrumented sample application\.

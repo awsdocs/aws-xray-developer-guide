@@ -2,10 +2,12 @@
 
 The following table describes the important changes to the documentation for AWS X\-Ray\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 
-**Latest documentation update**: May 20, 2021
+**Latest documentation update**: February 7, 2022
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Added AWS Distro for OpenTelemetry Ruby](#document-history) | AWS Distro for OpenTelemetry \(ADOT\) provides a single set of open source APIs, libraries, and agents to collect distributed traces and metrics\. ADOT Ruby enables you to instrument your Ruby application for X\-Ray and other tracing back\-ends\. For more information, see [AWS Distro for OpenTelemetry Ruby](https://docs.aws.amazon.com/xray/latest/devguide/xray-ruby-opentel-sdk.html)\. | February 7, 2022 | 
+| [Added functionality](#document-history) |  You can now view traces and configure X\-Ray from the CloudWatch console\. For more information, see [X\-Ray console](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html)\.  | January 24, 2022 | 
 | [Integrated CloudWatch RUM](#document-history) |  With AWS X\-Ray and CloudWatch RUM, you can analyze and debug the request path starting from end users of your application through downstream AWS managed services\. For more information, see [CloudWatch RUM and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/services-cloudwatch-RUM.html)\. | December 3, 2021 | 
 | [Integrated AWS Distro for OpenTelemetry](#document-history) | The AWS Distro for OpenTelemetry \(ADOT\) provides a single set of open source APIs, libraries, and agents to collect distributed traces and metrics\. ADOT enables you to instrument your application for X\-Ray and other tracing back\-ends\. For more information, see [Instrumenting your app](https://docs.aws.amazon.com/xray/latest/devguide/xray-instrumenting-your-app.html)\. | September 23, 2021 | 
 | [Added functionality](#document-history) | AWS X\-Ray now integrates with Amazon Virtual Private Cloud, enabling resources in your Amazon VPC to communicate with the X\-Ray service without going through the public internet\. For more information, see [Using AWS X\-Ray with VPC endpoints](https://docs.aws.amazon.com/xray/latest/devguide/xray-security-vpc-endpoint.html)\. | May 20, 2021 | 

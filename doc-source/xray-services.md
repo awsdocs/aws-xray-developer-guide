@@ -10,13 +10,14 @@ Many AWS services provide varying levels of X\-Ray integration, including sampli
 The X\-Ray SDKs include plugins for additional integration with AWS services\. For example, you can use the X\-Ray SDK for Java Elastic Beanstalk plugin to add information about the Elastic Beanstalk environment that runs your application, including the environment name and ID\.
 
 Here are some examples of AWS services that are integrated with X\-Ray:
++ [AWS Distro for OpenTelemetry \(ADOT\)](xray-services-adot.md) – With ADOT, engineers can instrument their applications once and send correlated metrics and traces to multiple AWS monitoring solutions including Amazon CloudWatch, AWS X\-Ray, Amazon OpenSearch Service, and Amazon Managed Service for Prometheus\.
 + [AWS Lambda](xray-services-lambda.md) – Active and passive instrumentation of incoming requests on all runtimes\. AWS Lambda adds two nodes to your service map, one for the AWS Lambda service, and one for the function\. When you enable instrumentation, AWS Lambda also runs the X\-Ray daemon on Java and Node\.js runtimes for use with the X\-Ray SDK\.
 + [Amazon API Gateway](xray-services-apigateway.md) – Active and passive instrumentation\. API Gateway uses sampling rules to determine which requests to record, and adds a node for the gateway stage to your service map\. 
 + [AWS Elastic Beanstalk](xray-services-beanstalk.md) – Tooling\. Elastic Beanstalk includes the X\-Ray daemon on the following platforms:
   + *Java SE* – 2\.3\.0 and later configurations
   + *Tomcat* – 2\.4\.0 and later configurations
   + *Node\.js* – 3\.2\.0 and later configurations
-  + *Windows Server* – All configurations other than Windows Server Core that have been released since December 9th, 2016
+  + *Windows Server* – All configurations other than Windows Server Core that have been released after December 9th, 2016
 
   You can use the Elastic Beanstalk console to tell Elastic Beanstalk to run the daemon on these platforms, or use the `XRayEnabled` option in the `aws:elasticbeanstalk:xray` namespace\. 
 + [Elastic Load Balancing](xray-services-elb.md) – Request tracing on Application Load Balancers\. The Application Load Balancer adds the trace ID to the request header before sending it to a target group\.
@@ -27,8 +28,10 @@ Here are some examples of AWS services that are integrated with X\-Ray:
 Choose from the following topics to explore the full set of integrated AWS services\.
 
 **Topics**
++ [AWS Distro for OpenTelemetry and AWS X\-Ray](xray-services-adot.md)
 + [Amazon API Gateway active tracing support for AWS X\-Ray](xray-services-apigateway.md)
 + [Amazon EC2 and AWS App Mesh](xray-services-appmesh.md)
++ [AWS App Runner and X\-Ray](xray-services-app-runner.md)
 + [AWS AppSync and AWS X\-Ray](xray-services-appsync.md)
 + [Logging X\-Ray API calls with AWS CloudTrail](xray-api-cloudtrail.md)
 + [Monitoring endpoints and APIs with CloudWatch](xray-services-cloudwatch.md)

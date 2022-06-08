@@ -21,7 +21,7 @@ When you use an instrumented client to make SQL queries, the X\-Ray SDK for Node
 
 ## Including additional data in SQL subsegments<a name="xray-sdk-nodejs-sqlclients-additional"></a>
 
-You can add additional information to subsegments generated for SQL queries, as long as it's mapped to a whitelisted SQL field\. For example, to record the sanitized SQL query string in a subsegment, you can add it directly to the subsegment's SQL object\.
+You can add additional information to subsegments generated for SQL queries, as long as it's mapped to an allow\-listed SQL field\. For example, to record the sanitized SQL query string in a subsegment, you can add it directly to the subsegment's SQL object\.
 
 **Example Assign SQL to subsegment**  
 
@@ -38,4 +38,4 @@ if (subs & & subs.length > 0) {
 }
 ```
 
-For a full list of whitelisted SQL fields, see [SQL Queries](https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html#api-segmentdocuments-sql) in the *AWS X\-Ray Developer Guide*\.
+For a full list of allow\-listed SQL fields, see [SQL Queries](https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html#api-segmentdocuments-sql) in the *AWS X\-Ray Developer Guide*\.

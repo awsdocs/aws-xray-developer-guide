@@ -14,7 +14,7 @@ X\-Ray creates an insight when it detects an *anomaly* in one or more nodes of t
 
 Insights must be enabled for each group you want to use insights features with\. You can enable insights from the **Groups** page\.
 
-1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#/service-map)\.
+1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#)\.
 
 1. Select an existing group or create a new one by choosing **Create group**, and then select **Enable Insights**\. For more information about configuring groups in the X\-Ray console, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
 
@@ -53,7 +53,7 @@ You can enable insights notifications for any insights enabled group from the **
 
 **To enable notifications for an X\-Ray group**
 
-1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#/service-map)\.
+1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#)\.
 
 1. Select an existing group or create a new one by choosing **Create group**, ensure that **Enable Insights** is selected, and then select **Enable Notifications**\. For more information about configuring groups in the X\-Ray console, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
 

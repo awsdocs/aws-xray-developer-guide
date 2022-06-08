@@ -100,13 +100,13 @@ You must use the latest version of the X\-Ray SDK to perform manual instrumentat
 If you are working in a Maven project, add the following dependencies to your `pom.xml` file\. 
 
 ```
-<dependencies>
-  <dependency>
-    <groupId>com.amazonaws</groupId>
-    <artifactId>aws-xray-recorder-sdk-core</artifactId>
-    <version>2.11.0</version>
-  </dependency>
-</dependencies>
+<dependencies> 
+  <dependency> 
+    <groupId>com.amazonaws</groupId> 
+    <artifactId>aws-xray-recorder-sdk-core</artifactId> 
+    <version>2.11.0</version> 
+  </dependency> 
+  </dependencies>
 ```
 
 If you are working in a Gradle project, add the following dependencies to your `build.gradle` file\.
@@ -115,7 +115,7 @@ If you are working in a Gradle project, add the following dependencies to your `
 implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.11.0' 
 ```
 
-You can add [custom subsegments](xray-sdk-java-subsegments.md) in addition to [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
+You can add [ custom subsegments](xray-sdk-java-subsegments.md) in addition to [annotations, metadata, and user IDs](xray-sdk-java-segment.md) while using the agent, just as you would with the normal SDK\. The agent automatically propagates context across threads, so no workarounds to propagate context should be necessary when working with multithreaded applications\.
 
 ## Troubleshooting<a name="XRayAutoInstrumentationAgent-Troubleshooting"></a>
 

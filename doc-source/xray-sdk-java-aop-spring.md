@@ -22,14 +22,14 @@ If you use Maven to build your application, add the following dependency in your
 <dependency> 
      <groupId>com.amazonaws</groupId> 
      <artifactId>aws-xray-recorder-sdk-spring</artifactId> 
-     <version>2.9.0</version> 
+     <version>2.11.0</version> 
 </dependency>
 ```
 
 For Gradle, add the following dependency in your `build.gradle` file\.
 
 ```
-compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.9.0'
+compile 'com.amazonaws:aws-xray-recorder-sdk-spring:2.11.0'
 ```
 
 ## Configuring Spring Boot<a name="xray-sdk-java-aop-spring-boot-configuration"></a>
@@ -54,7 +54,7 @@ compile 'org.springframework.boot:spring-boot-starter-aop:2.5.2'
 
 ## Adding a tracing filter to your application<a name="xray-sdk-java-aop-filters-spring"></a>
 
-Add a `Filter` to your `WebConfig` class\. Pass the segment name to the [ `AWSXRayServletFilter`](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html) constructor as a string\. For more information about tracing filters and instrumenting incoming requests, see [Tracing incoming requests with the X\-Ray SDK for Java](xray-sdk-java-filters.md)\.
+Add a `Filter` to your `WebConfig` class\. Pass the segment name to the [https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/javax/servlet/AWSXRayServletFilter.html) constructor as a string\. For more information about tracing filters and instrumenting incoming requests, see [Tracing incoming requests with the X\-Ray SDK for Java](xray-sdk-java-filters.md)\.
 
 **Example src/main/java/myapp/WebConfig\.java \- spring**  
 
@@ -88,8 +88,8 @@ To activate X\-Ray tracing in your application, your code must extend the abstra
   ```
   @Pointcut(“@within(com.amazonaws.xray.spring.aop.XRayEnabled) && bean(*Controller)”)
   ```
-  
-If your project is using Spring Data JPA, consider extending from `AbstractXRayInterceptor` instead of `BaseAbstractXRayInterceptor`.
+
+ If your project is using Spring Data JPA, consider extending from `AbstractXRayInterceptor` instead of `BaseAbstractXRayInterceptor`\. 
 
 ## Example<a name="xray-sdk-java-aop-example"></a>
 

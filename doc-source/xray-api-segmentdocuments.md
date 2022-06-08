@@ -236,8 +236,8 @@ All fields are optional\.
   + `x_forwarded_for` – \(segments only\) **boolean** indicating that the `client_ip` was read from an `X-Forwarded-For` header and is not reliable as it could have been forged\.
   + `traced` – \(subsegments only\) **boolean** indicating that the downstream call is to another traced service\. If this field is set to `true`, X\-Ray considers the trace to be broken until the downstream service uploads a segment with a `parent_id` that matches the `id` of the subsegment that contains this block\.
 + `response` – Information about a response\.
-  + `status` – **number** indicating the HTTP status of the response\.
-  + `content_length` – **number** indicating the length of the response body in bytes\.
+  + `status` – **integer** indicating the HTTP status of the response\.
+  + `content_length` – **integer** indicating the length of the response body in bytes\.
 
 When you instrument a call to a downstream web api, record a subsegment with information about the HTTP request and response\. X\-Ray uses the subsegment to generate an inferred segment for the remote API\.
 
@@ -257,7 +257,7 @@ When you instrument a call to a downstream web api, record a subsegment with inf
       "instance_id": "i-0b5a4678fc325bg98"
     },
     "xray": {
-        "sdk_version": "2.9.0 for Java"
+        "sdk_version": "2.11.0 for Java"
     },
   },
   "http": {
@@ -340,7 +340,7 @@ Segments and subsegments can include an `annotations` object containing one or m
       "instance_id": "i-0b5a4678fc325bg98"
     },
     "xray": {
-        "sdk_version": "2.9.0 for Java"
+        "sdk_version": "2.11.0 for Java"
     },
   },
   "annotations": {
@@ -416,33 +416,58 @@ For segments, the `aws` object contains information about the resource on which 
 
 All fields are optional\.
 + `account_id` – If your application sends segments to a different AWS account, record the ID of the account running your application\.
-+ `ecs` – Information about an Amazon ECS container\.
-  + `container` – The container ID of the container running your application\.
-+ `ec2` – Information about an EC2 instance\.
++ `cloudwatch_logs` – Array of objects that describe a single CloudWatch log group\.
+  + `log_group` – The CloudWatch Log Group name\.
+  + `arn` – The CloudWatch Log Group ARN\.
++ `ec2` – Information about an Amazon EC2 instance\.
   + `instance_id` – The instance ID of the EC2 instance\.
-  + `availability_zone` – The Availability Zone in which the instance is running\.  
-**Example AWS block with plugins**  
-
-  ```
-  "aws": {
-    "elastic_beanstalk": {
-      "version_label": "app-5a56-170119_190650-stage-170119_190650",
-      "deployment_id": 32,
-      "environment_name": "scorekeep"
-    },
-    "ec2": {
-      "availability_zone": "us-west-2c",
-      "instance_id": "i-075ad396f12bc325a"
-    },
-    "xray": {
-      "sdk": "2.9.0 for Java"
-    }
-  }
-  ```
+  + `instance_size` – The type of EC2 instance\.
+  + `ami_id` – The Amazon Machine Image ID\.
+  + `availability_zone` – The Availability Zone in which the instance is running\.
++ `ecs` – Information about an Amazon ECS container\.
+  + `container` – The hostname of your container\.
+  + `container_id` – The full container ID of your container\.
+  + `container_arn` – The ARN of your container instance\.
++ `eks` – Information about an Amazon EKS cluster\.
+  + `pod` – The hostname of your EKS pod\.
+  + `cluster_name` – The EKS cluster name\.
+  + `container_id` – The full container ID of your container\.
 + `elastic_beanstalk` – Information about an Elastic Beanstalk environment\. You can find this information in a file named `/var/elasticbeanstalk/xray/environment.conf` on the latest Elastic Beanstalk platforms\.
   + `environment_name` – The name of the environment\.
   + `version_label` – The name of the application version that is currently deployed to the instance that served the request\.
   + `deployment_id` – **number** indicating the ID of the last successful deployment to the instance that served the request\.
++ `xray` – Metadata about the type and version of instrumentation used\.
+  + `auto_instrumentation` – Boolean indicating whether auto\-instrumentation was used \(for example, the Java Agent\)\.
+  + `sdk_version` – The version of SDK or agent being used\.
+  + `sdk` – The type of SDK\.
+
+**Example AWS block with plugins**  
+
+```
+"aws":{
+   "elastic_beanstalk":{
+      "version_label":"app-5a56-170119_190650-stage-170119_190650",
+      "deployment_id":32,
+      "environment_name":"scorekeep"
+   },
+   "ec2":{
+      "availability_zone":"us-west-2c",
+      "instance_id":"i-075ad396f12bc325a",
+      "ami_id":
+   },
+   "cloudwatch_logs":[
+      {
+         "log_group":"my-cw-log-group",
+         "arn":"arn:aws:logs:us-west-2:012345678912:log-group:my-cw-log-group"
+      }
+   ],
+   "xray":{
+      "auto_instrumentation":false,
+      "sdk":"X-Ray for Java",
+      "sdk_version":"2.8.0"
+   }
+}
+```
 
 For subsegments, record information about the AWS services and resources that your application accesses\. X\-Ray uses this information to create inferred segments that represent the downstream services in your service map\.
 

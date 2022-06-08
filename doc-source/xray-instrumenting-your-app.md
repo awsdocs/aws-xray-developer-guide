@@ -60,5 +60,4 @@ X\-Ray currently includes auto\-instrumentation support for [Java](aws-x-ray-aut
 
  We recommend choosing an X\-Ray SDK for instrumenting your application if you need the following: 
 + A tightly integrated single\-vendor solution
-+ Support for Ruby, which is not yet generally available as part of ADOT
 + Integration with X\-Ray centralized sampling rules, including the ability to configure sampling rules from the X\-Ray console and automatically use them across multiple hosts

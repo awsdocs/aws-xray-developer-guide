@@ -77,8 +77,6 @@ $ docker stop xray-daemon
 $ docker rm xray-daemon
 ```
 
-The Scorekeep sample application shows how to use the X\-Ray daemon in a local Docker container\. See [Instrumenting Amazon ECS applications](scorekeep-ecs.md) for details\.
-
 ## Running the X\-Ray daemon on Windows<a name="xray-daemon-local-windows"></a>
 
 You can run the daemon executable from the command line\. Use the `-o` option to run in local mode, and `-n` to set the region\.

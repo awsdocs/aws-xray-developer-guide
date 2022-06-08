@@ -68,7 +68,7 @@ The service map indicates the health of each node by coloring it based on the ra
 
 For more information about how to read the service map, see [Viewing the service map](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html#xray-console-servicemap)\.
 
-![\[Observe a fault\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-before.png)
+![\[Observe a fault\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-before-2021.png)
 
 ## Identify response time peaks<a name="xray-console-analytics-response-peaks"></a>
 

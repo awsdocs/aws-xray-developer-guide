@@ -32,7 +32,7 @@ You can download the X\-Ray SDK for Java from Maven\. The X\-Ray SDK for Java is
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk-instrumentor](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk-instrumentor) – With `aws-xray-recorder-sdk-aws-sdk`, instruments all AWS SDK for Java clients automatically\.
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk-v2-instrumentor](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-aws-sdk-v2-instrumentor) – With `aws-xray-recorder-sdk-aws-sdk`, instruments all AWS SDK for Java 2\.2 and later clients automatically\.
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-apache-http](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-apache-http) – Instruments outbound HTTP calls made with Apache HTTP clients\.
-+  [ `aws-xray-recorder-sdk-spring`](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-spring) – Provides interceptors for Spring AOP Framework applications\.
++  [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-spring](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-spring) – Provides interceptors for Spring AOP Framework applications\.
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-postgres](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-postgres) – Instruments outbound calls to a PostgreSQL database made with JDBC\.
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-mysql](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-sql-mysql) – Instruments outbound calls to a MySQL database made with JDBC\.
 + [https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom](https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom) – Provides a bill of materials that you can use to specify the version to use for all submodules\.
@@ -59,7 +59,7 @@ If you use a library that is included in the X\-Ray SDK for Java, you must use t
 The X\-Ray SDK for Java is available from Maven:
 + **Group** – `com.amazonaws`
 + **Artifact** – `aws-xray-recorder-sdk-bom`
-+ **Version** – `2.9.0`
++ **Version** – `2.11.0`
 
 If you use Maven to build your application, add the SDK as a dependency in your `pom.xml` file\.
 
@@ -71,7 +71,7 @@ If you use Maven to build your application, add the SDK as a dependency in your 
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-xray-recorder-sdk-bom</artifactId>
-      <version>2.9.0</version>
+      <version>2.11.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -125,7 +125,7 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom('com.amazonaws:aws-java-sdk-bom:1.11.39')
-        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.9.0')
+        mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.11.0')
     }
 }
 ```

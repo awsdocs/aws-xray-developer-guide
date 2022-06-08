@@ -26,17 +26,42 @@ You can configure the X\-Ray SDK to read sampling rules from a JSON document tha
 
 By defining sampling rules in the X\-Ray console, and [configuring the SDK](#xray-console-sampling-service) to read rules from the X\-Ray service, you can avoid both of these issues\. The service manages the reservoir for each rule, and assigns quotas to each instance of your service to distribute the reservoir evenly, based on the number of instances that are running\. The reservoir limit is calculated according to the rules you set\. Because the rules are configured in the service, you can manage rules without making additional deployments\.
 
+**Note**  
+You can now configure X\-Ray sampling rules from within the Amazon CloudWatch console\. You can also continue to use the X\-Ray console\. 
+
+------
+#### [ X\-Ray console ]
+
 **To configure sampling rules in the X\-Ray console**
 
-1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#/service-map)\.
+1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#)\.
 
-1. Choose **Sampling**\.
+1. Choose **Sampling** in the left navigation pane\.
 
 1. To create a rule, choose **Create sampling rule**\.
 
    To edit a rule, choose a rule's name\.
 
    To delete a rule, choose a rule and use the **Actions** menu to delete it\.
+
+------
+#### [ CloudWatch console ]
+
+**To configure sampling rules in the CloudWatch console**
+
+1. Sign in to the AWS Management Console and open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+
+1. Choose **Settings** in the left navigation pane\.
+
+1. Choose **View settings** under **Sampling rules** within the **X\-Ray traces** section\.
+
+1. To create a rule, choose **Create sampling rule**\.
+
+   To edit a rule, choose a rule and choose **Edit** to edit it\.
+
+   To delete a rule, choose a rule and choose **Delete** to delete it\.
+
+------
 
 ## Sampling rule options<a name="xray-console-sampling-options"></a>
 

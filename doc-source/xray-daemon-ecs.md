@@ -32,9 +32,6 @@ $ docker pull amazon/aws-xray-daemon
 
 For custom configuration, you may need to define your own Docker image\.
 
-**Note**  
-The Scorekeep sample application shows how to use the X\-Ray daemon on Amazon ECS\. See [Instrumenting Amazon ECS applications](scorekeep-ecs.md) for details\.
-
 Add managed policies to your task role to grant the daemon permission to upload trace data to X\-Ray\. For more information, see [Giving the daemon permission to send data to X\-Ray](xray-daemon.md#xray-daemon-permissions)\.
 
 Use one of the following Dockerfiles to create an image that runs the daemon\.

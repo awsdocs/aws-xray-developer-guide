@@ -48,7 +48,7 @@ For example, when you call DynamoDB with an instrumented AWS SDK client, the X\-
 
 When you call another instrumented service with an instrumented application, the downstream service sends its own segment to record its view of the same call that the upstream service recorded in a subsegment\. In the service graph, both services' nodes contain timing and error information from those services' segments, while the edge between them contains information from the upstream service's subsegment\.
 
-![\[An instrumented application calling another instrumented application.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-client-edge.png)
+![\[An instrumented application calling another instrumented application.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-instrumented-edge.png)
 
 Both viewpoints are useful, as the downstream service records precisely when it started and ended work on the request, and the upstream service records the round trip latency, including time that the request spent traveling between the two services\.
 
@@ -61,13 +61,11 @@ A segment's `name` should match the domain name or logical name of the service t
 
 A service graph is a JSON document that contains information about the services and resources that make up your application\. The X\-Ray console uses the service graph to generate a visualization or *service map*\.
 
-![\[Service map\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap.png)
+![\[Service map\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-gettingstarted-servicemap-before-2021.png)
 
 For a distributed application, X\-Ray combines nodes from all services that process requests with the same trace ID into a single service graph\. The first service that the request hits adds a [tracing header](#xray-concepts-tracingheader) that is propagated between the front end and services that it calls\.
 
 For example, [Scorekeep](xray-scorekeep.md) runs a web API that calls a microservice \(an AWS Lambda function\) to generate a random name by using a Node\.js library\. The X\-Ray SDK for Java generates the trace ID and includes it in calls to Lambda\. Lambda sends tracing data and passes the trace ID to the function\. The X\-Ray SDK for Node\.js also uses the trace ID to send data\. As a result, nodes for the API, the Lambda service, and the Lambda function all appear as separate, but connected, nodes on the service map\.
-
-![\[Nodes for the API, Lambda service, and Lambda function appear as separate but connected nodes\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
 
 Service graph data is retained for 30 days\.
 
