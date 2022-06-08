@@ -72,7 +72,7 @@ When you create a subsegment within a segment or another subsegment, the X\-Ray 
 
 ## Custom Lambda subsegments<a name="xray-sdk-nodejs-subsegments-lambda"></a>
 
-The SDK is configured to automatically create a placeholder facade segment when the it detects it's running in Lambda\. To create a basic subsegement, which will create a single `AWS::Lambda::Function` node on the X\-Ray service map, call and repurpose the facade segment\. If you manually create a new segment with a new ID \(while sharing the trace ID, parent ID and the sampling decision\) you will be able to send a new segment\.
+The SDK is configured to automatically create a placeholder facade segment when it detects it is running in a Lambda\. To create a basic subsegement, which will create a single `AWS::Lambda::Function` node on the X\-Ray service map, call and repurpose the facade segment\. If you manually create a new segment with a new ID \(while sharing the trace ID, parent ID and the sampling decision\) you will be able to send a new segment\.
 
 **Example app\.js \- manual custom subsegments**  
 
