@@ -15,7 +15,7 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What is AWS X-Ray?](aws-xray.md)
-+ [Getting started with AWS X-Ray](xray-gettingstarted.md)
++ [Getting started with X-Ray](xray-gettingstarted.md)
 + [AWS X-Ray concepts](xray-concepts.md)
 + [Security in AWS X-Ray](security.md)
    + [Data protection in AWS X-Ray](xray-console-encryption.md)
@@ -44,7 +44,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using sampling rules with the X-Ray API](xray-api-sampling.md)
    + [AWS X-Ray segment documents](xray-api-segmentdocuments.md)
 + [AWS X-Ray sample application](xray-scorekeep.md)
-   + [Getting started with AWS X-Ray through the AWS CLI](scorekeep-ubuntu.md)
+   + [Getting started with the Scorekeep sample application](scorekeep-tutorial.md)
    + [Manually instrumenting AWS SDK clients](scorekeep-sdkclients.md)
    + [Creating additional subsegments](scorekeep-subsegments.md)
    + [Recording annotations, metadata, and user IDs](scorekeep-annotations.md)

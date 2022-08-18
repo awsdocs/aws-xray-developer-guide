@@ -31,6 +31,8 @@ ADOT includes the following:
 
 ADOT currently includes auto\-instrumentation support for [Java](https://aws-otel.github.io/docs/getting-started/java-sdk/trace-auto-instr) and [Python](https://aws-otel.github.io/docs/getting-started/python-sdk/trace-auto-instr)\. In addition, ADOT enables auto\-instrumentation of AWS Lambda functions and their downstream requests using Java, Node\.js, and Python runtimes, via [ADOT Managed Lambda Layers](https://aws-otel.github.io/docs/getting-started/lambda)\. 
 
+ADOT SDKs for Java and Go support X\-Ray centralized sampling rules\. If you need support for X\-Ray sampling rules in other languages, consider using an AWS X\-Ray SDK\.
+
 ## Instrumenting your application with AWS X\-Ray SDKs<a name="xray-instrumenting-xray-sdk"></a>
 
  AWS X\-Ray includes a set of language\-specific SDKs for instrumenting your application to send traces to X\-Ray\. Each X\-Ray SDK provides the following: 
@@ -48,7 +50,7 @@ The following language\-specific SDKs are provided:
 + [AWS X\-Ray SDK for \.NET](xray-sdk-dotnet.md)
 + [AWS X\-Ray SDK for Ruby](xray-sdk-ruby.md)
 
-X\-Ray currently includes auto\-instrumentation support for [Java](aws-x-ray-auto-instrumentation-agent-for-java.md)\. 
+X\-Ray currently includes auto\-instrumentation support for [Java](aws-x-ray-auto-instrumentation-agent-for-java.md)\.
 
 ## Choosing between the AWS Distro for OpenTelemetry and X\-Ray SDKs<a name="xray-instrumenting-choosing"></a>
 
@@ -60,4 +62,4 @@ X\-Ray currently includes auto\-instrumentation support for [Java](aws-x-ray-aut
 
  We recommend choosing an X\-Ray SDK for instrumenting your application if you need the following: 
 + A tightly integrated single\-vendor solution
-+ Integration with X\-Ray centralized sampling rules, including the ability to configure sampling rules from the X\-Ray console and automatically use them across multiple hosts
++ Integration with X\-Ray centralized sampling rules, including the ability to configure sampling rules from the X\-Ray console and automatically use them across multiple hosts, when using Node\.js, Python, Ruby, or \.NET

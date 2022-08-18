@@ -68,7 +68,7 @@ When you instrument a call to a downstream web API, the X\-Ray SDK for \.NET rec
 {
   "id": "168416dc2ea97781",
   "name": "names.example.com",
-  "trace_id": "1-5880168b-fd5153bb58284b67678aa78c",
+  "trace_id": "1-62be1272-1b71c4274f39f122afa64eab",
   "start_time": 1484786387.131,
   "end_time": 1484786387.501,
   "parent_id": "004f72be19cddc2a",

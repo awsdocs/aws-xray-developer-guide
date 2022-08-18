@@ -77,6 +77,6 @@ from aws_xray_sdk.core import xray_recorder
 xray_recorder.configure(service='my_service', context=AsyncContext())
 from aws_xray_sdk.core import patch
 
-libraries = ('aioboto3')
+libraries = (['aioboto3'])
 patch(libraries)
 ```

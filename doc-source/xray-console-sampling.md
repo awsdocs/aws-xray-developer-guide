@@ -27,6 +27,8 @@ You can configure the X\-Ray SDK to read sampling rules from a JSON document tha
 By defining sampling rules in the X\-Ray console, and [configuring the SDK](#xray-console-sampling-service) to read rules from the X\-Ray service, you can avoid both of these issues\. The service manages the reservoir for each rule, and assigns quotas to each instance of your service to distribute the reservoir evenly, based on the number of instances that are running\. The reservoir limit is calculated according to the rules you set\. Because the rules are configured in the service, you can manage rules without making additional deployments\.
 
 **Note**  
+X\-Ray uses a best\-effort approach in applying sampling rules, and in some cases the effective sampling rate may not exactly match the configured sampling rules\. However, over time the number of requests sampled should be close to the configured percentage\. 
+
 You can now configure X\-Ray sampling rules from within the Amazon CloudWatch console\. You can also continue to use the X\-Ray console\. 
 
 ------
@@ -85,7 +87,6 @@ The following options are available for each rule\. String values can use wildca
 + **HTTP method** \(string\) – The method of the HTTP request\.
 + **URL path** \(string\) – The URL path of the request\.
   + X\-Ray SDK – The path portion of the HTTP request URL\.
-  + Amazon API Gateway – Not supported\.
 + **Resource ARN** \(string\) – The ARN of the AWS resource running the service\.
   + X\-Ray SDK – Not supported\. The SDK can only use rules with **Resource ARN** set to `*`\.
   + Amazon API Gateway – The stage ARN\.
