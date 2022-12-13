@@ -1,4 +1,4 @@
-# Configuring sampling rules in the X\-Ray console<a name="xray-console-sampling"></a>
+# Configuring sampling rules<a name="xray-console-sampling"></a>
 
 You can use the AWS X\-Ray console to configure sampling rules for your services\. The X\-Ray SDK and AWS services that support [active tracing](xray-services.md) with sampling configuration use sampling rules to determine which requests to record\. 
 

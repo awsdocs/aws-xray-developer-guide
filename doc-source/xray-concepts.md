@@ -85,7 +85,7 @@ To avoid incurring service charges when you are getting started, the default sam
 
 For example, you might want to disable sampling and trace all requests for calls that modify state or handle user accounts or transactions\. For high\-volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
 
-For more information, see [Configuring sampling rules in the X\-Ray console](xray-console-sampling.md)\.
+For more information, see [Configuring sampling rules](xray-console-sampling.md)\.
 
 ## Tracing header<a name="xray-concepts-tracingheader"></a>
 
@@ -125,7 +125,7 @@ Updating a group's filter expression doesn't change data that's already recorded
 **Note**  
 Groups are billed by the number of retrieved traces that match the filter expression\. For more information, see [AWS X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\. 
 
-For more information about groups, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+For more information about groups, see [Configuring groups](xray-console-groups.md)\.
 
 ## Annotations and metadata<a name="xray-concepts-annotations"></a>
 
@@ -148,4 +148,4 @@ X\-Ray tracks errors that occur in your application code, and errors that are re
 + **`Fault`** – Server faults \(500 series errors\)
 + **`Throttle`** – Throttling errors \(429 Too Many Requests\)
 
-When an exception occurs while your application is serving an instrumented request, the X\-Ray SDK records details about the exception, including the stack trace, if available\. You can view exceptions under [segment details](xray-console.md#xray-console-segments) in the X\-Ray console\.
+When an exception occurs while your application is serving an instrumented request, the X\-Ray SDK records details about the exception, including the stack trace, if available\. You can view exceptions under [segment details](xray-console-traces.md#xray-console-segments) in the X\-Ray console\.

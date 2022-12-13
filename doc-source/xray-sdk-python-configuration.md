@@ -187,11 +187,11 @@ You can use environment variables to configure the X\-Ray SDK for Python\. The S
 **Format**
   + **Same port** – `address:port`
   + **Different ports** – `tcp:address:port udp:address:port`
-+ `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
++ `AWS_XRAY_CONTEXT_MISSING` – Set to `RUNTIME_ERROR` to throw exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
-  + `RUNTIME_ERROR` – Throw a runtime exception \(default\)\.
-  + `LOG_ERROR` – Log an error and continue\.
+  + `RUNTIME_ERROR` – Throw a runtime exception\.
+  + `LOG_ERROR` – Log an error and continue \(default\)\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
 

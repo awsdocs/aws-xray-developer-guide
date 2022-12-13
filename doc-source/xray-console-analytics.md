@@ -1,4 +1,4 @@
-# Interacting with the AWS X\-Ray Analytics console<a name="xray-console-analytics"></a>
+# Interacting with the Analytics console<a name="xray-console-analytics"></a>
 
 The AWS X\-Ray Analytics console is an interactive tool for interpreting trace data to quickly understand how your application and its underlying services are performing\. The console enables you to explore, analyze, and visualize traces through interactive response time and time\-series graphs\. 
 

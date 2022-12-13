@@ -1,8 +1,8 @@
-# Using filter expressions to search for traces in the console<a name="xray-console-filters"></a>
+# Using filter expressions<a name="xray-console-filters"></a>
 
-When you choose a time period of traces to view in the X\-Ray console, you might get more results than the console can display\. In the upper\-right corner, the console shows the number of traces that it scanned and whether there are more traces available\. 
+Use *filter expressions* to view a service map or traces for a specific request, service, connection between two services \(an edge\), or requests that satisfy a condition\. X\-Ray provides a filter expression language for filtering requests, services, and edges based on data in request headers, response status, and indexed fields on the original segments\.
 
-You can narrow the results to just the traces that you want to find by using a *filter expression*\.
+When you choose a time period of traces to view in the X\-Ray console, you might get more results than the console can display\. In the upper\-right corner, the console shows the number of traces that it scanned and whether there are more traces available\. You can use a filter expression to narrow the results to just the traces that you want to find\.
 
 **Topics**
 + [Filter expression details](#xray-console-filters-details)
@@ -16,7 +16,7 @@ You can narrow the results to just the traces that you want to find by using a *
 
 ## Filter expression details<a name="xray-console-filters-details"></a>
 
-When you [choose a node in the service map](xray-console.md#xray-console-servicemap), the console constructs a filter expression based on the service name of the node, and the types of error present based on your selection\. To find traces that show performance issues or that relate to specific requests, you can adjust the expression that the console provides or create your own\. If you add annotations with the X\-Ray SDK, you can also filter based on the presence of an annotation key or the value of a key\.
+When you [choose a node in the service map](xray-console-servicemap.md), the console constructs a filter expression based on the service name of the node, and the types of error present based on your selection\. To find traces that show performance issues or that relate to specific requests, you can adjust the expression that the console provides or create your own\. If you add annotations with the X\-Ray SDK, you can also filter based on the presence of an annotation key or the value of a key\.
 
 **Note**  
 If you choose a relative time range in the service map and choose a node, the console converts the time range to an absolute start and end time\. To ensure that the traces for the node appear in the search results, and avoid scanning times when the node wasn't active, the time range only includes times when the node sent traces\. To search relative to the current time, you can switch back to a relative time range in the traces page and scan again\.
@@ -38,7 +38,7 @@ You can create and modify groups by using the dropdown menu to the left of the f
 **Note**  
 If the service encounters an error in qualifying a group, that group is no longer included in processing incoming traces and an error metric is recorded\.
 
-For more information about groups, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+For more information about groups, see [Configuring groups](xray-console-groups.md)\.
 
 ## Filter expression syntax<a name="console-filters-syntax"></a>
 
@@ -351,8 +351,10 @@ rootcause.json = #[{ "Services": [ { "Name": "GetWeatherData", "EntityPath": [{ 
 
 When you provide a service name to the `service` or `edge` keyword, you get results for all nodes that have that name\. For more precise filtering, you can use the `id` function to specify a service type in addition to a name to distinguish between nodes with the same name\.
 
+Use the `account.id` function to specify a particular account for the service, when viewing traces from multiple accounts in a monitoring account\.
+
 ```
-id(name: "service-name", type:"service::type")
+id(name: "service-name", type:"service::type", account.id:"account-ID")
 ```
 
 You can use the `id` function in place of a service name in service and edge filters\.
@@ -365,17 +367,13 @@ service(id(name: "service-name", type:"service::type")) { filter }
 edge(id(name: "service-one", type:"service::type"), id(name: "service-two", type:"service::type")) { filter }
 ```
 
-For example, the [Scorekeep sample application](xray-scorekeep.md) includes an AWS Lambda function named `random-name`\. This creates two nodes in the service map, one for the function invocation, and one for the Lambda service\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/xray/latest/devguide/images/scorekeep-servicemap-lambda-node.png)
-
-The two nodes have the same name but different types\. A standard service filter will find traces for both\.
+For example, AWS Lambda functions result in two nodes in the service map; one for the function invocation, and one for the Lambda service\. The two nodes have the same name but different types\. A standard service filter will find traces for both\.
 
 **Example – service filter**  
 Requests that include an error on any service named `random-name`\.  
 
 ```
-service("random-name") { error }
+service("function-name") { error }
 ```
 
 Use the `id` function to narrow the search to errors on the function itself, excluding errors from the service\.
@@ -389,9 +387,18 @@ service(id(name: "random-name", type: "AWS::Lambda::Function")) { error }
 
 To search for nodes by type, you can also exclude the name entirely\.
 
-**Example – service filter with id function**  
+**Example – service filter with id function and service type**  
 Requests that include an error on a service with type `AWS::Lambda::Function`\.  
 
 ```
 service(id(type: "AWS::Lambda::Function")) { error }
+```
+
+To search for nodes for a particular AWS account, specify an account ID\.
+
+**Example – service filter with id function and account ID**  
+Requests that include a service within a specific account ID `AWS::Lambda::Function`\.  
+
+```
+service(id(account.id: "account-id"))
 ```

@@ -21,7 +21,7 @@ Amazon API Gateway provides [active tracing](xray-services.md) support for AWS X
 
 1. To redeploy the API with the new settings, choose the **Actions** dropdown, and then choose **Deploy API**\.
 
-API Gateway uses sampling rules that you define in the X\-Ray console to determine which requests to record\. You can create rules that only apply to APIs, or that apply only to requests that contain certain headers\. API Gateway records headers in attributes on the segment, along with details about the stage and request\. For more information, see [Configuring sampling rules in the X\-Ray console](xray-console-sampling.md)\.
+API Gateway uses sampling rules that you define in the X\-Ray console to determine which requests to record\. You can create rules that only apply to APIs, or that apply only to requests that contain certain headers\. API Gateway records headers in attributes on the segment, along with details about the stage and request\. For more information, see [Configuring sampling rules](xray-console-sampling.md)\.
 
 **Note**  
 When tracing REST APIs with API Gateway [HTTP integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/setup-http-integrations.html), each segment's service name is set to the request URL path from API Gateway to your HTTP integration endpoint, resulting in a service node on the X\-Ray service map for each unique URL path\. A large number of URL paths may cause the service map to exceed the limit of 10,000 nodes, resulting in an error\.  

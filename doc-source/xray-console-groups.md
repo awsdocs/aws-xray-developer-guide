@@ -1,4 +1,4 @@
-# Configuring groups in the X\-Ray console<a name="xray-console-groups"></a>
+# Configuring groups<a name="xray-console-groups"></a>
 
 Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. You can use the AWS X\-Ray console or X\-Ray API to create and manage groups for your services\. This topic describes how to create and manage groups by using the X\-Ray console\. For information about how to manage groups by using the X\-Ray API, see [Groups](xray-api-configuration.md#xray-api-configuration-groups)\.
 
@@ -6,7 +6,7 @@ You can create groups of traces for service maps, traces, or analytics\. When yo
 
 ![\[Group menu\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-menu.png)
 
-Groups are identified by their name or an Amazon Resource Name \(ARN\), and contain a filter expression\. The service compares incoming traces to the expression and stores them accordingly\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\.
+Groups are identified by their name or an Amazon Resource Name \(ARN\), and contain a filter expression\. The service compares incoming traces to the expression and stores them accordingly\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\.
 
 Updating a group's filter expression doesn't change data that's already recorded\. The update applies only to subsequent traces\. This can result in a merged graph of the new and old expressions\. To avoid this, delete a current group and create a new one\.
 
@@ -37,13 +37,13 @@ You can now configure X\-Ray groups from within the Amazon CloudWatch console\. 
 
 1. On the **Create group** page, enter a name for the group\. A group name can have a maximum of 32 characters, and contain alphanumeric characters and dashes\. Group names are case sensitive\.
 
-1. Enter a filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
+1. Enter a filter expression\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
 
    ```
    fault = true AND http.url CONTAINS "example/game" AND responsetime >= 5
    ```
 
-1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.  
+1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using X\-Ray insights](xray-console-insights.md)\.  
 ![\[Insights check boxes on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-insights.png)
 
 1. In **Tags**, enter a tag key, and optionally, a tag value\. As you add a tag, a new line appears for you to enter another tag\. Tag keys must be unique\. To delete a tag, choose **X** at the end of the tag's row\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.  
@@ -64,13 +64,13 @@ You can now configure X\-Ray groups from within the Amazon CloudWatch console\. 
 
 1. On the **Create group** page, enter a name for the group\. A group name can have a maximum of 32 characters, and contain alphanumeric characters and dashes\. Group names are case sensitive\.
 
-1. Enter a filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
+1. Enter a filter expression\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
 
    ```
    fault = true AND http.url CONTAINS "example/game" AND responsetime >= 5
    ```
 
-1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.  
+1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using X\-Ray insights](xray-console-insights.md)\.  
 ![\[Insights check boxes on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-insights-cw.png)
 
 1. In **Tags**, choose **Add new tag** to enter a tag key, and optionally, a tag value\. Continue to add additional tags as desired\. Tag keys must be unique\. To delete a tag, choose **Remove** underneath each tag\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.  
@@ -123,13 +123,13 @@ You can now configure X\-Ray groups from within the Amazon CloudWatch console\. 
       + **Traces**
       + **Analytics**
 
-1. Although you can't rename a group, you can update the filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`, where the request URL address contains `example/game`, and response time for requests was greater than or equal to five seconds\.
+1. Although you can't rename a group, you can update the filter expression\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`, where the request URL address contains `example/game`, and response time for requests was greater than or equal to five seconds\.
 
    ```
    fault = true AND http.url CONTAINS "example/game" AND responsetime >= 5
    ```
 
-1. In **Insights**, enable or disable insights and insights notifications for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.  
+1. In **Insights**, enable or disable insights and insights notifications for the group\. For more information about insights, see [Using X\-Ray insights](xray-console-insights.md)\.  
 ![\[Insights check boxes on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-insights.png)
 
 1. In **Tags**, edit tag keys and values\. Tag keys must be unique\. Tag values are optional; you can delete values, if you want\. To delete a tag, choose **X** at the end of the tag's row\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.  
@@ -148,13 +148,13 @@ You can now configure X\-Ray groups from within the Amazon CloudWatch console\. 
 
 1. Choose a group from the **Groups** section and then choose **Edit**\.
 
-1. Although you can't rename a group, you can update the filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`, where the request URL address contains `example/game`, and response time for requests was greater than or equal to five seconds\.
+1. Although you can't rename a group, you can update the filter expression\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`, where the request URL address contains `example/game`, and response time for requests was greater than or equal to five seconds\.
 
    ```
    fault = true AND http.url CONTAINS "example/game" AND responsetime >= 5
    ```
 
-1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using insights in the AWS X\-Ray console](xray-console-insights.md)\.  
+1. In **Insights**, enable or disable insights access for the group\. For more information about insights, see [Using X\-Ray insights](xray-console-insights.md)\.  
 ![\[Insights check boxes on Group page\]](http://docs.aws.amazon.com/xray/latest/devguide/images/group-insights-cw.png)
 
 1. In **Tags**, choose **Add new tag** to enter a tag key, and optionally, a tag value\. Continue to add additional tags as desired\. Tag keys must be unique\. To delete a tag, choose **Remove** underneath each tag\. For more information about tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.  
@@ -179,7 +179,7 @@ Cloning a group creates a new group that has the filter expression and tags of a
 
 1. On the **Create group** page, the name of the group is *group\-name*`-clone`\. Optionally, enter a new name for the group\. A group name can have a maximum of 32 characters, and contain alphanumeric characters and dashes\. Group names are case sensitive\.
 
-1. You can keep the filter expression from the existing group, or optionally, enter a new filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
+1. You can keep the filter expression from the existing group, or optionally, enter a new filter expression\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
 
    ```
    service("api.example.com") { fault = true OR responsetime >= 5 }
@@ -202,7 +202,7 @@ Cloning a group creates a new group that has the filter expression and tags of a
 
 1. On the **Create group** page, the name of the group is *group\-name*`-clone`\. Optionally, enter a new name for the group\. A group name can have a maximum of 32 characters, and contain alphanumeric characters and dashes\. Group names are case sensitive\.
 
-1. You can keep the filter expression from the existing group, or optionally, enter a new filter expression\. For more information about how to build a filter expression, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
+1. You can keep the filter expression from the existing group, or optionally, enter a new filter expression\. For more information about how to build a filter expression, see [Using filter expressions](xray-console-filters.md)\. In the following example, the group filters for fault traces from the service `api.example.com`\. and requests to the service where the response time was greater than or equal to five seconds\.
 
    ```
    service("api.example.com") { fault = true OR responsetime >= 5 }

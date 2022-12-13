@@ -6,7 +6,7 @@ For more information, see [EventBridge X\-Ray Integration](https://docs.aws.amaz
 
 ## Viewing source and targets on the X\-Ray service map<a name="xray-services-eventbridge-service-map"></a>
 
-The X\-Ray [service map](xray-console.md#xray-console-servicemap) displays an EventBridge event node that connects source and target services, as in the following example:
+The X\-Ray [service map](xray-console-servicemap.md) displays an EventBridge event node that connects source and target services, as in the following example:
 
 ![\[X-Ray displays an EventBridge event node that connects source and target services\]](http://docs.aws.amazon.com/xray/latest/devguide/images/service-map-eventbridge.png)
 

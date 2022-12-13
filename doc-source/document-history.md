@@ -2,10 +2,14 @@
 
 The following table describes the important changes to the documentation for AWS X\-Ray\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 
-**Latest documentation update**: February 7, 2022
+**Latest documentation update**: November 27, 2022
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Added functionality](#document-history) | AWS X\-Ray now supports *cross\-account observability*, enabling you to monitor and troubleshoot applications that span across multiple accounts within an AWS region\. For details, see [Cross\-account tracing](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-crossaccount.html)\. | November 27, 2022 | 
+| [Added functionality](#document-history) |  You can now view linked traces between message producers, an Amazon SQS queue, and consumers, providing a connected view of traces sent from event\-driven applications\. For more information, see [tracing event\-driven applications](https://docs.aws.amazon.com/xray/latest/devguide/xray-tracelinking.html)\.  | November 20, 2022 | 
+| [Updated IAM managed policy details](#document-history) | Added IAM permission for listing resource policies to the `AWSXRayReadOnlyAccess` managed policy\. For details, see [IAM managed policies for X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/security_iam_id-based-policy-examples.html#xray-permissions-managedpolicies)\. | November 15, 2022 | 
+| [Updated IAM console permissions and managed policy details](#document-history) | The set of IAM permissions the X\-Ray console uses has been updated, along with the description of the `AWSXRayReadOnlyAccess` managed policy\. For details, see [Using the X\-Ray console](https://docs.aws.amazon.com/xray/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-console)\. | November 11, 2022 | 
 | [Added AWS Distro for OpenTelemetry Ruby](#document-history) | AWS Distro for OpenTelemetry \(ADOT\) provides a single set of open source APIs, libraries, and agents to collect distributed traces and metrics\. ADOT Ruby enables you to instrument your Ruby application for X\-Ray and other tracing back\-ends\. For more information, see [AWS Distro for OpenTelemetry Ruby](https://docs.aws.amazon.com/xray/latest/devguide/xray-ruby-opentel-sdk.html)\. | February 7, 2022 | 
 | [Added functionality](#document-history) |  You can now view traces and configure X\-Ray from the CloudWatch console\. For more information, see [X\-Ray console](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html)\.  | January 24, 2022 | 
 | [Integrated CloudWatch RUM](#document-history) |  With AWS X\-Ray and CloudWatch RUM, you can analyze and debug the request path starting from end users of your application through downstream AWS managed services\. For more information, see [CloudWatch RUM and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/services-cloudwatch-RUM.html)\. | December 3, 2021 | 

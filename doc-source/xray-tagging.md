@@ -61,7 +61,7 @@ As you create a new X\-Ray group, you can add optional tags on the **Create grou
 
 1. Choose **Create group**\.
 
-1. On the **Create group** page, specify a name and filter expression for the group\. For more information about these properties, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+1. On the **Create group** page, specify a name and filter expression for the group\. For more information about these properties, see [Configuring groups](xray-console-groups.md)\.
 
 1. In **Tags**, enter a tag key, and optionally, a tag value\. For example, you can enter a tag key of **Stage**, and a tag value of **Production**, to indicate that this group is for production use\. As you add a tag, a new line appears for you to add another tag, if needed\. See [Tag restrictions](#xray-tagging-restrictions) in this topic for limitations on tags\.
 
@@ -77,7 +77,7 @@ As you create a new X\-Ray sampling rule, you can add tags on the **Create sampl
 
 1. Choose **Create sampling rule**\.
 
-1. On the **Create sampling rule** page, specify a name, priority, limits, matching criteria, and matching attributes\. For more information about these properties, see [Configuring sampling rules in the X\-Ray console](xray-console-sampling.md)\.
+1. On the **Create sampling rule** page, specify a name, priority, limits, matching criteria, and matching attributes\. For more information about these properties, see [Configuring sampling rules](xray-console-sampling.md)\.
 
 1. In **Tags**, enter a tag key, and optionally, a tag value\. For example, you can enter a tag key of **Stage**, and a tag value of **Production**, to indicate that this sampling rule is for production use\. As you add a tag, a new line appears for you to add another tag, if needed\. See [Tag restrictions](#xray-tagging-restrictions) in this topic for limitations on tags\.
 
@@ -93,7 +93,7 @@ You can change or delete tags on an X\-Ray group on the **Edit group** page\.
 
 1. In the **Groups** table, choose the name of a group\.
 
-1. On the **Edit group** page, in **Tags**, edit tag keys and values\. You cannot have duplicate tag keys\. Tag values are optional; you can delete values if desired\. For more information about other properties on the **Edit group** page, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\. See [Tag restrictions](#xray-tagging-restrictions) in this topic for limitations on tags\.
+1. On the **Edit group** page, in **Tags**, edit tag keys and values\. You cannot have duplicate tag keys\. Tag values are optional; you can delete values if desired\. For more information about other properties on the **Edit group** page, see [Configuring groups](xray-console-groups.md)\. See [Tag restrictions](#xray-tagging-restrictions) in this topic for limitations on tags\.
 
 1. To delete a tag, choose **X** at the right of the tag\.
 
@@ -109,7 +109,7 @@ You can change or delete tags on an X\-Ray sampling rule on the **Edit sampling 
 
 1. In the **Sampling rules** table, choose the name of a sampling rule\.
 
-1. In **Tags**, edit tag keys and values\. You cannot have duplicate tag keys\. Tag values are optional; you can delete values if desired\. For more information about other properties on the **Edit sampling rule** page, see [Configuring sampling rules in the X\-Ray console](xray-console-sampling.md)\. See [Tag restrictions](#xray-tagging-restrictions) in this topic for limitations on tags\.
+1. In **Tags**, edit tag keys and values\. You cannot have duplicate tag keys\. Tag values are optional; you can delete values if desired\. For more information about other properties on the **Edit sampling rule** page, see [Configuring sampling rules](xray-console-sampling.md)\. See [Tag restrictions](#xray-tagging-restrictions) in this topic for limitations on tags\.
 
 1. To delete a tag, choose **X** at the right of the tag\.
 

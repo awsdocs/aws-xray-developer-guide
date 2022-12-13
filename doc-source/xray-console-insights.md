@@ -1,4 +1,4 @@
-# Using insights in the AWS X\-Ray console<a name="xray-console-insights"></a>
+# Using X\-Ray insights<a name="xray-console-insights"></a>
 
 AWS X\-Ray continuously analyzes trace data in your account to identify emergent issues in your applications\. When fault rates exceed the expected range, it creates an *insight* that records the issue and tracks its impact until it's resolved\. With insights, you can:
 + Identify where in your application issues are occurring, the root cause of the issue, and associated impact\. The impact analysis provided by insights enables you to derive the severity and priority of an issue\.
@@ -16,7 +16,7 @@ Insights must be enabled for each group you want to use insights features with\.
 
 1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#)\.
 
-1. Select an existing group or create a new one by choosing **Create group**, and then select **Enable Insights**\. For more information about configuring groups in the X\-Ray console, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+1. Select an existing group or create a new one by choosing **Create group**, and then select **Enable Insights**\. For more information about configuring groups in the X\-Ray console, see [Configuring groups](xray-console-groups.md)\.
 
 1. In the navigation pane on the left, choose **Insights**, and then choose an insight to view\.  
 ![\[List of insights in the X-Ray console.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-insights.png)
@@ -55,7 +55,7 @@ You can enable insights notifications for any insights enabled group from the **
 
 1. Open the [X\-Ray console](https://console.aws.amazon.com/xray/home#)\.
 
-1. Select an existing group or create a new one by choosing **Create group**, ensure that **Enable Insights** is selected, and then select **Enable Notifications**\. For more information about configuring groups in the X\-Ray console, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\.
+1. Select an existing group or create a new one by choosing **Create group**, ensure that **Enable Insights** is selected, and then select **Enable Notifications**\. For more information about configuring groups in the X\-Ray console, see [Configuring groups](xray-console-groups.md)\.
 
 **To configure Amazon EventBridge conditional rules**
 
@@ -112,7 +112,7 @@ The following example shows an increase in faults that caused an incident:
 
 The **Root cause** section shows a service map focused on the root cause service and the impacted path\. You may hide the unaffected nodes by selecting the eye icon in the top right of the Root cause map\. The root cause service is the farthest downstream node where X\-Ray identified an anomaly\. It can represent a service that you instrumented or an external service that your service called with an instrumented client\. For example, if you call Amazon DynamoDB with an instrumented AWS SDK client, an increase in faults from DynamoDB results in an insight with DynamoDB as the root cause\. 
 
-To further investigate the root cause, select **View root cause details** on the root cause graph\. You can use the **Analytics** page to investigate the root cause and related messages\. For more information, see [Interacting with the AWS X\-Ray Analytics console](xray-console-analytics.md)\.
+To further investigate the root cause, select **View root cause details** on the root cause graph\. You can use the **Analytics** page to investigate the root cause and related messages\. For more information, see [Interacting with the Analytics console](xray-console-analytics.md)\.
 
 ![\[Overview page of an X-Ray insight.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-insights-root-cause.png)<a name="impact"></a>
 
@@ -122,7 +122,7 @@ Faults that continue upstream in the map can impact multiple nodes and cause mul
 
 This example shows an increase in traces with a fault at the root node during the time of an incident\. Incidents in downstream services don't always correspond to an increase in client errors\.
 
-Choosing **Analyze insight** opens the X\-Ray Analytics console in a window where you can dive deep into the set of traces causing the insight\. For more information, see [Interacting with the AWS X\-Ray Analytics console](xray-console-analytics.md)\. 
+Choosing **Analyze insight** opens the X\-Ray Analytics console in a window where you can dive deep into the set of traces causing the insight\. For more information, see [Interacting with the Analytics console](xray-console-analytics.md)\. 
 
 **Understanding impact**
 
@@ -148,4 +148,4 @@ To see a service map and graphs for an event, choose it from the impact timeline
 
 ![\[Impact analysis graph for an X-Ray insight.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-insights-inspect-analysis.png)
 
-To take a deeper look at the traces involved in an incident, choose **Analyze event** on the **Inspect** page\. You can use the **Analytics** page to refine the list of traces and identify affected users\. For more information, see [Interacting with the AWS X\-Ray Analytics console](xray-console-analytics.md)\.
+To take a deeper look at the traces involved in an incident, choose **Analyze event** on the **Inspect** page\. You can use the **Analytics** page to refine the list of traces and identify affected users\. For more information, see [Interacting with the Analytics console](xray-console-analytics.md)\.

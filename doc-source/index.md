@@ -4,13 +4,13 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
@@ -29,13 +29,17 @@ Amazon's trademarks and trade dress may not be used in
    + [Infrastructure security in AWS X-Ray](infrastructure-security.md)
    + [Using AWS X-Ray with VPC endpoints](xray-security-vpc-endpoint.md)
 + [AWS X-Ray console](xray-console.md)
-   + [Using filter expressions to search for traces in the console](xray-console-filters.md)
-   + [Deep linking](xray-console-deeplinks.md)
-   + [Using latency histograms in the X-Ray console](xray-console-histograms.md)
-   + [Configuring sampling rules in the X-Ray console](xray-console-sampling.md)
-   + [Using insights in the AWS X-Ray console](xray-console-insights.md)
-   + [Interacting with the AWS X-Ray Analytics console](xray-console-analytics.md)
-   + [Configuring groups in the X-Ray console](xray-console-groups.md)
+   + [Using the service map](xray-console-servicemap.md)
+   + [Viewing traces and trace details](xray-console-traces.md)
+   + [Using filter expressions](xray-console-filters.md)
+   + [Cross-account tracing](xray-console-crossaccount.md)
+   + [Tracing event-driven applications](xray-tracelinking.md)
+   + [Using latency histograms](xray-console-histograms.md)
+   + [Using X-Ray insights](xray-console-insights.md)
+   + [Interacting with the Analytics console](xray-console-analytics.md)
+   + [Configuring groups](xray-console-groups.md)
+   + [Configuring sampling rules](xray-console-sampling.md)
+   + [Console deep linking](xray-console-deeplinks.md)
 + [AWS X-Ray API](xray-api.md)
    + [Using the AWS X-Ray API with the AWS CLI](xray-api-tutorial.md)
    + [Sending trace data to AWS X-Ray](xray-api-sendingdata.md)

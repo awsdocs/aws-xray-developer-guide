@@ -1,4 +1,4 @@
-# Deep linking<a name="xray-console-deeplinks"></a>
+# Console deep linking<a name="xray-console-deeplinks"></a>
 
 You can use routes and queries to deep link into specific traces, or filtered views of traces and the service map\.
 
@@ -40,7 +40,7 @@ https://console.aws.amazon.com/xray/home#/traces?filter=service("api.amazon.com"
 https://console.aws.amazon.com/xray/home#/traces?filter=service(%22api.amazon.com%22)%20%7B%20fault%20%3D%20true%20OR%20responsetime%20%3E%202.5%20%7D%20AND%20annotation.foo%20%3D%20%22bar%22
 ```
 
-For more information about filter expressions, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\.
+For more information about filter expressions, see [Using filter expressions](xray-console-filters.md)\.
 
 ## Time range<a name="xray-console-deeplinks-time"></a>
 

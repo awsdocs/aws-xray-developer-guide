@@ -1,6 +1,6 @@
 # Security in AWS X\-Ray<a name="security"></a>
 
-## <a name="w71aac12b3"></a>
+## <a name="w2aac12b3"></a>
 
 Cloud security at AWS is the highest priority\. As an AWS customer, you benefit from a data center and network architecture that is built to meet the requirements of the most security\-sensitive organizations\.
 

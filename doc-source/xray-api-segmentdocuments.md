@@ -8,7 +8,7 @@ X\-Ray compiles and processes segment documents to generate queryable **trace su
 
 X\-Ray provides a **JSON schema** for segment documents\. You can download the schema here: [xray\-segmentdocument\-schema\-v1\.0\.0](samples/xray-segmentdocument-schema-v1.0.0.zip)\. The fields and objects listed in the schema are described in more detail in the following sections\.
 
-A subset of segment fields are indexed by X\-Ray for use with filter expressions\. For example, if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users in the X\-Ray console or by using the `GetTraceSummaries` API\. For more information, see [Using filter expressions to search for traces in the console](xray-console-filters.md)\.
+A subset of segment fields are indexed by X\-Ray for use with filter expressions\. For example, if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users in the X\-Ray console or by using the `GetTraceSummaries` API\. For more information, see [Using filter expressions](xray-console-filters.md)\.
 
 When you instrument your application with the X\-Ray SDK, the SDK generates segment documents for you\. Instead of sending segment documents directly to X\-Ray, the SDK transmits them over a local UDP port to the [X\-Ray daemon](xray-daemon.md)\. For more information, see [Sending segment documents to the X\-Ray daemon](xray-api-sendingdata.md#xray-api-daemon)\.
 

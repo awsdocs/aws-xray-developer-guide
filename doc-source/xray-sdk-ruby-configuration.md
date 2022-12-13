@@ -217,11 +217,11 @@ Rails.application.config.xray = {
 You can use environment variables to configure the X\-Ray SDK for Ruby\. The SDK supports the following variables: 
 + `AWS_XRAY_TRACING_NAME` – Set a service name that the SDK uses for segments\. Overrides the service name that you set on the servlet filter's [segment naming strategy](xray-sdk-ruby-middleware.md#xray-sdk-ruby-middleware-naming)\.
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK sends trace data to `127.0.0.1:2000`\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
-+ `AWS_XRAY_CONTEXT_MISSING` – Set to `LOG_ERROR` to avoid throwing exceptions when your instrumented code attempts to record data when no segment is open\.
++ `AWS_XRAY_CONTEXT_MISSING` – Set to `RUNTIME_ERROR` to throw exceptions when your instrumented code attempts to record data when no segment is open\.
 
 **Valid Values**
-  + `RUNTIME_ERROR` – Throw a runtime exception \(default\)\.
-  + `LOG_ERROR` – Log an error and continue\.
+  + `RUNTIME_ERROR` – Throw a runtime exception\.
+  + `LOG_ERROR` – Log an error and continue \(default\)\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
 

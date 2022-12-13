@@ -1,6 +1,6 @@
 # Tracing SQL queries with the X\-Ray SDK for Java<a name="xray-sdk-java-sqlclients"></a>
 
-## SQL Interceptors
+## SQL Interceptors<a name="xray-sdk-java-sqlclients-interceptors"></a>
 
 Instrument SQL database queries by adding the X\-Ray SDK for Java JDBC interceptor to your data source configuration\.
 +  **PostgreSQL** – `com.amazonaws.xray.sql.postgres.TracingInterceptor` 
@@ -85,14 +85,14 @@ The Tomcat JDBC Data Source library is included in the X\-Ray SDK for Java, but 
 </dependency>
 ```
 
-## Native SQL Tracing Decorator
+## Native SQL Tracing Decorator<a name="xray-sdk-java-sqlclients-nativeSQL"></a>
++ Add [https://github.com/aws/aws-xray-sdk-java/tree/master/aws-xray-recorder-sdk-sql](https://github.com/aws/aws-xray-sdk-java/tree/master/aws-xray-recorder-sdk-sql) to your dependencies\. 
++ Decorate your database datasource, connection, or statement\. 
 
-1. Add [aws-xray-recorder-sdk-sql](https://github.com/aws/aws-xray-sdk-java/tree/master/aws-xray-recorder-sdk-sql) to your dependencies.
-2. Decorate your database datasource, connection, or statement.
-```
-dataSource = TracingDataSource.decorate(dataSource)
-connection = TracingConnection.decorate(connection)
-statement = TracingStatement.decorateStatement(statement)
-preparedStatement = TracingStatement.decoratePreparedStatement(preparedStatement, sql)
-callableStatement = TracingStatement.decorateCallableStatement(callableStatement, sql)
-```
+  ```
+  dataSource = TracingDataSource.decorate(dataSource)
+  connection = TracingConnection.decorate(connection)
+  statement = TracingStatement.decorateStatement(statement)
+  preparedStatement = TracingStatement.decoratePreparedStatement(preparedStatement, sql)
+  callableStatement = TracingStatement.decorateCallableStatement(callableStatement, sql)
+  ```

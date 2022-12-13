@@ -2,7 +2,9 @@
 
 AWS X\-Ray integrates with Amazon Simple Queue Service \(Amazon SQS\) to trace messages that are passed through an Amazon SQS queue\. If a service traces requests by using the X\-Ray SDK, Amazon SQS can send the tracing header and continue to propagate the original trace from the sender to the consumer with a consistent trace ID\. Trace continuity enables users to track, analyze, and debug throughout downstream services\.
 
-![\[Service map from Lambda through the Amazon SQS queue.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/sqs-manual-servicemap.png)
+AWS X\-Ray supports tracing event\-driven applications using Amazon SQS and AWS Lambda\. Use the CloudWatch console to see a connected view of each request as it's queued with Amazon SQS and processed by a downstream Lambda function\. Traces from upstream message producers are automatically linked to traces from downstream Lambda consumer nodes, creating an end\-to\-end view of the application\. For more information, see [tracing event\-driven applications](xray-tracelinking.md)\. 
+
+![\[Service map from Lambda through the Amazon SQS queue.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-batch-servicemap-linkededge.png)
 
 Amazon SQS supports the following tracing header instrumentation:
 + **Default HTTP Header** – The X\-Ray SDK automatically populates the trace header as an HTTP header when you call Amazon SQS through the AWS SDK\. The default trace header is carried by `X-Amzn-Trace-Id` and corresponds to all messages included in a [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html) or [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessageBatch.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessageBatch.html) request\. To learn more about the default HTTP header, see [Tracing header](xray-concepts.md#xray-concepts-tracingheader)\.
@@ -11,9 +13,6 @@ Amazon SQS supports the following tracing header instrumentation:
 When running on Amazon EC2, Amazon SQS supports processing one message at a time\. This applies when running on an on\-premises host, and when using container services, such as AWS Fargate, Amazon ECS, or AWS App Mesh\. 
 
 The trace header is excluded from both Amazon SQS message size and message attribute quotas\. Enabling X\-Ray tracing will not exceed your Amazon SQS quotas\. To learn more about AWS quotas, see [Amazon SQS Quotas](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html)\.
-
-**Note**  
-It is not currently possible to connect a trace passed into an SQS queue to the Lambda consuming it on the other end\. This is because although the trace header is propagated in the SQS message, you cannot set it in the Lambda because segments in Lambda are immutable\.
 
 ## Send the HTTP trace header<a name="xray-services-sqs-sending"></a>
 

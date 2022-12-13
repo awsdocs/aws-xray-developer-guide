@@ -248,7 +248,7 @@ $ aws xray delete-sampling-rule --rule-name polling-scorekeep
 
 ## Groups<a name="xray-api-configuration-groups"></a>
 
-You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\. For more information about groups, see [Configuring groups in the X\-Ray console](xray-console-groups.md)\. For more information about adding and managing tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
+You can use the X\-Ray API to manage groups in your account\. Groups are a collection of traces that are defined by a filter expression\. You can use groups to generate additional service graphs and supply Amazon CloudWatch metrics\. See [Getting data from AWS X\-Ray](xray-api-gettingdata.md) for more details about working with service graphs and metrics through the X\-Ray API\. For more information about groups, see [Configuring groups](xray-console-groups.md)\. For more information about adding and managing tags, see [Tagging X\-Ray sampling rules and groups](xray-tagging.md)\.
 
 Create a group with `CreateGroup`\. Tags are optional\. If you choose to add tags, a tag key is required, and tag values are optional\.
 

@@ -1,6 +1,6 @@
-# Using latency histograms in the X\-Ray console<a name="xray-console-histograms"></a>
+# Using latency histograms<a name="xray-console-histograms"></a>
 
-When you select a node or edge on an AWS X\-Ray [service map](xray-console.md#xray-console-servicemap), the X\-Ray console shows a latency distribution histogram\. 
+When you select a node or edge on an AWS X\-Ray [service map](xray-console-servicemap.md), the X\-Ray console shows a latency distribution histogram\. 
 
 ## Latency<a name="xray-console-historgram-latency"></a>
 
