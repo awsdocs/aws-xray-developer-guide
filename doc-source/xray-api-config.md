@@ -90,11 +90,11 @@ Now that this rule is compliant, AWS Config can begin to compile an audit histor
 
 Following is an example of an AWS Config timeline showing changes made at specific dates and times\.
 
-![\[AWS Config timeline\]](http://docs.aws.amazon.com/xray/latest/devguide/images/ConfigTimeline.png)
+![\[AWS Config timeline.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/ConfigTimeline.png)
 
 Following is an example of an AWS Config change entry\. The from/to format illustrates what changed\. This example shows that the default X\-Ray encryption settings were changed to a defined encryption key\.
 
-![\[X-Ray encryption configuration change entry\]](http://docs.aws.amazon.com/xray/latest/devguide/images/ConfigChanges.png)
+![\[X-Ray encryption configuration change entry.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/ConfigChanges.png)
 
 ## Amazon SNS notifications<a name="SNSNotifs"></a>
 

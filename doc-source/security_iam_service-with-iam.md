@@ -6,7 +6,7 @@ You can use AWS Identity and Access Management \(IAM\) to grant X\-Ray permissio
 
 To [use the X\-Ray console](xray-console.md) to view service maps and segments, you only need read permissions\. To enable console access, add the `AWSXrayReadOnlyAccess` [managed policy](security_iam_id-based-policy-examples.md#xray-permissions-managedpolicies) to your IAM user\.
 
-For [local development and testing](#xray-permissions-local), create an IAM user with read and write permissions\. Generate access keys for the user and store them in the standard AWS SDK location\. You can use these credentials with the X\-Ray daemon, the AWS CLI, and the AWS SDK\.
+For [local development and testing](#xray-permissions-local), create an IAM role with read and write permissions\. [Assume the role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) and store temporary credentials for the role\. You can use these credentials with the X\-Ray daemon, the AWS CLI, and the AWS SDK\. See [using temporary security credentials with the AWS CLI](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html#using-temp-creds-sdk-cli) for more information\.
 
 To [deploy your instrumented app to AWS](#xray-permissions-aws), create an IAM role with write permissions and assign it to the resources running your application\. `AWSXRayDaemonWriteAccess` includes permission to upload traces, and some read permissions as well to support the use of [sampling rules](xray-console-sampling.md)\.
 
@@ -130,7 +130,40 @@ To view examples of X\-Ray identity\-based policies, see [AWS X\-Ray identity\-b
 
 ## X\-Ray resource\-based policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
-X\-Ray does not support resource\-based policies, but it does support resource\-level policies\.
+X\-Ray supports resource\-based policies for current and future AWS service integration, such as [Amazon SNS active tracing](https://docs.aws.amazon.com/sns/latest/dg/sns-active-tracing.html)\. X\-Ray resource\-based policies can be updated by other AWS consoles, or through the AWS SDK or CLI\. For example, the Amazon SNS console attempts to automatically configure resource\-based policy for sending traces to X\-Ray\. The following policy document provides an example of manually configuring X\-Ray resource\-based policy\.
+
+**Example X\-Ray resource\-based policy for Amazon SNS active tracing**  
+This example policy document specifies the permissions that Amazon SNS needs to send trace data to X\-Ray:  
+
+```
+{
+    Version: "2012-10-17",
+    Statement: [
+      {
+        Sid: "SNSAccess",
+        Effect: Allow,
+        Principal: {
+          Service: "sns.amazonaws.com",
+        },
+        Action: [
+          "xray:PutTraceSegments",
+          "xray:GetSamplingRules",
+          "xray:GetSamplingTargets"
+        ],
+        Resource: "*",
+        Condition: {
+          StringEquals: {
+            "aws:SourceAccount": account-id
+          },
+          StringLike: {
+            "aws:SourceArn": "arn:$partition:sns:$region:$account-id:topic-name"
+          }
+        }
+      }
+    ]
+  }
+```
+To use this example policy document, replace *`partition`*, *`region`*, *`account-id`*, and *`topic-name`* with your specific AWS partition, region, account ID, and Amazon SNS topic name\. To give all Amazon SNS topics permission to send trace data to X\-Ray, replace the topic name with `*`\. 
 
 ## Authorization based on X\-Ray tags<a name="security_iam_service-with-iam-tags"></a>
 
@@ -142,14 +175,15 @@ To view an example identity\-based policy for limiting access to a resource base
 
 Your instrumented application sends trace data to the X\-Ray daemon\. The daemon buffers segment documents and uploads them to the X\-Ray service in batches\. The daemon needs write permissions to upload trace data and telemetry to the X\-Ray service\.
 
-When you [run the daemon locally](xray-daemon-local.md), store your IAM user's access key and secret key in a file named `credentials` in a folder named `.aws` in your user folder\.
+When you [run the daemon locally](xray-daemon-local.md), create an IAM role, [assume the role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) and store temporary credentials in environment variables, or in a file named `credentials` within a folder named `.aws` in your user folder\. See [using temporary security credentials with the AWS CLI](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html#using-temp-creds-sdk-cli) for more information\.
 
 **Example \~/\.aws/credentials**  
 
 ```
 [default]
-aws_access_key_id=AKIAIOSFODNN7EXAMPLE
-aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+aws_access_key_id={access key ID}
+aws_secret_access_key={access key}
+aws_session_token={AWS session token}
 ```
 
 If you already configured credentials for use with the AWS SDK or AWS CLI, the daemon can use those\. If multiple profiles are available, the daemon uses the default profile\.
@@ -191,6 +225,6 @@ For a customer managed key, configure your key with an access policy that allows
 + User who configures the key in X\-Ray has permission to call `kms:CreateGrant` and `kms:DescribeKey`\.
 + Users who can access encrypted trace data have permission to call `kms:Decrypt`\.
 
-When you add a user to the **Key users** group in the key configuration section of the IAM console, they have permission for both of these operations\. Permission only needs to be set on the key policy, so you don't need any AWS KMS permissions on your IAM users, groups, or roles\. For more information, see [Using Key Policies in the AWS KMS Developer Guide](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
+When you add a user to the **Key users** group in the key configuration section of the IAM console, they have permission for both of these operations\. Permission only needs to be set on the key policy, so you don't need any AWS KMS permissions on your users, groups, or roles\. For more information, see [Using Key Policies in the AWS KMS Developer Guide](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 For default encryption, or if you choose the AWS managed CMK \(`aws/xray`\), permission is based on who has access to X\-Ray APIs\. Anyone with access to [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html), included in `AWSXrayFullAccess`, can change the encryption configuration\. To prevent a user from changing the encryption key, do not give them permission to use [https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html](https://docs.aws.amazon.com/xray/latest/api/API_PutEncryptionConfig.html)\.

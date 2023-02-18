@@ -5,15 +5,14 @@ Use the following information to help you diagnose and fix common issues that yo
 **Topics**
 + [I Am not authorized to perform an action in X\-Ray](#security_iam_troubleshoot-no-permissions)
 + [I Am not authorized to perform iam:PassRole](#security_iam_troubleshoot-passrole)
-+ [I want to view my access keys](#security_iam_troubleshoot-access-keys)
 + [I'm an administrator and want to allow others to access X\-Ray](#security_iam_troubleshoot-admin-delegate)
 + [I want to allow people outside of my AWS account to access my X\-Ray resources](#security_iam_troubleshoot-cross-account-access)
 
 ## I Am not authorized to perform an action in X\-Ray<a name="security_iam_troubleshoot-no-permissions"></a>
 
-If the AWS Management Console tells you that you're not authorized to perform an action, then you must contact your administrator for assistance\. Your administrator is the person that provided you with your user name and password\.
+If the AWS Management Console tells you that you're not authorized to perform an action, then you must contact your administrator for assistance\. Your administrator is the person that provided you with your sign\-in credentials\.
 
-The following example error occurs when the `mateojackson` IAM user tries to use the console to view details about a sampling rule but does not have `xray:GetSamplingRules` permissions\.
+The following example error occurs when the `mateojackson` user tries to use the console to view details about a sampling rule but does not have `xray:GetSamplingRules` permissions\.
 
 ```
 User: arn:aws:iam::123456789012:user/mateojackson is not authorized to perform: xray:GetSamplingRules on resource: arn:${Partition}:xray:${Region}:${Account}:sampling-rule/${SamplingRuleName}
@@ -36,17 +35,6 @@ User: arn:aws:iam::123456789012:user/marymajor is not authorized to perform: iam
 In this case, Mary's policies must be updated to allow her to perform the `iam:PassRole` action\.
 
 If you need help, contact your AWS administrator\. Your administrator is the person who provided you with your sign\-in credentials\.
-
-## I want to view my access keys<a name="security_iam_troubleshoot-access-keys"></a>
-
-After you create your IAM user access keys, you can view your access key ID at any time\. However, you can't view your secret access key again\. If you lose your secret key, you must create a new access key pair\. 
-
-Access keys consist of two parts: an access key ID \(for example, `AKIAIOSFODNN7EXAMPLE`\) and a secret access key \(for example, `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`\)\. Like a user name and password, you must use both the access key ID and secret access key together to authenticate your requests\. Manage your access keys as securely as you do your user name and password\.
-
-**Important**  
- Do not provide your access keys to a third party, even to help [find your canonical user ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\. By doing this, you might give someone permanent access to your account\. 
-
-When you create an access key pair, you are prompted to save the access key ID and secret access key in a secure location\. The secret access key is available only at the time you create it\. If you lose your secret access key, you must add new access keys to your IAM user\. You can have a maximum of two access keys\. If you already have two, you must delete one key pair before creating a new one\. To view instructions, see [Managing access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) in the *IAM User Guide*\.
 
 ## I'm an administrator and want to allow others to access X\-Ray<a name="security_iam_troubleshoot-admin-delegate"></a>
 

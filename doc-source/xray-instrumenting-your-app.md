@@ -59,6 +59,9 @@ X\-Ray currently includes auto\-instrumentation support for [Java](aws-x-ray-aut
  We recommend instrumenting your application with the AWS Distro for OpenTelemetry if you need the following: 
 + The ability to send traces to multiple different tracing backends without having to re\-instrument your code
 + Support for a large number of library instrumentations for each language, maintained by the OpenTelemetry community
++ Fully managed Lambda layers that package everything you need to collect telemetry data, without requiring code changes when using Java, Python, or Node\.js
+**Note**  
+AWS Distro for OpenTelemetry offers a simpler getting started experience for instrumenting your Lambda functions\. However, due to the flexibility OpenTelemetry offers, your Lambda function will require additional memory and invocations may experience cold start latency increases, which can lead to additional charges\. If you're optimizing for low\-latency and do not require OpenTelemetry's advanced capabilities such as dynamically configurable backend destinations, you may want to use the AWS X\-Ray SDK to instrument your application\. 
 
  We recommend choosing an X\-Ray SDK for instrumenting your application if you need the following: 
 + A tightly integrated single\-vendor solution

@@ -2,12 +2,20 @@
 
 When your application makes calls to AWS services to store data, write to a queue, or send notifications, the X\-Ray SDK for Node\.js tracks the calls downstream in [subsegments](xray-sdk-nodejs-subsegments.md)\. Traced AWS services, and resources that you access within those services \(for example, an Amazon S3 bucket or Amazon SQS queue\), appear as downstream nodes on the service map in the X\-Ray console\.
 
-You can instrument all AWS SDK clients by wrapping your `aws-sdk` require statement in a call to `AWSXRay.captureAWS`\.
+Instrument AWS SDK clients that you create via the [AWS SDK for JavaScript V2](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) or [AWS SDK for JavaScript V3](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)\. Each AWS SDK version provides different methods for instrumenting AWS SDK clients\.
+
+**Note**  
+Currently, the AWS X\-Ray SDK for Node\.js returns less segment information when instrumenting AWS SDK for JavaScript V3 clients, as compared to instrumenting V2 clients\. For instance, subsegments representing calls to DynamoDB will not return the table name\. If you need this segment information in your traces, consider using the AWS SDK for JavaScript V2\. 
+
+------
+#### [ AWS SDK for JavaScript V2 ]
+
+You can instrument all AWS SDK V2 clients by wrapping your `aws-sdk` require statement in a call to `AWSXRay.captureAWS`\.
 
 **Example app\.js \- AWS SDK instrumentation**  
 
 ```
-var AWS = AWSXRay.captureAWS(require('aws-sdk'));
+const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 ```
 
 To instrument individual clients, wrap your AWS SDK client in a call to `AWSXRay.captureAWSClient`\. For example, to instrument an `AmazonDynamoDB` client:
@@ -15,9 +23,9 @@ To instrument individual clients, wrap your AWS SDK client in a call to `AWSXRay
 **Example app\.js \- DynamoDB client instrumentation**  
 
 ```
-    var AWSXRay = require('aws-xray-sdk');
+    const AWSXRay = require('aws-xray-sdk');
 ...
-    var ddb = AWSXRay.captureAWSClient(new AWS.DynamoDB());
+    const ddb = AWSXRay.captureAWSClient(new AWS.DynamoDB());
 ```
 
 **Warning**  
@@ -54,3 +62,43 @@ When you access named resources, calls to the following services create addition
 + **Amazon DynamoDB** – Table name
 + **Amazon Simple Storage Service** – Bucket and key name
 + **Amazon Simple Queue Service** – Queue name
+
+------
+#### [ AWS SDK for JavaScript V3 ]
+
+The AWS SDK for JavaScript V3 is modular, so your code only loads the modules it needs\. Because of this, it isn't possible to instrument all AWS SDK clients as V3 does not support the `captureAWS` method\. Instrument each AWS SDK client using the `AWSXRay.captureAWSv3Client` method\. For example, to instrument an `AmazonDynamoDB` client:
+
+**Example app\.js \- DynamoDB client instrumentation using SDK for Javascript V3**  
+
+```
+    const AWSXRay = require('aws-xray-sdk');
+    const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+...
+    const ddb = AWSXRay.captureAWSv3Client(new DynamoDBClient({ region: "region" }));
+```
+
+When using AWS SDK for JavaScript V3, metadata such as table name, bucket and key name, or queue name, are not currently returned, and therefore the service map will not contain discrete nodes for each named resource as it would when instrumenting AWS SDK clients using the AWS SDK for JavaScript V2\.
+
+**Example Subsegment for a call to DynamoDB to save an item, when using the AWS SDK for JavaScript V3**  
+
+```
+{
+  "id": "24756640c0d0978a",
+  "start_time": 1.480305974194E9,
+  "end_time": 1.4803059742E9,
+  "name": "DynamoDB",
+  "namespace": "aws",
+  "http": {
+    "response": {
+      "content_length": 60,
+      "status": 200
+    }
+  },
+  "aws": {
+    "operation": "UpdateItem",
+    "request_id": "UBQNSO5AEM8T4FDA4RQDEB94OVTDRVV4K4HIRGVJF66Q9ASUAAJG",
+  }
+}
+```
+
+------

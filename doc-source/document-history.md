@@ -2,10 +2,13 @@
 
 The following table describes the important changes to the documentation for AWS X\-Ray\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 
-**Latest documentation update**: November 27, 2022
+**Latest documentation update**: February 8, 2023
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Added functionality](#document-history) |  You can now configure Amazon SNS active tracing, enabling you to trace and analyze requests as they travel through your Amazon SNS topics\. For more information, see [Amazon SNS and AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-sns.html)\.  | February 8, 2023 | 
+| [Updated X\-Ray SDK for Node\.js topic](#document-history) | Added details for instrumenting clients using the AWS SDK for JavaScript V3\. For details, see [Tracing AWS SDK calls with the X\-Ray SDK for Node\.js](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-nodejs-awssdkclients.html)\. | February 7, 2023 | 
+| [Updated IAM managed policy details](#document-history) | Added IAM permission for cross\-account observability to the `AWSXRayReadOnlyAccess`, `AWSXRayFullAccess` and `AWSXrayCrossAccountSharingConfiguration` managed policies\. For details, see [IAM managed policies for X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/security_iam_id-based-policy-examples.html#xray-permissions-managedpolicies)\. | February 7, 2023 | 
 | [Added functionality](#document-history) | AWS X\-Ray now supports *cross\-account observability*, enabling you to monitor and troubleshoot applications that span across multiple accounts within an AWS region\. For details, see [Cross\-account tracing](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-crossaccount.html)\. | November 27, 2022 | 
 | [Added functionality](#document-history) |  You can now view linked traces between message producers, an Amazon SQS queue, and consumers, providing a connected view of traces sent from event\-driven applications\. For more information, see [tracing event\-driven applications](https://docs.aws.amazon.com/xray/latest/devguide/xray-tracelinking.html)\.  | November 20, 2022 | 
 | [Updated IAM managed policy details](#document-history) | Added IAM permission for listing resource policies to the `AWSXRayReadOnlyAccess` managed policy\. For details, see [IAM managed policies for X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/security_iam_id-based-policy-examples.html#xray-permissions-managedpolicies)\. | November 15, 2022 | 

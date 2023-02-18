@@ -28,7 +28,7 @@ To learn how to trace AWS SDK calls with your preferred language, see the follow
 
 ## Retrieve the trace header and recover trace context<a name="xray-services-sqs-retrieving"></a>
 
-To continue context propagation with Amazon SQS, you must manually instrument the handoff to the receiver component\.
+If you are using a Lambda downstream consumer, trace context propagation is automatic\. To continue context propagation with other Amazon SQS consumers, you must manually instrument the handoff to the receiver component\.
 
 There are three main steps to recovering the trace context:
 + Receive the message from the queue for the `AWSTraceHeader` attribute by calling the [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) API\.

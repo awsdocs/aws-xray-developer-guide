@@ -9,11 +9,11 @@ Each trace segment can be linked to up to 20 traces, while a trace can include a
 
 Use the **Service map** page within the [CloudWatch console](https://console.aws.amazon.com/cloudwatch/) to view a service map with traces from message producers that are linked to traces from Lambda consumers\. These links are displayed with a dashed\-line edge that connects the Amazon SQS node and downstream Lambda consumer nodes\. 
 
-![\[Edge between Amazon SQS and Lambda nodes\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-batch-servicemap-linkededge.png)
+![\[Edge between Amazon SQS and Lambda nodes.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-batch-servicemap-linkededge.png)
 
 Select a dashed\-line edge to display a *received event age* histogram, which maps the spread of event age when it's received by consumers\. The age is calculated each time an event is received\. 
 
-![\[Edge with received event age histogram\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-servicemap-linkededgedetails-cw.png)
+![\[Edge with received event age histogram.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/console-servicemap-linkededgedetails-cw.png)
 
 ## View linked trace details<a name="xray-tracelinking-tracedetails"></a>
 

@@ -83,7 +83,7 @@ To ensure efficient tracing and provide a representative sample of the requests 
 
 To avoid incurring service charges when you are getting started, the default sampling rate is conservative\. You can configure X\-Ray to modify the default sampling rule and configure additional rules that apply sampling based on properties of the service or request\.
 
-For example, you might want to disable sampling and trace all requests for calls that modify state or handle user accounts or transactions\. For high\-volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
+For example, you might want to disable sampling and trace all requests for calls that modify state or handle users or transactions\. For high\-volume read\-only calls, like background polling, health checks, or connection maintenance, you can sample at a low rate and still get enough data to see any issues that arise\.
 
 For more information, see [Configuring sampling rules](xray-console-sampling.md)\.
 

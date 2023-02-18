@@ -138,22 +138,14 @@ You can customize the daemon's behavior further by using command line options or
 
 The X\-Ray daemon uses the AWS SDK to upload trace data to X\-Ray, and it needs AWS credentials with permission to do that\.
 
-On Amazon EC2, the daemon uses the instance's instance profile role automatically\. Locally, save your access keys to a file named `credentials` in your user directory under a folder named `.aws`\.
-
-**Example \~/\.aws/credentials**  
-
-```
-[default]
-aws_access_key_id = AKIAIOSFODNN7EXAMPLE
-aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-```
+On Amazon EC2, the daemon uses the instance's instance profile role automatically\. For information about credentials required to run the daemon locally, see [running your application locally](security_iam_service-with-iam.md#xray-permissions-local)\.
 
 If you specify credentials in more than one location \(credentials file, instance profile, or environment variables\), the SDK provider chain determines which credentials are used\. For more information about providing credentials to the SDK, see [Specifying Credentials](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials) in the *AWS SDK for Go Developer Guide*\.
 
 The IAM role or user that the daemon's credentials belong to must have permission to write data to the service on your behalf\.
 + To use the daemon on Amazon EC2, create a new instance profile role or add the managed policy to an existing one\.
 + To use the daemon on Elastic Beanstalk, add the managed policy to the Elastic Beanstalk default instance profile role\.
-+ To run the daemon locally, create an IAM user and save its access keys on your computer\.
++ To run the daemon locally, see [running your application locally](security_iam_service-with-iam.md#xray-permissions-local)\.
 
 For more information, see [Identity and access management for AWS X\-Ray](security-iam.md)\.
 

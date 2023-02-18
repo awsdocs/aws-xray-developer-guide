@@ -47,7 +47,7 @@ The following are the colors associated with the response time line graph \(the 
 **Example – Response time distribution**  
 The response time distribution is a chart that shows the number of traces with a given response time\. Click and drag to make selections within the response time distribution\. This selects and creates a filter on the working trace set named `responseTime` for all traces within a specific response time\.  
 
-![\[Make a selection and create filter\]](http://docs.aws.amazon.com/xray/latest/devguide/images/analytics-responseTime.png)
+![\[A chart that shows the response time distribution of traces.\]](http://docs.aws.amazon.com/xray/latest/devguide/images/analytics-responseTime.png)
 
 ## Time series activity<a name="xray-console-analytics-time"></a>
 
