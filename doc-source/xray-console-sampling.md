@@ -73,7 +73,7 @@ The following options are available for each rule\. String values can use wildca
 + **Rule name** \(string\) – A unique name for the rule\.
 + **Priority** \(integer between 1 and 9999\) – The priority of the sampling rule\. Services evaluate rules in ascending order of priority, and make a sampling decision with the first rule that matches\.
 + **Reservoir** \(non\-negative integer\) – A fixed number of matching requests to instrument per second, before applying the fixed rate\. The reservoir is not used directly by services, but applies to all services using the rule collectively\.
-+ **Rate** \(number between 0 and 100\) – The percentage of matching requests to instrument, after the reservoir is exhausted\. The rate can be an integer or a float\.
++ **Rate** \(integer between 0 and 100\) – The percentage of matching requests to instrument, after the reservoir is exhausted\. When configuring a sampling rule in the console, choose a percentage between 0 and 100\. When configuring a sampling rule in a client SDK using a JSON document, provide a percentage value between 0 and 1\.
 + **Service name** \(string\) – The name of the instrumented service, as it appears in the service map\.
   + X\-Ray SDK – The service name that you configure on the recorder\.
   + Amazon API Gateway – `api-name/stage`\.
@@ -99,14 +99,14 @@ The following options are available for each rule\. String values can use wildca
 **Example – Default rule with no reservoir and a low rate**  
 You can modify the default rule's reservoir and rate\. The default rule applies to requests that don't match any other rule\.  
 + **Reservoir**: **0**
-+ **Rate**: **0\.005** \(0\.5 percent\)
++ **Rate**: **5** \(**0\.05** if configured using a JSON document\)
 
 **Example – Debugging rule to trace all requests for a problematic route**  
 A high\-priority rule applied temporarily for debugging\.  
 + **Rule name**: **DEBUG – history updates**
 + **Priority**: **1**
 + **Reservoir**: **1**
-+ **Rate**: **1**
++ **Rate**: **100** \(**1** if configured using a JSON document\)
 + **Service name**: **Scorekeep**
 + **Service type**: **\***
 + **Host**: **\***
@@ -118,7 +118,7 @@ A high\-priority rule applied temporarily for debugging\.
 + **Rule name**: **POST minimum**
 + **Priority**: **100**
 + **Reservoir**: **10**
-+ **Rate**: **0\.10**
++ **Rate**: **10** \(**\.1** if configured using a JSON document\)
 + **Service name**: **\***
 + **Service type**: **\***
 + **Host**: **\***

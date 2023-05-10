@@ -188,6 +188,7 @@ You can use environment variables to configure the X\-Ray SDK for Python\. The S
 **Valid Values**
   + `RUNTIME_ERROR` – Throw a runtime exception\.
   + `LOG_ERROR` – Log an error and continue \(default\)\.
+  + `IGNORE_ERROR` – Ignore error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
 

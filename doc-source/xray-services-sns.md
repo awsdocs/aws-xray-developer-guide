@@ -33,17 +33,22 @@ This example policy document specifies the permissions that Amazon SNS needs to 
         Resource: "*",
         Condition: {
           StringEquals: {
-            "aws:SourceAccount": account-id
+            "aws:SourceAccount": "account-id"
           },
           StringLike: {
-            "aws:SourceArn": "arn:$partition:sns:$region:$account-id:topic-name"
+            "aws:SourceArn": "arn:partition:sns:region:account-id:topic-name"
           }
         }
       }
     ]
   }
 ```
-To use this example policy document, replace *`partition`*, *`region`*, *`account-id`*, and *`topic-name`* with your specific AWS partition, region, account ID, and Amazon SNS topic name\. To give all Amazon SNS topics permission to send trace data to X\-Ray, replace the topic name with `*`\. 
+Use the CLI to create a resource\-based policy that gives Amazon SNS permissions to send trace data to X\-Ray:   
+
+```
+aws xray put-resource-policy --policy-name MyResourcePolicy --policy-document '{ "Version": "2012-10-17", "Statement": [ { "Sid": "SNSAccess", "Effect": "Allow", "Principal": { "Service": "sns.amazonaws.com" }, "Action": [ "xray:PutTraceSegments", "xray:GetSamplingRules", "xray:GetSamplingTargets" ], "Resource": "*", "Condition": { "StringEquals": { "aws:SourceAccount": "my-account-id" }, "StringLike": { "aws:SourceArn": "arn:my-partition:sns:my-region:my-account-id:my-topic-name" } } } ] }'
+```
+To use these examples, replace *`partition`*, *`region`*, *`account-id`*, and *`topic-name`* with your specific AWS partition, region, account ID, and Amazon SNS topic name\. To give all Amazon SNS topics permission to send trace data to X\-Ray, replace the topic name with `*`\. 
 
 ## View Amazon SNS publisher and subscriber traces in the X\-Ray console<a name="xray-services-sns-view-traces"></a>
 

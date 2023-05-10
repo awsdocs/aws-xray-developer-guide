@@ -28,7 +28,7 @@ Terminate a daemon process running in the background with `pkill`\.
 
 ## Running the X\-Ray daemon in a Docker container<a name="xray-daemon-local-docker"></a>
 
-To run the daemon locally in a Docker container, save the following text to a file named `Dockerfile`\. Download the complete [example image](https://hub.docker.com/r/amazon/aws-xray-daemon/) on Docker Hub\.
+To run the daemon locally in a Docker container, save the following text to a file named `Dockerfile`\. Download the complete [example image](https://gallery.ecr.aws/xray/aws-xray-daemon) on Amazon ECR\. See [downloading the daemon](xray-daemon.md#xray-daemon-downloading) for more information\.
 
 **Example Dockerfile – Amazon Linux**  
 

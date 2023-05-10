@@ -108,6 +108,14 @@ The tracing header can also contain a parent segment ID if the request originate
 X-Amzn-Trace-Id: Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1
 ```
 
+`Lineage` may be appended to the trace header by Lambda and other AWS services as part of their processing mechanisms, and should not be directly used\.
+
+**Example Tracing header with Lineage**  
+
+```
+X-Amzn-Trace-Id: Root=1-5759e988-bd862e3fe1be46a994272793;Sampled=1;Lineage=a87bd80c:1|68fd508a:5|c512fbe3:2
+```
+
 ## Filter expressions<a name="xray-concepts-filterexpressions"></a>
 
 Even with sampling, a complex application generates a lot of data\. The AWS X\-Ray console provides an easy\-to\-navigate view of the service graph\. It shows health and performance information that helps you identify issues and opportunities for optimization in your application\. For advanced tracing, you can drill down to traces for individual requests, or use **filter expressions** to find traces related to specific paths or users\.

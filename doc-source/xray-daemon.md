@@ -11,7 +11,7 @@ To run the X\-Ray daemon locally, on\-premises, or on other AWS services, downlo
 
 ## Downloading the daemon<a name="xray-daemon-downloading"></a>
 
-You can download the daemon from Amazon S3, Docker Hub, or Amazon ECR and then run it locally, or install it on an Amazon EC2 instance on launch\.
+You can download the daemon from Amazon S3, Amazon ECR, or Docker Hub, and then run it locally, or install it on an Amazon EC2 instance on launch\.
 
 ------
 #### [ Amazon S3 ]
@@ -100,14 +100,14 @@ Use the imported key to verify the signature of the daemon's ZIP archive\.
 
    ```
    $ BUCKETURL=https://s3.us-east-2.amazonaws.com/aws-xray-assets.us-east-2
-   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip
-   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.0.0.zip.sig
+   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.x.zip
+   $ wget $BUCKETURL/xray-daemon/aws-xray-daemon-linux-3.x.zip.sig
    ```
 
 1. Run `gpg --verify` to verify the signature\.
 
    ```
-   $ gpg --verify aws-xray-daemon-linux-3.0.0.zip.sig aws-xray-daemon-linux-3.0.0.zip
+   $ gpg --verify aws-xray-daemon-linux-3.x.zip.sig aws-xray-daemon-linux-3.x.zip
    gpg: Signature made Wed 19 Apr 2017 05:06:31 AM UTC using RSA key ID FE6157D3
    gpg: Good signature from "AWS X-Ray <aws-xray@amazon.com>"
    gpg: WARNING: This key is not certified with a trusted signature!

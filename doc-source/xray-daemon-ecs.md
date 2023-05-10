@@ -4,11 +4,7 @@ In Amazon ECS, create a Docker image that runs the X\-Ray daemon, upload it to a
 
 ## Using the official Docker image<a name="xray-daemon-ecs-image"></a>
 
-X\-Ray provides a Docker container image that you can deploy alongside your application\.
-
-```
-$ docker pull amazon/aws-xray-daemon
-```
+X\-Ray provides a Docker [container image](https://gallery.ecr.aws/xray/aws-xray-daemon) on Amazon ECR that you can deploy alongside your application\. See [downloading the daemon](xray-daemon.md#xray-daemon-downloading) for more information\.
 
 **Example Task definition**  
 
@@ -152,7 +148,7 @@ By adding command line options, you are updating the Docker `CMD` that is passed
 
 **To set a command line option**
 
-1. Open the Amazon ECS console at [https://console\.aws\.amazon\.com/ecs/](https://console.aws.amazon.com/ecs/)\.
+1. Open the Amazon ECS classic console at [https://console\.aws\.amazon\.com/ecs/](https://console.aws.amazon.com/ecs/)\.
 
 1. From the navigation bar, choose the region that contains your task definition\.
 

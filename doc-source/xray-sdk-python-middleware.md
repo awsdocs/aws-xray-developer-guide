@@ -78,11 +78,14 @@ Configure a segment name in your [`settings.py` file](xray-sdk-python-configurat
 ```
 XRAY_RECORDER = {
     'AWS_XRAY_TRACING_NAME': 'My application',
-    'PLUGINS': ('EC2Plugin'),
+    'PLUGINS': ('EC2Plugin',),
 }
 ```
 
 This tells the X\-Ray recorder to trace requests served by your Django application with the default sampling rate\. You can [configure the recorder your Django settings file](xray-sdk-python-configuration.md#xray-sdk-python-middleware-configuration-django) to apply custom sampling rules or change other settings\.
+
+**Note**  
+Since `plugins` are passed in as a tuple, be sure to include a trailing `,` when specifying a single plugin\. For example, `plugins = ('EC2Plugin',)` 
 
 ## Adding the middleware to your application \(flask\)<a name="xray-sdk-python-adding-middleware-flask"></a>
 

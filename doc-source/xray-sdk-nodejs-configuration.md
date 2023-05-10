@@ -161,6 +161,7 @@ You can use environment variables to configure the X\-Ray SDK for Node\.js\. The
 **Valid Values**
   + `RUNTIME_ERROR` – Throw a runtime exception\.
   + `LOG_ERROR` – Log an error and continue \(default\)\.
+  + `IGNORE_ERROR` – Ignore error and continue\.
 
   Errors related to missing segments or subsegments can occur when you attempt to use an instrumented client in startup code that runs when no request is open, or in code that spawns a new thread\.
 + `AWS_XRAY_DAEMON_ADDRESS` – Set the host and port of the X\-Ray daemon listener\. By default, the SDK uses `127.0.0.1:2000` for both trace data \(UDP\) and sampling \(TCP\)\. Use this variable if you have configured the daemon to [listen on a different port](xray-daemon-configuration.md) or if it is running on a different host\.
