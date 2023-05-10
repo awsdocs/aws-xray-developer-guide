@@ -115,7 +115,7 @@ my_sampling_rules =  {
 
 ```
 require 'aws-xray-sdk'
-require config/sampling-rules.rb
+require 'config/sampling-rules.rb'
 
 config = {
   sampling_rules: my_sampling_rules,
