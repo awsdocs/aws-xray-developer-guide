@@ -75,6 +75,28 @@ public class WebConfig {
 }
 ```
 
+### Jakarta Support
+Spring 6 uses [Jakarta](https://spring.io/blog/2022/11/16/spring-framework-6-0-goes-ga) instead of Javax for its Enterprise Edition. To support this new namespace, X-Ray has created a parallel set of classes that live in their own Jakarta namespace.
+
+For the filter classes, replace 'javax' with 'jakarta'. For the naming strategies, add jakarta to the namespace right before the class name. You can see how this is done in the example below.
+
+```
+package myapp;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
+import jakarta.servlet.Filter;
+import [com.amazonaws.xray.jakarta.servlet.AWSXRayServletFilter](https://docs.aws.amazon.com/xray-sdk-for-java/latest/javadoc/com/amazonaws/xray/jakarta/servlet/AWSXRayServletFilter.html);
+
+@Configuration
+public class WebConfig {
+
+    @Bean
+    public Filter TracingFilter() {
+        return new AWSXRayServletFilter("Scorekeep");
+    }
+}
+```
+
 ## Annotating your code or implementing an interface<a name="xray-sdk-java-aop-annotate-or-implement"></a>
 
 Your classes must either be annotated with the `@XRayEnabled` annotation, or implement the `XRayTraced` interface\. This tells the AOP system to wrap the functions of the affected class for X\-Ray instrumentation\.
